@@ -1,6 +1,7 @@
 package com.Grupo9.ProyectoFinal.Entidad;
 
 import com.Grupo9.ProyectoFinal.Enum.Zona;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -9,7 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -42,13 +45,14 @@ public class Usuario {
     protected String contrasena;
     @Column(name = "nombre_usuario", nullable = false)
     protected String nombreUsuario;
-    protected List<String> rol;
+    protected ArrayList<String> rol = new ArrayList<>();
     protected String nombre;
     protected String apellido;
     protected Zona zona;
     protected String telefono;
     protected String presentacion;
-    protected List<Comentario> comentarios;
+//    @ManyToMany
+//    protected ArrayList<Comentario> comentarios = new ArrayList<>();
     @Lob
     @Basic
     protected byte[] imagen;
