@@ -21,7 +21,6 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Comentario extends AbstractPersistable<Long> {
 
     @NotNull
@@ -30,8 +29,10 @@ public class Comentario extends AbstractPersistable<Long> {
     @Min(1)
     @Max(5)
     private Integer puntaje;
-//    @ManyToOne
-//    private Usuario usuario;
+    @ManyToOne
+    private Usuario emisor;
+    @ManyToOne
+    private Usuario receptor;
     
     
     
