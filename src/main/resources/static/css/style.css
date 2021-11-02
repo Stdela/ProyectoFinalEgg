@@ -1,0 +1,57 @@
+html {
+    min-height: 100vh;
+    position: relative;
+}
+
+
+/* NAVBAR */
+.hidden {
+    display: none;
+}
+
+.menu-bar {
+    background-image: linear-gradient(-90deg, #5D6D7E, #34495E);
+}
+
+.nav-link {
+    font-size: 16px;
+    margin: 3px;
+    color: #fff!important;
+    font-weight: 500;
+}
+
+.navbar-nav {
+    text-align: right;
+    margin-right: 20px;
+}
+
+.menu-bar .navbar-brand {
+    /* padding-right: 20px; */
+    margin-left: 2%;
+}
+
+.menu-bar .navbar-toggler {
+    /* padding-right: 20px; */
+    margin-right: 2%;
+    outline: none!important;
+    border: none!important;
+}
+
+td, th {
+    min-height: 70px;
+}
+
+
+/* FOOTER */
+footer {
+    background-color: black;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    color: white;
+}
+
+.social {
+    background-color: #D5D8DC;
+}
