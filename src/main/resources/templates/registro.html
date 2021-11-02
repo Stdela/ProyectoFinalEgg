@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro</title>
+</head>
+
+<body>
+  <h1>Registro</h1>
+  <form action="Lugar_para_Guardar">
+    <fieldset>
+      <legend>Datos Personales</legend>
+      <label for="name">Nombre</label>
+      <input type="text" id="nombre" name="nombre">
+      <br>
+
+      <label for="last_name">Apellido</label>
+      <input type="text" id="apellido" name="apellido">
+      <br>
+
+      <label for="email">Mail</label>
+      <input type="email" id="email" name="email">
+    </fieldset>
+
+    <fieldset>
+      <legend>Genero:</legend>
+      <input type="radio" id="hombre" name="genero" value="hombre">
+      <label for="hombre">Hombre</label>
+      <br>
+
+      <input type="radio" id="mujer" name="genero" value="mujer">
+      <label for="mujer">Mujer</label>
+      <br>
+
+      <input type="radio" id="otro" name="genero" value="otro">
+      <label for="otro">otro</label>
+      <br>
+    </fieldset>
+
+    <fieldset>
+      <legend>Profesion</legend>
+
+      <input type="checkbox" id="plomero" name="eleccion_profecion">
+      <label for="plomero">Plomero</label>
+
+      <input type="checkbox" id="gasista" name="eleccion_profecion">
+      <label for="gasista">Gasista</label><br>
+
+      <input type="checkbox" id="electricista" name="eleccion_profecion">
+      <label for="electricista">Electricista</label>
+
+
+      <input type="checkbox" id="cerrajero" name="eleccion_profecion">
+      <label for="cerrajero">Cerrajero</label>
+      <br> <br>
+
+      <label for="descripcion">Escriba una breve descripción</label> <br>
+      <textarea name="descripcion" id="descripcion" cols="50" rows="10"></textarea>
+    </fieldset>
+
+
+    <fieldset>
+      <legend>Zona de Trabajo en rosario</legend>
+      <input type="checkbox" id="norte" name="eleccion_zona">
+      <label for="norte">Norte</label>
+
+      <input type="checkbox" id="sur" name="eleccion_zona">
+      <label for="sur">Sur</label><br>
+
+      <input type="checkbox" id="este" name="eleccion_zona">
+      <label for="este">Este</label>
+
+
+      <input type="checkbox" id="oeste" name="eleccion_zona">
+      <label for="oeste">Oeste</label>
+      <br>
+    </fieldset>
+
+
+    <input type="submit" value="Registrse">
+
+  </form>
+</body>
+
+</html>
