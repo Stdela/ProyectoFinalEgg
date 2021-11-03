@@ -10,7 +10,7 @@ public class ProyectoFinal {
 
 	@GetMapping("/")
 	public String index() {
-		return "registro.html";
+		return "indexPrueba";
 	}
 
 }

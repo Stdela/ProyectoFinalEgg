@@ -5,11 +5,9 @@ import com.Grupo9.ProyectoFinal.Enum.Zona;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Basic;
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,22 +16,19 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Lob;
 
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
 
-/**
- *
- * @author delam
- */
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -41,31 +36,44 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @SQLDelete(sql = "UPDATE usuario SET borrado = true WHERE id=?")
 @Where(clause = "borrado=false")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Getter
+@Setter
 public class Usuario {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    protected Long id;
-    @Email
-    @NotNull
-    protected String email;
-    @NotNull
-    protected String contrasena;
-    @Column(name = "nombre_usuario", nullable = false)
-    protected String nombreUsuario;
-    protected ArrayList<String> rol/* = new ArrayList<>()*/;
-    protected String nombre;
-    protected String apellido;
-    protected Genero genero;
-    protected LocalDate fechaNacimiento;
-    protected Zona zona;
-    protected String telefono;
-    protected String presentacion;
-    //@OneToMany
-    //protected ArrayList<Comentario> comentarios/* = new ArrayList<>()*/;
-    @Lob
-    @Basic
-    protected byte[] imagen;
-    protected boolean borrado = false;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	protected Long id;
+	@Email
+
+	protected String email;
+
+	protected String contrasena;
+
+	protected ArrayList<String> rol;
+	protected String nombre;
+	protected String apellido;
+	protected Genero genero;
+	protected LocalDate fechaNacimiento;
+	protected Zona zona;
+	protected String telefono;
+	protected String presentacion;
+
+	@Lob
+	@Basic
+	protected byte[] imagen;
+	protected boolean borrado = false;
+
+	public Usuario(@Email @NotNull String email, @NotNull String contrasena, String nombre, String apellido,
+			Genero genero, LocalDate fechaNacimiento, Zona zona, String telefono) {
+		super();
+		this.email = email;
+		this.contrasena = contrasena;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.genero = genero;
+		this.fechaNacimiento = fechaNacimiento;
+		this.zona = zona;
+		this.telefono = telefono;
+	}
 
 }

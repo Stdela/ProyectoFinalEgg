@@ -1,7 +1,7 @@
 package com.Grupo9.ProyectoFinal.Entidad;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -29,8 +29,8 @@ import lombok.NoArgsConstructor;
 @Where(clause = "borrado=false")
 public class Empleo {
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Long id;
 	@NotNull
 	private String nombre;
 	@NotNull
@@ -43,12 +43,8 @@ public class Empleo {
 	private Empleador empleador;
 	@ManyToMany(mappedBy = "postulaciones")
 	private List<Trabajador> trabajador;
-	private Boolean concretado=false;
-	private Boolean borrado=false;
-	private Boolean finalizado=false;
-	
-	
-	
-	
+	private Boolean concretado = false;
+	private Boolean borrado = false;
+	private Boolean finalizado = false;
 
 }

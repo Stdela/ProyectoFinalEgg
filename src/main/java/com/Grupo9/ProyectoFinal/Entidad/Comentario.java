@@ -1,10 +1,10 @@
 package com.Grupo9.ProyectoFinal.Entidad;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -21,21 +21,22 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Comentario extends AbstractPersistable<Long> {
+public class Comentario {
 
-    @NotNull
-    private String comentario;
-    @NotNull
-    @Min(1)
-    @Max(5)
-    private Integer puntaje;
-    @ManyToOne
-    private Usuario emisor;
-    @ManyToOne
-    private Usuario receptor;
-    
-    
-    
-    
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	protected Long id;
+	@NotNull
+	private String comentario;
+	@NotNull
+	@Min(1)
+	@Max(5)
+	private Integer puntaje;
+	@ManyToOne
+	private Usuario emisor;
+	@ManyToOne
+	private Usuario receptor;
+	private boolean borrado = false;
 
 }
