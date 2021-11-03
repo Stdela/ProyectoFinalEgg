@@ -1,17 +1,101 @@
 package com.Grupo9.ProyectoFinal.Servicios;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.Grupo9.ProyectoFinal.Entidad.Empleador;
+import com.Grupo9.ProyectoFinal.Entidad.Empleo;
+import com.Grupo9.ProyectoFinal.Entidad.Trabajador;
+import com.Grupo9.ProyectoFinal.Enum.Oficio;
+import com.Grupo9.ProyectoFinal.Excepciones.WebException;
 import com.Grupo9.ProyectoFinal.Repositorio.EmpleoRepositorio;
+import com.Grupo9.ProyectoFinal.Repositorio.TrabajadorRepositorio;
 
 @Service
+@Transactional
 public class EmpleoServicio {
 	@Autowired
-	private EmpleoRepositorio empleoRepositorio;
-	
-	
+	private EmpleoRepositorio er;
+
+	@Autowired
+	private TrabajadorRepositorio tr;
+
+	// Crea el empleo con los datos básicos, luego se asignan los trabajadors y se
+	// cambian los boolean cuando corresponda
+	public Empleo crearEmpleo(String nombre, String descripcion, Oficio oficio, Empleador empleador)
+			throws WebException {
+		Empleo e = new Empleo(); // Ver si da error por los notNull. Sino crear constructor con esos parametros.
+
+		if (nombre.isEmpty() || nombre == null) {
+			throw new WebException("Debes ingresar un título");
+		}
+
+		if (descripcion.isEmpty() || descripcion == null) {
+			throw new WebException("Debes ingresar una descripción");
+		}
+
+		if (oficio == null) {
+			throw new WebException("Debes ingresar un oficio");
+		}
+
+		e.setNombre(nombre);
+		e.setDescripcion(descripcion);
+		e.setOficio(oficio);
+		e.setFechaPublicacion(LocalDate.now());
+		e.setEmpleador(empleador);
+
+		er.save(e);
+
+		return e;
+	}
+
+	// Para agregar un nuevo postulado de tipo trabajador
+	public Empleo agregarTrabajador(Long id, Trabajador trabajador) {
+		Empleo e = er.getById(id);
+		List<Trabajador> listaPostulados = e.getTrabajador();
+		listaPostulados.add(trabajador);
+		e.setTrabajador(listaPostulados);
+
+		er.save(e);
+		return e;
+	}
+
+	// Crea una nueva lista con solo el trabajador elegido y sobreescribe la de
+	// candidatos
+	// Está bien incializarla como ArrayList? sino me da error.
+	public void confirmarEmpleo(Long id, Long idTrabajador) {
+		Empleo e = er.getById(id);
+		Trabajador trabajador = tr.getById(idTrabajador);
+		List<Trabajador> listaPostulados = new ArrayList<>();
+		listaPostulados.add(trabajador);
+		e.setTrabajador(listaPostulados);
+		e.setConcretado(true);
+		er.save(e);
+	}
+
+	public void finalizarEmpleo(Long id) {
+		Empleo e = er.getById(id);
+		e.setFinalizado(true);
+		er.save(e);
+	}
+
+	public void modificarEmpleo(Long id, String nombre, String descripcion) {
+		Empleo e = er.getById(id);
+		e.setNombre(nombre);
+		e.setDescripcion(descripcion);
+		er.save(e);
+	}
+
+	public void borrarEmpleo(Long id) {
+		Empleo e = er.getById(id);
+		e.setBorrado(true);
+		er.save(e);
+	}
 
 }
