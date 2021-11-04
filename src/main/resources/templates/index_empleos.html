@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <!--/*/ <th:block th:include="fragments/componentes.html :: head">
+    </th:block> /*/-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/index_style.css">
+    <title>Proyecto Egg</title>
+</head>
+
+<body>
+    <!-- NAV -->
+    <div th:replace="/fragments/navbar.html :: navbar"></div>
+
+    <div class="index">
+
+        <h1 class="text-center py-2">Proyecto</h1>
+
+        <div class="container text-center content">
+
+            <h2 class="text-center py-3 h2">La solución más rápida a tu problema... <br> ¡la encontras acá!</h2>
+            <div class="btn-group">
+                <a class="btn btn-success" href="/busquedaEmpleo">Empleos</a>
+                <a class="btn btn-success" href="/busquedaTrabajadores">Trabajadores</a>
+            </div>
+            <h1 class="h1">(PROVISORIO) Empleos:</h1>
+
+            <!-- categorias de empleos disponibles, la ídea es que se vea diferente y por categorías -->
+            <div class="container wrap-empleos">
+                <section class="empleos">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Oficio</th>
+                                <th>Fecha de publicación</th>
+                                <th>Empleador</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:if="${empleos.empty}">
+                                <td colspan="9" class="text-center">No hay empleos todavía!</td>
+                            </tr>
+                            <tr th:each="empleos, itemStat : *{empleos}">
+                                <td><span th:text="${empleos.nombre}"> Nombre </span></td>
+                                <td><span th:text="${empleos.descripcion}"> Descripción </span></td>
+                                <td><span th:text="${empleos.oficio}"> Oficio </span></td>
+                                <td><span th:text="${empleos.fechaPublicacion}"> Fecha de publicación </span></td>
+                                <td><span th:text="${empleos.empleador.nombre}"> Empleador </span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div th:replace="/fragments/footer.html :: footer"></div>
+</body>
+
+</html>
