@@ -153,10 +153,12 @@ public class TrabajadorServicio {
                 suma = suma + comentario.getPuntaje();
             }
             Long prom = suma / cont;
-
+            return prom.toString();
+        }   else{
+            return "0";
         }
         
-    
+    }
 
     public List<Comentario> comentariosTrabajador(Long id) {
         Trabajador t = trabajadorRepositorio.getById(id);
