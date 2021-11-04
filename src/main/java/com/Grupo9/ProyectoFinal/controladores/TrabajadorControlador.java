@@ -13,14 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.Grupo9.ProyectoFinal.Entidad.Empleador;
 import com.Grupo9.ProyectoFinal.Entidad.Empleo;
 import com.Grupo9.ProyectoFinal.Entidad.Trabajador;
 import com.Grupo9.ProyectoFinal.Enum.Genero;
 import com.Grupo9.ProyectoFinal.Enum.Oficio;
 import com.Grupo9.ProyectoFinal.Enum.Tipo;
 import com.Grupo9.ProyectoFinal.Enum.Zona;
-import com.Grupo9.ProyectoFinal.Servicios.EmpleadorServicio;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleoServicio;
 import com.Grupo9.ProyectoFinal.Servicios.TrabajadorServicio;
 
@@ -38,7 +36,7 @@ public class TrabajadorControlador {
 	public String index(ModelMap model) {
        List<Empleo> listaEmpleos = empleoServicio.listarEmpleos();
       
-        model.addAllAttributes("listaEmpleos", listaEmpleos);
+        model.addAttribute("listaEmpleos", listaEmpleos);
 		
 		return "trabajadorIndex";
 	}
@@ -69,8 +67,8 @@ public class TrabajadorControlador {
 	public String perfilTrabajador(ModelMap model, @PathVariable("id") Long id) {
 		Trabajador trabajador = trabajadorServicio.encontrarPorId(id);
 		model.addAttribute("trabajador", trabajador);
-		model.addAllAttributes("comentarios", trabajadorServicio.comentariosTrabajador(id));
-		model.addAttribute("puntos", servicioTrabajador.puntosTrabajador(id));
+		model.addAttribute("comentarios", trabajadorServicio.comentariosTrabajador(id));
+		model.addAttribute("puntos", trabajadorServicio.puntosTrabajador(id));
 		
 		return "perfilTrabajador";
 	}
