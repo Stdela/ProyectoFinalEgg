@@ -38,7 +38,7 @@ public class TrabajadorControlador {
 	public String index(ModelMap model) {
        List<Empleo> listaEmpleos = empleoServicio.listarEmpleos();
       
-        model.addAllAttributes("listaEmpleos", listaEmpleos);
+        model.addAttribute("listaEmpleos", listaEmpleos);
 		
 		return "trabajadorIndex";
 	}
