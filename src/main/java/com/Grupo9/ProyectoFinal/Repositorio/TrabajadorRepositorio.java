@@ -8,4 +8,6 @@ import com.Grupo9.ProyectoFinal.Entidad.Trabajador;
 @Repository
 public interface TrabajadorRepositorio extends JpaRepository<Trabajador, Long>{
 
+    public Trabajador findByEmail(String email);
+
 }
