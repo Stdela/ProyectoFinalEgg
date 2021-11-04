@@ -1,11 +1,13 @@
 package com.Grupo9.ProyectoFinal.Servicios;
 
+import com.Grupo9.ProyectoFinal.Entidad.Comentario;
 import com.Grupo9.ProyectoFinal.Entidad.Empleo;
 import com.Grupo9.ProyectoFinal.Entidad.Trabajador;
 import com.Grupo9.ProyectoFinal.Enum.Genero;
 import com.Grupo9.ProyectoFinal.Enum.Oficio;
 import com.Grupo9.ProyectoFinal.Enum.Zona;
 import com.Grupo9.ProyectoFinal.Excepciones.WebException;
+import com.Grupo9.ProyectoFinal.Repositorio.ComentarioRepositorio;
 import com.Grupo9.ProyectoFinal.Repositorio.EmpleoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -24,6 +27,8 @@ public class TrabajadorServicio {
     TrabajadorRepositorio trabajadorRepositorio;
     @Autowired
     EmpleoRepositorio empleoRepositorio;
+    @Autowired
+    ComentarioRepositorio cr;
 
     public Trabajador crearTrabajador(String email, String contrasena, String contrasena2, String nombre, String apellido, Genero genero, LocalDate fechaNacimiento, Zona zona, String telefono, ArrayList<Oficio> oficio, String experiencia, Boolean disponible, Boolean licencia, ArrayList<String> skills) throws WebException {
         Trabajador t = trabajadorRepositorio.findByEmail(email);
@@ -135,6 +140,35 @@ public class TrabajadorServicio {
         return trabajador;
 
     }
+
+    public String puntosTrabajador(Long id) {
+        Trabajador t = trabajadorRepositorio.getById(id);
+        Optional<List<Comentario>> resp = cr.buscarPorReceptor(t);
+        if (resp.isPresent()) {
+            Integer cont = 0;
+            Long suma = 0l;
+            List<Comentario> comentarios = resp.get();
+            for (Comentario comentario : comentarios) {
+                cont++;
+                suma = suma + comentario.getPuntaje();
+            }
+            Long prom = suma / cont;
+
+        }
+        
     
-    
+
+    public List<Comentario> comentariosTrabajador(Long id) {
+        Trabajador t = trabajadorRepositorio.getById(id);
+        List<Comentario> comentarios;
+
+        Optional<List<Comentario>> resp = cr.buscarPorReceptor(t);
+        if (resp.isPresent()) {
+            comentarios = resp.get();
+        } else {
+            comentarios = null;
+        }
+        return comentarios;
+    }
+
 }
