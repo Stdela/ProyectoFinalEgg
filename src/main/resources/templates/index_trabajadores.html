@@ -17,7 +17,7 @@
 
 <body>
     <!-- NAV -->
-    <div th:replace="/fragments/navbar.html :: navbar"></div>
+    <div th:replace="/fragments/componentes.html :: navbar"></div>
 
     <div class="index">
 
@@ -26,6 +26,10 @@
         <div class="container text-center content">
 
             <h2 class="text-center py-3 h2">La solución más rápida a tu problema... <br> ¡la encontras acá!</h2>
+            <div class="btn-group">
+                <a class="btn btn-success" href="/busquedaEmpleo">Empleos</a>
+                <a class="btn btn-success" href="/busquedaTrabajadores">Trabajadores</a>
+            </div>
             <h1 class="h1">(PROVISORIO) Trabajos:</h1>
 
             <!-- categorias de empleados disponibles, la ídea es que se vea diferente y por categorías -->
@@ -66,7 +70,7 @@
             </div>
         </div>
     </div>
-    <div th:replace="/fragments/footer.html :: footer"></div>
+    <div th:replace="/fragments/componentes.html :: footer"></div>
 </body>
 
 </html>

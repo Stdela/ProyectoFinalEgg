@@ -11,7 +11,7 @@ import com.Grupo9.ProyectoFinal.Servicios.TrabajadorServicio;
 
 @Controller
 @RequestMapping("/")
-public class ProyectoFinal {
+public class ProyectoControlador {
 
 	
 	@Autowired
