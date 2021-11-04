@@ -22,6 +22,7 @@ import com.Grupo9.ProyectoFinal.Enum.Oficio;
 import com.Grupo9.ProyectoFinal.Enum.Tipo;
 import com.Grupo9.ProyectoFinal.Enum.Zona;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleadorServicio;
+import com.Grupo9.ProyectoFinal.Servicios.EmpleoServicio;
 import com.Grupo9.ProyectoFinal.Servicios.TrabajadorServicio;
 
 
@@ -34,6 +35,9 @@ public class EmpleadorControlador {
 	
 	@Autowired
 	private TrabajadorServicio trabajadorServicio;
+	
+	@Autowired 
+	private EmpleoServicio empleoServicio;
 	
 	@GetMapping()
 	public String index(ModelMap model) {
@@ -65,13 +69,16 @@ public class EmpleadorControlador {
 	}
 	
 	//Aca se necesitarian tambien los datos del que lo crea
-	@GetMapping("/crear-empleo")
-	public String crearEmpleo() {
+	@GetMapping("/crear-empleo/{id}")
+	public String crearEmpleo(ModelMap model, @PathVariable("id") Long id) {
+		Empleador empleador = empleadorServicio.encontrarPorId(id);
+		model.addAttribute("empleador", empleador);
 		return "formulario-crear-empleo";
 	}
 	
-	@PostMapping("/crear-empleo")
-	public String formularioEmple(@RequestParam("nombre") String nombre, @RequestParam("descripcion") String descripcion, @RequestParam("oficio") Oficio oficio, @RequestParam("empleador") Empleador empleador) {
+	@PostMapping("/crear-empleo/{id}")
+	public String formularioEmple(@PathVariable("id") Long id, @RequestParam("nombre") String nombre, @RequestParam("descripcion") String descripcion, @RequestParam("oficio") Oficio oficio) {
+		empleoServicio.crearEmpleo(nombre, descripcion, oficio,id);
 		return "return:/empleador";
 	}
 	
@@ -83,6 +90,8 @@ public class EmpleadorControlador {
 		model.addAttribute("empleador", empleador);
 		model.addAttribute("listaComentarios", empleadorServicio.comentariosEmpleador(id));
 		model.addAttribute("puntos", empleadorServicio.puntosEmpleador(id));
+		//empleos activos 
+		model.addAtribute("empleosActivos" , empleadorServicio.empleosActivos);
 		
 		return "perfilEmpleador";
 	}
