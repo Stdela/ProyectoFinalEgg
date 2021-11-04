@@ -21,6 +21,7 @@ import com.Grupo9.ProyectoFinal.Enum.Genero;
 import com.Grupo9.ProyectoFinal.Enum.Oficio;
 import com.Grupo9.ProyectoFinal.Enum.Tipo;
 import com.Grupo9.ProyectoFinal.Enum.Zona;
+import com.Grupo9.ProyectoFinal.Excepciones.WebException;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleadorServicio;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleoServicio;
 import com.Grupo9.ProyectoFinal.Servicios.TrabajadorServicio;
@@ -52,19 +53,19 @@ public class EmpleadorControlador {
 	
 	@GetMapping("/registro-empleador")
 	public String registroEmpleador() {
-		return "registro-empleador-prueba";
+		return "registro-empleador";
 	}
 	
 	@PostMapping("/registro-empleador")
 	public String registroRecibido(@RequestParam("email") String email, @RequestParam("contrasena") String contrasena,@RequestParam("contrasena2") String contrasena2,@RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
-			@RequestParam("genero") String genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") String zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") String tipo) {
+			@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") Tipo tipo) {
 		try {
-			empleadorServicio.crearEmpleador(email,contrasena,contrasena2,nombre,apellido,Genero.FEMENINO,LocalDate.of(2010, 3, 3),Zona.CENTRO,telefono,Tipo.EMPRESA);
+			empleadorServicio.crearEmpleador(email,contrasena,contrasena2,nombre,apellido,genero,fechaNacimiento,zona,telefono,tipo);
 		} catch (Exception e) {
 			System.out.print(e);
 		}
 		
-		return "redirect:/empleador";
+		return "redirect:/";
 	
 	}
 	
@@ -77,7 +78,7 @@ public class EmpleadorControlador {
 	}
 	
 	@PostMapping("/crear-empleo/{id}")
-	public String formularioEmple(@PathVariable("id") Long id, @RequestParam("nombre") String nombre, @RequestParam("descripcion") String descripcion, @RequestParam("oficio") Oficio oficio) {
+	public String formularioEmple(@PathVariable("id") Long id, @RequestParam("nombre") String nombre, @RequestParam("descripcion") String descripcion, @RequestParam("oficio") Oficio oficio) throws WebException {
 		empleoServicio.crearEmpleo(nombre, descripcion, oficio,id);
 		return "return:/empleador";
 	}
@@ -91,7 +92,7 @@ public class EmpleadorControlador {
 		model.addAttribute("listaComentarios", empleadorServicio.comentariosEmpleador(id));
 		model.addAttribute("puntos", empleadorServicio.puntosEmpleador(id));
 		//empleos activos 
-		model.addAtribute("empleosActivos" , empleadorServicio.empleosActivos);
+		//model.addAtribute("empleosActivos" , empleadorServicio.empleosActivos);
 		
 		return "perfilEmpleador";
 	}

@@ -3,6 +3,7 @@ package com.Grupo9.ProyectoFinal.Servicios;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +36,7 @@ public class EmpleadorServicio {
 	private ComentarioRepositorio cr;
 
 	public Empleador crearEmpleador(String email, String contrasena, String contrasena2, String nombre, String apellido,
-			Genero genero, LocalDate fechaNacimiento, Zona zona, String telefono, Tipo tipo) throws WebException {
+			Genero genero, Date fechaNacimiento, Zona zona, String telefono, Tipo tipo) throws WebException {
 
 		Empleador e = er.buscarPorEmail(email);
 		if (e != null) {
@@ -67,11 +68,11 @@ public class EmpleadorServicio {
 			throw new WebException("Debe ingresar un genero");
 		}
 
-		LocalDate fecha2 = LocalDate.now(); // For reference
+		Date fecha2 = new Date(); // For reference
 		// DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
 		// String formattedString = localDate.format(formatter);
 
-		if (fechaNacimiento == null || fechaNacimiento.isAfter(fecha2)) {
+		if (fechaNacimiento == null || fechaNacimiento.after(fecha2)) {
 			throw new WebException("Debe ingresar una fecha válida");
 		}
 
@@ -122,7 +123,7 @@ public class EmpleadorServicio {
 		return listaEmpleadores;
 	}
 	
-	public void modificarEmpleador(Long id, String nombre, String apellido, Genero genero, LocalDate fechaNacimiento,
+	public void modificarEmpleador(Long id, String nombre, String apellido, Genero genero, Date fechaNacimiento,
 			Zona zona, String telefono, Tipo tipo, MultipartFile foto) throws IOException {
 
 		Empleador e = er.getById(id);

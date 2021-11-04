@@ -2,6 +2,7 @@ package com.Grupo9.ProyectoFinal.controladores;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,12 +45,12 @@ public class TrabajadorControlador {
 	
 	@GetMapping("/registro-trabajador")
 	public String registroEmpleador() {
-		return "registro-empleador";
+		return "registro-trabajador";
 	}
 	
 	@PostMapping("/registro-trabajador")
 	public String registroRecibido(@RequestParam("email") String email, @RequestParam("contrasena") String contrasena,@RequestParam("contrasena2") String contrasena2,@RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
-			@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") LocalDate fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,
+			@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,
 			@RequestParam("oficio") ArrayList<Oficio> oficio, @RequestParam("experiencia") String experiencia, @RequestParam("disponible") Boolean disponible, @RequestParam("licencia") Boolean licencia, @RequestParam("skills") ArrayList<String> skills){
 		try {
 			
@@ -58,7 +59,7 @@ public class TrabajadorControlador {
 			System.out.print(e);
 		}
 		
-		return "redirect:/trabajadorIndex";
+		return "redirect:/";
 	
 	}
 	
