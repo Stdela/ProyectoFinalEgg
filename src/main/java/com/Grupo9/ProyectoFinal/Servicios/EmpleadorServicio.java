@@ -2,6 +2,8 @@ package com.Grupo9.ProyectoFinal.Servicios;
 
 import java.time.LocalDate;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,7 +85,7 @@ public class EmpleadorServicio {
 		return empleador;
 
 	}
-
+	
 	// Marca para borrado
 	public void borrarEmpleador(Long id) {
 		Empleador e = er.getById(id);
