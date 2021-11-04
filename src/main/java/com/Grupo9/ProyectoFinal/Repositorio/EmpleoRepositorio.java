@@ -14,7 +14,7 @@ public interface EmpleoRepositorio extends JpaRepository<Empleo, Long>{
 	
 	
 	
-	@Query("SELECT e FROM Empleo e WHERE e.concretado=FALSE and a.borrado=FALSE")
+	@Query("SELECT e FROM Empleo e WHERE e.concretado=FALSE and e.borrado=FALSE")
 	public Optional<List<Empleo>> empleosActivos();
 	
 	
