@@ -12,6 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,6 +24,16 @@ public class CustomUserDetailsService implements UserDetailsService {
     TrabajadorRepositorio trabajadorRepositorio;
     @Autowired
     UsuarioRepositorio usuarioRepositorio;
+    @Autowired
+    PasswordEncoder passEncoder;
+
+    public void crear(Usuario usuario) {
+        if (usuarioRepositorio.encontrarPorEmail(usuario.getEmail()) != null) {
+            throw new IllegalArgumentException("El usuario ya existe");
+        }
+        usuario.setContrasena(passEncoder.encode(usuario.getContrasena()));
+        usuarioRepositorio.save(usuario);
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
