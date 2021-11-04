@@ -1,0 +1,89 @@
+html{
+    font-family: 'Montserrat', sans-serif;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    width: 90%;
+    background: #efefef;
+    justify-content: center;
+    align-items: center;
+    display: block;
+    height: 100vh;
+    margin: auto;
+}
+#informacion{
+    margin-bottom: 60px;
+}
+.article{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.article h2{
+    margin-left: 20px;
+    font-weight: 500;
+}
+.article p{
+    line-height: 1.5;
+    text-align: justify;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20%;
+    float: right;
+}
+.article hr{
+    margin-top: 10px;
+}
+
+/*------------------*/
+/*codigo de equipo*/
+.cartas{
+    width: 80%;
+    float: right;
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+.container{
+    width: 100%;
+    display: flex;
+    max-width: 300px;
+}
+.card{
+    background: white;
+    width: 100%;
+    margin: 20px;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: default;
+    transition: all 400ms ease;
+}
+.card:hover{
+    transform: translateY(-3%);
+}
+figure{
+    padding: 15px;
+    margin-bottom: 15px;
+    max-width: 200px;
+    margin: auto;
+}
+.card img{
+    width: 100%;
+    border-radius: 10px;
+    height: 200px;
+}
+.card .descripcion{
+    padding: 15px;
+    text-align: center;
+}
+.card .descripcion h3{
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+.card .descripcion p{
+    line-height: 1.5;
+
+}

@@ -26,12 +26,16 @@ public class EmpleoServicio {
 
 	@Autowired
 	private TrabajadorRepositorio tr;
+	
+	@Autowired
+	private EmpleadorServicio empleadorServicio; 
 
 	// Crea el empleo con los datos básicos, luego se asignan los trabajadors y se
 	// cambian los boolean cuando corresponda
-	public Empleo crearEmpleo(String nombre, String descripcion, Oficio oficio, Empleador empleador)
+	public Empleo crearEmpleo(String nombre, String descripcion, Oficio oficio, Long id)
 			throws WebException {
 		Empleo e = new Empleo(); // Ver si da error por los notNull. Sino crear constructor con esos parametros.
+		Empleador empleador=empleadorServicio.encontrarPorId(id);
 
 		if (nombre.isEmpty() || nombre == null) {
 			throw new WebException("Debes ingresar un título");
