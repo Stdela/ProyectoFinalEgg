@@ -69,8 +69,8 @@ public class TrabajadorControlador {
 	public String perfilTrabajador(ModelMap model, @PathVariable("id") Long id) {
 		Trabajador trabajador = trabajadorServicio.encontrarPorId(id);
 		model.addAttribute("trabajador", trabajador);
-		model.addAllAttributes("comentarios", trabajadorServicio.comentariosTrabajador(id));
-		model.addAttribute("puntos", servicioTrabajador.puntosTrabajador(id));
+		model.addAttribute("comentarios", trabajadorServicio.comentariosTrabajador(id));
+		model.addAttribute("puntos", trabajadorServicio.puntosTrabajador(id));
 		
 		return "perfilTrabajador";
 	}

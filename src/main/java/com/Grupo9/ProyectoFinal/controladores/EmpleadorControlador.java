@@ -2,6 +2,7 @@ package com.Grupo9.ProyectoFinal.controladores;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.Grupo9.ProyectoFinal.Entidad.Comentario;
 import com.Grupo9.ProyectoFinal.Entidad.Empleador;
 import com.Grupo9.ProyectoFinal.Entidad.Trabajador;
 import com.Grupo9.ProyectoFinal.Enum.Genero;
@@ -76,11 +78,11 @@ public class EmpleadorControlador {
 	
 	
 	@GetMapping("/perfil/{id}")
-	public String perfilEmpleador(ModelMap model, @PathVariable("id") String id) {
+	public String perfilEmpleador(ModelMap model, @PathVariable("id") Long id) {
 		Empleador empleador = empleadorServicio.encontrarPorId(id);
 		model.addAttribute("empleador", empleador);
-		model.addAllAttributes("comentarios", empleadorServicio.comentariosEmpleador(id));
-		model.addAttribute("puntos", servicioEmpleador.puntosEmpleador(id));
+		model.addAttribute("listaComentarios", empleadorServicio.comentariosEmpleador(id));
+		model.addAttribute("puntos", empleadorServicio.puntosEmpleador(id));
 		
 		return "perfilEmpleador";
 	}
