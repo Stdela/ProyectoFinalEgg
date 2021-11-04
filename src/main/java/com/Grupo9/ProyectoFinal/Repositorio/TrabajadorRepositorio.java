@@ -10,4 +10,6 @@ public interface TrabajadorRepositorio extends JpaRepository<Trabajador, Long>{
 
     public Trabajador findByEmail(String email);
 
+    public Trabajador buscarPorEmail(String email);
+
 }
