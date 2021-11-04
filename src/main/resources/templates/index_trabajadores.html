@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <!--/*/ <th:block th:include="fragments/componentes.html :: head">
+    </th:block> /*/-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/index_style.css">
+    <title>Proyecto Egg</title>
+</head>
+
+<body>
+    <!-- NAV -->
+    <div th:replace="/fragments/navbar.html :: navbar"></div>
+
+    <div class="index">
+
+        <h1 class="text-center py-2">Proyecto</h1>
+
+        <div class="container text-center content">
+
+            <h2 class="text-center py-3 h2">La solución más rápida a tu problema... <br> ¡la encontras acá!</h2>
+            <h1 class="h1">(PROVISORIO) Trabajos:</h1>
+
+            <!-- categorias de empleados disponibles, la ídea es que se vea diferente y por categorías -->
+            <div class="container wrap-busquedas">
+                <section class="busquedas">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Oficio</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Genero</th>
+                                <th>Fecha de nacimiento</th>
+                                <th>Telefono</th>
+                                <th>Habilidades</th>
+                                <th>Disponibilidad</th>
+                                <th>Licencia</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:if="${trabajadores.empty}">
+                                <td colspan="9" class="text-center">No hay trabajadores todavía!</td>
+                            </tr>
+                            <tr th:each="trabajadores, itemStat : *{trabajadores}">
+                                <td><span th:text="${trabajadores.oficio}"> Oficio </span></td>
+                                <td><span th:text="${trabajadores.nombre}"> Nombre </span></td>
+                                <td><span th:text="${trabajadores.apellido}"> Apellido </span></td>
+                                <td><span th:text="${trabajadores.genero}"> Genero </span></td>
+                                <td><span th:text="${trabajadores.fechaNacimiento}"> Fecha de nacimiento </span></td>
+                                <td><span th:text="${trabajadores.telefono}"> Telefono </span></td>
+                                <td><span th:text="${trabajadores.skills}"> Habilidades </span></td>
+                                <td><span th:text="${trabajadores.disponible}"> Disponibilidad </span></td>
+                                <td><span th:text="${trabajadores.licencia}"> Licencia </span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div th:replace="/fragments/footer.html :: footer"></div>
+</body>
+
+</html>

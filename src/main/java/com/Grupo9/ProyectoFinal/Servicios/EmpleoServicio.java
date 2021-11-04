@@ -3,6 +3,7 @@ package com.Grupo9.ProyectoFinal.Servicios;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -97,5 +98,22 @@ public class EmpleoServicio {
 		e.setBorrado(true);
 		er.save(e);
 	}
+	
+	public List<Empleo> listarEmpleos(){
+		List<Empleo> listaEmpleos;
+		Optional<List<Empleo>> resp=er.empleosActivos();
+		if (resp.isPresent()) {
+			listaEmpleos=resp.get();			
+		}else {
+			listaEmpleos=null;
+		}
+		return listaEmpleos;		
+	}
+	
+	public Empleo encontrarPorID(Long id) {
+		Empleo e=er.getById(id);
+		return e;
+	}
+	
 
 }

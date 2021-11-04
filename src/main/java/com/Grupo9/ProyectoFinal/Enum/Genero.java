@@ -5,10 +5,14 @@
  */
 package com.Grupo9.ProyectoFinal.Enum;
 
+
+
 /**
  *
  * @author delam
  */
 public enum Genero {
     MASCULINO, FEMENINO, OTRO;
+	
+
 }
