@@ -3,6 +3,7 @@ package com.Grupo9.ProyectoFinal.Servicios;
 import com.Grupo9.ProyectoFinal.Entidad.Comentario;
 import com.Grupo9.ProyectoFinal.Entidad.Empleo;
 import com.Grupo9.ProyectoFinal.Entidad.Trabajador;
+import com.Grupo9.ProyectoFinal.Entidad.Usuario;
 import com.Grupo9.ProyectoFinal.Enum.Genero;
 import com.Grupo9.ProyectoFinal.Enum.Oficio;
 import com.Grupo9.ProyectoFinal.Enum.Zona;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Grupo9.ProyectoFinal.Repositorio.TrabajadorRepositorio;
+import com.Grupo9.ProyectoFinal.Repositorio.UsuarioRepositorio;
+import com.Grupo9.ProyectoFinal.Seguridad.CustomUserDetailsService;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -29,6 +32,8 @@ public class TrabajadorServicio {
     EmpleoRepositorio empleoRepositorio;
     @Autowired
     ComentarioRepositorio cr;
+    @Autowired
+    CustomUserDetailsService detailsService;
 
     public Trabajador crearTrabajador(String email, String contrasena, String contrasena2, String nombre, String apellido, Genero genero, LocalDate fechaNacimiento, Zona zona, String telefono, ArrayList<Oficio> oficio, String experiencia, Boolean disponible, Boolean licencia, ArrayList<String> skills) throws WebException {
         Trabajador t = trabajadorRepositorio.findByEmail(email);
@@ -89,9 +94,11 @@ public class TrabajadorServicio {
         ArrayList<String> rol = new ArrayList();
         rol.add("ROLE_TRABAJADOR");
         Trabajador trabajador = new Trabajador(oficio, experiencia, disponible, licencia, skills, email, contrasena, nombre, apellido, genero, fechaNacimiento, zona, telefono, rol);
-
+       
+        
         trabajadorRepositorio.save(trabajador);
-
+        detailsService.crearTrabajador(trabajador);
+        
         return trabajador;
     }
 

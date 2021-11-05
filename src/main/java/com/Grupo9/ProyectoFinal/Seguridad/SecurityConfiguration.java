@@ -1,4 +1,5 @@
 package com.Grupo9.ProyectoFinal.Seguridad;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,10 +35,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         protected void configure(HttpSecurity http) throws Exception {
             http.csrf().disable();
             http.authorizeRequests()
-                    .antMatchers("/registro-trabajador", "/registro-empleador").permitAll()
+                    .antMatchers("/css/*", "/js/*", "/img/*", "/registro-trabajador", "/registro-empleador").permitAll()
                     .anyRequest().authenticated();
             http.formLogin()
-                    .loginPage("/registro-trabajador")
+                    .loginPage("/login")
+                    .loginProcessingUrl("/logincheck")
+                    .usernameParameter("email")
+                    .passwordParameter("contrasena")
+                    .failureForwardUrl("/login?error")
                     .failureForwardUrl("/login?error")
                     .permitAll();
 
@@ -53,42 +58,41 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             return new BCryptPasswordEncoder();
         }
 
-        @Configuration
-        @Order(2)
-        public static class App2ConfigurationAdapter extends WebSecurityConfigurerAdapter {
-
-            @Autowired
-            UserDetailsService userDetailsService;
-
-            public App2ConfigurationAdapter() {
-                super();
-            }
-
-            @Override
-            protected void configure(HttpSecurity http) throws Exception {
-                http.csrf().disable();
-                http.authorizeRequests()
-                        .antMatchers("/registro-trabajador", "/registro-empleador").permitAll()
-                        .anyRequest().authenticated();
-                http.formLogin()
-                        .loginPage("/registro-empleador")
-                        .failureForwardUrl("/login?error")
-                        .permitAll();
-
-            }
-
-            @Autowired
-            @Bean
-            public PasswordEncoder passwordEncoder() {
-                return new BCryptPasswordEncoder();
-            }
-
-            public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-                auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-            }
-
-        }
+//        @Configuration
+//        @Order(2)
+//        public static class App2ConfigurationAdapter extends WebSecurityConfigurerAdapter {
+//
+//            @Autowired
+//            UserDetailsService userDetailsService;
+//
+//            public App2ConfigurationAdapter() {
+//                super();
+//            }
+//
+//            @Override
+//            protected void configure(HttpSecurity http) throws Exception {
+//                http.csrf().disable();
+//                http.authorizeRequests()
+//                        .antMatchers("/css/*", "/js/*", "/img/*", "/registro-trabajador", "/registro-empleador").permitAll()
+//                        .anyRequest().authenticated();
+//                http.formLogin()
+//                        .loginPage("/registro-empleador")
+//                        .loginProcessingUrl("/logincheck")
+//                        .usernameParameter("email")
+//                        .passwordParameter("contrasena")
+//                        .failureForwardUrl("/login?error")
+//                        .permitAll();
+//
+//            }
+//
+//            @Autowired
+//            @Bean
+//            public PasswordEncoder passwordEncoder() {
+//                return new BCryptPasswordEncoder();
+//            }
+//
+//            public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//                auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+//            }
     }
 }
-
-    
