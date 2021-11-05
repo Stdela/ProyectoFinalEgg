@@ -1,6 +1,7 @@
 package com.Grupo9.ProyectoFinal.Entidad;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Entity;
 
@@ -26,13 +27,13 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Empleador extends Usuario {
-
+	
 	private Tipo tipo;
 	// private ArrayList<Empleo> busquedasActivas;
 	private String contacto;
 
 	public Empleador(String email, String contrasena, String nombre, String apellido, Genero genero,
-			LocalDate fechaNacimiento, Zona zona, String telefono, Tipo tipo) {
+			Date fechaNacimiento, Zona zona, String telefono, Tipo tipo) {
 		super(email, contrasena, nombre, apellido, genero, fechaNacimiento, zona, telefono);
 		this.tipo = tipo;
 	}

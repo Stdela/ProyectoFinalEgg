@@ -19,6 +19,7 @@ import com.Grupo9.ProyectoFinal.Seguridad.CustomUserDetailsService;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,7 +36,7 @@ public class TrabajadorServicio {
     @Autowired
     CustomUserDetailsService detailsService;
 
-    public Trabajador crearTrabajador(String email, String contrasena, String contrasena2, String nombre, String apellido, Genero genero, LocalDate fechaNacimiento, Zona zona, String telefono, ArrayList<Oficio> oficio, String experiencia, Boolean disponible, Boolean licencia, ArrayList<String> skills) throws WebException {
+    public Trabajador crearTrabajador(String email, String contrasena, String contrasena2, String nombre, String apellido, Genero genero, Date fechaNacimiento, Zona zona, String telefono, ArrayList<Oficio> oficio, String experiencia, Boolean disponible, Boolean licencia, ArrayList<String> skills) throws WebException {
         Trabajador t = trabajadorRepositorio.findByEmail(email);
         if (t != null) {
             throw new WebException("El email ya esta en uso");
@@ -66,9 +67,9 @@ public class TrabajadorServicio {
             throw new WebException("Debe ingresar un genero");
         }
 
-        LocalDate fecha2 = LocalDate.now();
+        Date fecha2 = new Date();
 
-        if (fechaNacimiento == null || fechaNacimiento.isAfter(fecha2)) {
+        if (fechaNacimiento == null || fechaNacimiento.after(fecha2)) {
             throw new WebException("Debe ingresar una fecha válida");
         }
 
@@ -93,12 +94,12 @@ public class TrabajadorServicio {
         }
         ArrayList<String> rol = new ArrayList();
         rol.add("ROLE_TRABAJADOR");
-        Trabajador trabajador = new Trabajador(oficio, experiencia, disponible, licencia, skills, email, contrasena, nombre, apellido, genero, fechaNacimiento, zona, telefono, rol);
-       
-        
+
+        Trabajador trabajador = new Trabajador(email, contrasena, nombre, apellido, genero, fechaNacimiento, zona, telefono, oficio, experiencia, disponible, licencia, skills);
+
         trabajadorRepositorio.save(trabajador);
         detailsService.crearTrabajador(trabajador);
-        
+
         return trabajador;
     }
 
@@ -111,7 +112,7 @@ public class TrabajadorServicio {
 
     }
 
-    public Trabajador modificarTrabajador(Long id, String nombre, String apellido, Genero genero, LocalDate fechaNacimiento, Zona zona, String telefono, ArrayList<Oficio> oficio, String experiencia, Boolean disponible, Boolean licencia, ArrayList<String> skills, MultipartFile imagen, String presentacion) throws IOException {
+    public Trabajador modificarTrabajador(Long id, String nombre, String apellido, Genero genero, Date fechaNacimiento, Zona zona, String telefono, ArrayList<Oficio> oficio, String experiencia, Boolean disponible, Boolean licencia, ArrayList<String> skills, MultipartFile imagen, String presentacion) throws IOException {
         Trabajador trabajador = trabajadorRepositorio.findById(id).get();
         trabajador.setApellido(apellido);
         trabajador.setNombre(nombre);
@@ -161,10 +162,10 @@ public class TrabajadorServicio {
             }
             Long prom = suma / cont;
             return prom.toString();
-        }   else{
+        } else {
             return "0";
         }
-        
+
     }
 
     public List<Comentario> comentariosTrabajador(Long id) {

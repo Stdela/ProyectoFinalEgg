@@ -2,6 +2,7 @@ package com.Grupo9.ProyectoFinal.controladores;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.Grupo9.ProyectoFinal.Entidad.Empleador;
 import com.Grupo9.ProyectoFinal.Entidad.Empleo;
 import com.Grupo9.ProyectoFinal.Entidad.Trabajador;
 import com.Grupo9.ProyectoFinal.Enum.Genero;
 import com.Grupo9.ProyectoFinal.Enum.Oficio;
 import com.Grupo9.ProyectoFinal.Enum.Tipo;
 import com.Grupo9.ProyectoFinal.Enum.Zona;
-import com.Grupo9.ProyectoFinal.Servicios.EmpleadorServicio;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleoServicio;
 import com.Grupo9.ProyectoFinal.Servicios.TrabajadorServicio;
 
@@ -38,7 +37,7 @@ public class TrabajadorControlador {
 	public String index(ModelMap model) {
        List<Empleo> listaEmpleos = empleoServicio.listarEmpleos();
       
-        model.addAllAttributes("listaEmpleos", listaEmpleos);
+        model.addAttribute("listaEmpleos", listaEmpleos);
 		
 		return "trabajadorIndex";
 	}
@@ -46,12 +45,12 @@ public class TrabajadorControlador {
 	
 	@GetMapping("/registro-trabajador")
 	public String registroEmpleador() {
-		return "registro-empleador";
+		return "registro-trabajador";
 	}
 	
 	@PostMapping("/registro-trabajador")
 	public String registroRecibido(@RequestParam("email") String email, @RequestParam("contrasena") String contrasena,@RequestParam("contrasena2") String contrasena2,@RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
-			@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") LocalDate fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,
+			@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,
 			@RequestParam("oficio") ArrayList<Oficio> oficio, @RequestParam("experiencia") String experiencia, @RequestParam("disponible") Boolean disponible, @RequestParam("licencia") Boolean licencia, @RequestParam("skills") ArrayList<String> skills){
 		try {
 			
@@ -60,7 +59,7 @@ public class TrabajadorControlador {
 			System.out.print(e);
 		}
 		
-		return "redirect:/trabajadorIndex";
+		return "redirect:/";
 	
 	}
 	
@@ -69,8 +68,8 @@ public class TrabajadorControlador {
 	public String perfilTrabajador(ModelMap model, @PathVariable("id") Long id) {
 		Trabajador trabajador = trabajadorServicio.encontrarPorId(id);
 		model.addAttribute("trabajador", trabajador);
-		model.addAllAttributes("comentarios", trabajadorServicio.comentariosTrabajador(id));
-		model.addAttribute("puntos", servicioTrabajador.puntosTrabajador(id));
+		model.addAttribute("comentarios", trabajadorServicio.comentariosTrabajador(id));
+		model.addAttribute("puntos", trabajadorServicio.puntosTrabajador(id));
 		
 		return "perfilTrabajador";
 	}

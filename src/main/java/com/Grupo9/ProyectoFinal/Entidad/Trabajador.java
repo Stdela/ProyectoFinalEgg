@@ -1,6 +1,7 @@
 package com.Grupo9.ProyectoFinal.Entidad;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -35,7 +36,7 @@ public class Trabajador extends Usuario{
 	@ManyToMany
 	private List<Empleo> postulaciones;
 
-    public Trabajador(ArrayList<Oficio> oficio, String experiencia, Boolean disponible, Boolean licencia, ArrayList<String> skills, String email, String contrasena, String nombre, String apellido, Genero genero, LocalDate fechaNacimiento, Zona zona, String telefono, ArrayList<String> rol ) {
+    public Trabajador(String email, String contrasena, String nombre, String apellido, Genero genero, Date fechaNacimiento, Zona zona, String telefono, ArrayList<Oficio> oficio, String experiencia, Boolean disponible, Boolean licencia, ArrayList<String> skills) {
         super(email, contrasena, nombre, apellido, genero, fechaNacimiento, zona, telefono);
         this.oficio = oficio;
         this.experiencia = experiencia;

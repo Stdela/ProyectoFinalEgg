@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <th:block th:include="fragments/componentes.html :: head"></th:block>
+      <title>Crear empleo</title>
+    </head>
+<body>
+    <!-- NAV -->
+    <div th:replace="/fragments/componentes.html :: navbar"></div>
+
+    <!-- Formulario -->
+    <div class="container mb-5">
+        <div class="row justify-content-center">
+            <form th:action="@{/empleador/crear-empleo}" class="col-10 my-3" method="POST" >
+                <div class="row g-3">
+                    <div class="col-sm-6 col-md-6">
+                        <label class="form-label fw-bolder" for="name">Titulo</label>
+                        <input type="text" id="nombre" name="nombre" class="form-control" required>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <label class="form-label fw-bolder" for="name">Empleador</label>
+                        <input type="text" id="nombre" name="nombre" class="form-control" th:value="" readonly>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <label class="form-label fw-bolder" for="oficio">Oficio</label>
+                        <div class="col-md-6">
+                            <select name="oficio" id="oficio">
+                                <option selected>selecionar</option>
+                                <option th:each="oficioOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Oficio).values()}"
+                                th:values="${oficioOpt}"
+                                th:text="${oficioOpt}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="mb-3">
+                            <label for="descripcion" class="form-label fw-bolder">Descripcion de trabajo.</label>
+                            <textarea class="form-control" name="descripcion" id="descripcion" rows="5"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-primary" type="submit">Publicar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- <div th:replace="/fragments/componentes.html :: footer"></div> -->
+</body>
+</html>

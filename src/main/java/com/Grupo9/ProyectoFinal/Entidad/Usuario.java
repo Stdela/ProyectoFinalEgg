@@ -5,6 +5,7 @@ import com.Grupo9.ProyectoFinal.Enum.Zona;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.persistence.Basic;
 
@@ -15,7 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Lob;
-
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -53,7 +55,10 @@ public class Usuario {
 	protected String nombre;
 	protected String apellido;
 	protected Genero genero;
-	protected LocalDate fechaNacimiento;
+	
+	@Temporal(TemporalType.DATE)
+	protected Date fechaNacimiento;
+	//protected LocalDate fechaNacimiento;
 	protected Zona zona;
 	protected String telefono;
 	protected String presentacion;
@@ -64,7 +69,7 @@ public class Usuario {
 	protected boolean borrado = false;
 
 	public Usuario(@Email @NotNull String email, @NotNull String contrasena, String nombre, String apellido,
-			Genero genero, LocalDate fechaNacimiento, Zona zona, String telefono) {
+			Genero genero, Date fechaNacimiento, Zona zona, String telefono) {
 		super();
 		this.email = email;
 		this.contrasena = contrasena;

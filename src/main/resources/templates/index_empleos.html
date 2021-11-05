@@ -17,7 +17,7 @@
 
 <body>
     <!-- NAV -->
-    <div th:replace="/fragments/navbar.html :: navbar"></div>
+    <div th:replace="/fragments/componentes.html :: navbar"></div>
 
     <div class="index">
 
@@ -33,14 +33,14 @@
             <h1 class="h1">(PROVISORIO) Empleos:</h1>
 
             <!-- categorias de empleos disponibles, la ídea es que se vea diferente y por categorías -->
-            <div class="container wrap-empleos">
-                <section class="empleos">
+            <div class="container wrap-busquedas">
+                <section class="busquedas">
                     <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
-                                <th>Oficio</th>
+                                <!-- <th>Oficio</th> -->
                                 <th>Fecha de publicación</th>
                                 <th>Empleador</th>
                             </tr>
@@ -52,7 +52,7 @@
                             <tr th:each="empleos, itemStat : *{empleos}">
                                 <td><span th:text="${empleos.nombre}"> Nombre </span></td>
                                 <td><span th:text="${empleos.descripcion}"> Descripción </span></td>
-                                <td><span th:text="${empleos.oficio}"> Oficio </span></td>
+                                <td><span th:each="oficio, itemStat : *{empleos.oficio}" th:text="${oficio}"> Oficio </span></td>
                                 <td><span th:text="${empleos.fechaPublicacion}"> Fecha de publicación </span></td>
                                 <td><span th:text="${empleos.empleador.nombre}"> Empleador </span></td>
                             </tr>
@@ -62,7 +62,7 @@
             </div>
         </div>
     </div>
-    <div th:replace="/fragments/footer.html :: footer"></div>
+    <div th:replace="/fragments/componentes.html :: footer"></div>
 </body>
 
 </html>
