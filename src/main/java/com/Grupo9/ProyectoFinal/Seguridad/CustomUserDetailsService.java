@@ -31,7 +31,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     PasswordEncoder passEncoder;
 
     public void crearTrabajador(Trabajador trabajador) {
-        if (trabajadorRepositorio.buscarPorEmail(trabajador.getEmail()) != null) {
+        if (trabajadorRepositorio.findByEmail(trabajador.getEmail()) != null) {
             throw new IllegalArgumentException("El usuario ya existe");
         }
         trabajador.setContrasena(passEncoder.encode(trabajador.getContrasena()));
@@ -53,7 +53,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 throw new UsernameNotFoundException("Este usuario no existe");
             } else {
                 Empleador empleador = empleadorRepositorio.buscarPorEmail(email);
-                ServletRequestAttributes attr= (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+                ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
                 HttpSession session = attr.getRequest().getSession(true);
                 session.setAttribute("usuariosession", empleador);
                 return new org.springframework.security.core.userdetails.User(
@@ -71,11 +71,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
 
         try {
-            if (trabajadorRepositorio.buscarPorEmail(email) == null) {
+            if (trabajadorRepositorio.findByEmail(email) == null) {
                 throw new UsernameNotFoundException("Este usuario no existe");
             } else {
-                Trabajador trabajador = trabajadorRepositorio.buscarPorEmail(email);
-                ServletRequestAttributes attr= (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+                Trabajador trabajador = trabajadorRepositorio.findByEmail(email);
+                ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
                 HttpSession session = attr.getRequest().getSession(true);
                 session.setAttribute("usuariosession", trabajador);
                 return new org.springframework.security.core.userdetails.User(
