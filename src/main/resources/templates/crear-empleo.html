@@ -14,12 +14,16 @@
             <form th:action="@{/empleador/crear-empleo}" class="col-10 my-3" method="POST" >
                 <div class="row g-3">
                     <div class="col-sm-6 col-md-6">
-                        <label class="form-label fw-bolder" for="name">Titulo</label>
-                        <input type="text" id="nombre" name="nombre" class="form-control" required>
+                        <label class="form-label fw-bolder" for="titulo">Titulo</label>
+                        <input type="text" id="titulo" name="titulo" class="form-control" required>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <label class="form-label fw-bolder" for="id">Id</label>
+                        <input type="text" id="id" name="id" class="form-control" th:value="${empleador.id}" readonly>
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <label class="form-label fw-bolder" for="name">Empleador</label>
-                        <input type="text" id="nombre" name="nombre" class="form-control" th:value="" readonly>
+                        <input type="text" id="nombre" name="nombre" class="form-control" th:value="${empleador.nombre + ' ' + empleador.apellido }" readonly>
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <label class="form-label fw-bolder" for="oficio">Oficio</label>
@@ -31,6 +35,10 @@
                                 th:text="${oficioOpt}"></option>
                             </select>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="date" class="form-control" name="fechaPublicacion" th:value="${#temporals.format(localDate, 'yyyy-MM-dd')}" th:min="${#temporals.format(localDate, 'yyyy-MM-dd')}">
+                        <small id="loanDate" class="form-text text-muted">Loan's date.</small>
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <div class="mb-3">

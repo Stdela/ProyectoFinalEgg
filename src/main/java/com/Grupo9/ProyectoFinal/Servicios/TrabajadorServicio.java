@@ -31,7 +31,7 @@ public class TrabajadorServicio {
     @Autowired
     ComentarioRepositorio cr;
 
-    public Trabajador crearTrabajador(String email, String contrasena, String contrasena2, String nombre, String apellido, Genero genero, Date fechaNacimiento, Zona zona, String telefono, ArrayList<Oficio> oficio, String experiencia, Boolean disponible, Boolean licencia, ArrayList<String> skills) throws WebException {
+    public Trabajador crearTrabajador(String email, String contrasena, String contrasena2, String nombre, String apellido, Genero genero, Date fechaNacimiento, Zona zona, String telefono, Oficio oficio, String experiencia, Boolean disponible, Boolean licencia, String skills) throws WebException {
         Trabajador t = trabajadorRepositorio.findByEmail(email);
         if (t != null) {
             throw new WebException("El email ya esta en uso");
@@ -75,7 +75,7 @@ public class TrabajadorServicio {
         if (telefono.isEmpty() || telefono == null) {
             throw new WebException("Debe ingresar un telefono");
         }
-        if (oficio.isEmpty() || oficio == null) {
+        if (oficio == null) {
             throw new WebException("Debe ingresar un oficio ");
         }
         if (experiencia.isEmpty() || experiencia == null) {
@@ -105,7 +105,7 @@ public class TrabajadorServicio {
 
     }
 
-    public Trabajador modificarTrabajador(Long id, String nombre, String apellido, Genero genero, Date fechaNacimiento, Zona zona, String telefono, ArrayList<Oficio> oficio, String experiencia, Boolean disponible, Boolean licencia, ArrayList<String> skills, MultipartFile imagen, String presentacion) throws IOException {
+    public Trabajador modificarTrabajador(Long id, String nombre, String apellido, Genero genero, Date fechaNacimiento, Zona zona, String telefono, Oficio oficio, String experiencia, Boolean disponible, Boolean licencia, String skills, MultipartFile imagen, String presentacion) throws IOException {
         Trabajador trabajador = trabajadorRepositorio.findById(id).get();
         trabajador.setApellido(apellido);
         trabajador.setNombre(nombre);

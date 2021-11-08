@@ -1,7 +1,7 @@
 package com.Grupo9.ProyectoFinal.Entidad;
 
 import java.time.LocalDate;
-
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.SQLDelete;
@@ -38,7 +40,8 @@ public class Empleo {
 	@NotNull
 	private Oficio oficio;
 	@NotNull
-	private LocalDate fechaPublicacion;
+	@Temporal(TemporalType.DATE)
+	private Date fechaPublicacion;
 	@ManyToOne
 	private Empleador empleador;
 	@ManyToMany(mappedBy = "postulaciones")

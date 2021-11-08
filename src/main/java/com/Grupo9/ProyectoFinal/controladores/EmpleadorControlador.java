@@ -77,13 +77,25 @@ public class EmpleadorControlador {
 	public String crearEmpleo(ModelMap model, @PathVariable("id") Long id) {
 		Empleador empleador = empleadorServicio.encontrarPorId(id);
 		model.addAttribute("empleador", empleador);
-		return "formulario-crear-empleo";
+		model.addAttribute("id", id);
+		return "crear-empleo";
 	}
 	
-	@PostMapping("/crear-empleo/{id}")
-	public String formularioEmple(@PathVariable("id") Long id, @RequestParam("nombre") String nombre, @RequestParam("descripcion") String descripcion, @RequestParam("oficio") Oficio oficio) throws WebException {
-		empleoServicio.crearEmpleo(nombre, descripcion, oficio,id);
-		return "return:/empleador";
+	@PostMapping("/crear-empleo")
+	public String crearEmpleo(@RequestParam("id") Long id, @RequestParam("titulo") String titulo, @RequestParam("descripcion") String descripcion, @RequestParam("oficio") Oficio oficio, @RequestParam("fechaPublicacion") Date fechaPublicacion) {
+		try {
+			System.out.println(titulo);
+			System.out.println(descripcion);
+			System.out.println(oficio);
+			System.out.println(fechaPublicacion);
+			empleoServicio.crearEmpleo(titulo, descripcion, oficio, fechaPublicacion,id);
+			
+			return "redirect:/";			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return "redirect:/busquedaEmpleo";
+		}
+		
 	}
 	
 	

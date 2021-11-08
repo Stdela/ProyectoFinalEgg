@@ -54,7 +54,7 @@ public class TrabajadorControlador {
 	@PostMapping("/registro-trabajador")
 	public String registroRecibido(@RequestParam("email") String email, @RequestParam("contrasena") String contrasena,@RequestParam("contrasena2") String contrasena2,@RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
 			@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,
-			@RequestParam("oficio") ArrayList<Oficio> oficio, @RequestParam("experiencia") String experiencia, @RequestParam("disponible") Boolean disponible, @RequestParam("licencia") Boolean licencia, @RequestParam("skills") ArrayList<String> skills){
+			@RequestParam("oficio") Oficio oficio, @RequestParam("experiencia") String experiencia, @RequestParam("disponible") Boolean disponible, @RequestParam("licencia") Boolean licencia, @RequestParam("skills") String skills){
 		try {
 			
 			trabajadorServicio.crearTrabajador(email,contrasena,contrasena2,nombre,apellido,genero,fechaNacimiento,zona,telefono,oficio,experiencia,disponible,licencia,skills);
@@ -80,7 +80,7 @@ public class TrabajadorControlador {
           @PutMapping("/perfil/{id}")
         public String modificarTrabajador(@PathVariable("id") Long id, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
 			@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,
-			@RequestParam("oficio") ArrayList<Oficio> oficio, @RequestParam("imagen") MultipartFile imagen, @RequestParam("experiencia") String experiencia, @RequestParam("disponible") Boolean disponible, @RequestParam("licencia") Boolean licencia, @RequestParam("skills") ArrayList<String> skills) throws IOException{
+			@RequestParam("oficio") Oficio oficio, @RequestParam("imagen") MultipartFile imagen, @RequestParam("experiencia") String experiencia, @RequestParam("disponible") Boolean disponible, @RequestParam("licencia") Boolean licencia, @RequestParam("skills") String skills) throws IOException{
             		
             trabajadorServicio.modificarTrabajador(id, nombre, apellido, genero, fechaNacimiento, zona, telefono, oficio, experiencia, disponible, licencia, skills, imagen, experiencia);
          return  "perfilTrabajador";   
