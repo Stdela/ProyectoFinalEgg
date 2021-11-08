@@ -173,5 +173,11 @@ public class TrabajadorServicio {
         }
         return comentarios;
     }
+    
+    
+    public ArrayList<Trabajador> buscarPorOficio(Oficio oficio){
+    	
+    	return trabajadorRepositorio.buscarPorOficio(oficio);
+    }
 
 }
