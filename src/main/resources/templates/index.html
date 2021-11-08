@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/index_style.css">
+    <link rel="stylesheet" th:href="@{/css/index_style.css}" href="/css/index_style.css" type="text/css">
     <title>Proyecto Egg</title>
 </head>
 
@@ -32,7 +32,7 @@
             <div class="wrap">
                 <section class="categorias">
                     <div class="trabajos d-grid">
-                        <a class="btn btn-lg btn-warning h-100" href="/busquedaTrabajadores"><input
+                        <a class="btn btn-lg btn-warning h-100" href="/trabajador/"><input
                                 type="image" id="image" src="/img/Plomero_2.png">PLOMERIA</a>
                     </div>
                     <div class="trabajos d-grid">

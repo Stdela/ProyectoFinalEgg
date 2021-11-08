@@ -33,13 +33,13 @@ public class TrabajadorControlador {
 	@Autowired
 	private EmpleoServicio empleoServicio;
 	
-	@GetMapping()
+	@GetMapping("/")
 	public String index(ModelMap model) {
        List<Empleo> listaEmpleos = empleoServicio.listarEmpleos();
       
         model.addAttribute("listaEmpleos", listaEmpleos);
 		
-		return "trabajadorIndex";
+		return "index_trabajadores";
 	}
 	
 	
