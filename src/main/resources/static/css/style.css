@@ -1,6 +1,7 @@
 html {
     min-height: 100vh;
     position: relative;
+    background-color: #363538;
 }
 
 
@@ -54,4 +55,28 @@ footer {
 
 .social {
     background-color: #D5D8DC;
+}
+
+.fondo {
+    border: 2px solid #5D6D7E;
+    max-height: 80vh;
+    width: 100% ;
+    text-align: center;    
+    border-radius: 5px;
+    padding: 1.5rem;
+    color: black;
+}
+
+.caco {
+    opacity: .85;
+    /* background: url(../img/registro.jpg) center no-repeat;
+     */
+     background-color: #1ABC9C;
+    -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+   height: 100%;
+   width: 100% ;
+   text-align: center;
 }
