@@ -71,10 +71,11 @@ public class TrabajadorControlador {
 	public String perfilTrabajador(ModelMap model, @PathVariable("id") Long id) {
 		Trabajador trabajador = trabajadorServicio.encontrarPorId(id);
 		model.addAttribute("trabajador", trabajador);
-		model.addAttribute("comentarios", trabajadorServicio.comentariosTrabajador(id));
-		model.addAttribute("puntos", trabajadorServicio.puntosTrabajador(id));
+		model.addAttribute("id", id);
+//		model.addAttribute("comentarios", trabajadorServicio.comentariosTrabajador(id));
+//		model.addAttribute("puntos", trabajadorServicio.puntosTrabajador(id));
 		
-		return "perfilTrabajador";
+		return "perfil_empleador";
 	}
         
           @PutMapping("/perfil/{id}")
@@ -83,7 +84,7 @@ public class TrabajadorControlador {
 			@RequestParam("oficio") Oficio oficio, @RequestParam("imagen") MultipartFile imagen, @RequestParam("experiencia") String experiencia, @RequestParam("disponible") Boolean disponible, @RequestParam("licencia") Boolean licencia, @RequestParam("skills") String skills) throws IOException{
             		
             trabajadorServicio.modificarTrabajador(id, nombre, apellido, genero, fechaNacimiento, zona, telefono, oficio, experiencia, disponible, licencia, skills, imagen, experiencia);
-         return  "perfilTrabajador";   
+         return  "perfil_empleador";   
         }
       
 	

@@ -20,49 +20,38 @@
     <div th:replace="/fragments/componentes.html :: navbar"></div>
 
     <div class="index">
-
         <h1 class="text-center py-2">Proyecto</h1>
-
         <div class="container text-center content">
-
             <h2 class="text-center py-3 h2">La solución más rápida a tu problema... <br> ¡la encontras acá!</h2>
             <div class="btn-group">
                 <a class="btn btn-success" href="/busquedaEmpleo">Empleos</a>
                 <a class="btn btn-success" href="/busquedaTrabajadores">Trabajadores</a>
             </div>
             <h1 class="h1">(PROVISORIO) Empleos:</h1>
-
-            <!-- categorias de empleos disponibles, la ídea es que se vea diferente y por categorías -->
-            <div class="container wrap-busquedas">
-                <section class="busquedas">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Descripción</th>
-                                <!-- <th>Oficio</th> -->
-                                <th>Fecha de publicación</th>
-                                <th>Empleador</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:if="${empleos.empty}">
-                                <td colspan="9" class="text-center">No hay empleos todavía!</td>
-                            </tr>
-                            <tr th:each="empleos, itemStat : *{empleos}">
-                                <td><span th:text="${empleos.nombre}"> Nombre </span></td>
-                                <td><span th:text="${empleos.descripcion}"> Descripción </span></td>
-                                <td><span th:each="oficio, itemStat : *{empleos.oficio}" th:text="${oficio}"> Oficio </span></td>
-                                <td><span th:text="${empleos.fechaPublicacion}"> Fecha de publicación </span></td>
-                                <td><span th:text="${empleos.empleador.nombre}"> Empleador </span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
-            </div>
+            <section id="gallery">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 mb-4 d-flex">
+                            <div class="card me-3" th:each="empleos, itemStat : *{empleos}">
+                                <img src="https://images.unsplash.com/photo-1477862096227-3a1bb3b08330?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60" alt="" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title" th:each="oficio, itemStat : *{empleos.oficio}" th:text="${oficio}">Card title</h5>
+                                    <p class="card-text" th:text="${empleos.descripcion}"></p>
+                                    <span th:text="${empleos.fechaPublicacion}"> Fecha de publicación </span>
+                                    <span th:text="${'|'+empleos.empleador.nombre}"> Empleador </span>
+                                    <a th:href="${'https://api.whatsapp.com/send?phone=549'+empleos.empleador.telefono+'&text=Hola%20'+empleos.empleador.nombre + ' ' + empleos.empleador.apellido +',&nbsp;te&nbsp;contacto&nbsp;por&nbsp;la&nbsp;publicación&nbsp;de&nbsp;PROYECTO'}" class="btn btn-success btn-sm" target="_blank">whatsapp</a>
+                                </div>
+                                <div class="card-footer">1 Hora</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
     <div th:replace="/fragments/componentes.html :: footer"></div>
 </body>
-
 </html>
+
+
+
