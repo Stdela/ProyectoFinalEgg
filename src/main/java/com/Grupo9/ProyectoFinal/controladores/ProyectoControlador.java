@@ -53,4 +53,5 @@ public class ProyectoControlador {
 		}
 		return "index_trabajadores";
 	}
+
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -73,6 +74,8 @@ public class EmpleadorControlador {
 	}
 	
 	//Aca se necesitarian tambien los datos del que lo crea
+	@PreAuthorize("hasAnyRole('ROLE_EMPLEADOR')")
+	// SOLO PUEDEN ACCEDER EMPLEADORES
 	@GetMapping("/crear-empleo/{id}")
 	public String crearEmpleo(ModelMap model, @PathVariable("id") Long id) {
 		Empleador empleador = empleadorServicio.encontrarPorId(id);
@@ -80,8 +83,9 @@ public class EmpleadorControlador {
 		model.addAttribute("id", id);
 		return "crear-empleo";
 	}
-	
+	// SOLO PUEDEN ACCEDER EMPLEADORES
 	@PostMapping("/crear-empleo")
+	@PreAuthorize("hasAnyRole('ROLE_EMPLEADOR')")
 	public String crearEmpleo(@RequestParam("id") Long id, @RequestParam("titulo") String titulo, @RequestParam("descripcion") String descripcion, @RequestParam("oficio") Oficio oficio, @RequestParam("fechaPublicacion") Date fechaPublicacion) {
 		try {
 			System.out.println(titulo);
