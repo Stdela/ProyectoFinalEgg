@@ -117,12 +117,19 @@ public class EmpleadorControlador {
 		return "perfil_empleador";
 	}
         
-        @PutMapping("/perfil/{id}")
-            public String modificarEmpleador(@PathVariable("id") Long id, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
-			@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") Tipo tipo, @RequestParam("foto") MultipartFile foto ) throws IOException{
-                empleadorServicio.modificarEmpleador(id, nombre, apellido, genero, fechaNacimiento, zona, telefono, tipo, foto);
-                return "perfilEmpleador";
-            }
+        
+        @GetMapping("/perfil/modificar/{id}")
+        public String modificarEmpleador(ModelMap model, @PathVariable("id") Long id) {
+        	model.addAttribute(empleadorServicio.encontrarPorId(id));
+        	return "formularioEmpleador";
+        }
+        
+        @PutMapping("/perfil/modificar/{id}")
+        public String modificar(@PathVariable("id") Long id, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
+    		@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") Tipo tipo, @RequestParam("foto") MultipartFile foto ) throws IOException{
+            empleadorServicio.modificarEmpleador(id, nombre, apellido, genero, fechaNacimiento, zona, telefono, tipo, foto); 
+        return "perfil_empleador";
+        }
 	
 	
 	

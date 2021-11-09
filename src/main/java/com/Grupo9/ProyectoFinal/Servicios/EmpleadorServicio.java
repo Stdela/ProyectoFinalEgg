@@ -91,6 +91,10 @@ public class EmpleadorServicio {
 		if (tipo == null) {
 			throw new WebException("Debe ingresar un tipo de usuario");
 		}
+		
+		if (telefono.startsWith("+")) {
+			telefono.substring(1);
+		}
 
 		Empleador empleador = new Empleador(email, contrasena, nombre, apellido, genero, fechaNacimiento, zona,
 				telefono, tipo);
