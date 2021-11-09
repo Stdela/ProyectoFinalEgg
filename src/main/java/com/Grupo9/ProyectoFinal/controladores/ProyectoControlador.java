@@ -7,6 +7,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Grupo9.ProyectoFinal.Enum.Oficio;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleadorServicio;
@@ -53,6 +54,13 @@ public class ProyectoControlador {
 					trabajadorServicio.buscarPorOficio(empleoServicio.asignarOficio(oficio)));
 		}
 		return "index_trabajadores";
+	}
+	
+	@GetMapping("/empleos")
+	public String empleosporOficio(ModelMap model, @RequestParam (required = false)String oficio) {
+		model.addAttribute("empleos", empleoServicio.filtrarPorOficio(oficio));
+		return "index-oficios";
+		
 	}
 
 }

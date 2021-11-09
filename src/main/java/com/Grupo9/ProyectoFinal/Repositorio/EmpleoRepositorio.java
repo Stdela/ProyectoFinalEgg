@@ -17,6 +17,9 @@ public interface EmpleoRepositorio extends JpaRepository<Empleo, Long>{
 	@Query("SELECT e FROM Empleo e WHERE e.concretado=FALSE and e.borrado=FALSE")
 	public Optional<List<Empleo>> empleosActivos();
 	
+	@Query("SELECT e FROM EMPLEO e WHERE e.oficio=:oficio")
+	public List<Empleo> filtrarPorOficio(String oficio);
+	
 	
 	
 	
