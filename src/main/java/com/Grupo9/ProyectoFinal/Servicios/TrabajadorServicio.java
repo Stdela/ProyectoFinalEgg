@@ -3,6 +3,7 @@ package com.Grupo9.ProyectoFinal.Servicios;
 import com.Grupo9.ProyectoFinal.Entidad.Comentario;
 import com.Grupo9.ProyectoFinal.Entidad.Empleo;
 import com.Grupo9.ProyectoFinal.Entidad.Trabajador;
+import com.Grupo9.ProyectoFinal.Entidad.Usuario;
 import com.Grupo9.ProyectoFinal.Enum.Genero;
 import com.Grupo9.ProyectoFinal.Enum.Oficio;
 import com.Grupo9.ProyectoFinal.Enum.Zona;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Grupo9.ProyectoFinal.Repositorio.TrabajadorRepositorio;
+import com.Grupo9.ProyectoFinal.Repositorio.UsuarioRepositorio;
+import com.Grupo9.ProyectoFinal.Seguridad.CustomUserDetailsService;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -30,6 +33,8 @@ public class TrabajadorServicio {
     EmpleoRepositorio empleoRepositorio;
     @Autowired
     ComentarioRepositorio cr;
+    @Autowired
+    CustomUserDetailsService detailsService;
 
     public Trabajador crearTrabajador(String email, String contrasena, String contrasena2, String nombre, String apellido, Genero genero, Date fechaNacimiento, Zona zona, String telefono, Oficio oficio, String experiencia, Boolean disponible, Boolean licencia, String skills) throws WebException {
         Trabajador t = trabajadorRepositorio.findByEmail(email);
@@ -89,9 +94,11 @@ public class TrabajadorServicio {
         }
         ArrayList<String> rol = new ArrayList();
         rol.add("ROLE_TRABAJADOR");
-        Trabajador trabajador = new Trabajador(email, contrasena, nombre, apellido, genero, fechaNacimiento, zona, telefono,oficio, experiencia, disponible, licencia, skills);
+
+        Trabajador trabajador = new Trabajador(email, contrasena, nombre, apellido, genero, fechaNacimiento, zona, telefono, oficio, experiencia, disponible, licencia, skills);
 
         trabajadorRepositorio.save(trabajador);
+        detailsService.crearTrabajador(trabajador);
 
         return trabajador;
     }
@@ -155,10 +162,10 @@ public class TrabajadorServicio {
             }
             Long prom = suma / cont;
             return prom.toString();
-        }   else{
+        } else {
             return "0";
         }
-        
+
     }
 
     public List<Comentario> comentariosTrabajador(Long id) {

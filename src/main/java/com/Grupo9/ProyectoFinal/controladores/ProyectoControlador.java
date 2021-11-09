@@ -50,5 +50,7 @@ public class ProyectoControlador {
 		return "listaTrabajadoresPorOficio";
 	}
 	
+	
+	
 }
 
