@@ -42,6 +42,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         }*/
         trabajador.setContrasena(passEncoder.encode(trabajador.getContrasena()));
         usuarioRepositorio.save(trabajador);
+        this.loadUserByUsername(trabajador.getEmail());
     }
 
     public void crearEmpleador(Empleador empleador) {
@@ -50,6 +51,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         }*/
         empleador.setContrasena(passEncoder.encode(empleador.getContrasena()));
         usuarioRepositorio.save(empleador);
+        this.loadUserByUsername(empleador.getEmail());
     }
 
     @Override
