@@ -56,6 +56,7 @@ public class ProyectoControlador {
 		return "index_trabajadores";
 	}
 	
+	
 	@GetMapping("/empleos")
 	public String empleosporOficio(ModelMap model, @RequestParam (required = false)String oficio) {
 		model.addAttribute("empleos", empleoServicio.filtrarPorOficio(oficio));

@@ -142,8 +142,12 @@ public class EmpleoServicio {
 		}
 		return null;
 	}
+	
+	//Tal vez haya que pasar el string a enum antes de hacer la query
 	public List<Empleo> filtrarPorOficio(String oficio){
+		 //List<Empleo> empleos = er.filtrarPorOficio(asignarOficio(oficio));
 		 List<Empleo> empleos = er.filtrarPorOficio(oficio);
+		 
 		 return empleos;
 	}
 	
