@@ -2,6 +2,7 @@ package com.Grupo9.ProyectoFinal.Servicios;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,15 +29,15 @@ public class EmpleoServicio {
 	private TrabajadorRepositorio tr;
 	
 	@Autowired
-	private EmpleadorServicio es;
+	private EmpleadorServicio empleadorServicio; 
 
 	// Crea el empleo con los datos básicos, luego se asignan los trabajadors y se
 	// cambian los boolean cuando corresponda
-	public Empleo crearEmpleo(String nombre, String descripcion, Oficio oficio, Long idEmpleador)throws WebException {
-	
-		Empleador empleador=es.encontrarPorId(idEmpleador);
-			
+	public void crearEmpleo(String nombre, String descripcion, Oficio oficio, Date fechaPublicacion, Long id)
+			throws WebException {
+
 		Empleo e = new Empleo(); // Ver si da error por los notNull. Sino crear constructor con esos parametros.
+		Empleador empleador=empleadorServicio.encontrarPorId(id);
 
 		if (nombre.isEmpty() || nombre == null) {
 			throw new WebException("Debes ingresar un título");
@@ -53,12 +54,12 @@ public class EmpleoServicio {
 		e.setNombre(nombre);
 		e.setDescripcion(descripcion);
 		e.setOficio(oficio);
-		e.setFechaPublicacion(LocalDate.now());
+		e.setFechaPublicacion(fechaPublicacion);
 		e.setEmpleador(empleador);
 
 		er.save(e);
 
-		return e;
+//		return e;
 	}
 
 	// Para agregar un nuevo postulado de tipo trabajador
@@ -118,6 +119,28 @@ public class EmpleoServicio {
 	public Empleo encontrarPorID(Long id) {
 		Empleo e=er.getById(id);
 		return e;
+	}
+	
+	public Oficio asignarOficio(String oficio) {		
+		switch (oficio) {
+		case "plomeria":
+			return Oficio.PLOMERO;		
+		case "electrisista":
+			return Oficio.ELECTRICISTA;
+		case "mudanza":
+			return Oficio.MUDANZA;
+		case "gasista":
+			return Oficio.GASISTA;
+		case "albanileria":
+			return Oficio.ALBANIL;
+		case "cerrajero":
+			return Oficio.CERRAJERO;
+		case "vidrieria":
+			return Oficio.VIDRIERO;
+		case "pintor":
+			return Oficio.PINTOR;
+		}
+		return null;
 	}
 	
 

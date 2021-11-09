@@ -37,8 +37,19 @@
                 <div class="collapse navbar-collapse" id="toggleMobileMenu">                    
                     <ul class="navbar-nav ms-auto text-center">
                         <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/busquedaEmpleos">Trabajos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/busquedaEmpleo">Trabajos</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Información</a></li>
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Registros
+                          </a>
+                          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" th:href="@{/empleador/registro-empleador}">Empelador</a></li>
+                            <li><a class="dropdown-item" th:href="@{/trabajador/registro-trabajador}">Trabajador</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" th:href="@{/empleador/crear-empleo}">Empleos</a></li>
+                          </ul>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -87,10 +98,6 @@
               <p><i class="fas fa-envelope me-3"></i>info@ayuda.com</p>
               <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
               <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
-            <!-- Copyright -->
-            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-              © 2021 Copyright:
-              <a class="text-reset fw-bold" href="#">Equipo</a>
             </div>
           </div>
         </div>

@@ -11,13 +11,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/index_style.css">
+    <link rel="stylesheet" th:href="@{/css/index_style.css}" href="/css/index_style.css" type="text/css">
     <title>Proyecto Egg</title>
 </head>
 
 <body>
     <!-- NAV -->
-    <div th:replace="/fragments/navbar.html :: navbar"></div>
+    <div th:replace="/fragments/componentes.html :: navbar"></div>
 
     <div class="index">
 
@@ -26,6 +26,10 @@
         <div class="container text-center content">
 
             <h2 class="text-center py-3 h2">La solución más rápida a tu problema... <br> ¡la encontras acá!</h2>
+            <div class="btn-group">
+                <a class="btn btn-success" href="/busquedaEmpleo">Empleos</a>
+                <a class="btn btn-success" href="/busquedaTrabajadores">Trabajadores</a>
+            </div>
             <h1 class="h1">(PROVISORIO) Trabajos:</h1>
 
             <!-- categorias de empleados disponibles, la ídea es que se vea diferente y por categorías -->
@@ -49,16 +53,16 @@
                             <tr th:if="${trabajadores.empty}">
                                 <td colspan="9" class="text-center">No hay trabajadores todavía!</td>
                             </tr>
-                            <tr th:each="trabajadores, itemStat : *{trabajadores}">
-                                <td><span th:text="${trabajadores.oficio}"> Oficio </span></td>
-                                <td><span th:text="${trabajadores.nombre}"> Nombre </span></td>
-                                <td><span th:text="${trabajadores.apellido}"> Apellido </span></td>
-                                <td><span th:text="${trabajadores.genero}"> Genero </span></td>
-                                <td><span th:text="${trabajadores.fechaNacimiento}"> Fecha de nacimiento </span></td>
-                                <td><span th:text="${trabajadores.telefono}"> Telefono </span></td>
-                                <td><span th:text="${trabajadores.skills}"> Habilidades </span></td>
-                                <td><span th:text="${trabajadores.disponible}"> Disponibilidad </span></td>
-                                <td><span th:text="${trabajadores.licencia}"> Licencia </span></td>
+                            <tr th:each="trabajador, itemStat : *{trabajadores}">
+                                <td><span th:text="${trabajador.oficio}"> Oficio </span></td>
+                                <td><span th:text="${trabajador.nombre}"> Nombre </span></td>
+                                <td><span th:text="${trabajador.apellido}"> Apellido </span></td>
+                                <td><span th:text="${trabajador.genero}"> Genero </span></td>
+                                <td><span th:text="${trabajador.fechaNacimiento}"> Fecha de nacimiento </span></td>
+                                <td><span th:text="${trabajador.telefono}"> Telefono </span></td>
+                                <td><span th:text="${trabajador.skills}"> Habilidades </span></td>
+                                <td><span th:text="${trabajador.disponible}"> Disponibilidad </span></td>
+                                <td><span th:text="${trabajador.licencia}"> Licencia </span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -66,7 +70,7 @@
             </div>
         </div>
     </div>
-    <div th:replace="/fragments/footer.html :: footer"></div>
+    <div th:replace="/fragments/componentes.html :: footer"></div>
 </body>
 
 </html>

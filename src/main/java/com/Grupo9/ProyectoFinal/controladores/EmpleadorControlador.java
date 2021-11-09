@@ -21,8 +21,13 @@ import com.Grupo9.ProyectoFinal.Enum.Genero;
 import com.Grupo9.ProyectoFinal.Enum.Oficio;
 import com.Grupo9.ProyectoFinal.Enum.Tipo;
 import com.Grupo9.ProyectoFinal.Enum.Zona;
+import com.Grupo9.ProyectoFinal.Excepciones.WebException;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleadorServicio;
+import com.Grupo9.ProyectoFinal.Servicios.EmpleoServicio;
 import com.Grupo9.ProyectoFinal.Servicios.TrabajadorServicio;
+import java.io.IOException;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller
@@ -34,6 +39,9 @@ public class EmpleadorControlador {
 	
 	@Autowired
 	private TrabajadorServicio trabajadorServicio;
+	
+	@Autowired 
+	private EmpleoServicio empleoServicio;
 	
 	@GetMapping()
 	public String index(ModelMap model) {
@@ -48,31 +56,46 @@ public class EmpleadorControlador {
 	
 	@GetMapping("/registro-empleador")
 	public String registroEmpleador() {
-		return "registro-empleador-prueba";
+		return "registro-empleador";
 	}
 	
 	@PostMapping("/registro-empleador")
 	public String registroRecibido(@RequestParam("email") String email, @RequestParam("contrasena") String contrasena,@RequestParam("contrasena2") String contrasena2,@RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
-			@RequestParam("genero") String genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") String zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") String tipo) {
+			@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") Tipo tipo) {
 		try {
-			empleadorServicio.crearEmpleador(email,contrasena,contrasena2,nombre,apellido,Genero.FEMENINO,LocalDate.of(2010, 3, 3),Zona.CENTRO,telefono,Tipo.EMPRESA);
+			empleadorServicio.crearEmpleador(email,contrasena,contrasena2,nombre,apellido,genero,fechaNacimiento,zona,telefono,tipo);
 		} catch (Exception e) {
 			System.out.print(e);
 		}
 		
-		return "redirect:/empleador";
+		return "redirect:/";
 	
 	}
 	
 	//Aca se necesitarian tambien los datos del que lo crea
-	@GetMapping("/crear-empleo")
-	public String crearEmpleo() {
-		return "formulario-crear-empleo";
+	@GetMapping("/crear-empleo/{id}")
+	public String crearEmpleo(ModelMap model, @PathVariable("id") Long id) {
+		Empleador empleador = empleadorServicio.encontrarPorId(id);
+		model.addAttribute("empleador", empleador);
+		model.addAttribute("id", id);
+		return "crear-empleo";
 	}
 	
 	@PostMapping("/crear-empleo")
-	public String formularioEmple(@RequestParam("nombre") String nombre, @RequestParam("descripcion") String descripcion, @RequestParam("oficio") Oficio oficio, @RequestParam("empleador") Empleador empleador) {
-		return "return:/empleador";
+	public String crearEmpleo(@RequestParam("id") Long id, @RequestParam("titulo") String titulo, @RequestParam("descripcion") String descripcion, @RequestParam("oficio") Oficio oficio, @RequestParam("fechaPublicacion") Date fechaPublicacion) {
+		try {
+			System.out.println(titulo);
+			System.out.println(descripcion);
+			System.out.println(oficio);
+			System.out.println(fechaPublicacion);
+			empleoServicio.crearEmpleo(titulo, descripcion, oficio, fechaPublicacion,id);
+			
+			return "redirect:/";			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return "redirect:/busquedaEmpleo";
+		}
+		
 	}
 	
 	
@@ -83,9 +106,18 @@ public class EmpleadorControlador {
 		model.addAttribute("empleador", empleador);
 		model.addAttribute("listaComentarios", empleadorServicio.comentariosEmpleador(id));
 		model.addAttribute("puntos", empleadorServicio.puntosEmpleador(id));
+		//empleos activos 
+		//model.addAtribute("empleosActivos" , empleadorServicio.empleosActivos);
 		
 		return "perfilEmpleador";
 	}
+        
+        @PutMapping("perfil/{id}")
+            public String modificarEmpleador(@PathVariable("id") Long id, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
+			@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") Tipo tipo, @RequestParam("foto") MultipartFile foto ) throws IOException{
+                empleadorServicio.modificarEmpleador(id, nombre, apellido, genero, fechaNacimiento, zona, telefono, tipo, foto);
+                return "perfilEmpleador";
+            }
 	
 	
 	

@@ -1,9 +1,12 @@
 package com.Grupo9.ProyectoFinal.Entidad;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -27,15 +30,16 @@ import lombok.NoArgsConstructor;
 @Where(clause = "borrado=false")
 public class Trabajador extends Usuario{
 	
-	private ArrayList<Oficio> oficio;
+	@Enumerated(EnumType.STRING)
+	private Oficio oficio;
 	private String experiencia;
 	private Boolean disponible;
 	private Boolean licencia;
-	private ArrayList<String> skills;
+	private String skills;
 	@ManyToMany
 	private List<Empleo> postulaciones;
 
-    public Trabajador(ArrayList<Oficio> oficio, String experiencia, Boolean disponible, Boolean licencia, ArrayList<String> skills, String email, String contrasena, String nombre, String apellido, Genero genero, LocalDate fechaNacimiento, Zona zona, String telefono, ArrayList<String> rol ) {
+    public Trabajador(String email, String contrasena, String nombre, String apellido, Genero genero, Date fechaNacimiento, Zona zona, String telefono, Oficio oficio, String experiencia, Boolean disponible, Boolean licencia, String skills) {
         super(email, contrasena, nombre, apellido, genero, fechaNacimiento, zona, telefono);
         this.oficio = oficio;
         this.experiencia = experiencia;
