@@ -1,9 +1,12 @@
 package com.Grupo9.ProyectoFinal.controladores;
 
-import java.sql.Date;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -76,24 +79,21 @@ public class EmpleadorControlador {
 	//Aca se necesitarian tambien los datos del que lo crea
 	@PreAuthorize("hasAnyRole('ROLE_EMPLEADOR')")
 	// SOLO PUEDEN ACCEDER EMPLEADORES
-	@GetMapping("/crear-empleo/{id}")
-	public String crearEmpleo(ModelMap model, @PathVariable("id") Long id) {
-		Empleador empleador = empleadorServicio.encontrarPorId(id);
-		model.addAttribute("empleador", empleador);
-		model.addAttribute("id", id);
-		model.addAttribute("localDate", LocalDate.now());
+	@GetMapping("/crear-empleo")
+	public String crearEmpleo() {		
 		return "crear-empleo";
 	}
 	// SOLO PUEDEN ACCEDER EMPLEADORES
 	@PostMapping("/crear-empleo")
 	@PreAuthorize("hasAnyRole('ROLE_EMPLEADOR')")
-	public String crearEmpleo(@RequestParam("id") Long id, @RequestParam("titulo") String titulo, @RequestParam("descripcion") String descripcion, @RequestParam("oficio") Oficio oficio, @RequestParam("fechaPublicacion") Date fechaPublicacion) {
-		try {
-			System.out.println(titulo);
-			System.out.println(descripcion);
-			System.out.println(oficio);
-			System.out.println(fechaPublicacion);
-			empleoServicio.crearEmpleo(titulo, descripcion, oficio, fechaPublicacion,id);
+	public String crearEmpleo(HttpSession httpSession, @RequestParam("titulo") String titulo, @RequestParam("descripcion") String descripcion, @RequestParam("oficio") Oficio oficio) {
+		
+		Empleador empleador = (Empleador) httpSession.getAttribute("usuariosession");
+		try {	
+			
+			java.util.Date fechaPublicacion = new java.util.Date();
+			
+			empleoServicio.crearEmpleo(titulo, descripcion, oficio, fechaPublicacion,empleador.getId());
 			
 			return "redirect:/";			
 		} catch (Exception e) {

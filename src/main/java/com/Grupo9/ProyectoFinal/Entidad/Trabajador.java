@@ -45,8 +45,7 @@ public class Trabajador extends Usuario{
         this.experiencia = experiencia;
         this.disponible = disponible;
         this.licencia = licencia;
-        this.skills = skills;
-        
+        this.skills = skills;        
     }
 	
 	
