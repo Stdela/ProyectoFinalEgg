@@ -125,10 +125,10 @@ public class EmpleoServicio {
 		switch (oficio) {
 		case "plomeria":
 			return Oficio.PLOMERO;		
-		case "electrisista":
+		case "electricista":
 			return Oficio.ELECTRICISTA;
-		case "mudanza":
-			return Oficio.MUDANZA;
+		case "jardineria":
+			return Oficio.JARDINERO;
 		case "gasista":
 			return Oficio.GASISTA;
 		case "albanileria":

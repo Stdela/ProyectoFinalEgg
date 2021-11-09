@@ -24,6 +24,7 @@ import com.Grupo9.ProyectoFinal.Enum.Zona;
 import com.Grupo9.ProyectoFinal.Excepciones.WebException;
 import com.Grupo9.ProyectoFinal.Repositorio.ComentarioRepositorio;
 import com.Grupo9.ProyectoFinal.Repositorio.EmpleadorRepositorio;
+import com.Grupo9.ProyectoFinal.Seguridad.CustomUserDetailsService;
 
 @Service
 @Transactional
@@ -34,6 +35,9 @@ public class EmpleadorServicio {
 	
 	@Autowired
 	private ComentarioRepositorio cr;
+        
+        @Autowired
+    CustomUserDetailsService detailsService;
 
 	public Empleador crearEmpleador(String email, String contrasena, String contrasena2, String nombre, String apellido,
 			Genero genero, Date fechaNacimiento, Zona zona, String telefono, Tipo tipo) throws WebException {
@@ -96,6 +100,7 @@ public class EmpleadorServicio {
 		empleador.setRol(rol);
 		
 		er.save(empleador);
+                detailsService.crearEmpleador(empleador);
 
 		return empleador;
 

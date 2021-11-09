@@ -56,7 +56,7 @@ h1, h2{
 .categorias .trabajos {
   width: 23%;
   margin: 5% 1%;
-  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.22);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.22);
 
   display: flex;
   flex-direction: column;
@@ -64,6 +64,15 @@ h1, h2{
   align-self: flex-start;
 
   transition: all 0.4s;
+}
+
+.trabajos-todos {
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.trabajos-todos .btn {
+  padding: 5%;
 }
 
 .wrap-busquedas {
