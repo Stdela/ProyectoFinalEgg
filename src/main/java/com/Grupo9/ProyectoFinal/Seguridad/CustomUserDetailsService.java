@@ -6,9 +6,15 @@ import com.Grupo9.ProyectoFinal.Entidad.Usuario;
 import com.Grupo9.ProyectoFinal.Repositorio.EmpleadorRepositorio;
 import com.Grupo9.ProyectoFinal.Repositorio.TrabajadorRepositorio;
 import com.Grupo9.ProyectoFinal.Repositorio.UsuarioRepositorio;
+
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -56,6 +62,9 @@ public class CustomUserDetailsService implements UserDetailsService {
                 ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
                 HttpSession session = attr.getRequest().getSession(true);
                 session.setAttribute("usuariosession", empleador);
+                List<GrantedAuthority> permisos = new ArrayList<>();
+               GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_EMPLEADOR");
+               permisos.add(p1);
                 return new org.springframework.security.core.userdetails.User(
                         empleador.getEmail(),
                         empleador.getContrasena(),
@@ -63,7 +72,8 @@ public class CustomUserDetailsService implements UserDetailsService {
                         true,
                         true,
                         true,
-                        Arrays.asList(new SimpleGrantedAuthority("USER")));
+                        permisos)
+                        ;
             }
 
         } catch (UsernameNotFoundException e) {
@@ -78,6 +88,10 @@ public class CustomUserDetailsService implements UserDetailsService {
                 ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
                 HttpSession session = attr.getRequest().getSession(true);
                 session.setAttribute("usuariosession", trabajador);
+                List<GrantedAuthority> permisos = new ArrayList<>();
+                GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_TRABAJADOR");
+                permisos.add(p1);
+                
                 return new org.springframework.security.core.userdetails.User(
                         trabajador.getEmail(),
                         trabajador.getContrasena(),
@@ -85,7 +99,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                         true,
                         true,
                         true,
-                        Arrays.asList(new SimpleGrantedAuthority("USER")));
+                        permisos);
             }
 
         } catch (UsernameNotFoundException f) {
