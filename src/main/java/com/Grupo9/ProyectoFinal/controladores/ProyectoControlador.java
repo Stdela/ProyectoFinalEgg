@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.Grupo9.ProyectoFinal.Enum.Oficio;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleadorServicio;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleoServicio;
 import com.Grupo9.ProyectoFinal.Servicios.TrabajadorServicio;
@@ -30,12 +31,6 @@ public class ProyectoControlador {
 		return "index";
 	}
 
-	@GetMapping("/busquedaTrabajadores")
-	public String trabajadores(Model model) {
-		model.addAttribute("trabajadores", trabajadorServicio.listarTrabajador());
-		return "index_trabajadores";
-	}
-
 	@GetMapping("/busquedaEmpleadores")
 	public String empleadores(Model model) {
 		model.addAttribute("empleadores", empleadorServicio.listarEmpleadores());
@@ -48,9 +43,14 @@ public class ProyectoControlador {
 		return "index_empleos";
 	}
 
-	@GetMapping("/listaOficio/{oficio}")
+	@GetMapping("/busquedaTrabajadores/{oficio}")
 	public String trabajadoresPorOficio(ModelMap model, @PathVariable("oficio") String oficio) {
-		model.addAttribute("listaPorOficio", trabajadorServicio.buscarPorOficio(empleoServicio.asignarOficio(oficio)));
-		return "listaTrabajadoresPorOficio";
+		if (oficio.equals("todos")) {
+			model.addAttribute("trabajadores", trabajadorServicio.listarTrabajador());
+		} else {
+			model.addAttribute("trabajadores",
+					trabajadorServicio.buscarPorOficio(empleoServicio.asignarOficio(oficio)));
+		}
+		return "index_trabajadores";
 	}
 }
