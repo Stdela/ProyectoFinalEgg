@@ -1,7 +1,5 @@
 package com.Grupo9.ProyectoFinal.controladores;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.Grupo9.ProyectoFinal.Entidad.Trabajador;
-import com.Grupo9.ProyectoFinal.Enum.Oficio;
+import com.Grupo9.ProyectoFinal.Servicios.EmpleadorServicio;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleoServicio;
 import com.Grupo9.ProyectoFinal.Servicios.TrabajadorServicio;
 
@@ -19,23 +16,30 @@ import com.Grupo9.ProyectoFinal.Servicios.TrabajadorServicio;
 @RequestMapping("/")
 public class ProyectoControlador {
 
-	
 	@Autowired
 	TrabajadorServicio trabajadorServicio;
-	
+
+	@Autowired
+	EmpleadorServicio empleadorServicio;
+
 	@Autowired
 	EmpleoServicio empleoServicio;
-	
+
 	@GetMapping("/")
 	public String index() {
 		return "index";
 	}
-	
+
 	@GetMapping("/busquedaTrabajadores")
 	public String trabajadores(Model model) {
-		List<Trabajador> listaTrabajadores = trabajadorServicio.listarTrabajador();
-		model.addAttribute("trabajadores", listaTrabajadores);
+		model.addAttribute("trabajadores", trabajadorServicio.listarTrabajador());
 		return "index_trabajadores";
+	}
+
+	@GetMapping("/busquedaEmpleadores")
+	public String empleadores(Model model) {
+		model.addAttribute("empleadores", empleadorServicio.listarEmpleadores());
+		return "index_empleadores";
 	}
 
 	@GetMapping("/busquedaEmpleo")
@@ -43,12 +47,10 @@ public class ProyectoControlador {
 		model.addAttribute("empleos", empleoServicio.listarEmpleos());
 		return "index_empleos";
 	}
-	
+
 	@GetMapping("/listaOficio/{oficio}")
-	public String trabajadoresPorOficio (ModelMap model, @PathVariable("oficio") String oficio) {
-		model.addAttribute("listaPorOficio", trabajadorServicio.buscarPorOficio(empleoServicio.asignarOficio(oficio)));	
+	public String trabajadoresPorOficio(ModelMap model, @PathVariable("oficio") String oficio) {
+		model.addAttribute("listaPorOficio", trabajadorServicio.buscarPorOficio(empleoServicio.asignarOficio(oficio)));
 		return "listaTrabajadoresPorOficio";
 	}
-	
 }
-
