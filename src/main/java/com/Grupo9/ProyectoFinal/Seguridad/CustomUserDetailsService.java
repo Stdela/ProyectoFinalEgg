@@ -31,17 +31,17 @@ public class CustomUserDetailsService implements UserDetailsService {
     PasswordEncoder passEncoder;
 
     public void crearTrabajador(Trabajador trabajador) {
-        if (trabajadorRepositorio.findByEmail(trabajador.getEmail()) != null) {
+        /*if (trabajadorRepositorio.findByEmail(trabajador.getEmail()) != null) {
             throw new IllegalArgumentException("El usuario ya existe");
-        }
+        }*/
         trabajador.setContrasena(passEncoder.encode(trabajador.getContrasena()));
         usuarioRepositorio.save(trabajador);
     }
 
     public void crearEmpleador(Empleador empleador) {
-        if (empleadorRepositorio.buscarPorEmail(empleador.getEmail()) != null) {
+        /*if (empleadorRepositorio.buscarPorEmail(empleador.getEmail()) != null) {
             throw new IllegalArgumentException("El usuario ya existe");
-        }
+        }*/
         empleador.setContrasena(passEncoder.encode(empleador.getContrasena()));
         usuarioRepositorio.save(empleador);
     }
