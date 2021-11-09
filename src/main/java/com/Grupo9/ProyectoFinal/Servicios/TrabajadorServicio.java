@@ -94,6 +94,9 @@ public class TrabajadorServicio {
         }
         ArrayList<String> rol = new ArrayList();
         rol.add("ROLE_TRABAJADOR");
+        if (telefono.startsWith("+")) {
+			telefono.substring(1);
+		}
 
         Trabajador trabajador = new Trabajador(email, contrasena, nombre, apellido, genero, fechaNacimiento, zona, telefono, oficio, experiencia, disponible, licencia, skills);
 
