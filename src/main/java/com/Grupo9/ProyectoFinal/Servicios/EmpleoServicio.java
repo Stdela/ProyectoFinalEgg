@@ -142,6 +142,10 @@ public class EmpleoServicio {
 		}
 		return null;
 	}
+	public List<Empleo> filtrarPorOficio(String oficio){
+		 List<Empleo> empleos = er.filtrarPorOficio(oficio);
+		 return empleos;
+	}
 	
 
 }

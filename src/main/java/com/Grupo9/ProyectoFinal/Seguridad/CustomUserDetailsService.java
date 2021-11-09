@@ -109,15 +109,5 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         }
 
-//        Usuario usuario = usuarioRepositorio.encontrarPorEmail(email);
-//
-//        return new org.springframework.security.core.userdetails.User(
-//                usuario.getEmail(),
-//                usuario.getContrasena(),
-//                true,
-//                true,
-//                true,
-//                true,
-//                Arrays.asList(new SimpleGrantedAuthority("USER")));
     }
 }
