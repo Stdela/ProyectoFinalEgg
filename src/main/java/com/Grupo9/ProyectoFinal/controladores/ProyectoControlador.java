@@ -40,6 +40,7 @@ public class ProyectoControlador {
 	@GetMapping("/busquedaEmpleo")
 	public String empleos(Model model) {
 		model.addAttribute("empleos", empleoServicio.listarEmpleos());
+		model.addAttribute("empleador", empleadorServicio.listarEmpleadores());
 		return "index_empleos";
 	}
 

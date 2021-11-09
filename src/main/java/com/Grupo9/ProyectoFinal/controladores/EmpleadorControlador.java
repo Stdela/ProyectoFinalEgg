@@ -69,7 +69,7 @@ public class EmpleadorControlador {
 			System.out.print(e);
 		}
 		
-		return "redirect:/";
+		return "redirect:/empleador/perfil/1";
 	
 	}
 	
@@ -81,6 +81,7 @@ public class EmpleadorControlador {
 		Empleador empleador = empleadorServicio.encontrarPorId(id);
 		model.addAttribute("empleador", empleador);
 		model.addAttribute("id", id);
+		model.addAttribute("localDate", LocalDate.now());
 		return "crear-empleo";
 	}
 	// SOLO PUEDEN ACCEDER EMPLEADORES
@@ -108,15 +109,15 @@ public class EmpleadorControlador {
 	public String perfilEmpleador(ModelMap model, @PathVariable("id") Long id) {
 		Empleador empleador = empleadorServicio.encontrarPorId(id);
 		model.addAttribute("empleador", empleador);
-		model.addAttribute("listaComentarios", empleadorServicio.comentariosEmpleador(id));
-		model.addAttribute("puntos", empleadorServicio.puntosEmpleador(id));
+//		model.addAttribute("listaComentarios", empleadorServicio.comentariosEmpleador(id));
+//		model.addAttribute("puntos", empleadorServicio.puntosEmpleador(id));
 		//empleos activos 
 		//model.addAtribute("empleosActivos" , empleadorServicio.empleosActivos);
 		
-		return "perfilEmpleador";
+		return "perfil_empleador";
 	}
         
-        @PutMapping("perfil/{id}")
+        @PutMapping("/perfil/{id}")
             public String modificarEmpleador(@PathVariable("id") Long id, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
 			@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") Tipo tipo, @RequestParam("foto") MultipartFile foto ) throws IOException{
                 empleadorServicio.modificarEmpleador(id, nombre, apellido, genero, fechaNacimiento, zona, telefono, tipo, foto);

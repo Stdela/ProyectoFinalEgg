@@ -53,7 +53,7 @@
                             
                             <div class="col-sm-6">
                                 <p class="fw-bold">Teléfono</p>
-                                <a th:href="${'https://api.whatsapp.com/send?phone=549'+empleador.telefono+'&text=Hola%20'+empleador.nombre + ' ' + empleador.apellido +',&nbsp;te&nbsp;contacto&nbsp;por&nbsp;la&nbsp;publicación&nbsp;de&nbsp;PROYECTO'}" class="appWhatsapp" target="_blank">
+                                <a th:href="${'https://api.whatsapp.com/send?phone=549'+empleador.telefono+'&text=Hola%20,&nbsp;te&nbsp;contacto&nbsp;por&nbsp;la&nbsp;publicación&nbsp;de&nbsp;PROYECTO'}" class="appWhatsapp" target="_blank">
                                     <h6 class="text-muted" th:text="${empleador.telefono}"></h6>
                                 </a>
                             </div>
