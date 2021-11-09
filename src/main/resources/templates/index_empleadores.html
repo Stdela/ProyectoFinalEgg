@@ -30,7 +30,7 @@
                 <a class="btn btn-success" href="/busquedaEmpleo">Empleos</a>
                 <a class="btn btn-success" href="/busquedaTrabajadores">Trabajadores</a>
             </div>
-            <h1 class="h1">(PROVISORIO) Trabajadores:</h1>
+            <h1 class="h1">(PROVISORIO) Empleadores:</h1>
 
             <!-- categorias de empleados disponibles, la ídea es que se vea diferente y por categorías -->
             <div class="container wrap-busquedas">
@@ -38,31 +38,29 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Oficio</th>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
                                 <th>Genero</th>
                                 <th>Fecha de nacimiento</th>
                                 <th>Telefono</th>
-                                <th>Habilidades</th>
-                                <th>Disponibilidad</th>
-                                <th>Licencia</th>
+                                <th>Presentación</th>
+                                <th>Zona</th>
+                                <th>Contacto</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:if="${trabajadores.empty}">
+                            <tr th:if="${empleadores.empty}">
                                 <td colspan="9" class="text-center">No hay trabajadores todavía!</td>
                             </tr>
-                            <tr th:each="trabajador, itemStat : *{trabajadores}">
-                                <td><span th:text="${trabajador.oficio}"> Oficio </span></td>
-                                <td><span th:text="${trabajador.nombre}"> Nombre </span></td>
-                                <td><span th:text="${trabajador.apellido}"> Apellido </span></td>
-                                <td><span th:text="${trabajador.genero}"> Genero </span></td>
-                                <td><span th:text="${trabajador.fechaNacimiento}"> Fecha de nacimiento </span></td>
-                                <td><span th:text="${trabajador.telefono}"> Telefono </span></td>
-                                <td><span th:text="${trabajador.skills}"> Habilidades </span></td>
-                                <td><span th:text="${trabajador.disponible}"> Disponibilidad </span></td>
-                                <td><span th:text="${trabajador.licencia}"> Licencia </span></td>
+                            <tr th:each="empleador, itemStat : *{empleadores}">
+                                <td><span th:text="${empleador.nombre}"> Nombre </span></td>
+                                <td><span th:text="${empleador.apellido}"> Apellido </span></td>
+                                <td><span th:text="${empleador.genero}"> Genero </span></td>
+                                <td><span th:text="${empleador.fechaNacimiento}"> Fecha de nacimiento </span></td>
+                                <td><span th:text="${empleador.telefono}"> Telefono </span></td>
+                                <td><span th:text="${empleador.presentacion}"> Presentación </span></td>
+                                <td><span th:text="${empleador.zona}"> Zona </span></td>
+                                <td><span th:text="${empleador.contacto}"> Contacto </span></td>
                             </tr>
                         </tbody>
                     </table>
