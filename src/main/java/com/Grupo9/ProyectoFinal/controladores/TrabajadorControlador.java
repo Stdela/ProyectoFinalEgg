@@ -75,19 +75,26 @@ public class TrabajadorControlador {
 //		model.addAttribute("comentarios", trabajadorServicio.comentariosTrabajador(id));
 //		model.addAttribute("puntos", trabajadorServicio.puntosTrabajador(id));
 		
-		return "perfil_empleador";
+		return "perfil_trabajador";
+	}
+	
+	@GetMapping("perfil/modificar/{id}")
+	public String modificar(ModelMap model, @PathVariable("id") Long id) {
+		model.addAttribute("trabajador", trabajadorServicio.encontrarPorId(id));
+		return "formularioTrabajador";
 	}
         
-          @PutMapping("/perfil/{id}")
+          @PutMapping("/perfil/modificar/{id}")
         public String modificarTrabajador(@PathVariable("id") Long id, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
 			@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,
 			@RequestParam("oficio") Oficio oficio, @RequestParam("imagen") MultipartFile imagen, @RequestParam("experiencia") String experiencia, @RequestParam("disponible") Boolean disponible, @RequestParam("licencia") Boolean licencia, @RequestParam("skills") String skills) throws IOException{
             		
             trabajadorServicio.modificarTrabajador(id, nombre, apellido, genero, fechaNacimiento, zona, telefono, oficio, experiencia, disponible, licencia, skills, imagen, experiencia);
-         return  "perfil_empleador";   
+         return  "perfil_trabajadorr";   
         }
       
 	
+          
 	
 	
 	
