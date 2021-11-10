@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <th:block th:include="fragments/componentes.html :: head"></th:block>
+    <title>Registro</title>
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
+</head>
+<body style="background-color: #85929E;">
+
+  <!-- <div th:include="/fragments/componentes.html :: navbar"></div> -->
+
+  <div class="container my-5">
+    <div class="row">
+      <div class="py-1 text-center col-lg-4">
+        <img th:src="@{/img/registro_2.jpg}" src="../static/img/registro_2.png" class="img-thumbnail" alt="...">
+      </div>
+      <div class="col-lg-1"></div>
+      <div class="col-lg-7 d-flex align-items-start">
+        <div class="row">
+
+          <div class="d-flex align-items-start">
+            <!-- Pills 1 -->
+            <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+              <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Acceder</button>
+              <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Registro</button>              
+            </div>
+
+            <!-- Contenido 1 -->
+            <div class="tab-content" id="v-pills-tabContent">
+              <!-- 1.1 -->
+              <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                <form th:action="@{/login}" method="post">
+                  <!-- Email input -->
+                  <div class="form-outline mb-4">
+                    <input type="email" id="emailLog" class="form-control" />
+                    <label class="form-label" for="emailLog">Email</label>
+                  </div>
+                
+                  <!-- Password input -->
+                  <div class="form-outline mb-4">
+                    <input type="password" id="contrasenaLog" class="form-control" />
+                    <label class="form-label" for="contrasenaLog">Contraseña</label>
+                  </div>
+                
+                  <!-- 2 column grid layout for inline styling -->
+                  <div class="row mb-4">
+                    <div class="col d-flex justify-content-center">
+                      <!-- Checkbox -->
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          value=""
+                          id="form2Example34"
+                          checked
+                        />
+                        <label class="form-check-label" for="form2Example34"> Recuérdame</label>
+                      </div>
+                    </div>
+                
+                    <div class="col">
+                      <!-- Simple link -->
+                      <a href="#!">Olvidaste la contraseña?</a>
+                    </div>
+                  </div>
+                
+                  <!-- Submit button -->
+                  <button type="submit" class="btn btn-primary btn-block mb-4">Acceder</button>
+                </form>
+              </div>
+
+              <!-- 1.2 -->
+              <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                <!-- Pills 2 -->
+                <!-- Pills navs -->
+                <ul class="nav nav-pills mb-3" id="ex1" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <a
+                      class="nav-link active"
+                      id="ex1-tab-1"
+                      data-mdb-toggle="pill"
+                      href="#ex1-pills-1"
+                      role="tab"
+                      aria-controls="ex1-pills-1"
+                      aria-selected="true"
+                      >Empleador</a
+                    >
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a
+                      class="nav-link"
+                      id="ex1-tab-2"
+                      data-mdb-toggle="pill"
+                      href="#ex1-pills-2"
+                      role="tab"
+                      aria-controls="ex1-pills-2"
+                      aria-selected="false"
+                      >Trabajador</a
+                    >
+                  </li>
+                </ul>
+                <!-- Pills navs -->
+
+                <!-- Contenido 2 -->
+                <div class="tab-content" id="ex1-content">
+                  <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+                    <form th:action="@{/empleador/registro-empleador}" method="post" class="col-10 my-3" >
+                      <div class="row g-3">                    
+                          <div class="col-12">
+                              <label class="form-label fw-bolder" for="email">Email</label>
+                              <input type="email" id="email" name="email" class="form-control" required autofocus>
+                              <div class="invalid-feedback">
+                                  Email es requerido.
+                              </div>
+                          </div>
+                          <div class="col-6">
+                              <label class="form-label fw-bolder" for="contrasena">Contraseña</label>
+                              <input type="password" id="contrasena" name="contrasena" class="form-control" required>
+                              <div class="invalid-feedback">
+                                  Contraseña es requerido.
+                              </div>
+                          </div>
+                          <div class="col-6">
+                              <label class="form-label fw-bolder" for="contrasena2">Repetir Contraseña</label>
+                              <input type="password" id="contrasena2" name="contrasena2" class="form-control" required>
+                              <div class="invalid-feedback">
+                                  Repetir contraseña es requerido.
+                              </div>
+                          </div>
+                          <div class="col-sm-6 col-md-6">
+                              <label class="form-label fw-bolder" for="name">Nombre</label>
+                              <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Daniel" required>
+                              <div class="invalid-feedback">
+                                  Nombre es requerido.
+                              </div>
+                          </div>
+                          <div class="col-sm-6 col-md-6">
+                              <label class="form-label fw-bolder" for="apellido">Apellido</label>
+                              <input type="text" id="apellido" name="apellido" class="form-control" required>
+                              <div class="invalid-feedback">
+                                  Apellido es requerido.
+                              </div>
+                          </div>
+      
+                          <div class="row py-3 d-flex align-items-center">
+                              <div class="col-4">
+                                  <label class="my-3 form-label fw-bolder" for="fechaNacimiento">Fecha de nacimiento</label>
+                                  <div class="form-group">
+                                      <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento" th:value="${#temporals.format(localDate, 'yyyy-MM-dd')}">
+                                  </div>
+                              </div>
+                              <div class="col-4">
+                                  <div class="form-group">
+                                      <label class="my-3 form-label fw-bolder" id="telefono">Teléfono</label>
+                                      <input type="text" class="form-control" name="telefono" id="telefono">
+                                  </div>
+                              </div>
+                              <div class="col-4">
+                                  <div class="form-group">
+                                      <label class="my-3 form-label fw-bolder" id="tipo">Tipo</label>
+                                      <div class="col-md-6">
+                                          <select name="tipo" id="tipo">
+                                              <option selected>selecionar</option>
+                                              <option th:each="tipoOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Tipo).values()}"
+                                              th:values="${tipoOpt}"
+                                              th:text="${tipoOpt}"></option>
+                                          </select>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+          
+                          <div class="row py-3 d-flex justify-content-between">
+                              <div class="col-sm-6 col-4">
+                                  <h4 class="mb-3 justify-content-start">Género</h4>
+                                  <div class="col-md-6">
+                                      <select name="genero" id="genero">
+                                          <option selected>selecionar</option>
+                                          <option th:each="generoOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Genero).values()}"
+                                          th:values="${generoOpt}"
+                                          th:text="${generoOpt}"></option>
+                                      </select>
+                                  </div>
+                              </div>
+      
+                              <div class="col-sm-6 col-4">
+                                  <h4 class="mb-3">Zona</h4>
+                                  <div class="col-md-6">
+                                      <select name="zona" id="zona">
+                                          <option selected>selecionar</option>
+                                          <option th:each="zonaOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Zona).values()}"
+                                          th:values="${zonaOpt}"
+                                          th:text="${zonaOpt}"></option>
+                                      </select>
+                                  </div>
+                              </div>
+                          </div>
+                          
+                          <hr class="my-4">
+          
+                          <div class="col-12">
+                              <button class="btn btn-primary" type="submit">Registrarse</button>
+                          </div>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- Trabajador ▼ -->
+                  <div class="tab-pane fade" id="ex1-pills-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+                    <form th:action="@{/trabajador/registro-trabajador}" class="col-10 my-3" method="POST">
+                      <div class="row g-3">
+                        <div class="col-lg-2"></div>
+                        <div class="col-6 col-lg-4">
+                          <div class="form-outline">
+                              <label class="form-label fw-bolder" for="name">Nombre</label>
+                              <input type="text" id="nombre" name="nombre" class="form-control" placeholder="" required>
+                          </div>
+                        </div>
+                        <div class="col-6 col-lg-4">
+                          <div class="form-outline">
+                              <label class="form-label fw-bolder" for="last_name">Apellido</label>
+                              <input type="text" id="apellido" name="apellido" class="form-control" required>
+                          </div>
+                        </div>
+                        <div class="col-lg-2"></div>
+                        
+                        <!-- Email input -->
+                        <div class="col-lg-2"></div>
+                        <div class="col-12 col-lg-8">
+                            <div class="form-outline">
+                                <label class="form-label fw-bolder" for="email">Email</label>
+                                <input type="email" id="email" name="email" class="form-control" required autofocus>
+                            </div>
+                        </div>
+                        <div class="col-lg-2"></div>
+                        
+                        <!-- Password & repeat -->
+                        <div class="col-lg-2"></div>
+                        <div class="col-6 col-lg-4">
+                            <div class="form-outline">
+                                <label class="form-label fw-bolder" for="contrasena">Contraseña</label>
+                                <input type="password" id="contrasena" name="contrasena" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-4">
+                            <div class="form-outline">
+                                <label class="form-label fw-bolder" for="contrasena2">Repetir Contraseña</label>
+                                <input type="password" id="contrasena2" name="contrasena2" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-2"></div>
+                        
+                        <!-- Fecha de Nacimiento -->
+                        <div class="col-lg-2"></div>
+                        <div class="col-12 col-lg-8">
+                            <div class="form-outline">
+                                <label class="form-label fw-bolder" for="fechaNacimiento">Fecha de nacimiento</label>
+                                <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento" th:value="${#temporals.format(localDate, 'yyyy-MM-dd')}">
+                            </div>
+                        </div>
+                        <div class="col-lg-2"></div>
+                        
+                        <!-- Teléfono -->
+                        <div class="col-lg-2"></div>
+                        <div class="col-12 col-lg-8">
+                            <div class="form-outline">
+                                <label class="form-label fw-bolder" for="telefono">Teléfono</label>
+                                <input type="pass" id="telefono" name="telefono" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-2"></div>
+                        
+                        <!-- Género | Zona | Oficio input -->
+                        <!-- Zona -->
+                        <div class="col-lg-2"></div>
+                        <div class="col-4 col-lg-2">
+                            <label class="form-label fw-bolder" for="zona">Zona&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            <select name="zona" id="zona">
+                                <option selected>selecionar</option>
+                                <option th:each="zonaOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Zona).values()}"
+                                th:values="${zonaOpt}"
+                                th:text="${zonaOpt}"></option>
+                            </select>
+                        </div>
+                        <!-- Género -->
+                        <div class="col-lg-1"></div>
+                        <div class="col-4 col-lg-2">
+                            <label class="form-label fw-bolder" for="genero">Género</label>
+                            <select name="genero" id="genero">
+                                <option selected>selecionar</option>
+                                <option th:each="generoOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Genero).values()}"
+                                th:values="${generoOpt}"
+                                th:text="${generoOpt}"></option>
+                            </select>
+                        </div>
+    
+                        <!-- Oficio -->
+                        <div class="col-lg-1"></div>
+                        <div class="col-4 col-lg-2">
+                            <label class="form-label fw-bolder" for="oficio">Oficio</label>
+                            <select name="oficio" id="oficio">
+                                <option selected>selecionar</option>
+                                <option th:each="oficioOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Oficio).values()}"
+                                th:values="${oficioOpt}"
+                                th:text="${oficioOpt}"></option>
+                            </select>
+                        </div>
+                        <div class="col-lg-1"></div>
+                        
+                        <!-- Disponibilidad | Licencia | Skills input -->
+                    
+                        <!-- Disponibilidad -->
+                        <div class="col-lg-3"></div>
+                        <div class="col col-lg-2">
+                            <label class="form-label fw-bolder" for="disponible">Disponibilidad</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="disponible" id="si" value="true">
+                                <label class="form-check-label" for="si">
+                                  Si
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="disponible" id="no" value="no">
+                                <label class="form-check-label" for="no">
+                                  No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-1"></div>
+    
+                        <!-- Licencia -->
+                        <div class="col-lg-1"></div>
+                        <div class="col col-lg-2">
+                            <label class="form-label fw-bolder" for="licencia">Licencia</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="licencia" id="si" value="true">
+                                <label class="form-check-label" for="si">
+                                  Si
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="licencia" id="no" value="no">
+                                <label class="form-check-label" for="no">
+                                  No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3"></div>
+    
+                        <!-- Skills -->
+                        <div class="col-lg-2"></div>
+                        <div class="col col-lg-8">
+                            <label for="skills" class="form-label fw-bolder">Skills</label>
+                            <input class="form-control" type="text" name="skills" id="skills">
+                        </div>
+                        <div class="col-lg-2"></div>
+                        
+                        <!-- Experiencia -->
+                        <div class="col col-lg-2"></div>
+                        <div class="col col-lg-8">
+                            <label for="experiencia" class="form-label fw-bolder">Cuéntanos sobre tu experiencia.</label>
+                            <textarea class="form-control" name="experiencia" id="experiencia" rows="5"></textarea>
+                        </div>
+                        <div class="col col-lg-2"></div>
+                        
+                        <div class="col col-lg-2"></div>
+                        <div class="col col-lg-8">
+                            <button class="btn btn-primary" type="submit">Registrarse</button>
+                        </div>
+                        <div class="col col-lg-2"></div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <!-- Pills content -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</body>
+</html>

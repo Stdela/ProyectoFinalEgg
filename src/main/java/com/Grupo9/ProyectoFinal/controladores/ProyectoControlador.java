@@ -32,6 +32,11 @@ public class ProyectoControlador {
 		return "index";
 	}
 
+	@GetMapping("/user_login")
+	public String login() {
+		return "login.html";
+	}
+
 	@GetMapping("/busquedaEmpleadores")
 	public String empleadores(Model model) {
 		model.addAttribute("empleadores", empleadorServicio.listarEmpleadores());
