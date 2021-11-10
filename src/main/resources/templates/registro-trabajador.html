@@ -25,10 +25,10 @@
             <div class="col-lg-1"></div>
             <div class="col-lg-7">
                 <form th:action="@{/trabajador/registro-trabajador}" class="col-10 my-3" method="POST">
-                    <div th:if="${error != null}"
+                    <div th:if="${errorTrabajador != null}"
                         class="alert alert-danger alert-dismissible text-center align-items-center">
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        <p th:text="${error}"></p>
+                        <p th:text="${errorTrabajador}"></p>
                     </div>
                     <div class="row g-3">
                         <div class="col-lg-2"></div>

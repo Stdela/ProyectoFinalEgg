@@ -93,7 +93,7 @@ public class EmpleadorControlador {
 				model.put("tipo", tipo);
 			}
 			model.put("errorEmpleador", e.getMessage());
-			return "login";
+			return "registro-empleador";
 		}
 		
 		return "redirect:/";

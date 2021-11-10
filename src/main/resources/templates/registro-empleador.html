@@ -24,10 +24,10 @@
     <div class="container mb-5">
         <div class="row justify-content-center">
             <form th:action="@{/empleador/registro-empleador}" method="post" class="col-10 my-3">
-                <div th:if="${error != null}"
+                <div th:if="${errorEmpleador != null}"
                     class="alert alert-danger alert-dismissible text-center align-items-center">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    <p th:text="${error}"></p>
+                    <p th:text="${errorEmpleador}"></p>
                 </div>
                 <div class="row g-3">
                     <div class="col-12">
