@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -105,5 +107,21 @@ public class TrabajadorControlador {
             trabajadorServicio.modificarTrabajador(id, nombre, apellido, genero, fechaNacimiento, zona, telefono, oficio, experiencia, disponible, licencia, skills, imagen, experiencia);
          return  "perfil_trabajadorr";   
         }
+<<<<<<< HEAD
+=======
+      
+        @PostMapping("/postular/{id}")  
+        public String postularEmpleo(@PathVariable ("id") Long idEmpleo, HttpSession httpSession) {
+        	Trabajador trabajador = (Trabajador) httpSession.getAttribute("usuariosession");
+        	empleoServicio.agregarTrabajador(idEmpleo, trabajador);
+        	return "redirect:/";
+        }
+        
+	
+          
+	
+	
+	
+>>>>>>> 4b33eb9c4f87b3b7aad43747e114e495b436f792
 
 }
