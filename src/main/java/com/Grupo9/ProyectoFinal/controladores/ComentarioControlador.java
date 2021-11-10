@@ -24,16 +24,16 @@ public class ComentarioControlador {
 	@PostMapping("/comentario/{id}")
 	public String dejarComentario(@PathVariable("id") Long idReceptor, @RequestParam("comentario") String comentario, @RequestParam("puntaje") Integer puntaje, HttpSession httpSession) throws WebException {
 		//httpSession.getAttribute("usuariosession")
-				
-		Empleador empleador= (Empleador) httpSession.getAttribute("usuariosession");
-		if (empleador.getId()==null) {
-			Trabajador trabajador= (Trabajador) httpSession.getAttribute("usuariosession");
-			comentarioServicio.crearComentario(comentario, puntaje, trabajador.getId(), idReceptor);
-		} else {
-			comentarioServicio.crearComentario(comentario, puntaje, empleador.getId(), idReceptor);
-		}
-				
-		return "redirect:/";
+		
+	Empleador empleador= (Empleador) httpSession.getAttribute("usuariosession");
+	if (empleador.getId()==null) {
+		Trabajador trabajador= (Trabajador) httpSession.getAttribute("usuariosession");
+		comentarioServicio.crearComentario(comentario, puntaje, trabajador.getId(), idReceptor);
+	} else {
+		comentarioServicio.crearComentario(comentario, puntaje, empleador.getId(), idReceptor);
+	}
+			
+	return "redirect:/";
 	}
 
 }

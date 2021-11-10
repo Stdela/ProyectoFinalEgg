@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.Grupo9.ProyectoFinal.Entidad.Empleador;
 import com.Grupo9.ProyectoFinal.Entidad.Empleo;
 import com.Grupo9.ProyectoFinal.Entidad.Trabajador;
 import com.Grupo9.ProyectoFinal.Enum.Genero;
@@ -103,6 +104,12 @@ public class TrabajadorControlador {
 //		model.addAttribute("comentarios", trabajadorServicio.comentariosTrabajador(id));
 //		model.addAttribute("puntos", trabajadorServicio.puntosTrabajador(id));
 
+		return "perfil_trabajador";
+	}
+	@GetMapping("/perfil-trabajador")
+	public String perfilPropio (HttpSession httpSession, ModelMap model) {
+		Trabajador trabajador= (Trabajador) httpSession.getAttribute("usuariosession");
+		model.addAttribute("trabajador", trabajador);
 		return "perfil_trabajador";
 	}
 
