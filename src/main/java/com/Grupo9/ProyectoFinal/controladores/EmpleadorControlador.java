@@ -92,8 +92,8 @@ public class EmpleadorControlador {
 			} catch (IllegalArgumentException ex) {
 				model.put("tipo", tipo);
 			}
-			model.put("error", e.getMessage());
-			return "registro-empleador";
+			model.put("errorEmpleador", e.getMessage());
+			return "login";
 		}
 		
 		return "redirect:/";
