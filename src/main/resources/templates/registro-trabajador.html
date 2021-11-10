@@ -85,7 +85,7 @@
                             <div class="form-outline">
                                 <label class="form-label fw-bolder" for="fechaNacimiento">Fecha de nacimiento</label>
                                 <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento"
-                                    th:value="${#temporals.format(localDate, 'yyyy-MM-dd')}">
+                                    th:value="${#temporals.format(localDate, 'yyyy-MM-dd')}" required>
                             </div>
                         </div>
                         <div class="col-lg-2"></div>
@@ -109,22 +109,22 @@
                         <div class="col-lg-2"></div>
                         <div class="col-4 col-lg-2">
                             <label class="form-label fw-bolder" for="zona">Zona&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                            <select name="zona" id="zona">
+                            <select name="zona" id="zona" required>
                                 <option selected>selecionar</option>
                                 <option th:each="zonaOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Zona).values()}"
                                 th:values="${zonaOpt}"
-                                th:text="${zonaOpt}"></option>
+                                th:text="${zonaOpt}" th:selected="${zonaOpt==zona}"></option>
                             </select>
                         </div>
                         <!-- Género -->
                         <div class="col-lg-1"></div>
                         <div class="col-4 col-lg-2">
                             <label class="form-label fw-bolder" for="genero">Género</label>
-                            <select name="genero" id="genero">
-                                <option th:value="${genero}" th:text="${genero != null}? genero : 'Seleccionar'" selected></option>
+                            <select name="genero" id="genero" required>
+                                <option selected>selecionar</option>
                                 <option th:each="generoOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Genero).values()}"
                                 th:values="${generoOpt}"
-                                th:text="${generoOpt}"></option>
+                                th:text="${generoOpt}" th:selected="${generoOpt==genero}"></option>></option>
                             </select>
                         </div>
     
@@ -132,11 +132,11 @@
                         <div class="col-lg-1"></div>
                         <div class="col-4 col-lg-2">
                             <label class="form-label fw-bolder" for="oficio">Oficio</label>
-                            <select name="oficio" id="oficio">
+                            <select name="oficio" id="oficio" required>
                                 <option selected>selecionar</option>
                                 <option th:each="oficioOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Oficio).values()}"
                                 th:values="${oficioOpt}"
-                                th:text="${oficioOpt}"></option>
+                                th:text="${oficioOpt}" th:selected="${oficioOpt==oficio}"></option>
                             </select>
                         </div>
                         <div class="col-lg-1"></div>
@@ -148,13 +148,13 @@
                         <div class="col col-lg-2">
                             <label class="form-label fw-bolder" for="disponible">Disponibilidad</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="disponible" id="si" value="true">
+                                <input class="form-check-input" type="radio" name="disponible" id="si" value="true" required>
                                 <label class="form-check-label" for="si">
                                   Si
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="disponible" id="no" value="no">
+                                <input class="form-check-input" type="radio" name="disponible" id="no" value="no" required>
                                 <label class="form-check-label" for="no">
                                   No
                                 </label>
@@ -167,13 +167,13 @@
                         <div class="col col-lg-2">
                             <label class="form-label fw-bolder" for="licencia">Licencia</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="licencia" id="si" value="true">
+                                <input class="form-check-input" type="radio" name="licencia" id="si" value="true" required>
                                 <label class="form-check-label" for="si">
                                   Si
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="licencia" id="no" value="no">
+                                <input class="form-check-input" type="radio" name="licencia" id="no" value="no" required>
                                 <label class="form-check-label" for="no">
                                   No
                                 </label>
@@ -185,7 +185,7 @@
                         <div class="col-lg-2"></div>
                         <div class="col col-lg-8">
                             <label for="skills" class="form-label fw-bolder">Skills</label>
-                            <input class="form-control" type="text" name="skills" th:value="${skills}" id="skills">
+                            <input class="form-control" type="text" name="skills" th:value="${skills}" id="skills" required>
                         </div>
                         <div class="col-lg-2"></div>
     
@@ -194,7 +194,7 @@
                         <div class="col col-lg-2"></div>
                         <div class="col col-lg-8">
                             <label for="experiencia" class="form-label fw-bolder">Cuéntanos sobre tu experiencia.</label>
-                            <textarea class="form-control" name="experiencia" th:text="${experiencia}" id="experiencia" rows="5"></textarea>
+                            <textarea class="form-control" name="experiencia" th:text="${experiencia}" id="experiencia" rows="5" required></textarea>
                         </div>
                         <div class="col col-lg-2"></div>
     

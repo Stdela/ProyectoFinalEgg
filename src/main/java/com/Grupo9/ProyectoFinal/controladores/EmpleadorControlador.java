@@ -3,7 +3,7 @@ package com.Grupo9.ProyectoFinal.controladores;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -131,6 +131,7 @@ public class EmpleadorControlador {
         return "perfil_empleador";
         }
 	
+        
 	
 	
 

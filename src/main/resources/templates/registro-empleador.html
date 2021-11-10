@@ -26,7 +26,7 @@
                 <div class="row g-3">                    
                     <div class="col-12">
                         <label class="form-label fw-bolder" for="email">Email</label>
-                        <input type="email" id="email" name="email" class="form-control" required autofocus>
+                        <input type="email" id="email" name="email" th:value="${email}" class="form-control" required autofocus>
                         <div class="invalid-feedback">
                             Email es requerido.
                         </div>
@@ -47,14 +47,14 @@
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <label class="form-label fw-bolder" for="name">Nombre</label>
-                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Daniel" required>
+                        <input type="text" id="nombre" name="nombre" th:value="${nombre}" class="form-control" placeholder="Daniel" required>
                         <div class="invalid-feedback">
                             Nombre es requerido.
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <label class="form-label fw-bolder" for="apellido">Apellido</label>
-                        <input type="text" id="apellido" name="apellido" class="form-control" required>
+                        <input type="text" id="apellido" name="apellido" th:value="${apellido}" class="form-control" required>
                         <div class="invalid-feedback">
                             Apellido es requerido.
                         </div>
@@ -70,7 +70,7 @@
                         <div class="col-4">
                             <div class="form-group">
                                 <label class="my-3 form-label fw-bolder" id="telefono">Teléfono</label>
-                                <input type="text" class="form-control" name="telefono" id="telefono">
+                                <input type="text" class="form-control" name="telefono" id="telefono" th:value="${telefono}">
                             </div>
                         </div>
                         <div class="col-4">

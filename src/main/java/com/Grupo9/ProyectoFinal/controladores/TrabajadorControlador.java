@@ -70,7 +70,7 @@ public class TrabajadorControlador {
 			model.put("fechaNacimiento", fechaNacimiento);
 			model.put("zona", zona);
 			model.put("telefono", telefono);
-			model.put("oficio", Oficio.valueOf(oficio));
+			model.put("oficio", oficio);
 			model.put("experiencia", experiencia);
 			model.put("disponible", disponible);
 			model.put("skills", skills);
@@ -107,8 +107,6 @@ public class TrabajadorControlador {
             trabajadorServicio.modificarTrabajador(id, nombre, apellido, genero, fechaNacimiento, zona, telefono, oficio, experiencia, disponible, licencia, skills, imagen, experiencia);
          return  "perfil_trabajadorr";   
         }
-<<<<<<< HEAD
-=======
       
         @PostMapping("/postular/{id}")  
         public String postularEmpleo(@PathVariable ("id") Long idEmpleo, HttpSession httpSession) {
@@ -116,12 +114,5 @@ public class TrabajadorControlador {
         	empleoServicio.agregarTrabajador(idEmpleo, trabajador);
         	return "redirect:/";
         }
-        
-	
-          
-	
-	
-	
->>>>>>> 4b33eb9c4f87b3b7aad43747e114e495b436f792
 
 }
