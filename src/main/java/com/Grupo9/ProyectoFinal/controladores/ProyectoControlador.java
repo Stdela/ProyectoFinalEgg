@@ -32,7 +32,7 @@ public class ProyectoControlador {
 		return "index";
 	}
 
-	@GetMapping("/user_login")
+	@GetMapping("/login")
 	public String login() {
 		return "login.html";
 	}
