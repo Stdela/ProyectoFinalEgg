@@ -26,13 +26,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 ///TO DO : Change to .authenticated()
                 .anyRequest().permitAll();
         http.formLogin()
-                /*.loginPage("/login")
-                .loginProcessingUrl("/logincheck")
-                ///PUEDE QUE SE TENGA QUE CAMBIAR A username y password respectivamente
-                .usernameParameter("email")
-                .passwordParameter("contrasena")
+                .loginPage("/login")
+                //.loginProcessingUrl("/logincheck")
+                .defaultSuccessUrl("/")
+                .usernameParameter("username")
+                .passwordParameter("password")
                 .failureForwardUrl("/login?error")
-                .failureForwardUrl("/login?error")*/
                 .permitAll();
 
     }
