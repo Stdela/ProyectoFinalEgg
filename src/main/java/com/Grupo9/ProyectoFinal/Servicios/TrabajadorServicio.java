@@ -81,17 +81,19 @@ public class TrabajadorServicio {
 		try {
 			Zona.valueOf(zona);
 		} catch (IllegalArgumentException e) {
-			throw new WebException("Debe ingresar una zona válida");
+			throw new WebException("Debe ingresar una zona");
 		}
 
 		try {
 			Genero.valueOf(genero);
 		} catch (IllegalArgumentException e) {
-			throw new WebException("Debe ingresar un género válido");
+			throw new WebException("Debe ingresar un género");
 		}
 
-		if (oficio == null) {
-			throw new WebException("Debe ingresar un oficio ");
+		try {
+			Oficio.valueOf(oficio);
+		} catch (IllegalArgumentException e) {
+			throw new WebException("Debe ingresar un oficio");
 		}
 
 		if (disponible == null || disponible.isEmpty()) {
@@ -117,7 +119,7 @@ public class TrabajadorServicio {
 		}
 
 		Trabajador trabajador = new Trabajador(email, contrasena, nombre, apellido, Genero.valueOf(genero),
-				fechaNacimiento, Zona.valueOf(zona), telefono, empleoServicio.asignarOficio(oficio), experiencia,
+				fechaNacimiento, Zona.valueOf(zona), telefono, Oficio.valueOf(oficio), experiencia,
 				Boolean.valueOf(disponible), Boolean.valueOf(licencia), skills);
 
 		trabajadorRepositorio.save(trabajador);

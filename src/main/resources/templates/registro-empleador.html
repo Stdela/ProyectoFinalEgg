@@ -74,7 +74,7 @@
                             <label class="my-3 form-label fw-bolder" for="fechaNacimiento">Fecha de nacimiento</label>
                             <div class="form-group">
                                 <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento"
-                                    th:value="${#temporals.format(localDate, 'yyyy-MM-dd')}" required>
+                                    th:value="${#temporals.format(localDate, 'yyyy-MM-dd')}">
                             </div>
                         </div>
                         <div class="col-4">

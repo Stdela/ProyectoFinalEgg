@@ -23,6 +23,7 @@ import com.Grupo9.ProyectoFinal.Entidad.Trabajador;
 import com.Grupo9.ProyectoFinal.Enum.Genero;
 import com.Grupo9.ProyectoFinal.Enum.Oficio;
 import com.Grupo9.ProyectoFinal.Enum.Zona;
+import com.Grupo9.ProyectoFinal.Excepciones.WebException;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleoServicio;
 import com.Grupo9.ProyectoFinal.Servicios.TrabajadorServicio;
 
@@ -66,11 +67,23 @@ public class TrabajadorControlador {
 			model.put("email", email);
 			model.put("nombre", nombre);
 			model.put("apellido", apellido);
-			model.put("genero", genero);
 			model.put("fechaNacimiento", fechaNacimiento);
-			model.put("zona", zona);
+			try {
+				model.put("zona", Zona.valueOf(zona));
+			} catch (IllegalArgumentException ex) {
+				model.put("zona", zona);
+			}
+			try {
+				model.put("genero", Genero.valueOf(genero));
+			} catch (IllegalArgumentException ex) {
+				model.put("genero", genero);
+			}
 			model.put("telefono", telefono);
-			model.put("oficio", oficio);
+			try {
+				model.put("oficio", Oficio.valueOf(oficio));
+			} catch (IllegalArgumentException ex) {
+				model.put("oficio", oficio);
+			}
 			model.put("experiencia", experiencia);
 			model.put("disponible", disponible);
 			model.put("skills", skills);
@@ -89,30 +102,35 @@ public class TrabajadorControlador {
 		model.addAttribute("id", id);
 //		model.addAttribute("comentarios", trabajadorServicio.comentariosTrabajador(id));
 //		model.addAttribute("puntos", trabajadorServicio.puntosTrabajador(id));
-		
+
 		return "perfil_trabajador";
 	}
-	
+
 	@GetMapping("perfil/modificar/{id}")
 	public String modificar(ModelMap model, @PathVariable("id") Long id) {
 		model.addAttribute("trabajador", trabajadorServicio.encontrarPorId(id));
 		return "formularioTrabajador";
 	}
-        
-          @PutMapping("/perfil/modificar/{id}")
-        public String modificarTrabajador(@PathVariable("id") Long id, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
-			@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,
-			@RequestParam("oficio") Oficio oficio, @RequestParam("imagen") MultipartFile imagen, @RequestParam("experiencia") String experiencia, @RequestParam("disponible") Boolean disponible, @RequestParam("licencia") Boolean licencia, @RequestParam("skills") String skills) throws IOException{
-            		
-            trabajadorServicio.modificarTrabajador(id, nombre, apellido, genero, fechaNacimiento, zona, telefono, oficio, experiencia, disponible, licencia, skills, imagen, experiencia);
-         return  "perfil_trabajadorr";   
-        }
-      
-        @PostMapping("/postular/{id}")  
-        public String postularEmpleo(@PathVariable ("id") Long idEmpleo, HttpSession httpSession) {
-        	Trabajador trabajador = (Trabajador) httpSession.getAttribute("usuariosession");
-        	empleoServicio.agregarTrabajador(idEmpleo, trabajador);
-        	return "redirect:/";
-        }
+
+	@PutMapping("/perfil/modificar/{id}")
+	public String modificarTrabajador(@PathVariable("id") Long id, @RequestParam("nombre") String nombre,
+			@RequestParam("apellido") String apellido, @RequestParam("genero") Genero genero,
+			@RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona,
+			@RequestParam("telefono") String telefono, @RequestParam("oficio") Oficio oficio,
+			@RequestParam("imagen") MultipartFile imagen, @RequestParam("experiencia") String experiencia,
+			@RequestParam("disponible") Boolean disponible, @RequestParam("licencia") Boolean licencia,
+			@RequestParam("skills") String skills) throws IOException {
+
+		trabajadorServicio.modificarTrabajador(id, nombre, apellido, genero, fechaNacimiento, zona, telefono, oficio,
+				experiencia, disponible, licencia, skills, imagen, experiencia);
+		return "perfil_trabajadorr";
+	}
+
+	@PostMapping("/postular/{id}")
+	public String postularEmpleo(@PathVariable("id") Long idEmpleo, HttpSession httpSession) {
+		Trabajador trabajador = (Trabajador) httpSession.getAttribute("usuariosession");
+		empleoServicio.agregarTrabajador(idEmpleo, trabajador);
+		return "redirect:/";
+	}
 
 }
