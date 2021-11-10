@@ -54,10 +54,10 @@ public class TrabajadorControlador {
 	public String registroRecibido(ModelMap model, @RequestParam("email") String email,
 			@RequestParam("contrasena") String contrasena, @RequestParam("contrasena2") String contrasena2,
 			@RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
-			@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento,
-			@RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,
-			@RequestParam("oficio") Oficio oficio, @RequestParam("experiencia") String experiencia,
-			@RequestParam(defaultValue = "no") Boolean disponible, @RequestParam(defaultValue = "no") Boolean licencia,
+			@RequestParam("genero") String genero, @RequestParam(defaultValue = "2100-01-01") Date fechaNacimiento,
+			@RequestParam("zona") String zona, @RequestParam("telefono") String telefono,
+			@RequestParam("oficio") String oficio, @RequestParam("experiencia") String experiencia,
+			@RequestParam(defaultValue = "") String disponible, @RequestParam(defaultValue = "") String licencia,
 			@RequestParam("skills") String skills) {
 		try {
 			trabajadorServicio.crearTrabajador(email, contrasena, contrasena2, nombre, apellido, genero,

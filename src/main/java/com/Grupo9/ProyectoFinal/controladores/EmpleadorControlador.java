@@ -66,13 +66,22 @@ public class EmpleadorControlador {
 	}
 	
 	@PostMapping("/registro-empleador")
-	public String registroRecibido(@RequestParam("email") String email, @RequestParam("contrasena") String contrasena,@RequestParam("contrasena2") String contrasena2,@RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
+	public String registroRecibido(ModelMap model, @RequestParam("email") String email, @RequestParam("contrasena") String contrasena,@RequestParam("contrasena2") String contrasena2,@RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
 			@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") Tipo tipo) {
 		
 		try {
 			empleadorServicio.crearEmpleador(email,contrasena,contrasena2,nombre,apellido,genero,fechaNacimiento,zona,telefono,tipo);
 		} catch (Exception e) {
-			System.out.print(e);
+			model.put("email", email);
+			model.put("nombre", nombre);
+			model.put("apellido", apellido);
+			model.put("genero", genero);
+			model.put("fechaNacimiento", fechaNacimiento);
+			model.put("zona", zona);
+			model.put("telefono", telefono);
+			model.put("tipo", tipo);
+			model.put("error", e.getMessage());
+			return "registro-empleador";
 		}
 		
 		return "redirect:/";

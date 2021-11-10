@@ -36,14 +36,14 @@
                             <div class="form-outline">
                                 <label class="form-label fw-bolder" for="name">Nombre</label>
                                 <input type="text" id="nombre" name="nombre" th:value="${nombre}" class="form-control"
-                                    placeholder="Daniel" required>
+                                    placeholder="Daniel">
                             </div>
                         </div>
                         <div class="col-6 col-lg-4">
                             <div class="form-outline">
                                 <label class="form-label fw-bolder" for="last_name">Apellido</label>
                                 <input type="text" id="apellido" name="apellido" th:value="${apellido}"
-                                    class="form-control" required>
+                                    class="form-control">
                             </div>
                         </div>
                         <div class="col-lg-2"></div>
@@ -53,8 +53,7 @@
                         <div class="col-12 col-lg-8">
                             <div class="form-outline">
                                 <label class="form-label fw-bolder" for="email">Email</label>
-                                <input type="email" id="email" name="email" th:value="${email}" class="form-control"
-                                    required autofocus>
+                                <input type="email" id="email" name="email" th:value="${email}" class="form-control">
                             </div>
                         </div>
                         <div class="col-lg-2"></div>
@@ -66,13 +65,13 @@
                         <div class="col-6 col-lg-4">
                             <div class="form-outline">
                                 <label class="form-label fw-bolder" for="contrasena">Contraseña</label>
-                                <input type="text" id="contrasena" name="contrasena" class="form-control" required>
+                                <input type="text" id="contrasena" name="contrasena" class="form-control">
                             </div>
                         </div>
                         <div class="col-6 col-lg-4">
                             <div class="form-outline">
                                 <label class="form-label fw-bolder" for="contrasena2">Repetir Contraseña</label>
-                                <input type="text" id="contrasena2" name="contrasena2" class="form-control" required>
+                                <input type="text" id="contrasena2" name="contrasena2" class="form-control">
                             </div>
                         </div>
                         <div class="col-lg-2"></div>
@@ -85,7 +84,7 @@
                             <div class="form-outline">
                                 <label class="form-label fw-bolder" for="fechaNacimiento">Fecha de nacimiento</label>
                                 <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento"
-                                    th:value="${#temporals.format(localDate, 'yyyy-MM-dd')}" required>
+                                    th:value="${#temporals.format(localDate, 'yyyy-MM-dd')}">
                             </div>
                         </div>
                         <div class="col-lg-2"></div>
@@ -96,7 +95,7 @@
                         <div class="col-12 col-lg-8">
                             <div class="form-outline">
                                 <label class="form-label fw-bolder" for="telefono">Teléfono</label>
-                                <input type="pass" id="telefono" name="telefono" th:value="${telefono}" class="form-control" required>
+                                <input type="pass" id="telefono" name="telefono" th:value="${telefono}" class="form-control">
                             </div>
                         </div>
                         <div class="col-lg-2"></div>
@@ -108,8 +107,8 @@
                         <!-- Zona -->
                         <div class="col-lg-2"></div>
                         <div class="col-4 col-lg-2">
-                            <label class="form-label fw-bolder" for="zona">Zona&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                            <select name="zona" id="zona" required>
+                            <label class="form-label fw-bolder" for="zona">Zona</label>
+                            <select name="zona" id="zona">
                                 <option selected>selecionar</option>
                                 <option th:each="zonaOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Zona).values()}"
                                 th:values="${zonaOpt}"
@@ -120,7 +119,7 @@
                         <div class="col-lg-1"></div>
                         <div class="col-4 col-lg-2">
                             <label class="form-label fw-bolder" for="genero">Género</label>
-                            <select name="genero" id="genero" required>
+                            <select name="genero" id="genero">
                                 <option selected>selecionar</option>
                                 <option th:each="generoOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Genero).values()}"
                                 th:values="${generoOpt}"
@@ -132,7 +131,7 @@
                         <div class="col-lg-1"></div>
                         <div class="col-4 col-lg-2">
                             <label class="form-label fw-bolder" for="oficio">Oficio</label>
-                            <select name="oficio" id="oficio" required>
+                            <select name="oficio" id="oficio">
                                 <option selected>selecionar</option>
                                 <option th:each="oficioOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Oficio).values()}"
                                 th:values="${oficioOpt}"
@@ -148,14 +147,14 @@
                         <div class="col col-lg-2">
                             <label class="form-label fw-bolder" for="disponible">Disponibilidad</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="disponible" id="si" value="true" required>
-                                <label class="form-check-label" for="si">
+                                <input class="form-check-input" type="radio" name="disponible" id="si-disp" value="true">
+                                <label class="form-check-label" for="si-disp">
                                   Si
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="disponible" id="no" value="no" required>
-                                <label class="form-check-label" for="no">
+                                <input class="form-check-input" type="radio" name="disponible" id="no-disp" value="no">
+                                <label class="form-check-label" for="no-disp">
                                   No
                                 </label>
                             </div>
@@ -167,14 +166,14 @@
                         <div class="col col-lg-2">
                             <label class="form-label fw-bolder" for="licencia">Licencia</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="licencia" id="si" value="true" required>
-                                <label class="form-check-label" for="si">
+                                <input class="form-check-input" type="radio" name="licencia" id="si-lic" value="true">
+                                <label class="form-check-label" for="si-lic">
                                   Si
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="licencia" id="no" value="no" required>
-                                <label class="form-check-label" for="no">
+                                <input class="form-check-input" type="radio" name="licencia" id="no-lic" value="no">
+                                <label class="form-check-label" for="no-lic">
                                   No
                                 </label>
                             </div>
@@ -185,7 +184,7 @@
                         <div class="col-lg-2"></div>
                         <div class="col col-lg-8">
                             <label for="skills" class="form-label fw-bolder">Skills</label>
-                            <input class="form-control" type="text" name="skills" th:value="${skills}" id="skills" required>
+                            <input class="form-control" type="text" name="skills" th:value="${skills}" id="skills">
                         </div>
                         <div class="col-lg-2"></div>
     
@@ -194,7 +193,7 @@
                         <div class="col col-lg-2"></div>
                         <div class="col col-lg-8">
                             <label for="experiencia" class="form-label fw-bolder">Cuéntanos sobre tu experiencia.</label>
-                            <textarea class="form-control" name="experiencia" th:text="${experiencia}" id="experiencia" rows="5" required></textarea>
+                            <textarea class="form-control" name="experiencia" th:text="${experiencia}" id="experiencia" rows="5"></textarea>
                         </div>
                         <div class="col col-lg-2"></div>
     
