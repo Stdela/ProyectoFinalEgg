@@ -87,8 +87,8 @@ public class TrabajadorControlador {
 			model.put("experiencia", experiencia);
 			model.put("disponible", disponible);
 			model.put("skills", skills);
-			model.put("error", e.getMessage());
-			return "registro-trabajador";
+			model.put("errorTrabajador", e.getMessage());
+			return "login";
 		}
 
 		return "redirect:/";

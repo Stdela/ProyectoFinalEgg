@@ -92,10 +92,11 @@ public class EmpleoServicio {
 		er.save(e);
 	}
 
-	public void modificarEmpleo(Long id, String nombre, String descripcion) {
+	public void modificarEmpleo(Long id, String nombre, String descripcion, Oficio oficio) {
 		Empleo e = er.getById(id);
 		e.setNombre(nombre);
 		e.setDescripcion(descripcion);
+		e.setOficio(oficio);
 		er.save(e);
 	}
 

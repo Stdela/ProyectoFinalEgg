@@ -92,8 +92,8 @@ public class EmpleadorControlador {
 			} catch (IllegalArgumentException ex) {
 				model.put("tipo", tipo);
 			}
-			model.put("error", e.getMessage());
-			return "registro-empleador";
+			model.put("errorEmpleador", e.getMessage());
+			return "login";
 		}
 		
 		return "redirect:/";
@@ -153,6 +153,18 @@ public class EmpleadorControlador {
     		@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") Tipo tipo, @RequestParam("foto") MultipartFile foto ) throws IOException{
             empleadorServicio.modificarEmpleador(id, nombre, apellido, genero, fechaNacimiento, zona, telefono, tipo, foto); 
         return "perfil_empleador";
+        }
+        
+        @GetMapping("/modificarEmpleo/{id}")
+        public String modificarEmpleoVista(ModelMap model, @PathVariable("id") Long id) {
+        	model.addAttribute("empleo", empleoServicio.encontrarPorID(id));
+        	return "modificar_empleo";
+        }
+        
+        @PutMapping("/modificarEmpleo/{id}")
+        public String modificarEmpleo(@PathVariable("id") Long id, @RequestParam("nombre") String nombre, @RequestParam("descripcion") String descripcion, @RequestParam("oficio") Oficio oficio) {
+        	empleoServicio.modificarEmpleo(id, nombre, descripcion, oficio);
+        	return "redirect://perfil/{id}";
         }
 	
         
