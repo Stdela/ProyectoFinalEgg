@@ -58,7 +58,7 @@ public class ProyectoControlador {
 	
 	
 	@GetMapping("/empleos")
-	public String empleosporOficio(ModelMap model, @RequestParam (required = false)String oficio) {
+	public String empleosporOficio(ModelMap model, @RequestParam String oficio) {
 		model.addAttribute("empleos", empleoServicio.filtrarPorOficio(oficio));
 		return "index-oficios";
 		

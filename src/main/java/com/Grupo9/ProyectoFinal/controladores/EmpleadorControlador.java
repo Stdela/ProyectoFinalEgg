@@ -3,7 +3,7 @@ package com.Grupo9.ProyectoFinal.controladores;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -30,6 +30,8 @@ import com.Grupo9.ProyectoFinal.Servicios.EmpleadorServicio;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleoServicio;
 import com.Grupo9.ProyectoFinal.Servicios.TrabajadorServicio;
 import java.io.IOException;
+import java.sql.Date;
+
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -66,13 +68,14 @@ public class EmpleadorControlador {
 	@PostMapping("/registro-empleador")
 	public String registroRecibido(@RequestParam("email") String email, @RequestParam("contrasena") String contrasena,@RequestParam("contrasena2") String contrasena2,@RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
 			@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") Tipo tipo) {
+		
 		try {
 			empleadorServicio.crearEmpleador(email,contrasena,contrasena2,nombre,apellido,genero,fechaNacimiento,zona,telefono,tipo);
 		} catch (Exception e) {
 			System.out.print(e);
 		}
 		
-		return "redirect:/empleador/perfil/1";
+		return "redirect:/";
 	
 	}
 	
