@@ -154,6 +154,18 @@ public class EmpleadorControlador {
             empleadorServicio.modificarEmpleador(id, nombre, apellido, genero, fechaNacimiento, zona, telefono, tipo, foto); 
         return "perfil_empleador";
         }
+        
+        @GetMapping("/modificarEmpleo/{id}")
+        public String modificarEmpleoVista(ModelMap model, @PathVariable("id") Long id) {
+        	model.addAttribute("empleo", empleoServicio.encontrarPorID(id));
+        	return "modificar_empleo";
+        }
+        
+        @PutMapping("/modificarEmpleo/{id}")
+        public String modificarEmpleo(@PathVariable("id") Long id, @RequestParam("nombre") String nombre, @RequestParam("descripcion") String descripcion, @RequestParam("oficio") Oficio oficio) {
+        	empleoServicio.modificarEmpleo(id, nombre, descripcion, oficio);
+        	return "redirect://perfil/{id}";
+        }
 	
         
 	
