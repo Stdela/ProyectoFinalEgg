@@ -3,58 +3,67 @@
 
 <head>
     <th:block th:include="fragments/componentes.html :: head"></th:block>
-  <title>Registro</title>
+    <title>Registro</title>
 </head>
 
 <body>
     <!-- Navbar -->
     <div th:include="/fragments/componentes.html :: navbar"></div>
-    
+
     <!-- Ilustración -->
     <div class="container">
         <div class="py-1 text-center">
-            <img th:src="@{/img/sign-in.png}" src="../static/img/sign-in.png" alt="brand" class="mb-4 d-block mx-auto" width="220" height="180">
+            <img th:src="@{/img/sign-in.png}" src="../static/img/sign-in.png" alt="brand" class="mb-4 d-block mx-auto"
+                width="220" height="180">
             <h2 class="text-decoration-underline">Formulario de Registro</h2>
             <p class="lead fw-bolder">Empleador</p>
         </div>
     </div>
-    
+
     <!-- Formulario -->
     <div class="container mb-5">
         <div class="row justify-content-center">
-            <form th:action="@{/empleador/registro-empleador}" method="post" class="col-10 my-3" >
-                <div class="row g-3">                    
+            <form th:action="@{/empleador/registro-empleador}" method="post" class="col-10 my-3">
+                <div th:if="${error != null}"
+                    class="alert alert-danger alert-dismissible text-center align-items-center">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <p th:text="${error}"></p>
+                </div>
+                <div class="row g-3">
                     <div class="col-12">
                         <label class="form-label fw-bolder" for="email">Email</label>
-                        <input type="email" id="email" name="email" class="form-control" required autofocus>
+                        <input type="email" id="email" name="email" th:value="${email}" class="form-control"
+                            autofocus>
                         <div class="invalid-feedback">
                             Email es requerido.
                         </div>
                     </div>
                     <div class="col-6">
                         <label class="form-label fw-bolder" for="contrasena">Contraseña</label>
-                        <input type="text" id="contrasena" name="contrasena" class="form-control" required>
+                        <input type="text" id="contrasena" name="contrasena" class="form-control">
                         <div class="invalid-feedback">
                             Contraseña es requerido.
                         </div>
                     </div>
                     <div class="col-6">
                         <label class="form-label fw-bolder" for="contrasena2">Repetir Contraseña</label>
-                        <input type="text" id="contrasena2" name="contrasena2" class="form-control" required>
+                        <input type="text" id="contrasena2" name="contrasena2" class="form-control">
                         <div class="invalid-feedback">
                             Repetir contraseña es requerido.
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <label class="form-label fw-bolder" for="name">Nombre</label>
-                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Daniel" required>
+                        <input type="text" id="nombre" name="nombre" th:value="${nombre}" class="form-control"
+                            placeholder="Daniel">
                         <div class="invalid-feedback">
                             Nombre es requerido.
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <label class="form-label fw-bolder" for="apellido">Apellido</label>
-                        <input type="text" id="apellido" name="apellido" class="form-control" required>
+                        <input type="text" id="apellido" name="apellido" th:value="${apellido}" class="form-control"
+                        >
                         <div class="invalid-feedback">
                             Apellido es requerido.
                         </div>
@@ -64,13 +73,14 @@
                         <div class="col-4">
                             <label class="my-3 form-label fw-bolder" for="fechaNacimiento">Fecha de nacimiento</label>
                             <div class="form-group">
-                                <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento" th:value="${#temporals.format(localDate, 'yyyy-MM-dd')}">
+                                <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento"
+                                    th:value="${#temporals.format(localDate, 'yyyy-MM-dd')}">
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="form-group">
                                 <label class="my-3 form-label fw-bolder" id="telefono">Teléfono</label>
-                                <input type="text" class="form-control" name="telefono" id="telefono">
+                                <input type="text" class="form-control" name="telefono" id="telefono" th:value="${telefono}">
                             </div>
                         </div>
                         <div class="col-4">
@@ -81,7 +91,7 @@
                                         <option selected>selecionar</option>
                                         <option th:each="tipoOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Tipo).values()}"
                                         th:values="${tipoOpt}"
-                                        th:text="${tipoOpt}"></option>
+                                        th:text="${tipoOpt}" th:selected="${tipoOpt==tipo}"></option>
                                     </select>
                                 </div>
                             </div>
@@ -96,7 +106,7 @@
                                     <option selected>selecionar</option>
                                     <option th:each="generoOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Genero).values()}"
                                     th:values="${generoOpt}"
-                                    th:text="${generoOpt}"></option>
+                                    th:text="${generoOpt}" th:selected="${generoOpt==genero}"></option>
                                 </select>
                             </div>
                         </div>
@@ -108,7 +118,7 @@
                                     <option selected>selecionar</option>
                                     <option th:each="zonaOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Zona).values()}"
                                     th:values="${zonaOpt}"
-                                    th:text="${zonaOpt}"></option>
+                                    th:text="${zonaOpt}" th:selected="${zonaOpt==zona}"></option>
                                 </select>
                             </div>
                         </div>

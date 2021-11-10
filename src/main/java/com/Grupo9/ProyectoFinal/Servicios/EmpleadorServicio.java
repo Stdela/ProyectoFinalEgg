@@ -32,18 +32,18 @@ public class EmpleadorServicio {
 
 	@Autowired
 	private EmpleadorRepositorio er;
-	
+
 	@Autowired
 	private ComentarioRepositorio cr;
-        
-        @Autowired
-    CustomUserDetailsService detailsService;
+
+	@Autowired
+	CustomUserDetailsService detailsService;
 
 	public Empleador crearEmpleador(String email, String contrasena, String contrasena2, String nombre, String apellido,
-			Genero genero, Date fechaNacimiento, Zona zona, String telefono, Tipo tipo) throws WebException {
+			String genero, Date fechaNacimiento, String zona, String telefono, String tipo) throws WebException {
 
-		Empleador e = er.buscarPorEmail(email);
-		if (e != null) {
+		Empleador em = er.buscarPorEmail(email);
+		if (em != null) {
 			throw new WebException("El email ya esta en uso");
 		}
 
@@ -68,10 +68,6 @@ public class EmpleadorServicio {
 			throw new WebException("Debe ingresar un apellido");
 		}
 
-		if (genero == null) {
-			throw new WebException("Debe ingresar un genero");
-		}
-
 		Date fecha2 = new Date(); // For reference
 		// DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
 		// String formattedString = localDate.format(formatter);
@@ -80,36 +76,46 @@ public class EmpleadorServicio {
 			throw new WebException("Debe ingresar una fecha válida");
 		}
 
-		if (zona == null) {
-			throw new WebException("Debe ingresar una zona");
-		}
-
 		if (telefono.isEmpty() || telefono == null) {
 			throw new WebException("Debe ingresar un telefono");
 		}
 
-		if (tipo == null) {
+		try {
+			Tipo.valueOf(tipo);
+		} catch (IllegalArgumentException e) {
 			throw new WebException("Debe ingresar un tipo de usuario");
 		}
-		
+
+		try {
+			Genero.valueOf(genero);
+		} catch (IllegalArgumentException e) {
+			throw new WebException("Debe ingresar un genero");
+		}
+
+		try {
+			Zona.valueOf(zona);
+		} catch (IllegalArgumentException e) {
+			throw new WebException("Debe ingresar una zona");
+		}
+
 		if (telefono.startsWith("+")) {
 			telefono.substring(1);
 		}
 
-		Empleador empleador = new Empleador(email, contrasena, nombre, apellido, genero, fechaNacimiento, zona,
-				telefono, tipo);
-		
-		ArrayList<String> rol=new ArrayList<>();
-		rol.add("ROLE_EMPLEADOR");		
+		Empleador empleador = new Empleador(email, contrasena, nombre, apellido, Genero.valueOf(genero), fechaNacimiento, Zona.valueOf(zona),
+				telefono, Tipo.valueOf(tipo));
+
+		ArrayList<String> rol = new ArrayList<>();
+		rol.add("ROLE_EMPLEADOR");
 		empleador.setRol(rol);
-		
+
 		er.save(empleador);
-                detailsService.crearEmpleador(empleador);
+		detailsService.crearEmpleador(empleador);
 
 		return empleador;
 
 	}
-	
+
 	// Marca para borrado
 	public void borrarEmpleador(Long id) {
 		Empleador e = er.getById(id);
@@ -121,17 +127,17 @@ public class EmpleadorServicio {
 	public void eliminarEmpleadorBD(Long id) {
 		er.deleteById(id);
 	}
-	
+
 	public Empleador encontrarPorId(Long id) {
-		Empleador e=er.getById(id);
-		return e;		
+		Empleador e = er.getById(id);
+		return e;
 	}
-	
-	public List<Empleador> listarEmpleadores(){
-		List<Empleador> listaEmpleadores=er.findAll();
+
+	public List<Empleador> listarEmpleadores() {
+		List<Empleador> listaEmpleadores = er.findAll();
 		return listaEmpleadores;
 	}
-	
+
 	public void modificarEmpleador(Long id, String nombre, String apellido, Genero genero, Date fechaNacimiento,
 			Zona zona, String telefono, Tipo tipo, MultipartFile foto) throws IOException {
 
@@ -144,38 +150,38 @@ public class EmpleadorServicio {
 		e.setTelefono(telefono);
 		e.setTipo(tipo);
 		e.setImagen(foto.getBytes());
-		
+
 		er.save(e);
 	}
-	
+
 	public String puntosEmpleador(Long id) {
-		Empleador e=er.getById(id);
-		Optional<List<Comentario>> resp=cr.buscarPorReceptor(e);
+		Empleador e = er.getById(id);
+		Optional<List<Comentario>> resp = cr.buscarPorReceptor(e);
 		if (resp.isPresent()) {
-			Integer cont=0;
-			Long suma=0l;
-			List<Comentario> comentarios=resp.get();
+			Integer cont = 0;
+			Long suma = 0l;
+			List<Comentario> comentarios = resp.get();
 			for (Comentario comentario : comentarios) {
 				cont++;
-				suma=suma+comentario.getPuntaje();				
+				suma = suma + comentario.getPuntaje();
 			}
-			Long prom=suma/cont;
-			return prom.toString();			
-		}else {
+			Long prom = suma / cont;
+			return prom.toString();
+		} else {
 			return "0";
 		}
 	}
-	
+
 	public List<Comentario> comentariosEmpleador(Long id) {
-		Empleador e=er.getById(id);
+		Empleador e = er.getById(id);
 		List<Comentario> comentarios;
-				
-		Optional<List<Comentario>> resp=cr.buscarPorReceptor(e);
+
+		Optional<List<Comentario>> resp = cr.buscarPorReceptor(e);
 		if (resp.isPresent()) {
-			comentarios=resp.get();				
-		}else {
-			comentarios=null;
-		}		
+			comentarios = resp.get();
+		} else {
+			comentarios = null;
+		}
 		return comentarios;
 	}
 

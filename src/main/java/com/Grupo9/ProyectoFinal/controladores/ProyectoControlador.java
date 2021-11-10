@@ -32,6 +32,11 @@ public class ProyectoControlador {
 		return "index";
 	}
 
+	@GetMapping("/user_login")
+	public String login() {
+		return "login.html";
+	}
+
 	@GetMapping("/busquedaEmpleadores")
 	public String empleadores(Model model) {
 		model.addAttribute("empleadores", empleadorServicio.listarEmpleadores());
@@ -58,7 +63,7 @@ public class ProyectoControlador {
 	
 	
 	@GetMapping("/empleos")
-	public String empleosporOficio(ModelMap model, @RequestParam (required = false)String oficio) {
+	public String empleosporOficio(ModelMap model, @RequestParam String oficio) {
 		model.addAttribute("empleos", empleoServicio.filtrarPorOficio(oficio));
 		return "index-oficios";
 		

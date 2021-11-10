@@ -30,6 +30,8 @@ import com.Grupo9.ProyectoFinal.Servicios.EmpleadorServicio;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleoServicio;
 import com.Grupo9.ProyectoFinal.Servicios.TrabajadorServicio;
 import java.io.IOException;
+import java.sql.Date;
+
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -64,15 +66,37 @@ public class EmpleadorControlador {
 	}
 	
 	@PostMapping("/registro-empleador")
-	public String registroRecibido(@RequestParam("email") String email, @RequestParam("contrasena") String contrasena,@RequestParam("contrasena2") String contrasena2,@RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
-			@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") Tipo tipo) {
+	public String registroRecibido(ModelMap model, @RequestParam("email") String email, @RequestParam("contrasena") String contrasena,@RequestParam("contrasena2") String contrasena2,@RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
+			@RequestParam("genero") String genero, @RequestParam(defaultValue = "2100-01-01") Date fechaNacimiento, @RequestParam("zona") String zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") String tipo) {
+		
 		try {
 			empleadorServicio.crearEmpleador(email,contrasena,contrasena2,nombre,apellido,genero,fechaNacimiento,zona,telefono,tipo);
 		} catch (Exception e) {
-			System.out.print(e);
+			model.put("email", email);
+			model.put("nombre", nombre);
+			model.put("apellido", apellido);
+			try {
+				model.put("genero", Genero.valueOf(genero));
+			} catch (IllegalArgumentException ex) {
+				model.put("genero", genero);
+			}
+			model.put("fechaNacimiento", fechaNacimiento);
+			try {
+				model.put("zona", Zona.valueOf(zona));
+			} catch (IllegalArgumentException ex) {
+				model.put("zona", zona);
+			}
+			model.put("telefono", telefono);
+			try {
+				model.put("tipo", Tipo.valueOf(tipo));
+			} catch (IllegalArgumentException ex) {
+				model.put("tipo", tipo);
+			}
+			model.put("error", e.getMessage());
+			return "registro-empleador";
 		}
 		
-		return "redirect:/empleador/perfil/1";
+		return "redirect:/";
 	
 	}
 	
@@ -131,6 +155,7 @@ public class EmpleadorControlador {
         return "perfil_empleador";
         }
 	
+        
 	
 	
 
