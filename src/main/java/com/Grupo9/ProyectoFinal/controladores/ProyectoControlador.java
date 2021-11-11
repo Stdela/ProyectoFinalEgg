@@ -79,7 +79,6 @@ public class ProyectoControlador {
 		
 	Empleador empleador= (Empleador) httpSession.getAttribute("usuariosession");
 	if (empleador.getId()==null) {
-		Trabajador trabajador= (Trabajador) httpSession.getAttribute("usuariosession");
 		 return "redirect:/perfil-trabajador";
 	} else {
 		return "redirect:/perfil-empleador";
