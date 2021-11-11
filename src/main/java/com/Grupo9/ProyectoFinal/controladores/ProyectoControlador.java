@@ -1,6 +1,9 @@
 package com.Grupo9.ProyectoFinal.controladores;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -9,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.Grupo9.ProyectoFinal.Entidad.Empleador;
+import com.Grupo9.ProyectoFinal.Entidad.Trabajador;
 import com.Grupo9.ProyectoFinal.Enum.Oficio;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleadorServicio;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleoServicio;
@@ -68,5 +73,18 @@ public class ProyectoControlador {
 		return "index-oficios";
 		
 	}
+	@GetMapping("/redirect")
+	public String redirect(HttpSession httpSession) {
+		
+		
+	Empleador empleador= (Empleador) httpSession.getAttribute("usuariosession");
+	if (empleador.getId()==null) {
+		 return "redirect:/perfil-trabajador";
+	} else {
+		return "redirect:/perfil-empleador";
+	}
+			
 
 }
+}
+
