@@ -29,6 +29,7 @@ import com.Grupo9.ProyectoFinal.Enum.Zona;
 import com.Grupo9.ProyectoFinal.Excepciones.WebException;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleadorServicio;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleoServicio;
+import com.Grupo9.ProyectoFinal.Servicios.SendEmail;
 import com.Grupo9.ProyectoFinal.Servicios.TrabajadorServicio;
 import java.io.IOException;
 import java.sql.Date;
@@ -50,6 +51,9 @@ public class EmpleadorControlador {
 	@Autowired 
 	private EmpleoServicio empleoServicio;
 	
+	@Autowired
+	SendEmail mailSender;
+	
 	@GetMapping()
 	public String index(ModelMap model) {
         List<Trabajador> listaTrabajadores = trabajadorServicio.listarTrabajador();
@@ -68,7 +72,7 @@ public class EmpleadorControlador {
 	
 	@PostMapping("/registro-empleador")
 	public String registroRecibido(ModelMap model, @RequestParam("email") String email, @RequestParam("contrasena") String contrasena,@RequestParam("contrasena2") String contrasena2,@RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
-			@RequestParam("genero") String genero, @RequestParam(defaultValue = "2100-01-01") Date fechaNacimiento, @RequestParam("zona") String zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") String tipo) {
+			@RequestParam("genero") String genero, @RequestParam(defaultValue = "2100-01-01") Date fechaNacimiento, @RequestParam("zona") String zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") String tipo) throws IOException {
 		
 		try {
 			empleadorServicio.crearEmpleador(email,contrasena,contrasena2,nombre,apellido,genero,fechaNacimiento,zona,telefono,tipo);
@@ -95,8 +99,10 @@ public class EmpleadorControlador {
 			}
 			model.put("errorEmpleador", e.getMessage());
 			return "registro-empleador";
+			
+			
 		}
-		
+		mailSender.sendEmail(email);
 		return "redirect:/";
 	
 	}

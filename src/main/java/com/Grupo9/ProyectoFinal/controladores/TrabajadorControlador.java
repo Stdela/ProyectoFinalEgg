@@ -26,6 +26,7 @@ import com.Grupo9.ProyectoFinal.Enum.Oficio;
 import com.Grupo9.ProyectoFinal.Enum.Zona;
 import com.Grupo9.ProyectoFinal.Excepciones.WebException;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleoServicio;
+import com.Grupo9.ProyectoFinal.Servicios.SendEmail;
 import com.Grupo9.ProyectoFinal.Servicios.TrabajadorServicio;
 
 @Controller
@@ -37,6 +38,9 @@ public class TrabajadorControlador {
 
 	@Autowired
 	private EmpleoServicio empleoServicio;
+	
+	@Autowired
+	SendEmail mailSender;
 
 	@GetMapping("/")
 	public String index(ModelMap model) {
@@ -60,7 +64,7 @@ public class TrabajadorControlador {
 			@RequestParam("zona") String zona, @RequestParam("telefono") String telefono,
 			@RequestParam("oficio") String oficio, @RequestParam("experiencia") String experiencia,
 			@RequestParam(defaultValue = "") String disponible, @RequestParam(defaultValue = "") String licencia,
-			@RequestParam("skills") String skills) {
+			@RequestParam("skills") String skills) throws IOException {
 		try {
 			trabajadorServicio.crearTrabajador(email, contrasena, contrasena2, nombre, apellido, genero,
 					fechaNacimiento, zona, telefono, oficio, experiencia, disponible, licencia, skills);
@@ -91,6 +95,7 @@ public class TrabajadorControlador {
 			model.put("errorTrabajador", e.getMessage());
 			return "registro-trabajador";
 		}
+		mailSender.sendEmail(email);
 
 		return "redirect:/";
 
