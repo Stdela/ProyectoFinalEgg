@@ -9,13 +9,19 @@
 <body>
     <div th:include="/fragments/componentes.html :: navbar"></div>
 
-    <div class="bg-image" style="background-image: url('../img/fondo.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover; height: 100vh">
+    <div class="bg-image" style="background-image: url('../img/trabajador.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover; height: 100vh">
         <!-- Formulario -->
         <div class="container mb-5">
             <div class="row justify-content-center">
-                <div class="col-lg-2"></div> 
-                <div class="col-lg-7" style="border: 2px solid black; background: rgba(0, 0, 0, .4); color: #FFF;">
-                  <form th:action="@{/trabajador/registro-trabajador}" class="col my-3" method="POST">
+                <div class="col-lg-4 d-flex  align-items-center  flex-column" style="border: 2px solid black; background: rgba(0, 0, 0, .4); color: #FFF; margin-top: 2rem; border-radius: 15px;">
+                    <h1 class="display-4">Registrate</h1>
+                    <p class="lead">
+                        Haz contacto y da una solución efectiva con quién lo necesite.
+                      </p>
+                </div> 
+                <div class="col-lg-1"></div>
+                <div class="col-lg-7" style="border: 2px solid black; background: rgba(0, 0, 0, .4); color: #FFF; margin-top: 2rem; border-radius: 15px;">
+                  <form th:action="@{/trabajador/registro-trabajador}" class="col my-3 mx-3" method="POST" style="height: 80vh;">
                       <div th:if="${errorTrabajador != null}"
                           class="alert alert-danger alert-dismissible text-center align-items-center">
                           <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -26,8 +32,7 @@
                           <div class="col-6 col-lg-4">
                               <div class="form-outline">
                                   <label class="form-label fw-bolder" for="name">Nombre</label>
-                                  <input type="text" id="nombre" name="nombre" th:value="${nombre}" class="form-control"
-                                      placeholder="Daniel">
+                                  <input type="text" id="nombre" name="nombre" th:value="${nombre}" class="form-control">
                               </div>
                           </div>
                           <div class="col-6 col-lg-4">
@@ -119,27 +124,27 @@
       
                           <!-- Disponibilidad | Licencia | Skills input -->   
                       
-                          <!-- Disponibilidad -->
-                          <!-- <div class="col-lg-3"></div> -->
-                          <div class="col col-lg-2">
-                              <label class="form-label fw-bolder" for="disponible">Disponibilidad</label>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="disponible" id="si-disp" value="true">
-                                  <label class="form-check-label" for="si-disp">
-                                    Si
-                                  </label>
-                              </div>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="disponible" id="no-disp" value="no">
-                                  <label class="form-check-label" for="no-disp">
-                                    No
-                                  </label>
-                              </div>
-                          </div>
-                          <div class="col-lg-4"></div>
+
+                          <!-- Teléfono -->
+                          <!-- <div class="col-lg-2"></div> -->
+                          <div class="col-12 col-lg-4">
+                            <div class="form-outline">
+                                <label class="form-label fw-bolder" for="telefono">Teléfono</label>
+                                <input type="pass" id="telefono" name="telefono" th:value="${telefono}" class="form-control">
+                            </div>
+                        </div>
+                        <!-- <div class="col-lg-2"></div> -->
+    
+                        <!-- Skills -->
+                        <!-- <div class="col-lg-2"></div> -->
+                        <div class="col col-lg-4">
+                            <label for="skills" class="form-label fw-bolder">Skills</label>
+                            <input class="form-control" type="text" name="skills" th:value="${skills}" id="skills">
+                        </div>
+                        <!-- <div class="col-lg-2"></div> -->
       
                           <!-- Licencia -->
-                          <div class="col-lg-4"></div>
+                          
                           <div class="col col-lg-2">
                               <label class="form-label fw-bolder" for="licencia">Licencia</label>
                               <div class="form-check">
@@ -157,23 +162,23 @@
                           </div>
                           <!-- <div class="col-lg-3"></div> -->
   
-                          <!-- Teléfono -->
-                          <!-- <div class="col-lg-2"></div> -->
-                          <div class="col-12 col-lg-6">
-                              <div class="form-outline">
-                                  <label class="form-label fw-bolder" for="telefono">Teléfono</label>
-                                  <input type="pass" id="telefono" name="telefono" th:value="${telefono}" class="form-control">
-                              </div>
-                          </div>
-                          <!-- <div class="col-lg-2"></div> -->
-      
-                          <!-- Skills -->
-                          <!-- <div class="col-lg-2"></div> -->
-                          <div class="col col-lg-6">
-                              <label for="skills" class="form-label fw-bolder">Skills</label>
-                              <input class="form-control" type="text" name="skills" th:value="${skills}" id="skills">
-                          </div>
-                          <!-- <div class="col-lg-2"></div> -->
+                          <!-- Disponibilidad -->
+                          <!-- <div class="col-lg-3"></div> -->
+                          <div class="col col-lg-2">
+                            <label class="form-label fw-bolder" for="disponible">Disponibilidad</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="disponible" id="si-disp" value="true">
+                                <label class="form-check-label" for="si-disp">
+                                  Si
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="disponible" id="no-disp" value="no">
+                                <label class="form-check-label" for="no-disp">
+                                  No
+                                </label>
+                            </div>
+                        </div>
       
       
                           <!-- Experiencia -->
@@ -192,7 +197,7 @@
                       </div>
                   </form>
               </div>
-              <div class="col-lg-2"></div>
+              <!-- <div class="col-lg-2"></div> -->
             </div>
         </div>
     </div>
