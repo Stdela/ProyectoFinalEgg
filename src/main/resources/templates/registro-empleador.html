@@ -10,75 +10,84 @@
     <!-- Navbar -->
     <div th:include="/fragments/componentes.html :: navbar"></div>
 
-    <!-- Formulario -->
-    <div class="container mb-5">
-        <div class="row justify-content-center">
-            <div class="py-1 text-center col-lg-4">
-                <img th:src="@{/img/registro_empleador.jpg}" class="img-thumbnail" alt="...">
-            </div>
-            <div class="col-lg-1"></div>
-            <div class="col-lg-7">
-                <form th:action="@{/empleador/registro-empleador}" method="post" class="col-10 my-3">
-                    <div th:if="${errorEmpleador != null}"
-                        class="alert alert-danger alert-dismissible text-center align-items-center">
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        <p th:text="${errorEmpleador}"></p>
-                    </div>
-                    <div class="row g-3">
-                        <div class="col-12">
-                            <label class="form-label fw-bolder" for="email">Email</label>
-                            <input type="email" id="email" name="email" th:value="${email}" class="form-control"
-                                autofocus>
-                            <div class="invalid-feedback">
-                                Email es requerido.
-                            </div>
+    <div class="bg-image" style="background-image: url('../img/empleador.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover; height: 100vh">
+        <!-- Formulario -->
+        <div class="container mb-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 d-flex  align-items-center  flex-column py-5" style="border: 2px solid black; background: rgba(0, 0, 0, .4); color: #FFF; margin-top: 2rem; border-radius: 15px;">
+                    <h1 class="display-4">Registrate</h1>
+                    <p class="lead mt-5">
+                        Crea empleos referidos a tu necesidad y encuentra al candidato indicado para tú solución.
+                      </p>
+                </div>
+                <div class="col-lg-1"></div>
+                <div class="col-lg-7 d-flex align-items-center flex-column" style="border: 2px solid black; background: rgba(0, 0, 0, .4); color: #FFF; margin-top: 2rem; border-radius: 15px;">
+                    <form th:action="@{/empleador/registro-empleador}" method="post" class="col-10 my-3">
+                        <div th:if="${errorEmpleador != null}"
+                            class="alert alert-danger alert-dismissible text-center align-items-center">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            <p th:text="${errorEmpleador}"></p>
                         </div>
-                        <div class="col-6">
-                            <label class="form-label fw-bolder" for="contrasena">Contraseña</label>
-                            <input type="text" id="contrasena" name="contrasena" class="form-control">
-                            <div class="invalid-feedback">
-                                Contraseña es requerido.
+                        <div class="row g-3">
+                            <!-- Email -->
+                            <div class="col-12">
+                                <label class="form-label fw-bolder" for="email">Email</label>
+                                <input type="email" id="email" name="email" th:value="${email}" class="form-control"
+                                    autofocus>
+                                <div class="invalid-feedback">
+                                    Email es requerido.
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-6">
-                            <label class="form-label fw-bolder" for="contrasena2">Repetir Contraseña</label>
-                            <input type="text" id="contrasena2" name="contrasena2" class="form-control">
-                            <div class="invalid-feedback">
-                                Repetir contraseña es requerido.
+                            <!-- Contraseña -->
+                            <div class="col-6">
+                                <label class="form-label fw-bolder" for="contrasena">Contraseña</label>
+                                <input type="text" id="contrasena" name="contrasena" class="form-control">
+                                <div class="invalid-feedback">
+                                    Contraseña es requerido.
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6">
-                            <label class="form-label fw-bolder" for="name">Nombre</label>
-                            <input type="text" id="nombre" name="nombre" th:value="${nombre}" class="form-control"
-                                placeholder="Daniel">
-                            <div class="invalid-feedback">
-                                Nombre es requerido.
+                            <!-- Repetir contraseña -->
+                            <div class="col-6">
+                                <label class="form-label fw-bolder" for="contrasena2">Repetir Contraseña</label>
+                                <input type="text" id="contrasena2" name="contrasena2" class="form-control">
+                                <div class="invalid-feedback">
+                                    Repetir contraseña es requerido.
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6">
-                            <label class="form-label fw-bolder" for="apellido">Apellido</label>
-                            <input type="text" id="apellido" name="apellido" th:value="${apellido}" class="form-control"
-                            >
-                            <div class="invalid-feedback">
-                                Apellido es requerido.
+                            <!-- Nombre -->
+                            <div class="col-sm-6 col-md-6">
+                                <label class="form-label fw-bolder" for="name">Nombre</label>
+                                <input type="text" id="nombre" name="nombre" th:value="${nombre}" class="form-control">
+                                <div class="invalid-feedback">
+                                    Nombre es requerido.
+                                </div>
                             </div>
-                        </div>
-    
-                        <div class="row py-3 d-flex align-items-center">
-                            <div class="col-4">
+                            <!-- Apellido -->
+                            <div class="col-sm-6 col-md-6">
+                                <label class="form-label fw-bolder" for="apellido">Apellido</label>
+                                <input type="text" id="apellido" name="apellido" th:value="${apellido}" class="form-control"
+                                >
+                                <div class="invalid-feedback">
+                                    Apellido es requerido.
+                                </div>
+                            </div>
+                            <!-- Fecha de nacimiento -->
+                            <div class="col-4 col-lg-6">
                                 <label class="my-3 form-label fw-bolder" for="fechaNacimiento">Fecha de nacimiento</label>
                                 <div class="form-group">
                                     <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento"
                                         th:value="${#temporals.format(localDate, 'yyyy-MM-dd')}">
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <!-- Teléfono -->
+                            <div class="col-4 col-lg-6">
                                 <div class="form-group">
                                     <label class="my-3 form-label fw-bolder" id="telefono">Teléfono</label>
                                     <input type="text" class="form-control" name="telefono" id="telefono" th:value="${telefono}">
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <!-- Tipo -->
+                            <div class="col-4 col-lg-4">
                                 <div class="form-group">
                                     <label class="my-3 form-label fw-bolder" id="tipo">Tipo</label>
                                     <div class="col-md-6">
@@ -91,11 +100,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-        
-                        <div class="row py-3 d-flex justify-content-between">
-                            <div class="col-sm-6 col-4">
-                                <h4 class="mb-3 justify-content-start">Género</h4>
+                            <!-- Género -->
+                            <div class="col-sm-6 col-lg-4">
+                                <label class="my-3 form-label fw-bolder" id="tipo">Género</label>
                                 <div class="col-md-6">
                                     <select name="genero" id="genero">
                                         <option selected>selecionar</option>
@@ -105,9 +112,9 @@
                                     </select>
                                 </div>
                             </div>
-    
-                            <div class="col-sm-6 col-4">
-                                <h4 class="mb-3">Zona</h4>
+                            <!-- Zona -->
+                            <div class="col-sm-6 col-lg-4">
+                                <label class="my-3 form-label fw-bolder" id="tipo">Zona</label>
                                 <div class="col-md-6">
                                     <select name="zona" id="zona">
                                         <option selected>selecionar</option>
@@ -116,19 +123,19 @@
                                         th:text="${zonaOpt}" th:selected="${zonaOpt==zona}"></option>
                                     </select>
                                 </div>
+                            </div>                            
+                            <hr class="my-4">
+            
+                            <div class="col col-lg-12 d-grid">
+                                <button class="btn btn-primary" type="submit">Registrarse</button>
                             </div>
                         </div>
-                        
-                        <hr class="my-4">
-        
-                        <div class="col-12">
-                            <button class="btn btn-primary" type="submit">Registrarse</button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+
     
     <!-- Footer -->
     <div th:replace="/fragments/componentes :: footer"></div>

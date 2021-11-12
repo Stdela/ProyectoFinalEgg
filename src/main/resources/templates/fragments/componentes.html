@@ -20,9 +20,31 @@
     <header th:fragment="navbar">
         <div class="menu-bar">
             <nav class="navbar navbar-expand-lg navbar-light">
-                <a href="#" class="navbar-brand">
+              <a href="#" class="navbar-brand">
+                <img th:src="@{/img/logo.png}" src="../../static/img/logo.png" alt="Logo" width="100" height="70" class="d-inline-block align-top" sec:authorize="!isAuthenticated()">
+                <span class="hidden">Marca</span></a>
+                
+                <!-- EMPLEADOR -->
+                <div sec:authorize="hasRole('ROLE_EMPLEADOR')">
+                  <a class="nav-link"                 
+                   th:href="@{/empleador/perfil-empleador}"
+                   sec:authorize="isAuthenticated()"
+                   sec:authentication="name"></a>
+                </div>
+
+                 <!-- TRABAJADOR -->
+                 <div sec:authorize="hasRole('ROLE_TRABAJADOR')">
+                   <a class="nav-link"                 
+                   th:href="@{/trabajador/perfil-trabajador}"
+                   sec:authorize="isAuthenticated()"
+                   sec:authentication="name"></a>
+                 </div>
+
+              <span sec:authorize="hasRole('ROLE_EMPLEADOR')" style="color: #fff;">| Empleador</span>
+              <span sec:authorize="hasRole('ROLE_TRABAJADOR')" style="color: #fff;">| Trabajador</span>
+                <!-- <a href="#" class="navbar-brand">
                     <img th:src="@{/img/logo.png}" src="../../static/img/logo.png" alt="Logo" width="35" height="40" class="d-inline-block align-top">
-                    <span class="hidden">Marca</span></a>
+                    <span class="hidden">Marca</span></a> -->
                 <button 
                     type="button"
                     class="navbar-toggler"
@@ -37,11 +59,13 @@
                 <div class="collapse navbar-collapse" id="toggleMobileMenu">                    
                     <ul class="navbar-nav ms-auto text-center">
                         <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/busquedaEmpleo">Trabajos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Información</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/login">Login/Registro</a></li>
-                        <!-- <a href="/logout" sec:authorize="isAuthenticated()">Logout</a> -->
-
+                        <!-- Al estar logueado no se muestra el enlace Trabajos -->
+                        <li class="nav-item"><a class="nav-link" href="/busquedaEmpleo" sec:authorize="isAuthenticated()">Trabajos</a></li>
+                        <!-- Al estar logueado no se muestra el enlace Información -->
+                        <li class="nav-item"><a class="nav-link" href="#" sec:authorize="isAuthenticated()">Información</a></li>
+                        <!-- Al estar logueado no se muestra el enlace Login | Registro -->
+                        <li class="nav-item" sec:authorize="!isAuthenticated()"><a class="nav-link" href="/login">Login | Registro</a></li>
+                        <!-- Aparece al estar logueado, para cerrar la sesión -->
                         <li class="nav-item"><a class="nav-link" href="/logout" sec:authorize="isAuthenticated()">Cerrar Sesión</a></li>
                     </ul>
                 </div>
