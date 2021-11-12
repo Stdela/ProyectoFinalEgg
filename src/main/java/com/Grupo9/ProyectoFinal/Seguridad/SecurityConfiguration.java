@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 .failureForwardUrl("/login?error")
                 
-                .permitAll();
+                .permitAll().and().logout().permitAll();
 
     }
 
