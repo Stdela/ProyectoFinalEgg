@@ -124,21 +124,21 @@ public class EmpleoServicio {
 	
 	public Oficio asignarOficio(String oficio) {		
 		switch (oficio) {
-		case "plomeria":
+		case "PLOMERO":
 			return Oficio.PLOMERO;		
-		case "electricista":
+		case "ELECTRICISTA":
 			return Oficio.ELECTRICISTA;
-		case "jardineria":
+		case "JARDINERO":
 			return Oficio.JARDINERO;
-		case "gasista":
+		case "GASISTA":
 			return Oficio.GASISTA;
-		case "albanileria":
+		case "ALBANIL":
 			return Oficio.ALBANIL;
-		case "cerrajero":
+		case "CERRAJERO":
 			return Oficio.CERRAJERO;
-		case "vidrieria":
+		case "VIDRIERO":
 			return Oficio.VIDRIERO;
-		case "pintor":
+		case "PINTOR":
 			return Oficio.PINTOR;
 		}
 		return null;

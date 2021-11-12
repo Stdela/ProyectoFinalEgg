@@ -27,62 +27,53 @@
 
             <h2 class="text-center py-3 h2">La solución más rápida a tu problema... <br> ¡la encontras acá!</h2>
             <div class="btn-group">
-                <a class="btn btn-success" href="/busquedaEmpleo">Empleos</a>
-                <a class="btn btn-success" href="/busquedaTrabajadores/todos">Trabajadores</a>
-                <a class="btn btn-success" href="/busquedaEmpleadores">Empleadores</a>
+                <a class="btn btn-dark" href="/busquedaEmpleo">Empleos</a>
+                <a class="btn btn-dark" href="/busquedaTrabajadores/todos">Trabajadores</a>
+                <a class="btn btn-dark" href="/busquedaEmpleadores">Empleadores</a>
             </div>
-            <h1 class="h1">(PROVISORIO) Trabajadores:</h1>
+            <h1 class="h1">Trabajadores disponibles en este momento:</h1>
 
             <!-- categorias de empleados disponibles, la ídea es que se vea diferente y por categorías -->
-            <div class="container wrap-busquedas">
+            <div class="container wrap">
                 <button type="button" class="btn btn-primary" data-bs-toggle="collapse"
                     data-bs-target="#demo">Categorias</button>
                 <div id="demo" class="collapse">
                     <div class="categorias">
                         <div class="btn-group">
-                            <a type="button" class="btn btn-dark" href="/busquedaTrabajadores/plomeria">Plomeria</a>
-                            <a type="button" class="btn btn-dark" href="/busquedaTrabajadores/electricista">Electricista</a>
-                            <a type="button" class="btn btn-dark" href="/busquedaTrabajadores/jardineria">jardineria</a>
-                            <a type="button" class="btn btn-dark" href="/busquedaTrabajadores/gasista">Gasista</a>
-                            <a type="button" class="btn btn-dark" href="/busquedaTrabajadores/albanileria">albañileria</a>
-                            <a type="button" class="btn btn-dark" href="/busquedaTrabajadores/cerrajero">Cerrajero</a>
-                            <a type="button" class="btn btn-dark" href="/busquedaTrabajadores/vidrieria">vidrieria</a>
-                            <a type="button" class="btn btn-dark" href="/busquedaTrabajadores/pintura">Pintura</a>
+                            <a th:each="oficio : ${T(com.Grupo9.ProyectoFinal.Enum.Oficio).values()}" type="button"
+                                class="btn btn-dark" th:href="${'/busquedaTrabajadores/'+oficio}"
+                                th:text="${oficio}"></a>
                         </div>
                     </div>
                 </div>
-                <section class="busquedas">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Oficio</th>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Genero</th>
-                                <th>Fecha de nacimiento</th>
-                                <th>Habilidades</th>
-                                <th>Disponibilidad</th>
-                                <th>Licencia</th>
-                                <th>Contacto</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:if="${trabajadores.empty}">
-                                <td colspan="9" class="text-center">No hay trabajadores todavía!</td>
-                            </tr>
-                            <tr th:each="trabajador, itemStat : *{trabajadores}">
-                                <td><span th:text="${trabajador.oficio}"> Oficio </span></td>
-                                <td><span th:text="${trabajador.nombre}"> Nombre </span></td>
-                                <td><span th:text="${trabajador.apellido}"> Apellido </span></td>
-                                <td><span th:text="${trabajador.genero}"> Genero </span></td>
-                                <td><span th:text="${trabajador.fechaNacimiento}"> Fecha de nacimiento </span></td>
-                                <td><span th:text="${trabajador.skills}"> Habilidades </span></td>
-                                <td><span th:text="${trabajador.disponible}? 'Si' : 'No'"> Disponibilidad </span></td>
-                                <td><span th:text="${trabajador.licencia}? 'Si' : 'No'"> Licencia </span></td>
-                                <td><span th:text="${trabajador.telefono}"> Teléfono </span></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <section class="categorias">
+                    <div class="mx-auto" th:if="${trabajadores.empty}">
+                        <div class="alert alert-danger">No hay trabajadores disponibles!</div>
+                    </div>
+                    <div class="trabajadores d-grid" th:each="trabajador, itemStat : *{trabajadores}"
+                        th:if="${trabajador.disponible == true}">
+                        <div class="card">
+                            <img id="image" th:src="${'/img/'+trabajador.oficio+'.png'}"
+                                th:alt="${'tarjeta de '+trabajador.nombre}" class="card-img-top mx-auto" width="100"
+                                height="100">
+                            <div class="card-body">
+                                <span th:text="${trabajador.oficio}"> Oficio </span>
+                                <h3 class="card-title" th:text="${trabajador.nombre+' '+trabajador.apellido}">
+                                    Nombre</h3>
+                                <span>Skills:</span>
+                                <p class="card-text" th:text="${trabajador.skills}"></p>
+                                <span>Licencia:</span>
+                                <span th:text="${{trabajador.licencia}? 'Si' : 'No'}"> Licencia </span>
+                                </div>
+                                <div class="card-footer">
+                                    <a th:href="${'/trabajador/perfil/'+trabajador.id}" class="btn btn-dark btn-sm " target="_blank">Perfil</a>
+                                </div>
+                                <div class="card-footer">       
+                                    <a th:href="${'https://api.whatsapp.com/send?phone=549'+trabajador.telefono+'&text=Hola%20'+trabajador.nombre + ' ' + trabajador.apellido +',&nbsp;te&nbsp;contacto&nbsp;por&nbsp;tu&nbsp;perfil&nbsp;de&nbsp;PROYECTO,&nbsp;necesito&nbsp;contratar&nbsp;tus&nbsp;servicios'}" class="btn btn-success btn-sm " target="_blank">whatsapp</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </div>
         </div>

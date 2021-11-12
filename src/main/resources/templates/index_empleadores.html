@@ -27,15 +27,14 @@
 
             <h2 class="text-center py-3 h2">La solución más rápida a tu problema... <br> ¡la encontras acá!</h2>
             <div class="btn-group">
-                <a class="btn btn-success" href="/busquedaEmpleo">Empleos</a>
-                <a class="btn btn-success" href="/busquedaTrabajadores/todos">Trabajadores</a>
-                <a class="btn btn-success" href="/busquedaEmpleadores">Empleadores</a>
+                <a class="btn btn-dark" href="/busquedaEmpleo">Empleos</a>
+                <a class="btn btn-dark" href="/busquedaTrabajadores/todos">Trabajadores</a>
+                <a class="btn btn-dark" href="/busquedaEmpleadores">Empleadores</a>
             </div>
-            <h1 class="h1">(PROVISORIO) Empleadores:</h1>
+            <h1 class="h1">Empleadores:</h1>
 
-            <!-- categorias de empleados disponibles, la ídea es que se vea diferente y por categorías -->
             <div class="container wrap-busquedas">
-                <section class="busquedas">
+                <section class="empleadores">
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -61,7 +60,8 @@
                                 <td><span th:text="${empleador.telefono}"> Telefono </span></td>
                                 <td><span th:text="${empleador.presentacion}"> Presentación </span></td>
                                 <td><span th:text="${empleador.zona}"> Zona </span></td>
-                                <td><span th:text="${empleador.contacto}"> Contacto </span></td>
+                                <td><a class="btn btn-dark" th:href="${'/empleador/perfil/'+empleador.id}"> Perfil </a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
