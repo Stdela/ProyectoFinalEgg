@@ -22,6 +22,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -50,7 +52,7 @@ public class Usuario {
 	@Email
 
 	protected String email;
-
+	@Size(min = 6, max = 16, message = "Password must be between 6 and 16 characters.")
 	protected String contrasena;
 
 	protected ArrayList<String> rol;
