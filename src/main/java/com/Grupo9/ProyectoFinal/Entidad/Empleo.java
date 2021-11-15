@@ -56,5 +56,6 @@ public class Empleo {
 	private Boolean concretado = false;
 	private Boolean borrado = false;
 	private Boolean finalizado = false;
+	private Integer antiguedad; //En días
 
 }
