@@ -139,7 +139,7 @@ public class EmpleadorServicio {
 	}
 
 	public void modificarEmpleador(Long id, String nombre, String apellido, Genero genero, Date fechaNacimiento,
-			Zona zona, String telefono, Tipo tipo, MultipartFile foto) throws IOException {
+			Zona zona, String telefono, Tipo tipo /*MultipartFile foto*/) throws IOException {
 
 		Empleador e = er.getById(id);
 		e.setNombre(nombre);
@@ -149,7 +149,7 @@ public class EmpleadorServicio {
 		e.setZona(zona);
 		e.setTelefono(telefono);
 		e.setTipo(tipo);
-		e.setImagen(foto.getBytes());
+//		e.setImagen(foto.getBytes());
 
 		er.save(e);
 	}

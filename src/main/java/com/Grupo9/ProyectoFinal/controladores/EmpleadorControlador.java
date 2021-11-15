@@ -152,10 +152,32 @@ public class EmpleadorControlador {
 	@GetMapping("/perfil-empleador")
 	public String perfilPropio (HttpSession httpSession, ModelMap model) {
 		Empleador empleador = (Empleador) httpSession.getAttribute("usuariosession");
+		Empleador e = empleadorServicio.encontrarPorId(empleador.getId());
 		Integer edad = empleadorServicio.edad(empleador.getFechaNacimiento());
-		model.addAttribute("empleador", empleador);
+		model.addAttribute("empleador", e);
 		model.addAttribute("edad", edad);
 		return "perfil_empleador";
+	}
+	
+	@GetMapping("/perfil-modificar")
+	public String modificar(ModelMap model, HttpSession httpSession) {
+		Empleador empleador = (Empleador) httpSession.getAttribute("usuariosession");
+		model.addAttribute("empleador", empleador);
+		return "modif-empleador";
+	}
+	
+	@PostMapping("/perfil-modificar")
+	public String modificar(HttpSession httpSession, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
+    		@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") Tipo tipo) {
+		try {
+			Empleador emp = (Empleador) httpSession.getAttribute("usuariosession");
+			empleadorServicio.modificarEmpleador(emp.getId(), nombre, apellido, genero, fechaNacimiento, zona, telefono, tipo);
+						
+			return "redirect:/empleador/perfil-empleador";
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			return "redirect:/";
+		}
 	}
         
         
