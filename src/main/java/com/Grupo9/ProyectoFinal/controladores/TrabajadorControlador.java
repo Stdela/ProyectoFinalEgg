@@ -104,8 +104,10 @@ public class TrabajadorControlador {
 	@GetMapping("/perfil/{id}")
 	public String perfilTrabajador(ModelMap model, @PathVariable("id") Long id) {
 		Trabajador trabajador = trabajadorServicio.encontrarPorId(id);
+		Integer edad = trabajadorServicio.edad(trabajador.getFechaNacimiento());
 		model.addAttribute("trabajador", trabajador);
 		model.addAttribute("id", id);
+		model.addAttribute("edad", edad);
 //		model.addAttribute("comentarios", trabajadorServicio.comentariosTrabajador(id));
 //		model.addAttribute("puntos", trabajadorServicio.puntosTrabajador(id));
 
@@ -114,14 +116,36 @@ public class TrabajadorControlador {
 	@GetMapping("/perfil-trabajador")
 	public String perfilPropio (HttpSession httpSession, ModelMap model) {
 		Trabajador trabajador= (Trabajador) httpSession.getAttribute("usuariosession");
+		Integer edad = trabajadorServicio.edad(trabajador.getFechaNacimiento());
 		model.addAttribute("trabajador", trabajador);
+		model.addAttribute("edad", edad);
 		return "perfil_trabajador";
+	}
+	
+	@GetMapping("/perfil-modificar")
+	public String modificar(ModelMap model, HttpSession httpSession) {
+		Trabajador trabajador = (Trabajador) httpSession.getAttribute("usuariosession");
+		model.addAttribute("trabajador", trabajador);
+		return "editar_trabajador";
+	}
+	
+	@PutMapping("/perfil-modificar")
+	public String modificar(HttpSession httpSession) {
+		try {
+			Trabajador tbj = (Trabajador) httpSession.getAttribute("usuariosession");
+			trabajadorServicio.modificarTrabajador(tbj.getId(), tbj.getNombre(), tbj.getApellido(), tbj.getGenero(), tbj.getFechaNacimiento(),
+												   tbj.getZona(), tbj.getTelefono(), tbj.getOficio(), tbj.getExperiencia(), tbj.getDisponible(),
+												   tbj.getLicencia(), tbj.getSkills(), null, null);
+			return "redirect:/trabajador/perfil-trabajador";
+		} catch (Exception e) {
+			return "redirect:/";
+		}
 	}
 
 	@GetMapping("perfil/modificar/{id}")
 	public String modificar(ModelMap model, @PathVariable("id") Long id) {
 		model.addAttribute("trabajador", trabajadorServicio.encontrarPorId(id));
-		return "formularioTrabajador";
+		return "editar_trabajador";
 	}
 
 	@PutMapping("/perfil/modificar/{id}")

@@ -184,5 +184,28 @@ public class EmpleadorServicio {
 		}
 		return comentarios;
 	}
+	
+	public Integer edad(Date fechaNacimiento) {
+		Date hoy = new Date();
+		
+		int diaActual = hoy.getDay();
+		int mesActual = hoy.getMonth() + 1;
+		int anioActual = hoy.getYear();
+		
+		int diferencia = anioActual - fechaNacimiento.getYear();
+		
+		if (mesActual<= fechaNacimiento.getMonth()) {
+			if (mesActual == fechaNacimiento.getMonth() ) {
+				if (fechaNacimiento.getDay() > diaActual) {
+					diferencia--;	
+				}
+			} else {
+				diferencia--;
+			}
+			
+		}
+		
+		return diferencia;
+	}
 
 }

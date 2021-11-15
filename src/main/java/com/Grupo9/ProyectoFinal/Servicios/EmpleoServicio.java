@@ -2,6 +2,7 @@ package com.Grupo9.ProyectoFinal.Servicios;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +16,7 @@ import com.Grupo9.ProyectoFinal.Entidad.Empleador;
 import com.Grupo9.ProyectoFinal.Entidad.Empleo;
 import com.Grupo9.ProyectoFinal.Entidad.Trabajador;
 import com.Grupo9.ProyectoFinal.Enum.Oficio;
+import com.Grupo9.ProyectoFinal.Enum.Zona;
 import com.Grupo9.ProyectoFinal.Excepciones.WebException;
 import com.Grupo9.ProyectoFinal.Repositorio.EmpleoRepositorio;
 import com.Grupo9.ProyectoFinal.Repositorio.TrabajadorRepositorio;
@@ -33,7 +35,7 @@ public class EmpleoServicio {
 
 	// Crea el empleo con los datos básicos, luego se asignan los trabajadors y se
 	// cambian los boolean cuando corresponda
-	public void crearEmpleo(String nombre, String descripcion, Oficio oficio, Date fechaPublicacion, Long id)
+	public void crearEmpleo(String nombre, String descripcion, Oficio oficio, Date fechaPublicacion, Zona zona, Long id)
 			throws WebException {
 
 		Empleo e = new Empleo(); // Ver si da error por los notNull. Sino crear constructor con esos parametros.
@@ -55,6 +57,7 @@ public class EmpleoServicio {
 		e.setDescripcion(descripcion);
 		e.setOficio(oficio);
 		e.setFechaPublicacion(fechaPublicacion);
+		e.setZona(zona);
 		e.setEmpleador(empleador);
 
 		er.save(e);
@@ -151,6 +154,4 @@ public class EmpleoServicio {
 		 
 		 return empleos;
 	}
-	
-
 }

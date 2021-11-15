@@ -10,5 +10,5 @@ package com.Grupo9.ProyectoFinal.Enum;
  * @author delam
  */
 public enum Zona {
-    CENTRO, SUR, OESTE, NORTE;
+    CENTRO, NORTE, NOROESTE, OESTE, SUDOESTE, SUR;
 }
