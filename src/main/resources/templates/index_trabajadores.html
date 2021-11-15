@@ -21,15 +21,15 @@
 
     <div class="index">
 
-        <h1 class="text-center py-2">Proyecto</h1>
+        <!-- <h1 class="text-center py-2">Proyecto</h1> -->
 
         <div class="container text-center content">
 
             <h2 class="text-center py-3 h2">La solución más rápida a tu problema... <br> ¡la encontras acá!</h2>
             <div class="btn-group">
                 <a class="btn btn-dark" href="/busquedaEmpleo">Empleos</a>
-                <a class="btn btn-dark" href="/busquedaTrabajadores/todos">Trabajadores</a>
-                <a class="btn btn-dark" href="/busquedaEmpleadores">Empleadores</a>
+                <a class="btn btn-dark" href="/busquedaTrabajadores/todos" sec:authorize="hasRole('ROLE_EMPLEADOR')">Trabajadores</a>
+                <a class="btn btn-dark" href="/busquedaEmpleadores" sec:authorize="hasRole('ROLE_TRABAJADOR')">Empleadores</a>
             </div>
             <h1 class="h1">Trabajadores disponibles en este momento:</h1>
 

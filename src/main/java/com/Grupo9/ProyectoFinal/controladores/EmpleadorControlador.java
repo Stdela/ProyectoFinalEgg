@@ -117,14 +117,14 @@ public class EmpleadorControlador {
 	// SOLO PUEDEN ACCEDER EMPLEADORES
 	@PostMapping("/crear-empleo")
 	@PreAuthorize("hasAnyRole('ROLE_EMPLEADOR')")
-	public String crearEmpleo(HttpSession httpSession, @RequestParam("titulo") String titulo, @RequestParam("descripcion") String descripcion, @RequestParam("oficio") Oficio oficio) {
+	public String crearEmpleo(HttpSession httpSession, @RequestParam("titulo") String titulo, @RequestParam("descripcion") String descripcion, @RequestParam("oficio") Oficio oficio, @RequestParam("zona") Zona zona) {
 		
 		Empleador empleador = (Empleador) httpSession.getAttribute("usuariosession");
 		try {	
 			
 			java.util.Date fechaPublicacion = new java.util.Date();
 			
-			empleoServicio.crearEmpleo(titulo, descripcion, oficio, fechaPublicacion,empleador.getId());
+			empleoServicio.crearEmpleo(titulo, descripcion, oficio, fechaPublicacion, zona, empleador.getId());
 			
 			return "redirect:/";			
 		} catch (Exception e) {
@@ -139,7 +139,9 @@ public class EmpleadorControlador {
 	@GetMapping("/perfil/{id}")
 	public String perfilEmpleador(ModelMap model, @PathVariable("id") Long id) {
 		Empleador empleador = empleadorServicio.encontrarPorId(id);
+		Integer edad = empleadorServicio.edad(empleador.getFechaNacimiento());
 		model.addAttribute("empleador", empleador);
+		model.addAttribute("edad", edad);
 //		model.addAttribute("listaComentarios", empleadorServicio.comentariosEmpleador(id));
 //		model.addAttribute("puntos", empleadorServicio.puntosEmpleador(id));
 		//empleos activos 
@@ -150,7 +152,9 @@ public class EmpleadorControlador {
 	@GetMapping("/perfil-empleador")
 	public String perfilPropio (HttpSession httpSession, ModelMap model) {
 		Empleador empleador = (Empleador) httpSession.getAttribute("usuariosession");
+		Integer edad = empleadorServicio.edad(empleador.getFechaNacimiento());
 		model.addAttribute("empleador", empleador);
+		model.addAttribute("edad", edad);
 		return "perfil_empleador";
 	}
         

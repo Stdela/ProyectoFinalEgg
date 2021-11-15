@@ -198,7 +198,7 @@ public class TrabajadorServicio {
 	public List<Comentario> comentariosTrabajador(Long id) {
 		Trabajador t = trabajadorRepositorio.getById(id);
 		List<Comentario> comentarios;
-
+		
 		Optional<List<Comentario>> resp = cr.buscarPorReceptor(t);
 		if (resp.isPresent()) {
 			comentarios = resp.get();
@@ -211,6 +211,29 @@ public class TrabajadorServicio {
 	public ArrayList<Trabajador> buscarPorOficio(Oficio oficio) {
 
 		return trabajadorRepositorio.buscarPorOficio(oficio);
+	}
+	
+	public Integer edad(Date fechaNacimiento) {
+		Date hoy = new Date();
+		
+		int diaActual = hoy.getDay();
+		int mesActual = hoy.getMonth() + 1;
+		int anioActual = hoy.getYear();
+		
+		int diferencia = anioActual - fechaNacimiento.getYear();
+		
+		if (mesActual<= fechaNacimiento.getMonth()) {
+			if (mesActual == fechaNacimiento.getMonth() ) {
+				if (fechaNacimiento.getDay() > diaActual) {
+					diferencia--;	
+				}
+			} else {
+				diferencia--;
+			}
+			
+		}
+		
+		return diferencia;
 	}
 
 }

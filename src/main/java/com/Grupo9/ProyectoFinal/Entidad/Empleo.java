@@ -20,6 +20,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import com.Grupo9.ProyectoFinal.Enum.Oficio;
+import com.Grupo9.ProyectoFinal.Enum.Zona;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,6 +43,9 @@ public class Empleo {
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	private Oficio oficio;
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	private Zona zona;
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	private Date fechaPublicacion;

@@ -17,113 +17,113 @@
     <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js}" integrity="sha512-Tn2m0TIpgVyTzzvmxLNuqbSJH3JP8jm+Cy3hvHrW7ndTDcJ1w5mBiksqDBb8GpE2ksktFvDB/ykZ0mDpsZj20w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
-    <header th:fragment="navbar">
-        <div class="menu-bar">
-            <nav class="navbar navbar-expand-lg navbar-light">
-              <a href="#" class="navbar-brand">
-                <img th:src="@{/img/logo.png}" src="../../static/img/logo.png" alt="Logo" width="100" height="70" class="d-inline-block align-top" sec:authorize="!isAuthenticated()">
-                <span class="hidden">Marca</span></a>
-                
-                <!-- EMPLEADOR -->
-                <div sec:authorize="hasRole('ROLE_EMPLEADOR')">
-                  <a class="nav-link"                 
-                   th:href="@{/empleador/perfil-empleador}"
-                   sec:authorize="isAuthenticated()"
-                   sec:authentication="name"></a>
-                </div>
-
-                 <!-- TRABAJADOR -->
-                 <div sec:authorize="hasRole('ROLE_TRABAJADOR')">
-                   <a class="nav-link"                 
-                   th:href="@{/trabajador/perfil-trabajador}"
-                   sec:authorize="isAuthenticated()"
-                   sec:authentication="name"></a>
-                 </div>
-
-              <span sec:authorize="hasRole('ROLE_EMPLEADOR')" style="color: #fff;">| Empleador</span>
-              <span sec:authorize="hasRole('ROLE_TRABAJADOR')" style="color: #fff;">| Trabajador</span>
-                <!-- <a href="#" class="navbar-brand">
-                    <img th:src="@{/img/logo.png}" src="../../static/img/logo.png" alt="Logo" width="35" height="40" class="d-inline-block align-top">
-                    <span class="hidden">Marca</span></a> -->
-                <button 
-                    type="button"
-                    class="navbar-toggler"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#toggleMobileMenu"
-                    aria-controls="toggleMobileMenu"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
+  <header th:fragment="navbar">
+    <div class="menu-bar">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a href="#" class="navbar-brand">
+          <img th:src="@{/img/logo.png}" src="../../static/img/logo.png" alt="Logo" width="100" height="70" class="d-inline-block align-top" sec:authorize="!isAuthenticated()">
+          <span class="hidden">Marca</span>
+        </a>
         
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="toggleMobileMenu">                    
-                    <ul class="navbar-nav ms-auto text-center">
-                        <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
-                        <!-- Al estar logueado no se muestra el enlace Trabajos -->
-                        <li class="nav-item"><a class="nav-link" href="/busquedaEmpleo" sec:authorize="isAuthenticated()">Trabajos</a></li>
-                        <!-- Al estar logueado no se muestra el enlace Información -->
-                        <li class="nav-item"><a class="nav-link" href="#" sec:authorize="isAuthenticated()">Información</a></li>
-                        <!-- Al estar logueado no se muestra el enlace Login | Registro -->
-                        <li class="nav-item" sec:authorize="!isAuthenticated()"><a class="nav-link" href="/login">Login | Registro</a></li>
-                        <!-- Aparece al estar logueado, para cerrar la sesión -->
-                        <li class="nav-item"><a class="nav-link" href="/logout" sec:authorize="isAuthenticated()">Cerrar Sesión</a></li>
-                    </ul>
+        <!-- EMPLEADOR -->
+        <div sec:authorize="hasRole('ROLE_EMPLEADOR')">
+          <a class="nav-link p-0"
+           th:href="@{/empleador/perfil-empleador}"
+           sec:authorize="isAuthenticated()"
+           sec:authentication="name"></a>
+        </div>
+        
+        <!-- TRABAJADOR -->
+        <div sec:authorize="hasRole('ROLE_TRABAJADOR')">
+          <a class="nav-link p-0"
+          th:href="@{/trabajador/perfil-trabajador}"
+          sec:authorize="isAuthenticated()"
+          sec:authentication="name"></a>
+        </div>
+        
+        <span sec:authorize="hasRole('ROLE_EMPLEADOR')" style="color: #fff;">| Empleador</span>
+        <span sec:authorize="hasRole('ROLE_TRABAJADOR')" style="color: #fff;">| Trabajador</span>
+        <button 
+            type="button"
+            class="navbar-toggler"
+            data-bs-toggle="collapse"
+            data-bs-target="#toggleMobileMenu"
+            aria-controls="toggleMobileMenu"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="toggleMobileMenu">
+            <ul class="navbar-nav ms-auto text-center">
+                <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+                <!-- Al estar logueado no se muestra el enlace Trabajos -->
+                <div sec:authorize="hasRole('ROLE_TRABAJADOR')">
+                  <li class="nav-item"><a class="nav-link" href="/busquedaEmpleo" sec:authorize="isAuthenticated()">Empleos</a></li>
                 </div>
-            </nav>
+                <!-- Al estar logueado no se muestra el enlace Trabajos -->
+                <div sec:authorize="hasRole('ROLE_EMPLEADOR')">
+                  <li class="nav-item"><a class="nav-link" href="/busquedaTrabajadores/todos" sec:authorize="isAuthenticated()">Trabajadores</a></li>
+                </div>
+                <!-- Al estar logueado no se muestra el enlace Información -->
+                <li class="nav-item"><a class="nav-link" href="#" sec:authorize="isAuthenticated()">Información</a></li>
+                <!-- Al estar logueado no se muestra el enlace Login | Registro -->
+                <li class="nav-item" sec:authorize="!isAuthenticated()"><a class="nav-link" href="/login">Login | Registro</a></li>
+                <!-- Aparece al estar logueado, para cerrar la sesión -->
+                <li class="nav-item"><a class="nav-link" href="/logout" sec:authorize="isAuthenticated()">Cerrar Sesión</a></li>
+            </ul>
         </div>
-    </header>
+      </nav>
+    </div>
+  </header>
+  
+  <footer th:fragment="footer" class="text-center text-lg-start bg-light text-muted">
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom social">
+      <div class="me-5 d-none d-lg-block">
+        <span>Conéctese con nosotros en las redes sociales: </span>
+      </div>
+      <div>
+        <a href="" class="me-4 text-reset"><i class="fab fa-facebook-f"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-twitter"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-google"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-instagram"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </section>
 
-    
-    <footer th:fragment="footer" class="text-center text-lg-start bg-light text-muted">
-      <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom social">
-        <div class="me-5 d-none d-lg-block">
-          <span>Conéctese con nosotros en las redes sociales: </span>
-        </div>
-        <div>
-          <a href="" class="me-4 text-reset"><i class="fab fa-facebook-f"></i></a>
-          <a href="" class="me-4 text-reset"><i class="fab fa-twitter"></i></a>
-          <a href="" class="me-4 text-reset"><i class="fab fa-google"></i></a>
-          <a href="" class="me-4 text-reset"><i class="fab fa-instagram"></i></a>
-          <a href="" class="me-4 text-reset"><i class="fab fa-linkedin"></i></a>
-        </div>
-      </section>
-
-      <section class="container">
-        <div class="container text-center text-md-start mt-5">
-          <div class="row mt-3">
-            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-              <h6 class="text-uppercase fw-bold mb-4"><i class="fas fa-gem me-3"></i>Nombre Empresa</h6>
-              <p>
-                Todo esto para responder a tus consultas, acercate a nuestras oficinas o escribinos. Nuestros consultores se pondrán en contacto con vos.
-              </p>
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-              <h6 class="text-uppercase fw-bold mb-4">Nosotros</h6>
-              <p><a href="#!" class="text-reset">¿Quiénes somos?</a></p>
-            </div>
-            
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-              <h6 class="text-uppercase fw-bold mb-4">Links útiles</h6>
-              <p><a href="#!" class="text-reset">Empleado</a></p>
-              <p><a href="#!" class="text-reset">Empleador</a></p>
-              <p><a href="#!" class="text-reset">Ayuda</a></p>
-            </div>
-            
-            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-              <h6 class="text-uppercase fw-bold mb-4">Contacto</h6>
-              <p><i class="fas fa-home me-3"></i> Rosario, Santa Fe, Argentina</p>
-              <p><i class="fas fa-envelope me-3"></i>info@ayuda.com</p>
-              <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-              <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
-            </div>
+    <section class="container">
+      <div class="container text-center text-md-start mt-5">
+        <div class="row mt-3">
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4"><i class="fas fa-gem me-3"></i>Nombre Empresa</h6>
+            <p>Todo esto para responder a tus consultas, acercate a nuestras oficinas o escribinos. Nuestros consultores se pondrán en contacto con vos.</p>
+          </div>
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Nosotros</h6>
+            <p><a href="#!" class="text-reset">¿Quiénes somos?</a></p>
+          </div>
+          
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Links útiles</h6>
+            <p><a href="#!" class="text-reset">Empleado</a></p>
+            <p><a href="#!" class="text-reset">Empleador</a></p>
+            <p><a href="#!" class="text-reset">Ayuda</a></p>
+          </div>
+          
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Contacto</h6>
+            <p><i class="fas fa-home me-3"></i> Rosario, Santa Fe, Argentina</p>
+            <p><i class="fas fa-envelope me-3"></i>info@ayuda.com</p>
+            <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
+            <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
           </div>
         </div>
-      </section>
-
-      <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-        © 2021 Copyright:
-        <a class="text-reset fw-bold" href="">Equipo</a>
       </div>
-    </footer>
+    </section>
+
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+      © 2021 Copyright:
+      <a class="text-reset fw-bold" href="">Equipo</a>
+    </div>
+  </footer>
 </body>
 </html>

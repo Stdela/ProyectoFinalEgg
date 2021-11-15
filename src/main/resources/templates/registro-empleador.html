@@ -32,58 +32,41 @@
                             <!-- Email -->
                             <div class="col-12">
                                 <label class="form-label fw-bolder" for="email">Email</label>
-                                <input type="email" id="email" name="email" th:value="${email}" class="form-control"
-                                    autofocus>
-                                <div class="invalid-feedback">
-                                    Email es requerido.
-                                </div>
+                                <input type="email" id="email" name="email" th:value="${email}" class="form-control" required autofocus>
                             </div>
                             <!-- Contraseña -->
                             <div class="col-6">
                                 <label class="form-label fw-bolder" for="contrasena">Contraseña</label>
-                                <input type="password" id="contrasena" name="contrasena" class="form-control">
-                                <div class="invalid-feedback">
-                                    Contraseña es requerido.
-                                </div>
+                                <input type="password" id="contrasena" name="contrasena" class="form-control" required>
                             </div>
                             <!-- Repetir contraseña -->
                             <div class="col-6">
                                 <label class="form-label fw-bolder" for="contrasena2">Repetir Contraseña</label>
-                                <input type="password" id="contrasena2" name="contrasena2" class="form-control">
-                                <div class="invalid-feedback">
-                                    Repetir contraseña es requerido.
-                                </div>
+                                <input type="password" id="contrasena2" name="contrasena2" class="form-control" required>
                             </div>
                             <!-- Nombre -->
                             <div class="col-sm-6 col-md-6">
                                 <label class="form-label fw-bolder" for="name">Nombre</label>
-                                <input type="text" id="nombre" name="nombre" th:value="${nombre}" class="form-control">
-                                <div class="invalid-feedback">
-                                    Nombre es requerido.
-                                </div>
+                                <input type="text" id="nombre" name="nombre" th:value="${nombre}" class="form-control" required>
                             </div>
                             <!-- Apellido -->
                             <div class="col-sm-6 col-md-6">
                                 <label class="form-label fw-bolder" for="apellido">Apellido</label>
-                                <input type="text" id="apellido" name="apellido" th:value="${apellido}" class="form-control"
+                                <input type="text" id="apellido" name="apellido" th:value="${apellido}" class="form-control" required
                                 >
-                                <div class="invalid-feedback">
-                                    Apellido es requerido.
-                                </div>
                             </div>
                             <!-- Fecha de nacimiento -->
                             <div class="col-4 col-lg-6">
                                 <label class="my-3 form-label fw-bolder" for="fechaNacimiento">Fecha de nacimiento</label>
                                 <div class="form-group">
-                                    <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento"
-                                        th:value="${#temporals.format(localDate, 'yyyy-MM-dd')}">
+                                    <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento" th:value="${#temporals.format(localDate, 'yyyy-MM-dd')}" required>
                                 </div>
                             </div>
                             <!-- Teléfono -->
                             <div class="col-4 col-lg-6">
                                 <div class="form-group">
                                     <label class="my-3 form-label fw-bolder" id="telefono">Teléfono</label>
-                                    <input type="text" class="form-control" name="telefono" id="telefono" th:value="${telefono}">
+                                    <input type="text" class="form-control" name="telefono" id="telefono" th:value="${telefono}" required>
                                 </div>
                             </div>
                             <!-- Tipo -->
@@ -91,7 +74,7 @@
                                 <div class="form-group">
                                     <label class="my-3 form-label fw-bolder" id="tipo">Tipo</label>
                                     <div class="col-md-6">
-                                        <select name="tipo" id="tipo">
+                                        <select name="tipo" id="tipo" required>
                                             <option selected>selecionar</option>
                                             <option th:each="tipoOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Tipo).values()}"
                                             th:values="${tipoOpt}"
@@ -104,7 +87,7 @@
                             <div class="col-sm-6 col-lg-4">
                                 <label class="my-3 form-label fw-bolder" id="tipo">Género</label>
                                 <div class="col-md-6">
-                                    <select name="genero" id="genero">
+                                    <select name="genero" id="genero" required>
                                         <option selected>selecionar</option>
                                         <option th:each="generoOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Genero).values()}"
                                         th:values="${generoOpt}"
@@ -116,7 +99,7 @@
                             <div class="col-sm-6 col-lg-4">
                                 <label class="my-3 form-label fw-bolder" id="tipo">Zona</label>
                                 <div class="col-md-6">
-                                    <select name="zona" id="zona">
+                                    <select name="zona" id="zona" required>
                                         <option selected>selecionar</option>
                                         <option th:each="zonaOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Zona).values()}"
                                         th:values="${zonaOpt}"

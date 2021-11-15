@@ -19,31 +19,29 @@
     <!-- NAV -->
     <div th:replace="/fragments/componentes.html :: navbar"></div>
 
-    <div class="index">
+    <div class="container">
         <h1 class="text-center py-2">Proyecto</h1>
         <div class="container text-center content">
             <h2 class="text-center py-3 h2">La solución más rápida a tu problema... <br> ¡la encontras acá!</h2>
-            <div class="btn-group">
+            <div class="btn-group mb-3">
                 <a class="btn btn-dark" href="/busquedaEmpleo">Empleos</a>
-                <a class="btn btn-dark" href="/busquedaTrabajadores/todos">Trabajadores</a>
-                <a class="btn btn-dark" href="/busquedaEmpleadores">Empleadores</a>
+                <a class="btn btn-dark" href="/busquedaTrabajadores/todos" sec:authorize="hasRole('ROLE_EMPLEADOR')">Trabajadores</a>
+                <a class="btn btn-dark" href="/busquedaEmpleadores" sec:authorize="hasRole('ROLE_TRABAJADOR')">Empleadores</a>
             </div>
-            <h1 class="h1">(PROVISORIO) Empleos:</h1>
             <section id="gallery">
                 <div class="container">
                     <div class="row row-cols-1 row-cols-md-3 g-4">
-                        <div class="col" th:each="empleos, itemStat : *{empleos}">
+                        <div class="col-12 col-md-6 col-lg-3" th:each="empleos, itemStat : *{empleos}">
                             <div class="card h-100">
                                 <img th:src="${'/img/'+empleos.oficio+'.jpg'}" alt="" class="card-img-top" width="100" height="100">
                                 <div class="card-body">
                                     <h5 class="card-title" th:each="oficio, itemStat : *{empleos.oficio}" th:text="${oficio}">Card title</h5>                                    
                                     <p class="card-text" th:text="${empleos.descripcion}"></p>
-                                    <span th:text="${empleos.fechaPublicacion}"> Fecha de publicación </span>
-                                    <span th:text="${'|'+empleos.empleador.nombre}"> Empleador </span>
+                                    <span th:text="${empleos.zona}">ZONA</span>
+                                    <span th:text="${'| '+empleos.empleador.nombre}"> Empleador </span>
                                 </div>
-                                <div class="card-footer">
-                                    
-                                    <a th:href="${'https://api.whatsapp.com/send?phone=549'+empleos.empleador.telefono+'&text=Hola%20'+empleos.empleador.nombre + ' ' + empleos.empleador.apellido +',&nbsp;te&nbsp;contacto&nbsp;por&nbsp;la&nbsp;publicación&nbsp;de&nbsp;PROYECTO'}" class="btn btn-success btn-sm " target="_blank">whatsapp</a>
+                                <div class="card-footer" sec:authorize="hasRole('ROLE_TRABAJADOR')">
+                                    <a th:href="${'https://api.whatsapp.com/send?phone=549'+empleos.empleador.telefono+'&text=Hola%20'+empleos.empleador.nombre + ' ' + empleos.empleador.apellido +',&nbsp;te&nbsp;contacto&nbsp;por&nbsp;la&nbsp;publicación&nbsp;de&nbsp;PROYECTO'}" class="btn btn-success btn-sm " target="_blank" >whatsapp</a>
                                 </div>
                                 <div class="card-footer">
                                     <small class="text-muted">Agregado hace 1 hora</small>
