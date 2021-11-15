@@ -157,6 +157,25 @@ public class EmpleadorControlador {
 		model.addAttribute("edad", edad);
 		return "perfil_empleador";
 	}
+	
+	@GetMapping("/perfil-modificar")
+	public String modificar(ModelMap model, HttpSession httpSession) {
+		Empleador empleador = (Empleador) httpSession.getAttribute("usuariosession");
+		model.addAttribute("empleador", empleador);
+		return "modif-empleador";
+	}
+	
+	@PutMapping("/perfil-modificar")
+	public String modificar(HttpSession httpSession) {
+		try {
+			Empleador emp = (Empleador) httpSession.getAttribute("usuariosession");
+			empleadorServicio.modificarEmpleador(emp.getId(), emp.getNombre(), emp.getApellido(), emp.getGenero(), emp.getFechaNacimiento(), emp.getZona(), emp.getTelefono(), emp.getTipo(), null);
+						
+			return "redirect:/empleador/perfil-empleador";
+		} catch (Exception e) {
+			return "redirect:/";
+		}
+	}
         
         
         @GetMapping("/perfil/modificar/{id}")
