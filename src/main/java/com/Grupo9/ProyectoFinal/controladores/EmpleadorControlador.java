@@ -119,6 +119,7 @@ public class EmpleadorControlador {
 			java.util.Date fechaPublicacion = new java.util.Date();
 			
 			empleoServicio.crearEmpleo(titulo, descripcion, oficio, fechaPublicacion, zona, empleador.getId());
+			httpSession.setAttribute("usuariosession", empleador)	;
 			
 			return "redirect:/";			
 		} catch (Exception e) {
@@ -158,6 +159,7 @@ public class EmpleadorControlador {
 		Empleador empleador = (Empleador) httpSession.getAttribute("usuariosession");
 		Empleador e = empleadorServicio.encontrarPorId(empleador.getId());
 		Integer edad = empleadorServicio.edad(empleador.getFechaNacimiento());
+		httpSession.setAttribute("usuariosession", empleador)	;
 		model.addAttribute("empleador", e);
 		model.addAttribute("edad", edad);
 		return "perfil_empleador";
@@ -166,6 +168,7 @@ public class EmpleadorControlador {
 	@GetMapping("/perfil-modificar")
 	public String modificar(ModelMap model, HttpSession httpSession) {
 		Empleador empleador = (Empleador) httpSession.getAttribute("usuariosession");
+		httpSession.setAttribute("usuariosession", empleador)	;
 		model.addAttribute("empleador", empleador);
 		return "modif-empleador";
 	}
@@ -176,7 +179,7 @@ public class EmpleadorControlador {
 		try {
 			Empleador emp = (Empleador) httpSession.getAttribute("usuariosession");
 			empleadorServicio.modificarEmpleador(emp.getId(), nombre, apellido, genero, fechaNacimiento, zona, telefono, tipo);
-						
+			httpSession.setAttribute("usuariosession", emp)	;		
 			return "redirect:/empleador/perfil-empleador";
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
