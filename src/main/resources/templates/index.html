@@ -13,6 +13,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/index_style.css}" href="/css/index_style.css" type="text/css">
     <title>Proyecto Egg</title>
+    <style>
+      @media (min-width: 1030px) {
+          .carousel-item>img {
+              max-height: 600px;
+          }
+      }
+      .txt-white {
+          color: white;
+      }
+  </style>
 </head>
 
 <body>
@@ -20,6 +30,48 @@
     <div th:replace="/fragments/componentes.html :: navbar"></div>
 
     <div class="index">
+
+        
+
+
+        <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="10000">
+              <img src="/img/work.jpg" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h3 class="txt-white">Sigamos trabajando juntos</h3>
+                <p class="txt-white">Tanto si buscás trabajo o alguien que lo haga, estás en el lugar correcto.</p>
+              </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+              <img src="/img/ros.jpg" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h3 class="txt-white">Rosario la cuidad</h3>
+                <p class="txt-white">Realiza tus búsquedas según la necesidad de tu zona.</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="/img/registro.jpg" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h3 class="txt-white">Registros</h3>
+                <p class="txt-white">Llena el formulario y da solución a tus problemas.</p>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
 
         <h1 class="text-center py-2">Proyecto</h1>
 

@@ -24,26 +24,15 @@
                     <div class="col-sm-4 bg-info rounded-start">
                         <div class="card-block text-center">
                             <i class="fas fa-user-tie fa-7x mt-5"></i>
-                          
                             <h2 class="fw-bold mt-4" th:text="${empleador.nombre + ' ' + empleador.apellido}"></h2>
                             <p th:text="${empleador.tipo}"></p>
-                            <div class="row mt-3 mb-1 d-flex justify-content-center">
-                                <a class="col-1 d-flex justify-content-center text-decoration-none mx-2" href="#"><i class="fab fa-whatsapp h2 text-dark"></i></a>
-                                <a class="col-1 d-flex justify-content-center text-decoration-none mx-2" href="#"><i class="fas fa-envelope h2 text-dark"></i></a>
-                            </div>                           
-                            <a class="text-black" href="/empleador/perfil-modificar">
-                                <i class="far fa-edit fa-2x mb-4"></i>
-                            </a>
-                            <div>
-                                <a class="btn btn-outline-dark m-2" href="/empleador/crear-empleo" role="button">Crear empleo</a>
-                            </div>                            
+                            <div class="row mt-3 mb-1 d-flex justify-content-center" sec:authorize="hasRole('ROLE_EMPLEADOR')">
+                                <a class="col-4 btn btn-outline-dark m-2" href="/empleador/perfil-modificar">Editar Perfil</a>
+                                <a class="col-4 btn btn-outline-dark m-2" href="/empleador/crear-empleo" role="button">Crear empleo</a>
+                            </div>
                         </div>
-                        
                     </div>
                     <div class="col-sm-8 bg-white rounded-end">
-                        <!-- <h3 class="mt-3 text-center">Presentacion</h3>
-                        <hr class="badge-primary mt-0">
-                        <p id="presentacion" class="justi" th:text="${empleador.nombre}"></p> -->
                         <h4 class="mt-3">Datos de contacto</h4>
                         <hr class="bg-black">
                         <div class="row">
@@ -57,26 +46,27 @@
                             </div>
                         </div>
                         <div class="row">
-                            
                             <div class="col-sm-6">
                                 <p class="fw-bold">Teléfono</p>
-                                <a th:href="${'https://api.whatsapp.com/send?phone=549'+empleador.telefono+'&text=Hola%20'+empleador.nombre + ' ' + empleador.apellido +',&nbsp;te&nbsp;contacto&nbsp;por&nbsp;la&nbsp;publicación&nbsp;de&nbsp;PROYECTO'}" class="appWhatsapp" target="_blank">
-                                    <h6 class="text-muted" th:text="${empleador.telefono}"></h6>
-                                </a>
+                                <h6 class="text-muted" th:text="${empleador.telefono}"></h6>
                             </div>
                             <div class="col-sm-6">
                                 <p class="fw-bold">Edad</p>
-                                <h6 class="text-muted">26</h6>
+                                <h6 class="text-muted" th:text="${edad}"></h6>
                             </div>
                         </div>
-                        
                         <hr class="bg-black">
                         Comentarios(falta)
+                        <div class="comentarios"><span>Comentario 1</span></div>
+                        <div class="comentarios"><span>Comentario 2</span></div>
+                        <div class="comentarios"><span>Comentario 3</span></div>
+                        <div class="comentarios"><span>Comentario 4</span></div>
+                        <div class="comentarios"><span>Comentario 5</span></div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
 
     <div th:replace="/fragments/componentes.html :: footer"></div>
 
