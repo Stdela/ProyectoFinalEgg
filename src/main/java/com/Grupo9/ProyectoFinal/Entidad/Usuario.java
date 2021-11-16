@@ -54,7 +54,7 @@ public class Usuario {
 	@NotBlank(message = "debe proporcionar un email")
 	protected String email;
 	@NotBlank(message = "debe proporcionar una contraseña")
-	@Size(min = 6, max = 16, message = "Contrasena debe tener entre 6 y 16 caracteres.")
+	///@Size(min = 6, max = 16, message = "Contrasena debe tener entre 6 y 16 caracteres.")
 	protected String contrasena;
 
 	protected ArrayList<String> rol;

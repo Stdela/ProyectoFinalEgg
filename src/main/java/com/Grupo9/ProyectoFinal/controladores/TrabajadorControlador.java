@@ -125,7 +125,7 @@ public class TrabajadorControlador {
 	public String perfilPropio (HttpSession httpSession, ModelMap model) {
 		Trabajador trabajador= (Trabajador) httpSession.getAttribute("usuariosession");
 		Integer edad = trabajadorServicio.edad(trabajador.getFechaNacimiento());
-		httpSession.setAttribute("usuariosession", trabajador)	;
+		///httpSession.setAttribute("usuariosession", trabajador)	;
 		model.addAttribute("trabajador", trabajador);
 		model.addAttribute("edad", edad);
 		return "perfil_trabajador";
