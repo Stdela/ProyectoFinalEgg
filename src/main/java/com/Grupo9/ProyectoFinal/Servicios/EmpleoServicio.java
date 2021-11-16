@@ -130,7 +130,10 @@ public class EmpleoServicio {
 		List<Empleo> listaEmpleos;
 		Optional<List<Empleo>> resp=er.empleosActivos();
 		if (resp.isPresent()) {
-			listaEmpleos=resp.get();			
+			listaEmpleos=resp.get();
+			for (Empleo empleo : listaEmpleos) {
+				empleo.setAntiguedad(calcularAntiguedad(empleo.getId()));				
+			}
 		}else {
 			listaEmpleos=null;
 		}
@@ -170,5 +173,12 @@ public class EmpleoServicio {
 		 List<Empleo> empleos = er.filtrarPorOficio(oficio);
 		 
 		 return empleos;
+	}
+	
+	public Integer calcularAntiguedad(Long id) {
+		Empleo empleo=er.getById(id);
+		Date fechaActual=new Date();
+		Integer dias=(int) ((fechaActual.getTime()-empleo.getFechaPublicacion().getTime())/86400000);
+		return dias;
 	}
 }

@@ -149,10 +149,13 @@ public class EmpleadorServicio {
 	}
 
 	public void modificarEmpleador(Long id, String nombre, String apellido, Genero genero, Date fechaNacimiento,
-			Zona zona, String telefono, Tipo tipo, MultipartFile foto) throws IOException, NoSuchElementException {
+
+		
+			Zona zona, String telefono, Tipo tipo /*MultipartFile foto*/) throws IOException, NoSuchElementException {
 		if(er.getById(id)==null) {
 			throw new NoSuchElementException("El usuario no fue encontrado");
 		}
+
 		Empleador e = er.getById(id);
 		e.setNombre(nombre);
 		e.setApellido(apellido);
@@ -161,7 +164,7 @@ public class EmpleadorServicio {
 		e.setZona(zona);
 		e.setTelefono(telefono);
 		e.setTipo(tipo);
-		e.setImagen(foto.getBytes());
+//		e.setImagen(foto.getBytes());
 
 		er.save(e);
 	}

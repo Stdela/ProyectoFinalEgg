@@ -83,8 +83,13 @@ public class ProyectoControlador {
 	} else {
 		return "redirect:/perfil-empleador";
 	}
-			
+	}
+	
+	@GetMapping("/como-funciona")
+	public String comoFunciona() {
+		return "comoFunciona";
+	}
 
-}
+
 }
 
