@@ -24,6 +24,7 @@ import com.Grupo9.ProyectoFinal.Entidad.Trabajador;
 import com.Grupo9.ProyectoFinal.Enum.Genero;
 import com.Grupo9.ProyectoFinal.Enum.Oficio;
 import com.Grupo9.ProyectoFinal.Enum.Zona;
+import com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException;
 import com.Grupo9.ProyectoFinal.Excepciones.WebException;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleoServicio;
 import com.Grupo9.ProyectoFinal.Servicios.SendEmail;
@@ -102,16 +103,22 @@ public class TrabajadorControlador {
 	}
 
 	@GetMapping("/perfil/{id}")
-	public String perfilTrabajador(ModelMap model, @PathVariable("id") Long id) {
+	public String perfilTrabajador(ModelMap model, @PathVariable("id") Long id) throws NoSuchElementException {
+		try {
 		Trabajador trabajador = trabajadorServicio.encontrarPorId(id);
 		Integer edad = trabajadorServicio.edad(trabajador.getFechaNacimiento());
 		model.addAttribute("trabajador", trabajador);
 		model.addAttribute("id", id);
 		model.addAttribute("edad", edad);
+		
 //		model.addAttribute("comentarios", trabajadorServicio.comentariosTrabajador(id));
 //		model.addAttribute("puntos", trabajadorServicio.puntosTrabajador(id));
 
 		return "perfil_trabajador";
+		} catch(NoSuchElementException ex) {
+			model.put("error", ex);
+			return "perfil_trabajador";
+		}
 	}
 	@GetMapping("/perfil-trabajador")
 	public String perfilPropio (HttpSession httpSession, ModelMap model) {
@@ -143,7 +150,7 @@ public class TrabajadorControlador {
 	}
 
 	@GetMapping("perfil/modificar/{id}")
-	public String modificar(ModelMap model, @PathVariable("id") Long id) {
+	public String modificar(ModelMap model, @PathVariable("id") Long id) throws NoSuchElementException {
 		model.addAttribute("trabajador", trabajadorServicio.encontrarPorId(id));
 		return "editar_trabajador";
 	}
@@ -163,10 +170,16 @@ public class TrabajadorControlador {
 	}
 
 	@PostMapping("/postular/{id}")
-	public String postularEmpleo(@PathVariable("id") Long idEmpleo, HttpSession httpSession) {
+	public String postularEmpleo(ModelMap model, @PathVariable("id") Long idEmpleo, HttpSession httpSession) throws NoSuchElementException {
+		try {
 		Trabajador trabajador = (Trabajador) httpSession.getAttribute("usuariosession");
 		empleoServicio.agregarTrabajador(idEmpleo, trabajador);
 		return "redirect:/";
+		
+	} catch(NoSuchElementException ex) {
+		model.put("error", ex);
+		return "redirect:/";
+	}
 	}
 
 }

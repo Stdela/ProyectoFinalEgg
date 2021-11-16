@@ -17,6 +17,7 @@ import com.Grupo9.ProyectoFinal.Entidad.Empleo;
 import com.Grupo9.ProyectoFinal.Entidad.Trabajador;
 import com.Grupo9.ProyectoFinal.Enum.Oficio;
 import com.Grupo9.ProyectoFinal.Enum.Zona;
+import com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException;
 import com.Grupo9.ProyectoFinal.Excepciones.WebException;
 import com.Grupo9.ProyectoFinal.Repositorio.EmpleoRepositorio;
 import com.Grupo9.ProyectoFinal.Repositorio.TrabajadorRepositorio;
@@ -36,9 +37,10 @@ public class EmpleoServicio {
 	// Crea el empleo con los datos básicos, luego se asignan los trabajadors y se
 	// cambian los boolean cuando corresponda
 	public void crearEmpleo(String nombre, String descripcion, Oficio oficio, Date fechaPublicacion, Zona zona, Long id)
-			throws WebException {
+			throws WebException, NoSuchElementException {
 
 		Empleo e = new Empleo(); // Ver si da error por los notNull. Sino crear constructor con esos parametros.
+		
 		Empleador empleador=empleadorServicio.encontrarPorId(id);
 
 		if (nombre.isEmpty() || nombre == null) {
@@ -66,7 +68,10 @@ public class EmpleoServicio {
 	}
 
 	// Para agregar un nuevo postulado de tipo trabajador
-	public Empleo agregarTrabajador(Long id, Trabajador trabajador) {
+	public Empleo agregarTrabajador(Long id, Trabajador trabajador) throws NoSuchElementException {
+		if(er.getById(id)==null) {
+			throw new NoSuchElementException("El empleo no fue encontrado");
+		}
 		Empleo e = er.getById(id);
 		List<Trabajador> listaPostulados = e.getTrabajador();
 		listaPostulados.add(trabajador);
@@ -79,7 +84,10 @@ public class EmpleoServicio {
 	// Crea una nueva lista con solo el trabajador elegido y sobreescribe la de
 	// candidatos
 	// Está bien incializarla como ArrayList? sino me da error.
-	public void confirmarEmpleo(Long id, Long idTrabajador) {
+	public void confirmarEmpleo(Long id, Long idTrabajador) throws NoSuchElementException {
+		if(er.getById(id)==null) {
+			throw new NoSuchElementException("El empleo no fue encontrado");
+		}
 		Empleo e = er.getById(id);
 		Trabajador trabajador = tr.getById(idTrabajador);
 		List<Trabajador> listaPostulados = new ArrayList<>();
@@ -89,13 +97,19 @@ public class EmpleoServicio {
 		er.save(e);
 	}
 
-	public void finalizarEmpleo(Long id) {
+	public void finalizarEmpleo(Long id) throws NoSuchElementException {
+		if(er.getById(id)==null) {
+			throw new NoSuchElementException("El empleo no fue encontrado");
+		}
 		Empleo e = er.getById(id);
 		e.setFinalizado(true);
 		er.save(e);
 	}
 
-	public void modificarEmpleo(Long id, String nombre, String descripcion, Oficio oficio) {
+	public void modificarEmpleo(Long id, String nombre, String descripcion, Oficio oficio) throws NoSuchElementException {
+		if(er.getById(id)==null) {
+			throw new NoSuchElementException("El usuario no fue encontrado");
+		}
 		Empleo e = er.getById(id);
 		e.setNombre(nombre);
 		e.setDescripcion(descripcion);
@@ -103,7 +117,10 @@ public class EmpleoServicio {
 		er.save(e);
 	}
 
-	public void borrarEmpleo(Long id) {
+	public void borrarEmpleo(Long id) throws NoSuchElementException  {
+		if(er.getById(id)==null) {
+			throw new NoSuchElementException("El empleo no fue encontrado");
+		}
 		Empleo e = er.getById(id);
 		e.setBorrado(true);
 		er.save(e);

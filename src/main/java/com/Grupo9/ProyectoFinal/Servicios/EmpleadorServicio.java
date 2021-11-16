@@ -21,6 +21,7 @@ import com.Grupo9.ProyectoFinal.Entidad.Comentario;
 import com.Grupo9.ProyectoFinal.Enum.Genero;
 import com.Grupo9.ProyectoFinal.Enum.Tipo;
 import com.Grupo9.ProyectoFinal.Enum.Zona;
+import com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException;
 import com.Grupo9.ProyectoFinal.Excepciones.WebException;
 import com.Grupo9.ProyectoFinal.Repositorio.ComentarioRepositorio;
 import com.Grupo9.ProyectoFinal.Repositorio.EmpleadorRepositorio;
@@ -117,18 +118,27 @@ public class EmpleadorServicio {
 	}
 
 	// Marca para borrado
-	public void borrarEmpleador(Long id) {
+	public void borrarEmpleador(Long id) throws NoSuchElementException {
+		if(er.getById(id)==null) {
+			throw new NoSuchElementException("El usuario no fue encontrado");
+		}
 		Empleador e = er.getById(id);
 		e.setBorrado(true);
 		er.save(e);
 	}
 
 	// Borra el empleador de la base de datos
-	public void eliminarEmpleadorBD(Long id) {
+	public void eliminarEmpleadorBD(Long id) throws NoSuchElementException {
+		if(er.getById(id)==null) {
+			throw new NoSuchElementException("El usuario no fue encontrado");
+		}
 		er.deleteById(id);
 	}
 
-	public Empleador encontrarPorId(Long id) {
+	public Empleador encontrarPorId(Long id) throws NoSuchElementException {
+		if(er.getById(id)==null) {
+			throw new NoSuchElementException("El usuario no fue encontrado");
+		}
 		Empleador e = er.getById(id);
 		return e;
 	}
@@ -139,8 +149,10 @@ public class EmpleadorServicio {
 	}
 
 	public void modificarEmpleador(Long id, String nombre, String apellido, Genero genero, Date fechaNacimiento,
-			Zona zona, String telefono, Tipo tipo, MultipartFile foto) throws IOException {
-
+			Zona zona, String telefono, Tipo tipo, MultipartFile foto) throws IOException, NoSuchElementException {
+		if(er.getById(id)==null) {
+			throw new NoSuchElementException("El usuario no fue encontrado");
+		}
 		Empleador e = er.getById(id);
 		e.setNombre(nombre);
 		e.setApellido(apellido);
@@ -154,7 +166,10 @@ public class EmpleadorServicio {
 		er.save(e);
 	}
 
-	public String puntosEmpleador(Long id) {
+	public String puntosEmpleador(Long id) throws NoSuchElementException {
+		if(er.getById(id)==null) {
+			throw new NoSuchElementException("El usuario no fue encontrado");
+		}
 		Empleador e = er.getById(id);
 		Optional<List<Comentario>> resp = cr.buscarPorReceptor(e);
 		if (resp.isPresent()) {
@@ -172,7 +187,10 @@ public class EmpleadorServicio {
 		}
 	}
 
-	public List<Comentario> comentariosEmpleador(Long id) {
+	public List<Comentario> comentariosEmpleador(Long id) throws NoSuchElementException {
+		if(er.getById(id)==null) {
+			throw new NoSuchElementException("El usuario no fue encontrado");
+		}
 		Empleador e = er.getById(id);
 		List<Comentario> comentarios;
 

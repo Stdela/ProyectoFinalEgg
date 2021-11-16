@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.Grupo9.ProyectoFinal.Entidad.Comentario;
 import com.Grupo9.ProyectoFinal.Entidad.Usuario;
+import com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException;
 import com.Grupo9.ProyectoFinal.Excepciones.WebException;
 import com.Grupo9.ProyectoFinal.Repositorio.ComentarioRepositorio;
 import com.Grupo9.ProyectoFinal.Repositorio.UsuarioRepositorio;
@@ -47,7 +48,10 @@ public class ComentarioServicio {
 		return c;
 	}
 
-	public Comentario modificarComentario(Long id, String comentario, Integer puntaje) throws WebException {
+	public Comentario modificarComentario(Long id, String comentario, Integer puntaje) throws WebException, NoSuchElementException {
+		if(cr.getById(id)==null) {
+			throw new NoSuchElementException("El comentario no fue encontrado");
+		}
 		Comentario c = cr.getById(id);
 
 		if (comentario.isEmpty() || comentario == null) {
@@ -70,10 +74,18 @@ public class ComentarioServicio {
 		return c;
 	}
 
-	public void borrarComentario(Long id) {
-		Comentario c = cr.getById(id);
-		c.setBorrado(true);
-		cr.save(c);
+	public void borrarComentario(Long id) throws NoSuchElementException {
+		if(cr.getById(id)==null) {
+			throw new NoSuchElementException("El comentario no fue encontrado");
+		}
+			Comentario c = cr.getById(id);
+			c.setBorrado(true);
+			cr.save(c);
+	
+		
+		
+		
+		
 	}
 
 }

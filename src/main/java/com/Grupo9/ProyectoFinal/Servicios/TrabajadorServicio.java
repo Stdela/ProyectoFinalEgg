@@ -7,6 +7,7 @@ import com.Grupo9.ProyectoFinal.Entidad.Usuario;
 import com.Grupo9.ProyectoFinal.Enum.Genero;
 import com.Grupo9.ProyectoFinal.Enum.Oficio;
 import com.Grupo9.ProyectoFinal.Enum.Zona;
+import com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException;
 import com.Grupo9.ProyectoFinal.Excepciones.WebException;
 import com.Grupo9.ProyectoFinal.Repositorio.ComentarioRepositorio;
 import com.Grupo9.ProyectoFinal.Repositorio.EmpleoRepositorio;
@@ -162,12 +163,21 @@ public class TrabajadorServicio {
 		return trabajadorRepositorio.findAll();
 	}
 
-	public Trabajador encontrarPorId(Long id) {
+	public Trabajador encontrarPorId(Long id) throws NoSuchElementException {
+		if(trabajadorRepositorio.getById(id)==null) {
+			throw new NoSuchElementException("El trabajador no fue encontrado");
+		}
 		return trabajadorRepositorio.findById(id).get();
 	}
 
-	public Trabajador agregarPostulaciones(Long idTrabajador, Long idEmpleo) {
+	public Trabajador agregarPostulaciones(Long idTrabajador, Long idEmpleo) throws NoSuchElementException {
+		if(trabajadorRepositorio.getById(idTrabajador)==null) {
+			throw new NoSuchElementException("El usuario no fue encontrado");
+		}
 		Trabajador trabajador = trabajadorRepositorio.findById(idTrabajador).get();
+		if(empleoRepositorio.getById(idEmpleo)==null) {
+			throw new NoSuchElementException("El empleo no fue encontrado");
+		}
 		Empleo empleo = empleoRepositorio.getById(idEmpleo);
 		List<Empleo> empleos = new ArrayList<>();
 		empleos.add(empleo);
@@ -176,7 +186,10 @@ public class TrabajadorServicio {
 
 	}
 
-	public String puntosTrabajador(Long id) {
+	public String puntosTrabajador(Long id) throws NoSuchElementException {
+		if(trabajadorRepositorio.getById(id)==null) {
+			throw new NoSuchElementException("El usuario no fue encontrado");
+		}
 		Trabajador t = trabajadorRepositorio.getById(id);
 		Optional<List<Comentario>> resp = cr.buscarPorReceptor(t);
 		if (resp.isPresent()) {
@@ -195,7 +208,10 @@ public class TrabajadorServicio {
 
 	}
 
-	public List<Comentario> comentariosTrabajador(Long id) {
+	public List<Comentario> comentariosTrabajador(Long id) throws NoSuchElementException {
+		if(trabajadorRepositorio.getById(id)==null) {
+			throw new NoSuchElementException("El usuario no fue encontrado");
+		}
 		Trabajador t = trabajadorRepositorio.getById(id);
 		List<Comentario> comentarios;
 		

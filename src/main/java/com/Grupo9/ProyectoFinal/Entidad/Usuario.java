@@ -21,6 +21,7 @@ import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -49,10 +50,11 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	protected Long id;
-	@Email
-
+	@Email(message = "debe proporcionar un email valido")
+	@NotBlank(message = "debe proporcionar un email")
 	protected String email;
-	@Size(min = 6, max = 16, message = "Password must be between 6 and 16 characters.")
+	@NotBlank(message = "debe proporcionar una contraseña")
+	@Size(min = 6, max = 16, message = "Contrasena debe tener entre 6 y 16 caracteres.")
 	protected String contrasena;
 
 	protected ArrayList<String> rol;

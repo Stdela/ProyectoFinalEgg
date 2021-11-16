@@ -26,6 +26,7 @@ import com.Grupo9.ProyectoFinal.Enum.Genero;
 import com.Grupo9.ProyectoFinal.Enum.Oficio;
 import com.Grupo9.ProyectoFinal.Enum.Tipo;
 import com.Grupo9.ProyectoFinal.Enum.Zona;
+import com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException;
 import com.Grupo9.ProyectoFinal.Excepciones.WebException;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleadorServicio;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleoServicio;
@@ -128,6 +129,7 @@ public class EmpleadorControlador {
 			
 			return "redirect:/";			
 		} catch (Exception e) {
+			
 			System.out.println(e.getMessage());
 			return "redirect:/busquedaEmpleo";
 		}
@@ -137,17 +139,26 @@ public class EmpleadorControlador {
 	
 	
 	@GetMapping("/perfil/{id}")
-	public String perfilEmpleador(ModelMap model, @PathVariable("id") Long id) {
-		Empleador empleador = empleadorServicio.encontrarPorId(id);
-		Integer edad = empleadorServicio.edad(empleador.getFechaNacimiento());
-		model.addAttribute("empleador", empleador);
-		model.addAttribute("edad", edad);
+	public String perfilEmpleador(ModelMap model, @PathVariable("id") Long id) throws NoSuchElementException  {
+		try {
+			Empleador empleador = empleadorServicio.encontrarPorId(id);
+			Integer edad = empleadorServicio.edad(empleador.getFechaNacimiento());
+			model.addAttribute("empleador", empleador);
+			model.addAttribute("edad", edad);
+			return "perfil_empleador";
+
+		} catch(NoSuchElementException ex) {
+			model.put("error", ex);
+			return "perfil_empleador";
+		}
+	
+		
 //		model.addAttribute("listaComentarios", empleadorServicio.comentariosEmpleador(id));
 //		model.addAttribute("puntos", empleadorServicio.puntosEmpleador(id));
 		//empleos activos 
 		//model.addAtribute("empleosActivos" , empleadorServicio.empleosActivos);
 		
-		return "perfil_empleador";
+		
 	}
 	@GetMapping("/perfil-empleador")
 	public String perfilPropio (HttpSession httpSession, ModelMap model) {
@@ -160,16 +171,21 @@ public class EmpleadorControlador {
         
         
         @GetMapping("/perfil/modificar/{id}")
-        public String modificarEmpleador(ModelMap model, @PathVariable("id") Long id) {
+        public String modificarEmpleador(ModelMap model, @PathVariable("id") Long id) throws NoSuchElementException {
         	model.addAttribute(empleadorServicio.encontrarPorId(id));
         	return "formularioEmpleador";
         }
         
         @PutMapping("/perfil/modificar/{id}")
-        public String modificar(@PathVariable("id") Long id, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
-    		@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") Tipo tipo, @RequestParam("foto") MultipartFile foto ) throws IOException{
-            empleadorServicio.modificarEmpleador(id, nombre, apellido, genero, fechaNacimiento, zona, telefono, tipo, foto); 
-        return "perfil_empleador";
+        public String modificar(ModelMap model,@PathVariable("id") Long id, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
+    		@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") Tipo tipo, @RequestParam("foto") MultipartFile foto ) throws IOException, NoSuchElementException{
+            try {
+        	empleadorServicio.modificarEmpleador(id, nombre, apellido, genero, fechaNacimiento, zona, telefono, tipo, foto); 
+        	   return "perfil_empleador";
+        } catch(NoSuchElementException ex) {
+			model.put("error", ex);
+			   return "perfil_empleador";
+        }
         }
         
         @GetMapping("/modificarEmpleo/{id}")
@@ -179,9 +195,15 @@ public class EmpleadorControlador {
         }
         
         @PutMapping("/modificarEmpleo/{id}")
-        public String modificarEmpleo(@PathVariable("id") Long id, @RequestParam("nombre") String nombre, @RequestParam("descripcion") String descripcion, @RequestParam("oficio") Oficio oficio) {
+        public String modificarEmpleo(ModelMap model, @PathVariable("id") Long id, @RequestParam("nombre") String nombre, @RequestParam("descripcion") String descripcion, @RequestParam("oficio") Oficio oficio) throws NoSuchElementException {
+        	try {
         	empleoServicio.modificarEmpleo(id, nombre, descripcion, oficio);
+        	
         	return "redirect://perfil/{id}";
+        	  } catch(NoSuchElementException ex) {
+      			model.put("error", ex);
+      			   return "redirect://perfil/{id}";
+              }
         }
 	
         
