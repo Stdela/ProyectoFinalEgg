@@ -1,42 +1,35 @@
 package com.Grupo9.ProyectoFinal.controladores;
 
 
-import java.time.LocalDate;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.Grupo9.ProyectoFinal.Entidad.Comentario;
 import com.Grupo9.ProyectoFinal.Entidad.Empleador;
 import com.Grupo9.ProyectoFinal.Entidad.Trabajador;
 import com.Grupo9.ProyectoFinal.Enum.Genero;
 import com.Grupo9.ProyectoFinal.Enum.Oficio;
 import com.Grupo9.ProyectoFinal.Enum.Tipo;
 import com.Grupo9.ProyectoFinal.Enum.Zona;
-import com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException;
-import com.Grupo9.ProyectoFinal.Excepciones.WebException;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleadorServicio;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleoServicio;
 import com.Grupo9.ProyectoFinal.Servicios.SendEmail;
 import com.Grupo9.ProyectoFinal.Servicios.TrabajadorServicio;
-import java.io.IOException;
-import java.sql.Date;
-
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller

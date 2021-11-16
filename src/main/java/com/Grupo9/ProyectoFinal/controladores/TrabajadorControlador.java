@@ -91,6 +91,7 @@ public class TrabajadorControlador {
 				model.put("oficio", oficio);
 			}
 			model.put("experiencia", experiencia);
+			model.put("licencia", licencia);
 			model.put("disponible", disponible);
 			model.put("skills", skills);
 			model.put("errorTrabajador", e.getMessage());

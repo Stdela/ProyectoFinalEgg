@@ -28,25 +28,27 @@
             <h2 class="text-center py-3 h2">La solución más rápida a tu problema... <br> ¡la encontras acá!</h2>
             <div class="btn-group">
                 <a class="btn btn-dark" href="/busquedaEmpleo">Empleos</a>
-                <a class="btn btn-dark" href="/busquedaTrabajadores/todos" sec:authorize="hasRole('ROLE_EMPLEADOR')">Trabajadores</a>
-                <a class="btn btn-dark" href="/busquedaEmpleadores" sec:authorize="hasRole('ROLE_TRABAJADOR')">Empleadores</a>
+                <a class="btn btn-dark" href="/busquedaTrabajadores/todos"
+                    sec:authorize="hasRole('ROLE_EMPLEADOR')">Trabajadores</a>
+                <a class="btn btn-dark" href="/busquedaEmpleadores"
+                    sec:authorize="hasRole('ROLE_TRABAJADOR')">Empleadores</a>
             </div>
             <h1 class="h1">Trabajadores disponibles en este momento:</h1>
 
             <!-- categorias de empleados disponibles, la ídea es que se vea diferente y por categorías -->
             <div class="container wrap">
-                <button type="button" class="btn btn-primary" data-bs-toggle="collapse"
-                    data-bs-target="#demo">Categorias</button>
-                <div id="demo" class="collapse">
-                    <div class="categorias">
-                        <div class="btn-group">
-                            <a th:each="oficio : ${T(com.Grupo9.ProyectoFinal.Enum.Oficio).values()}" type="button"
+                <div class="categorias">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="collapse"
+                        data-bs-target="#demo">Categorias</button>
+                    <div id="demo" class="collapse">
+                        <div class="btn-group" th:each="oficio : ${T(com.Grupo9.ProyectoFinal.Enum.Oficio).values()}">
+                            <a type="button"
                                 class="btn btn-dark" th:href="${'/busquedaTrabajadores/'+oficio}"
                                 th:text="${oficio}"></a>
                         </div>
                     </div>
                 </div>
-                <section class="categorias">
+                <section class="busquedas">
                     <div class="mx-auto" th:if="${trabajadores.empty}">
                         <div class="alert alert-danger">No hay trabajadores disponibles!</div>
                     </div>

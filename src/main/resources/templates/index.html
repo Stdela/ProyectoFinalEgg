@@ -26,15 +26,13 @@
         <div class="container text-center content">
 
             <h2 class="text-center py-3">La solución más rápida a tu problema... <br> ¡la encontras acá!</h2>
-            <h1>categorias:
-                <div class="trabajos-todos">
-                    <a class="btn btn-warning h-100" href="/busquedaTrabajadores/todos">MOSTRAR TODOS</a>
-                </div>
-            </h1>
             <!-- categorias de trabajos disponibles (Solo te envía a la lista de trabajadores, la búsqueda por categoria está WIP)-->
             <div class="wrap">
                 <section class="categorias">
-                    <div class="trabajos d-grid" th:each="oficio : ${T(com.Grupo9.ProyectoFinal.Enum.Oficio).values()}">
+                    <div class="trabajos-todos">
+                        <a class="btn btn-warning h-100" href="/busquedaTrabajadores/todos">MOSTRAR TODOS</a>
+                    </div>
+                    <div class="trabajos d-grid gap-2" th:each="oficio : ${T(com.Grupo9.ProyectoFinal.Enum.Oficio).values()}">
                         <a class="btn btn-lg btn-warning h-100" th:href="${'/busquedaTrabajadores/'+oficio}"><input
                                 type="image" id="image" th:alt="${'botón de '+oficio}" th:src="${'/img/'+oficio+'.png'}" th:text="${oficio}"></a>
                     </div>

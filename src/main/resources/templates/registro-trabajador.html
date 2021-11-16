@@ -65,7 +65,7 @@
                             <div class="col-12 col-lg-4">
                                 <div class="form-outline">
                                     <label class="form-label fw-bolder" for="fechaNacimiento">Fecha de nacimiento</label>
-                                    <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento"  th:value="${#temporals.format(localDate, 'yyyy-MM-dd')}" required>
+                                    <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento"  th:value="${fechaNacimiento}" required>
                                 </div>
                             </div>
                             <hr>
@@ -123,13 +123,13 @@
                             <div class="col col-lg-2">
                                 <label class="form-label fw-bolder" for="licencia">Licencia</label>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="licencia" id="si-lic" value="true">
+                                    <input class="form-check-input" type="radio" name="licencia" id="si-lic" value="true" th:checked="${licencia}? licencia : false">
                                     <label class="form-check-label" for="si-lic">
                                       Si
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="licencia" id="no-lic" value="no">
+                                    <input class="form-check-input" type="radio" name="licencia" id="no-lic" value="no" th:checked="${licencia}? false : true">
                                     <label class="form-check-label" for="no-lic">
                                       No
                                     </label>
@@ -137,15 +137,15 @@
                             </div>
                             <!-- Disponibilidad -->
                             <div class="col col-lg-2">
-                              <label class="form-label fw-bolder" for="disponible">Disponibilidad</label>
+                              <label class="form-label fw-bolder" for="disponible" aria-required="true">Disponibilidad</label>
                               <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="disponible" id="si-disp" value="true">
+                                  <input class="form-check-input" type="radio" name="disponible" id="si-disp" value="true" th:checked="${disponible}? disponible : false">
                                   <label class="form-check-label" for="si-disp">
                                     Si
                                   </label>
                               </div>
                               <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="disponible" id="no-disp" value="no">
+                                  <input class="form-check-input" type="radio" name="disponible" id="no-disp" value="no" th:checked="${disponible}? false : true">
                                   <label class="form-check-label" for="no-disp">
                                     No
                                   </label>
