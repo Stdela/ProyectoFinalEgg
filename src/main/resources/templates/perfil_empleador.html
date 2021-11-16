@@ -27,8 +27,10 @@
                             <h2 class="fw-bold mt-4" th:text="${empleador.nombre + ' ' + empleador.apellido}"></h2>
                             <p th:text="${empleador.tipo}"></p>
                             <div class="row mt-3 mb-1 d-flex justify-content-center" sec:authorize="hasRole('ROLE_EMPLEADOR')">
-                                <a class="col-4 btn btn-outline-dark m-2" href="/empleador/perfil-modificar">Editar Perfil</a>
-                                <a class="col-4 btn btn-outline-dark m-2" href="/empleador/crear-empleo" role="button">Crear empleo</a>
+                                <div class="d-grid gap-2 d-md-block">
+                                    <button class="btn btn-outline-secondary" type="button"><a class="text-decoration-none text-dark" href="/empleador/perfil-modificar">Editar Perfil</a></button>
+                                    <button class="btn btn-outline-secondary" type="button"><a class="text-decoration-none text-dark" href="/empleador/crear-empleo" role="button">Crear empleo</a></button>
+                                  </div>
                             </div>
                         </div>
                     </div>
