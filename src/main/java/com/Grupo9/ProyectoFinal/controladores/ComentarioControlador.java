@@ -29,8 +29,10 @@ public class ComentarioControlador {
 	if (empleador.getId()==null) {
 		Trabajador trabajador= (Trabajador) httpSession.getAttribute("usuariosession");
 		comentarioServicio.crearComentario(comentario, puntaje, trabajador.getId(), idReceptor);
+		httpSession.setAttribute("usuariosession", trabajador)	;
 	} else {
 		comentarioServicio.crearComentario(comentario, puntaje, empleador.getId(), idReceptor);
+		httpSession.setAttribute("usuariosession", empleador)	;
 	}
 			
 	return "redirect:/";

@@ -124,6 +124,7 @@ public class TrabajadorControlador {
 	public String perfilPropio (HttpSession httpSession, ModelMap model) {
 		Trabajador trabajador= (Trabajador) httpSession.getAttribute("usuariosession");
 		Integer edad = trabajadorServicio.edad(trabajador.getFechaNacimiento());
+		httpSession.setAttribute("usuariosession", trabajador)	;
 		model.addAttribute("trabajador", trabajador);
 		model.addAttribute("edad", edad);
 		return "perfil_trabajador";
@@ -143,6 +144,7 @@ public class TrabajadorControlador {
 			trabajadorServicio.modificarTrabajador(tbj.getId(), tbj.getNombre(), tbj.getApellido(), tbj.getGenero(), tbj.getFechaNacimiento(),
 												   tbj.getZona(), tbj.getTelefono(), tbj.getOficio(), tbj.getExperiencia(), tbj.getDisponible(),
 												   tbj.getLicencia(), tbj.getSkills(), null, null);
+			httpSession.setAttribute("usuariosession", tbj)	;
 			return "redirect:/trabajador/perfil-trabajador";
 		} catch (Exception e) {
 			return "redirect:/";
@@ -174,6 +176,7 @@ public class TrabajadorControlador {
 		try {
 		Trabajador trabajador = (Trabajador) httpSession.getAttribute("usuariosession");
 		empleoServicio.agregarTrabajador(idEmpleo, trabajador);
+		httpSession.setAttribute("usuariosession", trabajador)	;
 		return "redirect:/";
 		
 	} catch(NoSuchElementException ex) {
