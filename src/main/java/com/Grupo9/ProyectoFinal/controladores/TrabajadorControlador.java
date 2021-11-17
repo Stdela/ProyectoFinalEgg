@@ -23,6 +23,7 @@ import com.Grupo9.ProyectoFinal.Entidad.Empleo;
 import com.Grupo9.ProyectoFinal.Entidad.Trabajador;
 import com.Grupo9.ProyectoFinal.Enum.Genero;
 import com.Grupo9.ProyectoFinal.Enum.Oficio;
+import com.Grupo9.ProyectoFinal.Enum.Tipo;
 import com.Grupo9.ProyectoFinal.Enum.Zona;
 import com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException;
 import com.Grupo9.ProyectoFinal.Excepciones.WebException;
@@ -122,11 +123,12 @@ public class TrabajadorControlador {
 		}
 	}
 	@GetMapping("/perfil-trabajador")
-	public String perfilPropio (HttpSession httpSession, ModelMap model) {
+	public String perfilPropio (HttpSession httpSession, ModelMap model) throws NoSuchElementException, com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException {
 		Trabajador trabajador= (Trabajador) httpSession.getAttribute("usuariosession");
+		Trabajador t = trabajadorServicio.encontrarPorId(trabajador.getId());
 		Integer edad = trabajadorServicio.edad(trabajador.getFechaNacimiento());
-		///httpSession.setAttribute("usuariosession", trabajador)	;
-		model.addAttribute("trabajador", trabajador);
+		///httpSession.setAttribute("usuariosession", t)	;
+		model.addAttribute("trabajador", t);
 		model.addAttribute("edad", edad);
 		return "perfil_trabajador";
 	}
@@ -135,16 +137,15 @@ public class TrabajadorControlador {
 	public String modificar(ModelMap model, HttpSession httpSession) {
 		Trabajador trabajador = (Trabajador) httpSession.getAttribute("usuariosession");
 		model.addAttribute("trabajador", trabajador);
-		return "editar_trabajador";
+		return "modif-trabajador";
 	}
 	
-	@PutMapping("/perfil-modificar")
-	public String modificar(HttpSession httpSession) {
+	@PostMapping("/perfil-modificar")
+	public String modificar(HttpSession httpSession, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
+		@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono, @RequestParam("oficio") Oficio oficio, @RequestParam("experiencia") String experiencia, @RequestParam("disponible") Boolean disponible, @RequestParam("licencia") Boolean licencia, @RequestParam("skills") String skills) {
 		try {
 			Trabajador tbj = (Trabajador) httpSession.getAttribute("usuariosession");
-			trabajadorServicio.modificarTrabajador(tbj.getId(), tbj.getNombre(), tbj.getApellido(), tbj.getGenero(), tbj.getFechaNacimiento(),
-												   tbj.getZona(), tbj.getTelefono(), tbj.getOficio(), tbj.getExperiencia(), tbj.getDisponible(),
-												   tbj.getLicencia(), tbj.getSkills(), null, null);
+			trabajadorServicio.modificarTrabajador(tbj.getId(), nombre, apellido, genero, fechaNacimiento, zona, telefono, oficio, experiencia, disponible, licencia, skills);
 			httpSession.setAttribute("usuariosession", tbj)	;
 			return "redirect:/trabajador/perfil-trabajador";
 		} catch (Exception e) {
@@ -155,7 +156,7 @@ public class TrabajadorControlador {
 	@GetMapping("perfil/modificar/{id}")
 	public String modificar(ModelMap model, @PathVariable("id") Long id) throws NoSuchElementException {
 		model.addAttribute("trabajador", trabajadorServicio.encontrarPorId(id));
-		return "editar_trabajador";
+		return "modif-trabajador";
 	}
 
 	@PutMapping("/perfil/modificar/{id}")
@@ -168,7 +169,7 @@ public class TrabajadorControlador {
 			@RequestParam("skills") String skills) throws IOException {
 
 		trabajadorServicio.modificarTrabajador(id, nombre, apellido, genero, fechaNacimiento, zona, telefono, oficio,
-				experiencia, disponible, licencia, skills, imagen, experiencia);
+				experiencia, disponible, licencia, skills);
 		return "perfil_trabajadorr";
 	}
 

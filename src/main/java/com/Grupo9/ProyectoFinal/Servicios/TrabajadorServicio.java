@@ -138,24 +138,25 @@ public class TrabajadorServicio {
 
 	}
 
-	public Trabajador modificarTrabajador(Long id, String nombre, String apellido, Genero genero, Date fechaNacimiento,
+	public void modificarTrabajador(Long id, String nombre, String apellido, Genero genero, Date fechaNacimiento,
 			Zona zona, String telefono, Oficio oficio, String experiencia, Boolean disponible, Boolean licencia,
-			String skills, MultipartFile imagen, String presentacion) throws IOException {
+			String skills/*, MultipartFile imagen, String presentacion*/) throws IOException {
 		Trabajador trabajador = trabajadorRepositorio.findById(id).get();
 		trabajador.setApellido(apellido);
 		trabajador.setNombre(nombre);
 		trabajador.setDisponible(disponible);
 		trabajador.setGenero(genero);
 		trabajador.setFechaNacimiento(fechaNacimiento);
-		trabajador.setImagen(imagen.getBytes());
-		trabajador.setPresentacion(presentacion);
+//		trabajador.setImagen(imagen.getBytes());
+//		trabajador.setPresentacion(presentacion);
 		trabajador.setSkills(skills);
 		trabajador.setOficio(oficio);
 		trabajador.setLicencia(licencia);
 		trabajador.setZona(zona);
 		trabajador.setTelefono(telefono);
 		trabajador.setExperiencia(experiencia);
-		return trabajador;
+		
+		trabajadorRepositorio.save(trabajador);
 
 	}
 
