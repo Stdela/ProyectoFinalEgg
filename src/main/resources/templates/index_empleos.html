@@ -44,7 +44,7 @@
                                     <a th:href="${'https://api.whatsapp.com/send?phone=549'+empleos.empleador.telefono+'&text=Hola%20'+empleos.empleador.nombre + ' ' + empleos.empleador.apellido +',&nbsp;te&nbsp;contacto&nbsp;por&nbsp;la&nbsp;publicación&nbsp;de&nbsp;PROYECTO'}" class="btn btn-success btn-sm " target="_blank" >whatsapp</a>
                                 </div>
                                 <div class="card-footer">
-                                    <small class="text-muted">Agregado hace 1 hora</small>
+                                    <small class="text-muted" th:text="${empleos.antiguedad == 0}? 'Agregado hace 1 día' : 'Agregado hace ' + ${empleos.antiguedad} + ' días'"></small>
                                 </div>
                             </div>
                         </div>

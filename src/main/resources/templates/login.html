@@ -37,13 +37,13 @@
                   <form th:action="@{/login}" method="post">
                     <!-- Email input -->
                     <div class="form-outline mb-4">
-                      <input type="email" id="emailLog" class="form-control" name="username" />
+                      <input type="email" id="emailLog" class="form-control" name="username" required/>
                       <label class="form-label" for="emailLog">Email</label>
                     </div>
                   
                     <!-- Password input -->
                     <div class="form-outline mb-4">
-                      <input type="password" id="contrasenaLog" class="form-control" name="password" />
+                      <input type="password" id="contrasenaLog" class="form-control" name="password" required/>
                       <label class="form-label" for="contrasenaLog">Contraseña</label>  
                     </div>
                   
