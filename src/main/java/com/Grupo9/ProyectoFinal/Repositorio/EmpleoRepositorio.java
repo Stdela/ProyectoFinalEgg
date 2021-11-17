@@ -16,10 +16,10 @@ public interface EmpleoRepositorio extends JpaRepository<Empleo, Long>{
 	
 	
 	
-	@Query("SELECT e FROM Empleo e WHERE e.concretado=FALSE and e.borrado=FALSE")
+	@Query("SELECT e FROM Empleo e WHERE e.concretado=FALSE and e.borrado=FALSE ORDER BY e.antiguedad ASC")
 	public Optional<List<Empleo>> empleosActivos();
 	
-	@Query("SELECT e FROM Empleo e WHERE e.oficio=:oficio ORDER BY e.antiguedad ASC")
+	@Query("SELECT e FROM Empleo e WHERE e.oficio=:oficio")
 	//public List<Empleo> filtrarPorOficio(@Param("oficio") Oficio oficio);
 	public List<Empleo> filtrarPorOficio(@Param("oficio") String oficio);
 	
