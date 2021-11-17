@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -13,16 +13,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/index_style.css}" href="/css/index_style.css" type="text/css">
     <title>Proyecto Egg</title>
-    <style>
-      @media (min-width: 1030px) {
-          .carousel-item>a>img {
-              max-height: 600px;
-          }
-      }
-      .txt-white {
-          color: white;
-      }
-  </style>
 </head>
 
 <body>
@@ -75,23 +65,28 @@
       </button>
     </div>
     
-    <div class="container text-center content" sec:authorize="isAuthenticated()">
-      <h1 class="text-center py-2">Proyecto</h1>
-      <h2 class="text-center py-3">La solución más rápida a tu problema... <br> ¡la encontras acá!</h2>
-      <!-- categorias de trabajos disponibles (Solo te envía a la lista de trabajadores, la búsqueda por categoria está WIP)-->
-      <div class="wrap">
-          <section class="categorias">
-              <div class="trabajos-todos">
-                  <a class="btn btn-warning h-100" href="/busquedaTrabajadores/todos">MOSTRAR TODOS</a>
-              </div>
-              <div class="trabajos d-grid gap-2" th:each="oficio : ${T(com.Grupo9.ProyectoFinal.Enum.Oficio).values()}">
-                  <a class="btn btn-lg btn-warning h-100" th:href="${'/busquedaTrabajadores/'+oficio}"><input
-                          type="image" id="image" th:alt="${'botón de '+oficio}" th:src="${'/img/'+oficio+'.png'}" th:text="${oficio}"></a>
-              </div>
-          </section>
+    <div sec:authorize="hasRole('ROLE_EMPLEADOR')">
+      <div class="container text-center content" sec:authorize="isAuthenticated()" >
+        <h1 class="text-center py-2">Proyecto</h1>
+        <h2 class="text-center py-3">La solución más rápida a tu problema... <br> ¡la encontras acá!</h2>
+        <!-- categorias de trabajos disponibles (Solo te envía a la lista de trabajadores, la búsqueda por categoria está WIP)-->
+        <div class="wrap">
+            <section class="categorias">
+                <div class="trabajos-todos">
+                    <a class="btn btn-warning h-100" href="/busquedaTrabajadores/todos">MOSTRAR TODOS</a>
+                </div>
+                <div class="trabajos d-grid gap-2" th:each="oficio : ${T(com.Grupo9.ProyectoFinal.Enum.Oficio).values()}">
+                    <a class="btn btn-lg btn-warning h-100" th:href="${'/busquedaTrabajadores/'+oficio}"><input
+                            type="image" id="image" th:alt="${'botón de '+oficio}" th:src="${'/img/'+oficio+'.png'}" th:text="${oficio}"></a>
+                </div>
+            </section>
+        </div>
       </div>
     </div>
-  </div>
+
+    
+
+  </div> <!--index fin-->
   <div th:replace="/fragments/componentes.html :: footer"></div>
 </body>
 
