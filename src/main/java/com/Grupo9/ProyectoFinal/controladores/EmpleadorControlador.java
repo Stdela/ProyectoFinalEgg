@@ -133,7 +133,7 @@ public class EmpleadorControlador {
 	
 	
 	
-	@GetMapping("/perfil/{id}")
+	@GetMapping(path = "/perfil/{id}",  produces = "image/png")
 	public String perfilEmpleador(ModelMap model, @PathVariable("id") Long id) throws NoSuchElementException, com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException  {
 		try {
 			Empleador empleador = empleadorServicio.encontrarPorId(id);
@@ -155,7 +155,7 @@ public class EmpleadorControlador {
 		
 		
 	}
-	@GetMapping("/perfil-empleador")
+	@GetMapping(path = "/perfil-empleador", produces = "image/png")
 	public String perfilPropio (HttpSession httpSession, ModelMap model) throws NoSuchElementException, com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException {
 		Empleador empleador = (Empleador) httpSession.getAttribute("usuariosession");
 		Empleador e = empleadorServicio.encontrarPorId(empleador.getId());
