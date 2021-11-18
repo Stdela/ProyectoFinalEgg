@@ -266,4 +266,20 @@ public class TrabajadorServicio {
 		return diferencia;
 	}
 
+	
+	public Genero asignarGenero(String genero) {
+		switch (genero) {
+		case "hombres":
+			return Genero.MASCULINO;		
+		case "mujeres":
+			return Genero.FEMENINO;
+	}
+		return null;
+	}
+
+	
+	public ArrayList<Trabajador> buscarPorGenero(Genero genero){
+		return trabajadorRepositorio.buscarPorGenero(genero);
+	}
+
 }
