@@ -77,7 +77,7 @@
   </header>
   
   <footer th:fragment="footer" class="text-center text-lg-start bg-light text-muted position-relative">
-    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom social">
+    <!-- <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom social">
       <div class="me-5 d-none d-lg-block">
         <span>Conectate con nosotros en las redes sociales: </span>
       </div>
@@ -87,6 +87,21 @@
         <a href="" class="me-4 text-reset"><i class="fab fa-google"></i></a>
         <a href="" class="me-4 text-reset"><i class="fab fa-instagram"></i></a>
         <a href="" class="me-4 text-reset"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </section> -->
+
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom social">
+      <div class="me-5 d-none d-lg-block">
+        <span>Conectate con nosotros en las redes sociales: </span>
+      </div>
+      <div>
+        <div class="me-4 d-flex justify-content-end">
+          <a th:href=@{"https://api.whatsapp.com/send?phone=5493471622079&text=Hola%20PROYECTO,&nbsp;me&nbsp;pueden&nbsp;ayudar??"} class="me-4 whastapp"><i class="fab fa-3x fa-whatsapp"></i></a>
+          <a href="#" class="me-4 facebook"><i class="fab fa-3x fa-facebook-square"></i></a>
+          <a href="#" class="me-4 twitter"><i class="fab fa-3x fa-twitter-square"></i></a>
+          <a th:href="@{/mail}" class="me-4 mail"><i class="fas fa-3x fa-envelope"></i></a>
+          
+        </div>
       </div>
     </section>
 
