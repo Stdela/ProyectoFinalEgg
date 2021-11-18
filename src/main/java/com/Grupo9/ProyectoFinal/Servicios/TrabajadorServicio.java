@@ -137,6 +137,14 @@ public class TrabajadorServicio {
 		trabajadorRepositorio.deleteById(id);
 
 	}
+	
+	public void eliminarTrabajadorBD(Long id) throws NoSuchElementException {
+		if(cr.getById(id)==null) {
+			throw new NoSuchElementException("El usuario no fue encontrado");
+		}
+		cr.deleteById(id);
+	}
+	
 
 	public void modificarTrabajador(Long id, String nombre, String apellido, Genero genero, Date fechaNacimiento,
 			Zona zona, String telefono, Oficio oficio, String experiencia, Boolean disponible, Boolean licencia,
