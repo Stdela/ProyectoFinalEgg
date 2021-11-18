@@ -14,6 +14,10 @@ import com.Grupo9.ProyectoFinal.Repositorio.EmpleoRepositorio;
 
 import org.hibernate.loader.plan.exec.process.internal.AbstractRowReader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.Grupo9.ProyectoFinal.Repositorio.TrabajadorRepositorio;
@@ -137,6 +141,14 @@ public class TrabajadorServicio {
 		trabajadorRepositorio.deleteById(id);
 
 	}
+	
+	public void eliminarTrabajadorBD(Long id) throws NoSuchElementException {
+		if(cr.getById(id)==null) {
+			throw new NoSuchElementException("El usuario no fue encontrado");
+		}
+		cr.deleteById(id);
+	}
+	
 
 	public void modificarTrabajador(Long id, String nombre, String apellido, Genero genero, Date fechaNacimiento,
 			Zona zona, String telefono, Oficio oficio, String experiencia, Boolean disponible, Boolean licencia,
@@ -160,8 +172,9 @@ public class TrabajadorServicio {
 
 	}
 
-	public List<Trabajador> listarTrabajador() {
-		return trabajadorRepositorio.findAll();
+	public Page<Trabajador> listarTrabajador(int page) {
+		Pageable pageable = PageRequest.of(page, 10);
+		return trabajadorRepositorio.findAll(pageable);
 	}
 
 	public Trabajador encontrarPorId(Long id) throws NoSuchElementException {

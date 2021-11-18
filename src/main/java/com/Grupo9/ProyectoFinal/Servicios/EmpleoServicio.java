@@ -10,6 +10,10 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.Grupo9.ProyectoFinal.Entidad.Empleador;
@@ -126,18 +130,20 @@ public class EmpleoServicio {
 		er.save(e);
 	}
 	
-	public List<Empleo> listarEmpleos(){
-		List<Empleo> listaEmpleos;
-		Optional<List<Empleo>> resp=er.empleosActivos();
-		if (resp.isPresent()) {
-			listaEmpleos=resp.get();
-			for (Empleo empleo : listaEmpleos) {
+	public Page<Empleo> listarEmpleos(int page){
+		//List<Empleo> listaEmpleos;
+	//	Optional<List<Empleo>> resp=er.empleosActivos();
+		//, Sort.by("fechaPublicacion").descending()
+		Pageable pageable = PageRequest.of(page, 10, Sort.by("fechaPublicacion").descending());
+		Page<Empleo> resp = er.findAll(pageable);
+
+		
+//if (resp.isPresent()) {
+			//listaEmpleos=resp.get();
+			for (Empleo empleo : resp) {
 				empleo.setAntiguedad(calcularAntiguedad(empleo.getId()));				
 			}
-		}else {
-			listaEmpleos=null;
-		}
-		return listaEmpleos;		
+		return resp;		
 	}
 	
 	public Empleo encontrarPorID(Long id) {
