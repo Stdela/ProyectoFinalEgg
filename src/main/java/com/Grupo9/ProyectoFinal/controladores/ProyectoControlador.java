@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -17,6 +18,7 @@ import com.Grupo9.ProyectoFinal.Entidad.Trabajador;
 import com.Grupo9.ProyectoFinal.Enum.Oficio;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleadorServicio;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleoServicio;
+import com.Grupo9.ProyectoFinal.Servicios.SendMailService;
 import com.Grupo9.ProyectoFinal.Servicios.TrabajadorServicio;
 
 @Controller
@@ -31,6 +33,9 @@ public class ProyectoControlador {
 
 	@Autowired
 	EmpleoServicio empleoServicio;
+	
+	@Autowired
+	private SendMailService sendMailService; 
 
 	@GetMapping("/")
 	public String index() {
@@ -88,6 +93,22 @@ public class ProyectoControlador {
 	@GetMapping("/como-funciona")
 	public String comoFunciona() {
 		return "comoFunciona";
+	}
+	
+	@GetMapping("/mail")
+	public String mail() {
+		return "enviar-mail";
+	}
+	
+	@PostMapping("/mail")
+	public String sendMail(@RequestParam("name") String name, @RequestParam("mail") String mail, @RequestParam("subject") String subject, @RequestParam("body") String body ) {
+		try {
+			String message = body + "\n\n Datos de contacto: " + "\n Nombre: " + name + "\n Email: " + mail;
+			sendMailService.sendMail( subject, message);			
+			return "redirect:/";
+		} catch (Exception e) {
+			return "redirect:/login";
+		}		
 	}
 
 
