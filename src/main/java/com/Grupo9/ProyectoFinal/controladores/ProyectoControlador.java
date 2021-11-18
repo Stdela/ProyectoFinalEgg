@@ -117,7 +117,7 @@ public class ProyectoControlador {
 	
 	@GetMapping("/como-funciona")
 	public String comoFunciona() {
-		return "informacion";
+		return "comoFunciona";
 	}
 
 
