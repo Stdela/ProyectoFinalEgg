@@ -58,22 +58,22 @@ public class ProyectoControlador {
 	}
 
 	@GetMapping("/busquedaEmpleadores")
-	public String empleadores(Model model) {
-		model.addAttribute("empleadores", empleadorServicio.listarEmpleadores());
+	public String empleadores(Model model, @RequestParam(defaultValue = "0") Integer page) {
+		model.addAttribute("empleadores", empleadorServicio.listarEmpleadores(page));
 		return "index_empleadores";
 	}
 
 	@GetMapping("/busquedaEmpleo")
-	public String empleos(Model model) {
-		model.addAttribute("empleos", empleoServicio.listarEmpleos());
-		model.addAttribute("empleador", empleadorServicio.listarEmpleadores());
+	public String empleos(Model model, @RequestParam(defaultValue = "0") Integer page) {
+		model.addAttribute("empleos", empleoServicio.listarEmpleos(page));
+		model.addAttribute("empleador", empleadorServicio.listarEmpleadores(page));
 		return "index_empleos";
 	}
 
 	@GetMapping("/busquedaTrabajadores/{oficio}")
-	public String trabajadoresPorOficio(ModelMap model, @PathVariable("oficio") String oficio) {
+	public String trabajadoresPorOficio(ModelMap model, @PathVariable("oficio") String oficio, @RequestParam(defaultValue = "0") Integer page) {
 		if (oficio.equals("todos")) {
-			model.addAttribute("trabajadores", trabajadorServicio.listarTrabajador());
+			model.addAttribute("trabajadores", trabajadorServicio.listarTrabajador(page));
 		} else {
 			model.addAttribute("trabajadores",
 					trabajadorServicio.buscarPorOficio(empleoServicio.asignarOficio(oficio)));

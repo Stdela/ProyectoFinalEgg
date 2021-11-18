@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -45,8 +46,8 @@ public class TrabajadorControlador {
 	SendEmail mailSender;
 
 	@GetMapping("/")
-	public String index(ModelMap model) {
-		List<Empleo> listaEmpleos = empleoServicio.listarEmpleos();
+	public String index(ModelMap model, @RequestParam(defaultValue = "0") Integer page) {
+		Page<Empleo> listaEmpleos = empleoServicio.listarEmpleos(page);
 
 		model.addAttribute("listaEmpleos", listaEmpleos);
 

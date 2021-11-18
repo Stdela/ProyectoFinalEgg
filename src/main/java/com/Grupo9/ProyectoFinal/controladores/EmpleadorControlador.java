@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -49,8 +50,9 @@ public class EmpleadorControlador {
 	SendEmail mailSender;
 	
 	@GetMapping()
-	public String index(ModelMap model) {
-        List<Trabajador> listaTrabajadores = trabajadorServicio.listarTrabajador();
+	public String index(ModelMap model, @RequestParam(required = false) int page) {
+		
+        Page<Trabajador> listaTrabajadores = trabajadorServicio.listarTrabajador(page);
 		
 		model.addAttribute("listaTrabajadores", listaTrabajadores);
 		
@@ -101,7 +103,6 @@ public class EmpleadorControlador {
 	
 	}
 	
-	//Aca se necesitarian tambien los datos del que lo crea
 	@PreAuthorize("hasAnyRole('ROLE_EMPLEADOR')")
 	// SOLO PUEDEN ACCEDER EMPLEADORES
 	@GetMapping("/crear-empleo")
@@ -159,7 +160,7 @@ public class EmpleadorControlador {
 		Empleador empleador = (Empleador) httpSession.getAttribute("usuariosession");
 		Empleador e = empleadorServicio.encontrarPorId(empleador.getId());
 		Integer edad = empleadorServicio.edad(empleador.getFechaNacimiento());
-		///httpSession.setAttribute("usuariosession", e)	;
+		///httpSession.setAttribute("usuariosession", e);
 		model.addAttribute("empleador", e);
 		model.addAttribute("edad", edad);
 		return "perfil_empleador";
