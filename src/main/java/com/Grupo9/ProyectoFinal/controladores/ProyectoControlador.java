@@ -82,6 +82,21 @@ public class ProyectoControlador {
 	}
 	
 	
+	@GetMapping("/busquedaTrabajadores1/{genero}")
+	public String trabajadoresPorGenero(ModelMap model, @PathVariable("genero") String genero,  @RequestParam(defaultValue = "0") Integer page) {
+		if (genero.equals("todos")) {
+			model.addAttribute("trabajadores", trabajadorServicio.listarTrabajador(page));
+		} else {
+			model.addAttribute("trabajadores",
+					trabajadorServicio.buscarPorGenero(trabajadorServicio.asignarGenero(genero)));
+		}
+		return "index_trabajadores";
+	}
+	
+	
+	
+	
+	
 	@GetMapping("/empleos")
 	public String empleosporOficio(ModelMap model, @RequestParam String oficio) {
 		model.addAttribute("empleos", empleoServicio.filtrarPorOficio(oficio));
