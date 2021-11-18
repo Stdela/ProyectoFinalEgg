@@ -189,17 +189,17 @@ public class TrabajadorControlador {
 	}
 	}
 	
-	  @GetMapping("/eliminar")
+	/*  @GetMapping("/eliminar")
   	public String borrarCuenta(HttpSession httpSession) {
   	try { 		
   		Trabajador tbj = (Trabajador) httpSession.getAttribute("usuariosession");
   		trabajadorServicio.eliminarTrabajadorBD(tbj.getId());
-  			return "/login";
+  			return "/logout";
   	} catch (Exception e) {
   			return "redirect:/";
   			
+  	}	
   	}
-  		
-  	}
+	  */
 }
 

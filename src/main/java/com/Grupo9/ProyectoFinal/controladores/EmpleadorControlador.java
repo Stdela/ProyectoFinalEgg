@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -226,20 +227,17 @@ public class EmpleadorControlador {
               }
         }
 	
-        @GetMapping("/eliminar")
+       /* @GetMapping("/eliminar")
     	public String borrarCuenta(HttpSession httpSession) {
     	try { 		
     		Empleador emp = (Empleador) httpSession.getAttribute("usuariosession");
     		empleadorServicio.eliminarEmpleadorBD(emp.getId());
-    		return "/login";
+    		return "/logout";
     	} catch (Exception e) {
-    			return "redirect:/";
-    			
+    			return "redirect:/";		
+    	}	
     	}
-    	
-    		
-    	}
-	
+	*/
 	
 
 }
