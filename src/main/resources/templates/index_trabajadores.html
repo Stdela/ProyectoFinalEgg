@@ -48,6 +48,15 @@
                         </div>
                     </div>
                 </div>
+                <br>
+                 <div class="btn-group" role="group" aria-label="Basic example">
+                 <a type="button"  th:href="${'/busquedaTrabajadores1/'+ 'todos'}"   class="btn btn-primary">Todos</a>
+                 <a type="button" th:href="${'/busquedaTrabajadores1/'+'hombres'}" class="btn btn-primary">Hombres</a>
+                 <a type="button" th:href="${'/busquedaTrabajadores1/'+'mujeres'}" class="btn btn-primary">Mujeres</a>
+                 </div>
+                
+                
+                
                 <section class="busquedas">
                     <div class="mx-auto" th:if="${trabajadores.empty}">
                         <div class="alert alert-danger">No hay trabajadores disponibles!</div>
@@ -66,6 +75,11 @@
                                 <p class="card-text" th:text="${trabajador.skills}"></p>
                                 <span>Licencia:</span>
                                 <span th:text="${{trabajador.licencia}? 'Si' : 'No'}"> Licencia </span>
+                                <br>
+                                <span> Genero: </span>
+                                <span th:text="${trabajador.genero}"> </span>
+                                
+                                
                                 </div>
                                 <div class="card-footer">
                                     <a th:href="${'/trabajador/perfil/'+trabajador.id}" class="btn btn-dark btn-sm " target="_blank">Perfil</a>

@@ -1,0 +1,105 @@
+.info {
+  background-image: url("/img/fondo-fomulario.png");
+  background-size: cover;
+  display: grid;
+  grid-template-columns: 55% 45%;
+  grid-gap: 3%;
+  margin: 0;
+  padding: 10% 5%;
+}
+.text-body {
+  text-align: justify;
+}
+body {
+  font-family: "Vollkorn", serif;
+}
+.text-body p {
+  font-family: "Shippori Antique", sans-serif;
+}
+.container .text-body {
+  grid-area: area;
+}
+.explain {
+  display: grid;
+  grid-template-areas: "area area area";
+  padding: 2% 0% 2%;
+  grid-gap: 3%;
+}
+.item {
+  display: grid;
+  padding: 3%;
+  justify-content: center;
+  background: rgba(255, 234, 139, 0.616);
+}
+.item p {
+  text-align: justify;
+}
+.item .icon {
+  font-size: 300%;
+  justify-self: center;
+}
+.last {
+  font-family: "Vollkorn", serif;
+  grid-column: 1/4;
+  justify-self: center;
+}
+h3 {
+  margin-top: 3%;
+}
+hr {
+  margin: 5% 0% 5%;
+}
+.h2 {
+  padding-left: 5%;
+  background: linear-gradient(-90deg, #ffffffde, #8e91927e);
+}
+.register {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-auto-rows: 600px;
+}
+.col1 {
+  display: grid;
+  background-image: url("/img/empleador.jpg");
+  background-size: cover;
+  padding: 15% 5%;
+  align-items: center;
+  justify-items: center;
+}
+.col2 {
+  display: grid;
+  background-image: url("/img/trabajador.jpg");
+  background-size: cover;
+  padding: 15% 5%;
+  align-items: center;
+  justify-items: center;
+}
+.text {
+  display: grid;
+  color: rgb(255, 251, 251);
+  backdrop-filter: blur(2px);
+  background: rgb(0, 0, 0, .4);
+  border-radius: 10px;
+  padding: 3%;
+  border: 2px solid rgba(0, 0, 0, 0.76);
+}
+.text .btn {
+  align-self: flex-end;
+}
+.utilidades {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 100px;
+  grid-template-areas: "area area";
+  grid-gap: 2%;
+  padding: 5% 5% 0%;
+}
+.utilidades .text2 {
+  grid-area: area;
+}
+.preguntas {
+  justify-self: end;
+}
+.contacto {
+  justify-self: start;
+}
