@@ -30,7 +30,8 @@
                             <p th:text="${trabajador.oficio}"></p>
                             <div class="row d-flex justify-content-center" sec:authorize="hasRole('ROLE_EMPLEADOR')">
                                 <div class="col-1 d-flex justify-content-center text-decoration-none mx-3">
-                                    <a th:href="${'https://api.whatsapp.com/send?phone=549'+trabajador.telefono+'&text=Hola%20,&nbsp;te&nbsp;contacto&nbsp;por&nbsp;la&nbsp;publicación&nbsp;de&nbsp;PROYECTO'}" class="appWhatsapp" target="_blank" >
+                                    <a th:href="${'https://api.whatsapp.com/send?phone=549'+trabajador.telefono+'&text=Hola%20,&nbsp;te&nbsp;contacto&nbsp;por&nbsp;la&nbsp;publicación&nbsp;de&nbsp;PROYECTO'}"
+                                        class="appWhatsapp" target="_blank">
                                         <i class="fab fa-whatsapp h1 text-dark"></i>
                                     </a>
                                 </div>
@@ -61,11 +62,11 @@
                                     <h6 class="text-muted" th:text="${trabajador.telefono}"></h6>
                                 </a>
                             </div>
-                            
+
                         </div>
                         <div class="row">
 
-                            
+
                             <div class="col-sm-4">
                                 <p class="fw-bold">Edad</p>
                                 <h6 class="text-muted" th:text="${edad}"></h6>
@@ -92,10 +93,10 @@
                                 <p class="fw-bold">Habilidades</p>
                                 <h6 class="text-muted" th:text="${trabajador.skills}"></h6>
                             </div>
-                            <div class="col-sm-6">
+                            <!-- <div class="col-sm-6">
                                 <p class="fw-bold">Ha trabajado con</p>
                                 <h6 class="text-muted">empleadores</h6>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
@@ -111,11 +112,50 @@
                         <h4 class="mt-3">Comentarios</h4>
                         <hr class="bg-primary">
                         <div class="row">
-                            
+
                         </div>
                         <hr class="bg-black">
 
 
+                    </div>
+                </div>
+            </div>
+            <!-- Comentar -->
+            <div class="container-fluid d-flex justify-content-center" sec:authorize="hasRole('ROLE_EMPLEADOR')">
+                <div class="card w-100 bg-light position-relative ps-4 pt-3 pb-3 accordion-body rounded-3 mt-4 shadow">
+                    <div class="row">
+                        <div class="col-2"> <img src="https://i.imgur.com/xELPaag.jpg"
+                                class="rounded-circle mt-2 w-100"> </div>
+                        <div class="col-8">
+                            <div class="comment-box ms-1">
+                                <form th:action="@{/trabajador/perfil/} +${trabajador.id}" method="post">
+                                    <h4>Comentar</h4>
+                                    <div class="rating custom-control d-flex flex-row-reverse fa-pull-left">
+                                        <input type="radio" name="puntaje" value="5" id="5"><label for="5">☆</label>
+                                        <input type="radio" name="puntaje" value="4" id="4"><label for="4">☆</label>
+                                        <input type="radio" name="puntaje" value="3" id="3"><label for="3">☆</label>
+                                        <input type="radio" name="puntaje" value="2" id="2"><label for="2">☆</label>
+                                        <input type="radio" name="puntaje" value="1" id="1"><label for="1">☆</label>
+                                    </div>
+                                    <div class="comment-area"> 
+                                        <textarea class="form-control" name="comentario" th:placeholder="'Comentar sobre '+ ${trabajador.nombre}"rows="2"></textarea>
+                                    </div>
+
+
+                                    <!-- <div class="row d-flex justify-content-start">
+                                    <button class="btn btn-outline-info btn-sm">Cancelar</button>
+                                    <button class="btn btn-info send btn-sm">Enviar</button>
+                                </div> -->
+
+
+                                    <div class="row m-0 mt-1 justify-content-start ">
+                                        <button type="submit" class="btn btn-info col-3 justify-content-center m-1 ">Enviar</button>
+                                    </div>
+                                </form>
+
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
