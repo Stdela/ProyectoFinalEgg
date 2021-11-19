@@ -56,7 +56,6 @@ footer {
 .social {
     background-color: #D5D8DC;
 }
-
 .fondo {
     border: 2px solid #5D6D7E;
     max-height: 80vh;
@@ -67,10 +66,14 @@ footer {
     color: black;
 }
 
+.red {
+    background-color: #D5D8DC;
+}
+
 .caco {
-    opacity: .85;
     /* background: url(../img/registro.jpg) center no-repeat;
      */
+    opacity: .85;
      background-color: #1ABC9C;
     -webkit-background-size: cover;
    -moz-background-size: cover;

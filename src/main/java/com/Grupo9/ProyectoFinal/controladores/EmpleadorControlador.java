@@ -158,13 +158,15 @@ public class EmpleadorControlador {
 		
 	}
 	@GetMapping(path = "/perfil-empleador", produces = "image/png")
-	public String perfilPropio (HttpSession httpSession, ModelMap model) throws NoSuchElementException, com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException {
+	public String perfilPropio (HttpSession httpSession, ModelMap model, @RequestParam(defaultValue = "0") Integer page) throws NoSuchElementException, com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException {
 		Empleador empleador = (Empleador) httpSession.getAttribute("usuariosession");
 		Empleador e = empleadorServicio.encontrarPorId(empleador.getId());
 		Integer edad = empleadorServicio.edad(empleador.getFechaNacimiento());
 		///httpSession.setAttribute("usuariosession", e);
 		model.addAttribute("empleador", e);
 		model.addAttribute("edad", edad);
+		model.addAttribute("empleos", empleoServicio.listarEmpleos(page));
+		
 		return "perfil_empleador";
 	}
 	
