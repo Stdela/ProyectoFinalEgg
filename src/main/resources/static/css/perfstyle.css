@@ -10,6 +10,11 @@
     padding: 5px
 }
 
+#img-comentarios {
+    max-width: 100px;
+    max-height: 100px;
+}
+
 .comment-area textarea {
     resize: none;
     border: 1px solid #ad9f9f
@@ -24,11 +29,8 @@
 }
 
 .rating {
-    /* display: flex; */
     margin-top: -10px;
-    /* flex-direction: row-reverse; */
     margin-left: -4px;
-    /* float: left */
 }
 
 .rating>input {
