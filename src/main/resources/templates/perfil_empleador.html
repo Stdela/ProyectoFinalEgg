@@ -57,18 +57,32 @@
                                 <h6 class="text-muted" th:text="${edad}"></h6>
                             </div>
                         </div>
-                        <hr class="bg-black">
-                        Comentarios(falta)
-                        <div class="comentarios"><span>Comentario 1</span></div>
-                        <div class="comentarios"><span>Comentario 2</span></div>
-                        <div class="comentarios"><span>Comentario 3</span></div>
-                        <div class="comentarios"><span>Comentario 4</span></div>
-                        <div class="comentarios"><span>Comentario 5</span></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Empleos agregados -->
+            <div class="flex flex-wrap space-between" style="margin: -7px;">
+                <h4 class="bold mb-3 text-decoration-underline">Mis Publicaciones</h4>
+                <div class="row">
+                    <div class="col-sm-6" th:each="empleos, itemStat : *{empleos}" th:if="${empleador.id == empleos.empleador.id}">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="gb-results-list__info">
+                                    <h4 class=""><strong class="" th:text="${empleos.oficio}+ ' | '"></strong><span class="color-hierarchy3" th:text="${empleos.zona}"></span></h4>
+                                    <div class="size0">
+                                        <span itemprop="addressLocality" th:text="${empleos.descripcion}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <div th:replace="/fragments/componentes.html :: footer"></div>
 

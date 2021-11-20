@@ -66,25 +66,51 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
+
+    
     
     <div sec:authorize="hasRole('ROLE_EMPLEADOR')">
-      <div class="container text-center content" sec:authorize="isAuthenticated()" >
+      <div class="text-center mb-5" sec:authorize="isAuthenticated()" >
         <h1 class="text-center py-2">Proyecto</h1>
         <h2 class="text-center py-3">La solución más rápida a tu problema... <br> ¡la encontras acá!</h2>
         <!-- categorias de trabajos disponibles (Solo te envía a la lista de trabajadores, la búsqueda por categoria está WIP)-->
         <div class="wrap">
-            <section class="categorias">
-                <div class="trabajos-todos">
-                    <a class="btn btn-warning h-100" href="/busquedaTrabajadores/todos">MOSTRAR TODOS</a>
-                </div>
-                <div class="trabajos d-grid gap-2" th:each="oficio : ${T(com.Grupo9.ProyectoFinal.Enum.Oficio).values()}">
-                    <a class="btn btn-lg btn-warning h-100" th:href="${'/busquedaTrabajadores/'+oficio}"><input
-                            type="image" id="image" th:alt="${'botón de '+oficio}" th:src="${'/img/'+oficio+'.png'}" th:text="${oficio}"></a>
-                </div>
-            </section>
+          <section class="categorias">
+            <div class="trabajos-todos">
+              <a class="btn btn-warning h-100" href="/busquedaTrabajadores/todos">MOSTRAR TODOS</a>
+            </div>
+            <div class="trabajos d-grid gap-2" th:each="oficio : ${T(com.Grupo9.ProyectoFinal.Enum.Oficio).values()}">
+              <a class="btn btn-lg btn-warning h-100" th:href="${'/busquedaTrabajadores/'+oficio}"><input
+                type="image" id="image" th:alt="${'botón de '+oficio}" th:src="${'/img/'+oficio+'.png'}" th:text="${oficio}"></a>
+            </div>
+          </section>
         </div>
       </div>
     </div>
+
+    <section class="text-center bg-light">
+      <div class="container">
+        <h2>Proyecto te acerca a tu changa diaria</h2>
+        <br>
+        <div class="row">
+          <div class="col-sm-4 mb3">
+            <img width="60" class="mb1" src="https://d2dgum4gsvdsrq.cloudfront.net/assets/icons/certificate-9494107b6e3a358d12f7f7da27d5dfcc3c8c989b3a55195a4bae715ee82b5e6e.svg">
+            <h4 class="bold mb-3">Filtros para tus búsquedas</h4>
+            <p>Utiliza los filtros para búsquedas concretas.</p>
+          </div>
+          <div class="col-sm-4 mb3">
+            <img width="60" class="mb1" src="https://d2dgum4gsvdsrq.cloudfront.net/assets/icons/extra-visibility-11bfec03a3cf638d0ac23f46765ad2f4e9c2cb7a3d2d732aeea7766448e5b42f.svg">
+            <h4 class="bold mb-3">Visibilidad sobre tus empleos</h4>
+            <p>En tu perfil puedes visualizar todos tus empleos publicados.</p>
+          </div>
+          <div class="col-sm-4 mb3">
+            <img width="60" class="mb1" src="https://d2dgum4gsvdsrq.cloudfront.net/assets/icons/paper-plane-1e59db1f9803279d54737b4b4b8ce99547b451981112aa0c3f828591f9bd00cc.svg">
+            <h4 class="bold mb-3">Contacta ya</h4>
+            <p>Una vez encontrada tu CHANGA tienes la posibilidad de contactarte directamente con el empleador.</p>
+          </div>
+        </div>
+      </div>
+    </section>
     
 
   </div> <!--index fin-->

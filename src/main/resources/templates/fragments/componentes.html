@@ -92,14 +92,14 @@
 
     <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom social">
       <div class="me-5 d-none d-lg-block">
-        <span>Conectate con nosotros en las redes sociales: </span>
+        <h4 class="bold mb-3">Conectate con nosotros en las redes sociales</h4>
       </div>
       <div>
         <div class="me-4 d-flex justify-content-end">
-          <a th:href=@{"https://api.whatsapp.com/send?phone=5493471622079&text=Hola%20PROYECTO,&nbsp;me&nbsp;pueden&nbsp;ayudar??"} class="me-4 whastapp"><i class="fab fa-3x fa-whatsapp"></i></a>
-          <a href="#" class="me-4 facebook"><i class="fab fa-3x fa-facebook-square"></i></a>
-          <a href="#" class="me-4 twitter"><i class="fab fa-3x fa-twitter-square"></i></a>
-          <a th:href="@{/mail}" class="me-4 mail"><i class="fas fa-3x fa-envelope"></i></a>
+          <a href="https://api.whatsapp.com/send?phone=5493471622079&text=Hola%20PROYECTO,&nbsp;me&nbsp;pueden&nbsp;ayudar??" class="me-4"><i class="red fab fa-3x fa-whatsapp"></i></a>
+          <a href="#" class="me-4"><i class="red fab fa-3x fa-facebook-square"></i></a>
+          <a href="#" class="me-4"><i class="red fab fa-3x fa-twitter-square"></i></a>
+          <a th:href="@{/mail}" class="me-4"><i class="red fas fa-3x fa-envelope"></i></a>
           
         </div>
       </div>
@@ -114,6 +114,7 @@
           </div>
           <div class="col-6 col-md-6 col-lg-3 justify-content-center">
             <h6 class="text-uppercase fw-bold mb-4">Nosotros</h6>
+            <p><a href="/informacion" class="text-reset">Información</a></p>
             <p><a href="/como-funciona#como-funciona" class="text-reset">¿Como funciona?</a></p>
             <h6 class="text-uppercase fw-bold mb-4">Links útiles</h6>
             <p><a href="#!" class="text-reset">Empleado</a></p>

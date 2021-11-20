@@ -125,6 +125,11 @@ public class ProyectoControlador {
 		return "comoFunciona";
 	}
 	
+	@GetMapping("/informacion")
+	public String informacion() {
+		return "informacion";
+	}
+	
 	@GetMapping("/mail")
 	public String mail() {
 		return "enviar-mail";
