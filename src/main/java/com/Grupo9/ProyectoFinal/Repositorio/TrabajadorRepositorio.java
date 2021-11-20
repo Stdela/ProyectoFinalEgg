@@ -36,6 +36,11 @@ public interface TrabajadorRepositorio extends JpaRepository<Trabajador, Long>{
 	
 	@Query("SELECT t FROM Trabajador t WHERE t.genero=:genero AND t.disponible=TRUE")
 	public ArrayList<Trabajador> buscarPorGenero(@Param("genero") Genero genero);
+	
+	@Query("SELECT t FROM Trabajador t WHERE t.genero=:genero AND t.oficio=:oficio AND t.disponible=TRUE")
+	public ArrayList<Trabajador> buscarPorOficioYGenero(@Param("oficio") Oficio oficio, @Param("genero") Genero genero);
+	
+	
 
 
 }
