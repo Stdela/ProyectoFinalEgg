@@ -39,6 +39,7 @@
                                     <p class="card-text" th:text="${empleos.descripcion}"></p>
                                     <span th:text="${empleos.zona}">ZONA</span>
                                     <span th:text="${'| '+empleos.empleador.nombre}"> Empleador </span>
+                                    <p class="mt-3 mb-0"><span class="badge bg-danger" th:if="${empleos.antiguedad == 0}">Nuevo</span></p>
                                 </div>
                                 <div class="card-footer" sec:authorize="hasRole('ROLE_TRABAJADOR')">
                                     <a th:href="${'https://api.whatsapp.com/send?phone=549'+empleos.empleador.telefono+'&text=Hola%20'+empleos.empleador.nombre + ' ' + empleos.empleador.apellido +',&nbsp;te&nbsp;contacto&nbsp;por&nbsp;la&nbsp;publicación&nbsp;de&nbsp;PROYECTO'}" class="btn btn-success btn-sm " target="_blank" >whatsapp</a>

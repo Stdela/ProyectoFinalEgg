@@ -2,25 +2,16 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
-    <!--/*/ <th:block th:include="fragments/componentes.html :: head">
-    </th:block> /*/-->
-    <th:block th:include="fragments/componentes.html :: head">
-    </th:block>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/index_style.css}" href="/css/index_style.css" type="text/css">
+    <th:block th:include="fragments/componentes.html :: head"></th:block>
+
     <title>Proyecto Egg</title>
 </head>
 
 <body>
   <!-- NAV -->
   <div th:replace="/fragments/componentes.html :: navbar"></div>
-  
+
   <div class="index">
     <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
       <div class="carousel-indicators">
@@ -31,7 +22,7 @@
       <div class="carousel-inner">
         <div class="carousel-item active" data-bs-interval="10000">
           <a href="http://">
-            <img src="/img/work.jpg" class="d-block w-100" alt="...">
+            <img src="/img/rsz_work.jpg" class="d-block w-100" alt="...">
           </a>
           <div class="carousel-caption d-none d-md-block">
             <h3 class="txt-white">Sigamos trabajando juntos</h3>
@@ -40,7 +31,7 @@
         </div>
         <div class="carousel-item" data-bs-interval="2000">
           <a href="http://">
-            <img src="/img/ros.jpg" class="d-block w-100" alt="...">
+            <img src="/img/rsz_ros.jpg" class="d-block w-100" alt="...">
           </a>
           <div class="carousel-caption d-none d-md-block">
             <h3 class="txt-white">Rosario la cuidad</h3>
@@ -49,7 +40,7 @@
         </div>
         <div class="carousel-item">
           <a href="http://">
-            <img src="/img/registro.jpg" class="d-block w-100" alt="...">
+            <img src="/img/rsz_registro.jpg" class="d-block w-100" alt="...">
           </a>
           <div class="carousel-caption d-none d-md-block">
             <h3 class="txt-white">Registros</h3>
@@ -67,8 +58,6 @@
       </button>
     </div>
 
-    
-    
     <div sec:authorize="hasRole('ROLE_EMPLEADOR')">
       <div class="text-center mb-5" sec:authorize="isAuthenticated()" >
         <h1 class="text-center py-2">Proyecto</h1>
@@ -111,9 +100,8 @@
         </div>
       </div>
     </section>
-    
-
   </div> <!--index fin-->
+
   <div th:replace="/fragments/componentes.html :: footer"></div>
 </body>
 
