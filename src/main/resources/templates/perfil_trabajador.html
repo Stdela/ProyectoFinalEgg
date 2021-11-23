@@ -32,7 +32,7 @@
                                         <i class="fab fa-whatsapp h1 text-dark"></i>
                                     </a>
                                 </div>
-                                <a class="col-1 d-flex justify-content-center text-decoration-none mx-3" th:href="@{mailto:{to}(to=${trabajador.email},subject='Hola',body=${body})}" ><i
+                            <a class="col-1 d-flex justify-content-center text-decoration-none mx-3" th:href="@{mailto:{to}(to=${trabajador.email},subject='Hola',body='Hola '+${trabajador.nombre}+'! Te contacto porque necesito tu ayuda')}" ><i
                                         class="fas fa-envelope h1 text-dark"></i></a>
                             </div>
                             <div class="row mt-3 mb-1 d-flex justify-content-center"
@@ -121,7 +121,7 @@
                     </div>
                 </div>
                 <!-- Comentar -->
-                <div class="container-fluid d-flex justify-content-center" sec:authorize="hasRole('ROLE_EMPLEADOR')">
+                <!-- <div class="container-fluid d-flex justify-content-center" sec:authorize="hasRole('ROLE_EMPLEADOR')">
                     <div class="card w-75 bg-light position-relative ps-4 pt-3 pb-3 accordion-body rounded-3 mt-3 shadow">
                         <div class="row">
                             <div
@@ -157,7 +157,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- Comentar -->
             
             <!--Comentarios-->
