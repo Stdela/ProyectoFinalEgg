@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.Grupo9.ProyectoFinal.Entidad.Comentario;
 import com.Grupo9.ProyectoFinal.Entidad.Empleador;
 import com.Grupo9.ProyectoFinal.Entidad.Empleo;
 import com.Grupo9.ProyectoFinal.Entidad.Trabajador;
@@ -107,13 +108,17 @@ public class TrabajadorControlador {
 	}
 
 	@GetMapping(path ="/perfil/{id}", produces = "image/png")
-	public String perfilTrabajador(ModelMap model, @PathVariable("id") Long id) throws NoSuchElementException {
+	public String perfilTrabajador(ModelMap model, @PathVariable("id") Long id, HttpSession httpSession) throws NoSuchElementException {
 		try {
 		Trabajador trabajador = trabajadorServicio.encontrarPorId(id);
 		Integer edad = trabajadorServicio.edad(trabajador.getFechaNacimiento());
+		Empleador empleador = (Empleador) httpSession.getAttribute("usuariosession");
+		List<Comentario> comentarios = trabajadorServicio.comentariosTrabajador(id);
 		model.addAttribute("trabajador", trabajador);
 		model.addAttribute("id", id);
 		model.addAttribute("edad", edad);
+		model.addAttribute("comentarios", comentarios);
+		model.addAttribute("empleador", empleador);
 		
 //		model.addAttribute("comentarios", trabajadorServicio.comentariosTrabajador(id));
 //		model.addAttribute("puntos", trabajadorServicio.puntosTrabajador(id));
