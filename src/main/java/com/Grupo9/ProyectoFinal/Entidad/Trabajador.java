@@ -39,8 +39,8 @@ public class Trabajador extends Usuario{
 	@ManyToMany
 	private List<Empleo> postulaciones;
 
-    public Trabajador(String email, String contrasena, String nombre, String apellido, Genero genero, Date fechaNacimiento, Zona zona, String telefono, Oficio oficio, String experiencia, Boolean disponible, Boolean licencia, String skills) {
-        super(email, contrasena, nombre, apellido, genero, fechaNacimiento, zona, telefono);
+    public Trabajador(String email, String contrasena, String nombre, String apellido, Genero genero, Date fechaNacimiento, Zona zona, String telefono, Oficio oficio, String experiencia, Boolean disponible, Boolean licencia, String skills, Foto imagen) {
+        super(email, contrasena, nombre, apellido, genero, fechaNacimiento, zona, telefono, imagen);
         this.oficio = oficio;
         this.experiencia = experiencia;
         this.disponible = disponible;

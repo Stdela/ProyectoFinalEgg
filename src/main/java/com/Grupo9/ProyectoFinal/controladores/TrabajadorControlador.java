@@ -114,10 +114,12 @@ public class TrabajadorControlador {
 		Integer edad = trabajadorServicio.edad(trabajador.getFechaNacimiento());
 		Empleador empleador = (Empleador) httpSession.getAttribute("usuariosession");
 		List<Comentario> comentarios = trabajadorServicio.comentariosTrabajador(id);
+		Double valoracion = trabajadorServicio.valoracion(comentarios);
 		model.addAttribute("trabajador", trabajador);
 		model.addAttribute("id", id);
 		model.addAttribute("edad", edad);
 		model.addAttribute("comentarios", comentarios);
+		model.addAttribute("valoracion", valoracion);
 		model.addAttribute("empleador", empleador);
 		
 //		model.addAttribute("comentarios", trabajadorServicio.comentariosTrabajador(id));
@@ -134,7 +136,11 @@ public class TrabajadorControlador {
 		Trabajador trabajador= (Trabajador) httpSession.getAttribute("usuariosession");
 		Trabajador t = trabajadorServicio.encontrarPorId(trabajador.getId());
 		Integer edad = trabajadorServicio.edad(trabajador.getFechaNacimiento());
+		List<Comentario> comentarios = trabajadorServicio.comentariosTrabajador(t.getId());
+		Double valoracion = trabajadorServicio.valoracion(comentarios);
 		///httpSession.setAttribute("usuariosession", t)	;
+		model.addAttribute("comentarios", comentarios);
+		model.addAttribute("valoracion", valoracion);
 		model.addAttribute("trabajador", t);
 		model.addAttribute("edad", edad);
 		return "perfil_trabajador";
@@ -149,11 +155,12 @@ public class TrabajadorControlador {
 	
 	@PostMapping("/perfil-modificar")
 	public String modificar(HttpSession httpSession, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
-		@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono, @RequestParam("oficio") Oficio oficio, @RequestParam("experiencia") String experiencia, @RequestParam("disponible") Boolean disponible, @RequestParam("licencia") Boolean licencia, @RequestParam("skills") String skills) {
+		@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono, @RequestParam("oficio") Oficio oficio, @RequestParam("experiencia") String experiencia, @RequestParam("disponible") Boolean disponible, @RequestParam("licencia") Boolean licencia, @RequestParam("skills") String skills, MultipartFile imagen) {
 		try {
 			Trabajador tbj = (Trabajador) httpSession.getAttribute("usuariosession");
-			trabajadorServicio.modificarTrabajador(tbj.getId(), nombre, apellido, genero, fechaNacimiento, zona, telefono, oficio, experiencia, disponible, licencia, skills);
-			httpSession.setAttribute("usuariosession", tbj)	;
+			Trabajador t = trabajadorServicio.encontrarPorId(tbj.getId());
+			trabajadorServicio.modificarTrabajador(t.getId(), nombre, apellido, genero, fechaNacimiento, zona, telefono, oficio, experiencia, disponible, licencia, skills, imagen);
+			httpSession.setAttribute("usuariosession", t)	;
 			return "redirect:/trabajador/perfil-trabajador";
 		} catch (Exception e) {
 			return "redirect:/";
@@ -176,7 +183,7 @@ public class TrabajadorControlador {
 			@RequestParam("skills") String skills) throws IOException {
 
 		trabajadorServicio.modificarTrabajador(id, nombre, apellido, genero, fechaNacimiento, zona, telefono, oficio,
-				experiencia, disponible, licencia, skills);
+				experiencia, disponible, licencia, skills, imagen);
 		return "perfil_trabajadorr";
 	}
 

@@ -100,6 +100,26 @@ h1, h2{
   flex-wrap: wrap;
 }
 
+.form {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+
+.form1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: space-around;
+  align-content: center;
+  background: linear-gradient(-90deg, #c77c0c, #eeb10a);;
+}
+
+.form2 {
+  display: grid;
+  justify-content: space-around;
+  align-content: center;
+  background: rgba(0, 0, 0);
+}
+
 @media screen and (max-width: 1100px) {
   .categorias .trabajos {
     width: 30%;

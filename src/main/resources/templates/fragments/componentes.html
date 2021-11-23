@@ -69,7 +69,7 @@
                   <li class="nav-item"><a class="nav-link" href="/busquedaTrabajadores/todos" sec:authorize="isAuthenticated()">Trabajadores</a></li>
                 </div>
                 <!-- Al estar logueado no se muestra el enlace Información -->
-                <li class="nav-item"><a class="nav-link" href="/como-funciona">Información</a></li>
+                <li class="nav-item"><a class="nav-link" href="/informacion">Información</a></li>
                 <!-- Al estar logueado no se muestra el enlace Login | Registro -->
                 <li class="nav-item" sec:authorize="!isAuthenticated()"><a class="nav-link" href="/login">Login | Registro</a></li>
                 <!-- Aparece al estar logueado, para cerrar la sesión -->
@@ -104,8 +104,8 @@
           </div>
           <div class="col-6 col-md-6 col-lg-3 justify-content-center">
             <h6 class="text-uppercase fw-bold mb-4">Nosotros</h6>
-            <p><a href="/informacion" class="text-reset">Información</a></p>
-            <p><a href="/como-funciona#como-funciona" class="text-reset">¿Como funciona?</a></p>
+            <p><a href="/informacion" class="text-reset">Acerca de nosotros</a></p>
+            <p><a href="/informacion#como-funciona" class="text-reset">¿Como funciona?</a></p>
             <h6 class="text-uppercase fw-bold mb-4">Links útiles</h6>
             <p><a href="#!" class="text-reset">Empleado</a></p>
             <p><a href="#!" class="text-reset">Empleador</a></p>

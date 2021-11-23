@@ -22,7 +22,7 @@
                     <div id="tarjeta" class="row">
                         <div class="col-sm-4 bg-info rounded-start">
                             <div class="card-block text-center">
-                                <i class="fas fa-user-tie fa-7x mt-5"></i>
+                                <img id="img-perfil" th:if="${empleador.imagen != null}" th:src="${'/foto/empleador?id='+empleador.id}" class="img-thumbnail mt-5 rounded-circle w-100" alt="">
                                 <h2 class="fw-bold mt-4" th:text="${empleador.nombre + ' ' + empleador.apellido}"></h2>
                                 <p th:text="${empleador.tipo}"></p>
                                 <div class="row mt-3 mb-1 d-flex justify-content-center" sec:authorize="hasRole('ROLE_EMPLEADOR')">
