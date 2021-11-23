@@ -4,6 +4,10 @@ html {
     /* background-color: #363538; */
 }
 
+#logo {
+    max-width: 200px;
+    height: auto;
+}
 .color-1 {
     color: #5232ED;
 }
