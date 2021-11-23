@@ -12,7 +12,7 @@
 .text-body {
   text-align: justify;
 }
-body {
+.info, .explain, .h2, .register, .utilidades {
   font-family: "Vollkorn", serif;
 }
 .text-body p {
