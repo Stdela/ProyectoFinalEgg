@@ -25,8 +25,8 @@
                         <div class="col-sm-4 bg-info rounded-start">
                             <div class="card-block mb-4 text-center">
                                 <!-- <i class="fas fa-user-tie fa-7x mt-5"></i> -->
-                                <img id="img-perfil" th:src="${'/foto/empleador?id='+empleador.id}" class="img-thumbnail mt-5 rounded-circle w-100" alt="">
-
+                                <img id="img-perfil" th:if="${empleador.imagen != null}" th:src="${'/foto/empleador?id='+empleador.id}" class="img-thumbnail mt-5 rounded-circle w-100" alt="">
+                                <i th:if="${empleador.imagen == null}" class="fas fa-user-tie fa-7x mt-5"></i>
                                 <label for="imagen"></label>
                                 <input type="file" name="imagen" id="imagen">
                             </div>

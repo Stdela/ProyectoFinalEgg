@@ -172,8 +172,8 @@
                                         <div class="d-flex">
                                             <div class="izq">
                                                 <span>
-                                                    <img th:src="${'/foto/empleador?id='+comentarios.emisor.id}"
-                                                        class="img-fluid img-thumbnail rounded-circle w-100" alt="" />
+                                                    <img th:if="${comentarios.emisor.imagen == null}" th:src="@{/img/profile.png}" src="../static/img/profile.png" class="img-fluid img-thumbnail rounded-circle w-100" alt="">
+                                                    <img th:if="${comentarios.emisor.imagen != null}" th:src="${'/foto/empleador?id='+comentarios.emisor.id}" class="img-fluid img-thumbnail rounded-circle w-100" alt="" />
                                                 </span>
                                             </div>
                                             <div class="der">
@@ -210,8 +210,10 @@
                     <div class="row">
                         <div
                             class="col-12 col-md-2 col-lg-2 col-xl-2 col-sm-12 align-content-center d-flex justify-content-center">
-                            <img th:src="${'/foto/empleador?id='+empleador.id}" id="img-comentarios"
-                                class="img-thumbnail rounded-circle mt-2 w-100"> </div>
+                            <img th:if="${empleador.imagen == null}" id="img-comentarios"  th:src="@{/img/profile.png}" src="../static/img/profile.png" class="img-thumbnail rounded-circle mt-2 w-100" alt="">
+                            <img th:if="${empleador.imagen != null}" id="img-comentarios"  th:src="${'/foto/empleador?id='+empleador.id}" class="img-thumbnail rounded-circle mt-2 w-100" alt="">
+                            <!-- <img th:src="${'/foto/empleador?id='+empleador.id}" id="img-comentarios" class="img-thumbnail rounded-circle mt-2 w-100"> -->
+                         </div>
                         <div class="col-12 col-md-9 col-lg-9 col-xl-9 col-sm-12">
                             <div class="comment-box ms-1">
                                 <form th:action="@{/trabajador/perfil/} +${trabajador.id}" method="post">
