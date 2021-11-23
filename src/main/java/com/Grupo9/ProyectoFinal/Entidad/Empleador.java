@@ -36,8 +36,8 @@ public class Empleador extends Usuario {
 	private String contacto;
 
 	public Empleador(String email, String contrasena, String nombre, String apellido, Genero genero,
-			Date fechaNacimiento, Zona zona, String telefono, Tipo tipo) {
-		super(email, contrasena, nombre, apellido, genero, fechaNacimiento, zona, telefono);
+			Date fechaNacimiento, Zona zona, String telefono, Tipo tipo, Foto imagen) {
+		super(email, contrasena, nombre, apellido, genero, fechaNacimiento, zona, telefono, imagen);
 		this.tipo = tipo;
 	}
 
