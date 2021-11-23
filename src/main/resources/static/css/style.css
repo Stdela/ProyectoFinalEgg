@@ -42,6 +42,30 @@ td, th {
     min-height: 70px;
 }
 
+/* BG_IMAGE TRABAJADOR*/
+.bg-image-tbj {
+    background-image: url('../img/trabajador.jpg');background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* height: 80vh; */
+}
+
+.div_box {
+    border: 2px solid black;
+    background: rgba(0, 0, 0, .4);
+    color: #FFF;
+    margin-top: 2rem;
+    border-radius: 15px;
+}
+
+/* BG_IMAGE EMPLEADOR*/
+.bg-image-emp {
+    background-image: url('../img/empleador.jpg'); background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* height: 100vh; */
+}
+
 
 /* FOOTER */
 footer {
@@ -60,26 +84,31 @@ footer {
     border: 2px solid #5D6D7E;
     max-height: 80vh;
     width: 100% ;
-    text-align: center;    
+    text-align: center;
     border-radius: 5px;
     padding: 1.5rem;
     color: black;
 }
 
-.red {
-    background-color: #D5D8DC;
+.conectar {
+    display: flex;
+    align-items: center;
 }
 
-.caco {
-    /* background: url(../img/registro.jpg) center no-repeat;
-     */
-    opacity: .85;
-     background-color: #1ABC9C;
-    -webkit-background-size: cover;
-   -moz-background-size: cover;
-   -o-background-size: cover;
-   background-size: cover;
-   height: 100%;
-   width: 100% ;
-   text-align: center;
+.redes>a {
+    color: #566573;
 }
+
+/* .caco {
+    opacity: .85;
+    background-color: #1ABC9C;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+    width: 100% ;
+    text-align: center;
+} */
+/* background: url(../img/registro.jpg) center no-repeat;
+ */
