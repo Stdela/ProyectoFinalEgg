@@ -1,5 +1,7 @@
 .info {
   background-image: url("/img/fondo-fomulario.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   background-size: cover;
   display: grid;
   grid-template-columns: 55% 45%;
@@ -61,6 +63,8 @@ hr {
 .col1 {
   display: grid;
   background-image: url("/img/empleador.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   background-size: cover;
   padding: 15% 5%;
   align-items: center;
@@ -69,6 +73,8 @@ hr {
 .col2 {
   display: grid;
   background-image: url("/img/trabajador.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   background-size: cover;
   padding: 15% 5%;
   align-items: center;
