@@ -180,11 +180,12 @@ public class EmpleadorControlador {
 	
 	@PostMapping("/perfil-modificar")
 	public String modificar(HttpSession httpSession, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
-    		@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") Tipo tipo) {
+    		@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") Tipo tipo, MultipartFile imagen) {
 		try {
 			Empleador emp = (Empleador) httpSession.getAttribute("usuariosession");
-			empleadorServicio.modificarEmpleador(emp.getId(), nombre, apellido, genero, fechaNacimiento, zona, telefono, tipo);
-			httpSession.setAttribute("usuariosession", emp)	;		
+			Empleador e = empleadorServicio.encontrarPorId(emp.getId());
+			empleadorServicio.modificarEmpleador(e.getId(), nombre, apellido, genero, fechaNacimiento, zona, telefono, tipo, imagen);
+			httpSession.setAttribute("usuariosession", e)	;		
 			return "redirect:/empleador/perfil-empleador";
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -201,9 +202,9 @@ public class EmpleadorControlador {
         
         @PutMapping("/perfil/modificar/{id}")
         public String modificar(ModelMap model,@PathVariable("id") Long id, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
-    		@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") Tipo tipo, @RequestParam("foto") MultipartFile foto ) throws IOException, NoSuchElementException, com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException{
+    		@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") Tipo tipo, MultipartFile imagen ) throws IOException, NoSuchElementException, com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException{
             try {
-        	empleadorServicio.modificarEmpleador(id, nombre, apellido, genero, fechaNacimiento, zona, telefono, tipo); 
+        	empleadorServicio.modificarEmpleador(id, nombre, apellido, genero, fechaNacimiento, zona, telefono, tipo, imagen); 
         	   return "perfil_empleador";
         } catch(NoSuchElementException ex) {
 			model.put("error", ex);
