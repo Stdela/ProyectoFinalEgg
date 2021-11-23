@@ -185,6 +185,7 @@ h1, h2{
 @media (min-width: 1030px) {
   .carousel-item>a>img {
       max-height: 600px;
+      object-fit: cover;
   }
 }
 .txt-white {
