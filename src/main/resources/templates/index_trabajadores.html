@@ -42,21 +42,60 @@
                         data-bs-target="#demo">Categorias</button>
                     <div id="demo" class="collapse">
                         <div class="btn-group" th:each="oficio : ${T(com.Grupo9.ProyectoFinal.Enum.Oficio).values()}">
-                            <a type="button"
-                                class="btn btn-dark" th:href="${'/busquedaTrabajadores/'+oficio}"
+                            <a type="button" class="btn btn-dark" th:href="${'/busquedaTrabajadores/'+oficio}"
                                 th:text="${oficio}"></a>
+                        </div>
+                        <br>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a type="button" th:href="${'/busquedaTrabajadores1/'+ 'todos'}"
+                                class="btn btn-dark">Todos</a>
+                            <a type="button" th:href="${'/busquedaTrabajadores1/'+'hombres'}"
+                                class="btn btn-dark">Hombres</a>
+                            <a type="button" th:href="${'/busquedaTrabajadores1/'+'mujeres'}"
+                                class="btn btn-dark">Mujeres</a>
                         </div>
                     </div>
                 </div>
-                <br>
-                 <div class="btn-group" role="group" aria-label="Basic example">
-                 <a type="button"  th:href="${'/busquedaTrabajadores1/'+ 'todos'}"   class="btn btn-primary">Todos</a>
-                 <a type="button" th:href="${'/busquedaTrabajadores1/'+'hombres'}" class="btn btn-primary">Hombres</a>
-                 <a type="button" th:href="${'/busquedaTrabajadores1/'+'mujeres'}" class="btn btn-primary">Mujeres</a>
-                 </div>
-                
-                
-                
+                <!-- Prueba busqueda con filtro -->
+                <!-- <div class="container">
+                    <form action="/" method="post" class="form">
+                        <div class="form1">
+                            <div>
+                                <label for="oficio" class="my-3 form-label fw-bolder">Oficio</label>
+                                <select name="oficio" id="oficio">
+                                    <option selected>selecionar</option>
+                                    <option th:each="tipoOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Tipo).values()}"
+                                        th:values="${tipoOpt}" th:text="${tipoOpt}" th:selected="${tipoOpt==tipo}"></option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="zona" class="my-3 form-label fw-bolder">Zona</label>
+                                <select name="zona" id="zona" required>
+                                    <option selected>selecionar</option>
+                                    <option th:each="zonaOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Zona).values()}"
+                                        th:values="${zonaOpt}" th:text="${zonaOpt}" th:selected="${zonaOpt==zona}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="genero" class="my-3 form-label fw-bolder">Genero</label>
+                                <select name="genero" id="genero" required>
+                                    <option selected>selecionar</option>
+                                    <option th:each="generoOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Genero).values()}"
+                                        th:values="${generoOpt}" th:text="${generoOpt}" th:selected="${generoOpt==genero}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form2">
+                            <button class="btn btn-outline-warning" type="submit">Buscar</button>
+                        </div>
+                    </form>
+                </div> -->
+
+
+
+
                 <section class="busquedas">
                     <div class="mx-auto" th:if="${trabajadores.empty}">
                         <div class="alert alert-danger">No hay trabajadores disponibles!</div>
