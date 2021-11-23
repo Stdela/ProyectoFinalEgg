@@ -15,36 +15,24 @@
       <!-- NAV -->
     <div th:replace="/fragments/componentes.html :: navbar"></div>
 
-    <div class="container mb-5">
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-11 mt-5 mb-5 pt-5">
-                <div id="tarjeta" class="row">
-                    <div class="col-sm-4 bg-info rounded-start">
-                        <div class="card-block text-center">
-                            <!-- <i class="fas fa-user-tie fa-7x mt-5"></i> -->
-                            <img id="img-perfil" th:if="${empleador.imagen != null}" th:src="${'/foto/empleador?id='+empleador.id}" class="img-thumbnail mt-5 rounded-circle w-100" alt="">
-                            <i th:if="${empleador.imagen == null}" class="fas fa-user-tie fa-7x mt-5"></i>
-                            <h2 class="fw-bold mt-4" th:text="${empleador.nombre + ' ' + empleador.apellido}"></h2>
-                            <p th:text="${empleador.tipo}"></p>
-                            <div class="row mt-3 mb-1 d-flex justify-content-center" sec:authorize="hasRole('ROLE_EMPLEADOR')">
-                                <div class="d-grid gap-2 d-md-block">
-                                    <button class="btn btn-outline-secondary" type="button"><a class="text-decoration-none text-dark" href="/empleador/perfil-modificar">Editar Perfil</a></button>
-                                    <button class="btn btn-outline-secondary" type="button"><a class="text-decoration-none text-dark" href="/empleador/crear-empleo" role="button">Crear empleo</a></button>
-                                  </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-8 bg-white rounded-end">
-                        <h4 class="mt-3">Datos de contacto</h4>
-                        <hr class="bg-black">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <p class="fw-bold">Email</p>
-                                <h6 class="text-muted" th:text="${empleador.email}"></h6>
-                            </div>
-                            <div class="col-sm-6">
-                                <p class="fw-bold">Zona</p>
-                                <h6 class="text-muted" th:text="${empleador.zona}"></h6>
+    <div class="index color-4">
+        <div class="container pb-3">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-11 mt-5 mb-5 pt-5">
+                    <div id="tarjeta" class="row">
+                        <div class="col-sm-4 bg-info rounded-start">
+                            <div class="card-block text-center">
+                                <!-- <i class="fas fa-user-tie fa-7x mt-5"></i> -->
+                                <img id="img-perfil" th:if="${empleador.imagen != null}" th:src="${'/foto/empleador?id='+empleador.id}" class="img-thumbnail mt-5 rounded-circle w-100" alt="">
+                                <i th:if="${empleador.imagen == null}" class="fas fa-user-tie fa-7x mt-5"></i>
+                                <h2 class="fw-bold mt-4" th:text="${empleador.nombre + ' ' + empleador.apellido}"></h2>
+                                <p th:text="${empleador.tipo}"></p>
+                                <div class="row mt-3 mb-1 d-flex justify-content-center" sec:authorize="hasRole('ROLE_EMPLEADOR')">
+                                    <div class="d-grid gap-2 d-md-block">
+                                        <button class="btn btn-outline-secondary" type="button"><a class="text-decoration-none text-dark" href="/empleador/perfil-modificar">Editar Perfil</a></button>
+                                        <button class="btn btn-outline-secondary" type="button"><a class="text-decoration-none text-dark" href="/empleador/crear-empleo" role="button">Crear empleo</a></button>
+                                      </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-8 bg-white rounded-end">
@@ -60,40 +48,54 @@
                                     <h6 class="text-muted" th:text="${empleador.zona}"></h6>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <p class="fw-bold">Teléfono</p>
-                                    <h6 class="text-muted" th:text="${empleador.telefono}"></h6>
+                            <div class="col-sm-8 bg-white rounded-end">
+                                <h4 class="mt-3">Datos de contacto</h4>
+                                <hr class="bg-black">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p class="fw-bold">Email</p>
+                                        <h6 class="text-muted" th:text="${empleador.email}"></h6>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="fw-bold">Zona</p>
+                                        <h6 class="text-muted" th:text="${empleador.zona}"></h6>
+                                    </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <p class="fw-bold">Edad</p>
-                                    <h6 class="text-muted" th:text="${edad}"></h6>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p class="fw-bold">Teléfono</p>
+                                        <h6 class="text-muted" th:text="${empleador.telefono}"></h6>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="fw-bold">Edad</p>
+                                        <h6 class="text-muted" th:text="${edad}"></h6>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-    
-    
-                <!-- Empleos agregados -->
-                <div class="flex flex-wrap space-between" style="margin: -7px;">
-                    <h2 class="bold mb-3">Publicaciones</h2>
-                    <div class="row">
-                        <div class="col-sm-6" th:each="empleos, itemStat : *{empleos}" th:if="${empleador.id == empleos.empleador.id}">
-                            <div class="card mb-2" style="background-color: #29496b9c;">
-                                <div class="card-body">
-                                    <div class="list_info">
-                                        <h4 class=""><strong class="" th:text="${empleos.oficio}+ ' | '"></strong><span class="color_info" th:text="${empleos.zona}"></span></h4>
-                                        <span th:text="${empleos.descripcion}" style="color: white;"></span>
-                                        <p class="mt-3 mb-0" th:if="${empleos.antiguedad == 0}">
-                                            <span class="badge bg-success">Agregado recientemente</span>
-                                        </p>
-                                        <p class="mt-3 mb-0" th:if="${empleos.antiguedad == 1}">
-                                            <span class="badge bg-success">Agregado hace un día</span>
-                                        </p>
-                                        <p class="mt-3 mb-0" th:if="${empleos.antiguedad > 1}">
-                                            <span class="badge bg-success" th:text="${'Agregado hace '+empleos.antiguedad+ ' días'}"></span>
-                                        </p>
+        
+        
+                    <!-- Empleos agregados -->
+                    <div class="flex flex-wrap space-between" style="margin: -7px;">
+                        <h2 class="bold mb-3">Publicaciones</h2>
+                        <div class="row">
+                            <div class="col-sm-6" th:each="empleos, itemStat : *{empleos}" th:if="${empleador.id == empleos.empleador.id}">
+                                <div class="card mb-2" style="background-color: #29496b9c;">
+                                    <div class="card-body">
+                                        <div class="list_info">
+                                            <h4 class=""><strong class="" th:text="${empleos.oficio}+ ' | '"></strong><span class="color_info" th:text="${empleos.zona}"></span></h4>
+                                            <span th:text="${empleos.descripcion}" style="color: white;"></span>
+                                            <p class="mt-3 mb-0" th:if="${empleos.antiguedad == 0}">
+                                                <span class="badge bg-success">Agregado recientemente</span>
+                                            </p>
+                                            <p class="mt-3 mb-0" th:if="${empleos.antiguedad == 1}">
+                                                <span class="badge bg-success">Agregado hace un día</span>
+                                            </p>
+                                            <p class="mt-3 mb-0" th:if="${empleos.antiguedad > 1}">
+                                                <span class="badge bg-success" th:text="${'Agregado hace '+empleos.antiguedad+ ' días'}"></span>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -102,6 +104,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
 
