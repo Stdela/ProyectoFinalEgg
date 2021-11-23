@@ -19,21 +19,19 @@
     <!-- NAV -->
     <div th:replace="/fragments/componentes.html :: navbar"></div>
 
-    <div class="index">
-
+    <div class="index pb-4 color-4">
         <h1 class="text-center py-2">Proyecto</h1>
-
         <div class="text-center">
-
             <h2 class="text-center py-3 h2">La solución más rápida a tu problema... <br> ¡la encontras acá!</h2>
             <div class="btn-group">
                 <a class="btn btn-dark" href="/busquedaEmpleo">Empleos</a>
                 <a class="btn btn-dark" href="/busquedaTrabajadores/todos" sec:authorize="hasRole('ROLE_EMPLEADOR')">Trabajadores</a>
                 <a class="btn btn-dark" href="/busquedaEmpleadores" sec:authorize="hasRole('ROLE_TRABAJADOR')">Empleadores</a>
             </div>
-            <h1 class="h1">Empleadores:</h1>
+            <h1 class="h1">Empleadores</h1>
 
-            <div class="container wrap-busquedas mb-5">
+            <!-- <div class="container wrap-busquedas mb-5">
+
                 <section class="empleadores">
                     <table class="table table-hover">
                         <thead>
@@ -66,9 +64,34 @@
                         </tbody>
                     </table>
                 </section>
+            </div> -->
+
+            <div class="container">
+                <div class="flex flex-wrap space-between" style="margin: -7px;">
+                    <!-- <h4 class="bold mb-3 text-decoration-underline">Empleadores</h4> -->
+                    <div class="row">
+                        <div th:if="${empleadores.empty}">
+                            <h4 class="text-center">No hay trabajadores todavía!</h4>
+                        </div>
+                        <div class="col-sm-6" th:each="empleador, itemStat : *{empleadores}" >
+                            <div class="card mb-2" 
+                            style="background-color: #29496b9c;">
+                                <div class="card-body">
+                                    <h4 class=""><strong class="" th:text="${empleador.nombre + ' ' + empleador.apellido}+ ' | '"></strong><span class="color-hierarchy3" th:text="${empleador.zona}"></span></h4>
+                                    <div class="mb-4">
+                                        <span th:text="${empleador.tipo}" style="color: white;"></span>
+                                        <span class="badge bg-success mx-3" th:text="${empleador.telefono}"></span>
+                                    </div>
+                                    <a class="btn btn-dark" th:href="${'/empleador/perfil/'+empleador.id}"> Perfil </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
     <div th:replace="/fragments/componentes.html :: footer"></div>
 </body>
 

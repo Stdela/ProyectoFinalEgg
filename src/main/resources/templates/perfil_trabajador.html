@@ -13,197 +13,198 @@
     <!-- NAV -->
     <div th:replace="/fragments/componentes.html :: navbar"></div>
 
-    <div class="container mb-3">
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-11 mt-5 mb-5 pt-5">
-                <div id="tarjeta" class="row mb-3">
-                    <div class="col-sm-4 bg-info rounded-start">
-                        <div class="card-block text-center">
-                            <i class="fas fa-user-tie fa-7x mt-5"></i>
-                            <h2 class="fw-bold mt-4" th:text="${trabajador.nombre + ' ' + trabajador.apellido}"></h2>
-                            <p th:text="${trabajador.oficio}"></p>
-                            <div class="row d-flex justify-content-center" sec:authorize="hasRole('ROLE_EMPLEADOR')">
-                                <div class="col-1 d-flex justify-content-center text-decoration-none mx-3">
-                                    <a th:href="${'https://api.whatsapp.com/send?phone=549'+trabajador.telefono+'&text=Hola%20,&nbsp;te&nbsp;contacto&nbsp;por&nbsp;la&nbsp;publicación&nbsp;de&nbsp;PROYECTO'}"
-                                        class="appWhatsapp" target="_blank">
-                                        <i class="fab fa-whatsapp h1 text-dark"></i>
-                                    </a>
+    <div class="color-4">
+        <div class="container pb-3 color-4">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-11 mt-5 mb-5 pt-5">
+                    <div id="tarjeta" class="row mb-3">
+                        <div class="col-sm-4 bg-info rounded-start">
+                            <div class="card-block text-center">
+                                <i class="fas fa-user-tie fa-7x mt-5"></i>
+                                <h2 class="fw-bold mt-4" th:text="${trabajador.nombre + ' ' + trabajador.apellido}"></h2>
+                                <p th:text="${trabajador.oficio}"></p>
+                                <div class="row d-flex justify-content-center" sec:authorize="hasRole('ROLE_EMPLEADOR')">
+                                    <div class="col-1 d-flex justify-content-center text-decoration-none mx-3">
+                                        <a th:href="${'https://api.whatsapp.com/send?phone=549'+trabajador.telefono+'&text=Hola%20,&nbsp;te&nbsp;contacto&nbsp;por&nbsp;la&nbsp;publicación&nbsp;de&nbsp;PROYECTO'}"
+                                            class="appWhatsapp" target="_blank">
+                                            <i class="fab fa-whatsapp h1 text-dark"></i>
+                                        </a>
+                                    </div>
                                 </div>
-                                <a class="col-1 d-flex justify-content-center text-decoration-none mx-3" href="#"><i
-                                        class="fas fa-envelope h1 text-dark"></i></a>
-                            </div>
-                            <div class="row mt-3 mb-1 d-flex justify-content-center"
-                                sec:authorize="hasRole('ROLE_TRABAJADOR')">
-                                <!-- <a class="text-black" href="/trabajador/perfil-modificar">
-                                    <i class="far fa-edit fa-2x mb-4"></i>
-                                </a> -->
-                                <button class="btn btn-outline-secondary col-8" type="button"><a class="text-decoration-none text-dark" href="/trabajador/perfil-modificar">Editar Perfil</a></button>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-sm-8 bg-white rounded-end">
-                        <h4 class="mt-3">Datos personales</h4>
-                        <hr class="bg-black">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <p class="fw-bold">Email</p>
-                                <h6 class="text-muted" th:text="${trabajador.email}"></h6>
-                            </div>
-                            <div class="col-sm-6">
-                                <p class="fw-bold">Teléfono</p>
-                                <span th:text="${trabajador.telefono}"></span>
-                            </div>
-
-                        </div>
-                        <div class="row">
-
-
-                            <div class="col-sm-4">
-                                <p class="fw-bold">Edad</p>
-                                <h6 class="text-muted" th:text="${edad}"></h6>
-                            </div>
-                            <div class="col-sm-4">
-                                <p class="fw-bold">Zona</p>
-                                <h6 class="text-muted" th:text="${trabajador.zona}"></h6>
-                            </div>
-                            <div class="col-sm-4">
-                                <p class="fw-bold">Genero</p>
-                                <h6 class="text-muted" th:text="${trabajador.genero}"></h6>
-                            </div>
-                        </div>
-                        <h4 class="mt-3">Experiencia</h4>
-                        <hr class="bg-primary">
-                        <div class="row">
-                            <div class="col-12 mb-2">
-                                <!-- <p class="fw-bold"></p> -->
-                                <h6 id="exp" class="text-muted" th:text="${trabajador.experiencia}"></h6>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <p class="fw-bold">Habilidades</p>
-                                <h6 class="text-muted" th:text="${trabajador.skills}"></h6>
-                            </div>
-                            <!-- <div class="col-sm-6">
-                                <p class="fw-bold">Ha trabajado con</p>
-                                <h6 class="text-muted">empleadores</h6>
-                            </div> -->
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <p class="fw-bold">Disponible</p>
-                                <h6 class="text-muted" th:text="${{trabajador.disponible}? 'Si' : 'No'}"></h6>
-                            </div>
-                            <div class="col-sm-6">
-                                <p class="fw-bold">Posee licencia</p>
-                                <h6 class="text-muted" th:text="${{trabajador.licencia}? 'Si' : 'No'}"></h6>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- Comentar -->
-            <div class="container-fluid d-flex justify-content-center" sec:authorize="hasRole('ROLE_EMPLEADOR')">
-                <div class="card w-75 bg-light position-relative ps-4 pt-3 pb-3 accordion-body rounded-3 mt-3 shadow">
-                    <div class="row">
-                        <div
-                            class="col-12 col-md-2 col-lg-2 col-xl-2 col-sm-12 align-content-center d-flex justify-content-center">
-                            <img src="https://i.imgur.com/xELPaag.jpg" id="img-comentarios"
-                                class="img-thumbnail rounded-circle mt-2 w-100"> </div>
-                        <div class="col-12 col-md-9 col-lg-9 col-xl-9 col-sm-12">
-                            <div class="comment-box ms-1">
-                                <form th:action="@{/trabajador/perfil/} +${trabajador.id}" method="post">
-                                    <h4>Comentar</h4>
-                                    <div class="rating custom-control d-flex flex-row-reverse fa-pull-left">
-                                        <input type="radio" name="puntaje" value="5" id="5"><label for="5">☆</label>
-                                        <input type="radio" name="puntaje" value="4" id="4"><label for="4">☆</label>
-                                        <input type="radio" name="puntaje" value="3" id="3"><label for="3">☆</label>
-                                        <input type="radio" name="puntaje" value="2" id="2"><label for="2">☆</label>
-                                        <input type="radio" name="puntaje" value="1" id="1"><label for="1">☆</label>
-                                    </div>
-                                    <div class="comment-area">
-                                        <textarea class="form-control" name="comentario"
-                                            th:placeholder="'Comentar sobre '+ ${trabajador.nombre}"
-                                            rows="2"></textarea>
-                                    </div>
-
-                                    <div class="row m-0 mt-1 justify-content-start ">
-                                        <button type="submit"
-                                            class="btn btn-info col-6 col-md-3 justify-content-center m-1 ">Enviar</button>
-                                    </div>
-                                </form>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--Comentarios-->
-            <div class="container-fluid mt-2 pt-3">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-12">
-                        <h3 th:text="'Comentarios y opiniones sobre ' +${trabajador.nombre}"></h3>
-                        <div class="row d-flex flex-wrap justify-content-center">
-                            <div class="review-list col-md-5 col-12 card p-4 mb-2 me-2" th:each="comentarios, itemStat: *{comentarios}">
-                                <ul>
-                                    <li>
-                                        <div class="d-flex">
-                                            <div class="izq">
-                                                <span>
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        class="profile-pict-img img-fluid img-thumbnail" alt="" />
-                                                </span>
-                                            </div>
-                                            <div class="der">
-                                                <h4>
-                                                    <span th:text="'Comentario de '+${comentarios.emisor.nombre}+' '+${comentarios.emisor.apellido}"></span>
-                                                    <span class="estrella text-body-2">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -200 1792 1792"
-                                                            width="15" height="15">
-                                                            <path fill="currentColor"
-                                                                d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z">
-                                                            </path>
-                                                        </svg>
-                                                        <span th:text="${comentarios.puntaje}+'.0'"></span>
-                                                    </span>
-                                                </h4>
-                                                <div class="comment">
-                                                    <p>
-                                                        <span th:text="${comentarios.comentario}"></span>
-                                                    </p>
-                                                </div>
+                                <div class="row mt-3 mb-1 d-flex justify-content-center"
+                                    sec:authorize="hasRole('ROLE_TRABAJADOR')">
+                                    <!-- <a class="text-black" href="/trabajador/perfil-modificar">
+                                        <i class="far fa-edit fa-2x mb-4"></i>
+                                    </a> -->
+                                    <button class="btn btn-outline-secondary col-8" type="button"><a class="text-decoration-none text-dark" href="/trabajador/perfil-modificar">Editar Perfil</a></button>
+                                </div>
     
-                                            </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-8 bg-white rounded-end">
+                            <h4 class="mt-3">Datos personales</h4>
+                            <hr class="bg-black">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p class="fw-bold">Email</p>
+                                    <h6 class="text-muted" th:text="${trabajador.email}"></h6>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p class="fw-bold">Teléfono</p>
+                                    <span th:text="${trabajador.telefono}"></span>
+                                </div>
+    
+                            </div>
+                            <div class="row">
+    
+    
+                                <div class="col-sm-4">
+                                    <p class="fw-bold">Edad</p>
+                                    <h6 class="text-muted" th:text="${edad}"></h6>
+                                </div>
+                                <div class="col-sm-4">
+                                    <p class="fw-bold">Zona</p>
+                                    <h6 class="text-muted" th:text="${trabajador.zona}"></h6>
+                                </div>
+                                <div class="col-sm-4">
+                                    <p class="fw-bold">Genero</p>
+                                    <h6 class="text-muted" th:text="${trabajador.genero}"></h6>
+                                </div>
+                            </div>
+                            <h4 class="mt-3">Experiencia</h4>
+                            <hr class="bg-primary">
+                            <div class="row">
+                                <div class="col-12 mb-2">
+                                    <!-- <p class="fw-bold"></p> -->
+                                    <h6 id="exp" class="text-muted" th:text="${trabajador.experiencia}"></h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p class="fw-bold">Habilidades</p>
+                                    <h6 class="text-muted" th:text="${trabajador.skills}"></h6>
+                                </div>
+                                <!-- <div class="col-sm-6">
+                                    <p class="fw-bold">Ha trabajado con</p>
+                                    <h6 class="text-muted">empleadores</h6>
+                                </div> -->
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p class="fw-bold">Disponible</p>
+                                    <h6 class="text-muted" th:text="${{trabajador.disponible}? 'Si' : 'No'}"></h6>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p class="fw-bold">Posee licencia</p>
+                                    <h6 class="text-muted" th:text="${{trabajador.licencia}? 'Si' : 'No'}"></h6>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+                <!-- Comentar -->
+                <div class="container-fluid d-flex justify-content-center" sec:authorize="hasRole('ROLE_EMPLEADOR')">
+                    <div class="card w-75 bg-light position-relative ps-4 pt-3 pb-3 accordion-body rounded-3 mt-3 shadow">
+                        <div class="row">
+                            <div
+                                class="col-12 col-md-2 col-lg-2 col-xl-2 col-sm-12 align-content-center d-flex justify-content-center">
+                                <img src="https://i.imgur.com/xELPaag.jpg" id="img-comentarios"
+                                    class="img-thumbnail rounded-circle mt-2 w-100"> </div>
+                            <div class="col-12 col-md-9 col-lg-9 col-xl-9 col-sm-12">
+                                <div class="comment-box ms-1">
+                                    <form th:action="@{/trabajador/perfil/} +${trabajador.id}" method="post">
+                                        <h4>Comentar</h4>
+                                        <div class="rating custom-control d-flex flex-row-reverse fa-pull-left">
+                                            <input type="radio" name="puntaje" value="5" id="5"><label for="5">☆</label>
+                                            <input type="radio" name="puntaje" value="4" id="4"><label for="4">☆</label>
+                                            <input type="radio" name="puntaje" value="3" id="3"><label for="3">☆</label>
+                                            <input type="radio" name="puntaje" value="2" id="2"><label for="2">☆</label>
+                                            <input type="radio" name="puntaje" value="1" id="1"><label for="1">☆</label>
                                         </div>
-                                    </li>
-                                </ul>
+                                        <div class="comment-area">
+                                            <textarea class="form-control" name="comentario"
+                                                th:placeholder="'Comentar sobre '+ ${trabajador.nombre}"
+                                                rows="2"></textarea>
+                                        </div>
+    
+                                        <div class="row m-0 mt-1 justify-content-start ">
+                                            <button type="submit"
+                                                class="btn btn-info col-6 col-md-3 justify-content-center m-1 ">Enviar</button>
+                                        </div>
+                                    </form>
+    
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Comentarios-->
+                <div class="container-fluid mt-2 pt-3">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-12">
+                            <h3 th:text="'Comentarios y opiniones sobre ' +${trabajador.nombre}"></h3>
+                            <div class="row d-flex flex-wrap justify-content-center">
+                                <div class="review-list col-md-5 col-12 card p-4 mb-2 me-2" th:each="comentarios, itemStat: *{comentarios}">
+                                    <ul>
+                                        <li>
+                                            <div class="d-flex">
+                                                <div class="izq">
+                                                    <span>
+                                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                                                            class="profile-pict-img img-fluid img-thumbnail" alt="" />
+                                                    </span>
+                                                </div>
+                                                <div class="der">
+                                                    <h4>
+                                                        <span th:text="'Comentario de '+${comentarios.emisor.nombre}+' '+${comentarios.emisor.apellido}"></span>
+                                                        <span class="estrella text-body-2">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -200 1792 1792"
+                                                                width="15" height="15">
+                                                                <path fill="currentColor"
+                                                                    d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z">
+                                                                </path>
+                                                            </svg>
+                                                            <span th:text="${comentarios.puntaje}+'.0'"></span>
+                                                        </span>
+                                                    </h4>
+                                                    <div class="comment">
+                                                        <p>
+                                                            <span th:text="${comentarios.comentario}"></span>
+                                                        </p>
+                                                    </div>
+        
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- <div class="container-fluid mt-2 pt-2 border">
-            <div class="row">
-                <div class="col-md-10">
-                    <h3 th:text="'Comentarios y opiniones sobre ' +${trabajador.nombre}"></h3>
-                    <div class="row border">
-                        <div class="col-md-4" th:each="comentarios, itemStat: *{comentarios}">
-
-                            <span
-                                th:text="'Comentario de '+${comentarios.emisor.nombre}+' '+${comentarios.emisor.apellido}"></span>
-                            <span th:text="${comentarios.comentario}"></span>
-                            <span th:text="'Puntaje: '+${comentarios.puntaje}"></span>
+            <!-- <div class="container-fluid mt-2 pt-2 border">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h3 th:text="'Comentarios y opiniones sobre ' +${trabajador.nombre}"></h3>
+                        <div class="row border">
+                            <div class="col-md-4" th:each="comentarios, itemStat: *{comentarios}">
+    
+                                <span
+                                    th:text="'Comentario de '+${comentarios.emisor.nombre}+' '+${comentarios.emisor.apellido}"></span>
+                                <span th:text="${comentarios.comentario}"></span>
+                                <span th:text="'Puntaje: '+${comentarios.puntaje}"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div> -->
+            </div> -->
+        </div>
+
     </div>
-    </div>
+    
 
     <div th:replace="/fragments/componentes.html :: footer"></div>
 </body>
