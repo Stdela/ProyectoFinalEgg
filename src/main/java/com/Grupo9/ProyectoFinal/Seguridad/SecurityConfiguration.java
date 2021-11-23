@@ -22,7 +22,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/css/*", "/js/*", "/img/*","/","/trabajador/registro-trabajador", "/empleador/registro-empleador").permitAll()
+                .antMatchers("/css/*", "/js/*", "/img/*","/","/trabajador/registro-trabajador", "/empleador/registro-empleador","/informacion" , "/como-funciona", "/mail").permitAll()
                 ///TO DO : Change to .authenticated()
                 .anyRequest().authenticated();
         http.formLogin()
@@ -31,7 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .failureForwardUrl("/login?error")
+                .failureUrl("/login-error")
                 
                 .permitAll().and().logout().permitAll();
 

@@ -19,34 +19,44 @@
     <!-- NAV -->
     <div th:replace="/fragments/componentes.html :: navbar"></div>
 
-    <div class="index">
+    <div class="index color-4">
 
         <!-- <h1 class="text-center py-2">Proyecto</h1> -->
 
-        <div class="container text-center content">
+        <div class="text-center">
 
             <h2 class="text-center py-3 h2">La solución más rápida a tu problema... <br> ¡la encontras acá!</h2>
             <div class="btn-group">
                 <a class="btn btn-dark" href="/busquedaEmpleo">Empleos</a>
-                <a class="btn btn-dark" href="/busquedaTrabajadores/todos" sec:authorize="hasRole('ROLE_EMPLEADOR')">Trabajadores</a>
-                <a class="btn btn-dark" href="/busquedaEmpleadores" sec:authorize="hasRole('ROLE_TRABAJADOR')">Empleadores</a>
+                <a class="btn btn-dark" href="/busquedaTrabajadores/todos"
+                    sec:authorize="hasRole('ROLE_EMPLEADOR')">Trabajadores</a>
+                <a class="btn btn-dark" href="/busquedaEmpleadores"
+                    sec:authorize="hasRole('ROLE_TRABAJADOR')">Empleadores</a>
             </div>
             <h1 class="h1">Trabajadores disponibles en este momento:</h1>
 
             <!-- categorias de empleados disponibles, la ídea es que se vea diferente y por categorías -->
             <div class="container wrap">
-                <button type="button" class="btn btn-primary" data-bs-toggle="collapse"
-                    data-bs-target="#demo">Categorias</button>
-                <div id="demo" class="collapse">
-                    <div class="categorias">
-                        <div class="btn-group">
-                            <a th:each="oficio : ${T(com.Grupo9.ProyectoFinal.Enum.Oficio).values()}" type="button"
-                                class="btn btn-dark" th:href="${'/busquedaTrabajadores/'+oficio}"
+                <div class="categorias">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="collapse"
+                        data-bs-target="#demo">Categorias</button>
+                    <div id="demo" class="collapse">
+                        <div class="btn-group" th:each="oficio : ${T(com.Grupo9.ProyectoFinal.Enum.Oficio).values()}">
+                            <a type="button" class="btn btn-dark" th:href="${'/busquedaTrabajadores/'+oficio}"
                                 th:text="${oficio}"></a>
                         </div>
                     </div>
                 </div>
-                <section class="categorias">
+                <br>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a type="button"  th:href="${'/busquedaTrabajadores1/'+ 'todos'}"   class="btn btn-primary">Todos</a>
+                    <a type="button" th:href="${'/busquedaTrabajadores1/'+'hombres'}" class="btn btn-primary">Hombres</a>
+                    <a type="button" th:href="${'/busquedaTrabajadores1/'+'mujeres'}" class="btn btn-primary">Mujeres</a>
+                </div>
+                
+                
+                
+                <section class="busquedas">
                     <div class="mx-auto" th:if="${trabajadores.empty}">
                         <div class="alert alert-danger">No hay trabajadores disponibles!</div>
                     </div>
@@ -60,10 +70,16 @@
                                 <span th:text="${trabajador.oficio}"> Oficio </span>
                                 <h3 class="card-title" th:text="${trabajador.nombre+' '+trabajador.apellido}">
                                     Nombre</h3>
-                                <span>Skills:</span>
+                                <!-- <span>Skills:</span> -->
                                 <p class="card-text" th:text="${trabajador.skills}"></p>
                                 <span>Licencia:</span>
                                 <span th:text="${{trabajador.licencia}? 'Si' : 'No'}"> Licencia </span>
+                                <br>
+                                <!-- <span> Genero: </span> -->
+                                <span th:text="${trabajador.zona +' | '}"> </span>
+                                <span th:text="${trabajador.telefono}"> </span>
+                                
+                                
                                 </div>
                                 <div class="card-footer">
                                     <a th:href="${'/trabajador/perfil/'+trabajador.id}" class="btn btn-dark btn-sm " target="_blank">Perfil</a>

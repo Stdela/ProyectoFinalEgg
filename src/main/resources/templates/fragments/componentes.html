@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
+    <!-- CSS -->
     <link rel="stylesheet" th:href="@{/css/style.css}" href="../../static/css/style.css" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/index_style.css}" href="/css/index_style.css" type="text/css">
 
+    <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@00&display=swap" rel="stylesheet">
+
+    <!-- JS -->
     <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js}" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js}" integrity="sha512-Tn2m0TIpgVyTzzvmxLNuqbSJH3JP8jm+Cy3hvHrW7ndTDcJ1w5mBiksqDBb8GpE2ksktFvDB/ykZ0mDpsZj20w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
   <header th:fragment="navbar">
     <div class="menu-bar">
-      <nav class="navbar navbar-expand-lg navbar-light">
+      <nav class="navbar navbar-expand-md navbar-expand-lg navbar-light">
         <a href="#" class="navbar-brand">
-          <img th:src="@{/img/logo.png}" src="../../static/img/logo.png" alt="Logo" width="100" height="70" class="d-inline-block align-top" sec:authorize="!isAuthenticated()">
+          <img id="logo" th:src="@{/img/changarinb.png}" src="../../static/img/changarinb.png" alt="Logo" class="d-inline-block align-top w-100" sec:authorize="!isAuthenticated()">
           <span class="hidden">Marca</span>
         </a>
         
@@ -65,7 +69,7 @@
                   <li class="nav-item"><a class="nav-link" href="/busquedaTrabajadores/todos" sec:authorize="isAuthenticated()">Trabajadores</a></li>
                 </div>
                 <!-- Al estar logueado no se muestra el enlace Información -->
-                <li class="nav-item"><a class="nav-link" href="#" sec:authorize="isAuthenticated()">Información</a></li>
+                <li class="nav-item"><a class="nav-link" href="/informacion">Información</a></li>
                 <!-- Al estar logueado no se muestra el enlace Login | Registro -->
                 <li class="nav-item" sec:authorize="!isAuthenticated()"><a class="nav-link" href="/login">Login | Registro</a></li>
                 <!-- Aparece al estar logueado, para cerrar la sesión -->
@@ -76,53 +80,52 @@
     </div>
   </header>
   
-  <footer th:fragment="footer" class="text-center text-lg-start bg-light text-muted">
-    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom social">
+  <footer th:fragment="footer" class="text-center text-lg-start bg-light position-relative">
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom social color-5">
       <div class="me-5 d-none d-lg-block">
-        <span>Conéctese con nosotros en las redes sociales: </span>
+        <h4 class="bold mb-3">Conectate con nosotros en las redes sociales</h4>
       </div>
       <div>
-        <a href="" class="me-4 text-reset"><i class="fab fa-facebook-f"></i></a>
-        <a href="" class="me-4 text-reset"><i class="fab fa-twitter"></i></a>
-        <a href="" class="me-4 text-reset"><i class="fab fa-google"></i></a>
-        <a href="" class="me-4 text-reset"><i class="fab fa-instagram"></i></a>
-        <a href="" class="me-4 text-reset"><i class="fab fa-linkedin"></i></a>
+        <div class="d-flex justify-content-end redes">
+          <a href="https://api.whatsapp.com/send?phone=5493471622079&text=Hola%20PROYECTO,&nbsp;me&nbsp;pueden&nbsp;ayudar??" class="me-4"><i class="fab fa-3x fa-whatsapp"></i></a>
+          <a href="#" class="me-4"><i class="fab fa-3x fa-facebook-square"></i></a>
+          <a href="#" class="me-4"><i class="fab fa-3x fa-twitter-square"></i></a>
+          <a th:href="@{/mail}" class="ml-4"><i class="fas fa-3x fa-envelope"></i></a>
+        </div>
       </div>
     </section>
 
-    <section class="container">
-      <div class="container text-center text-md-start mt-5">
-        <div class="row mt-3">
-          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-            <h6 class="text-uppercase fw-bold mb-4"><i class="fas fa-gem me-3"></i>Nombre Empresa</h6>
+    <section class="container-fluid m-0 p-0 color-4 letra-2">
+      <div class="container text-center text-md-start pt-2">
+        <div class="row">
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 d-none d-lg-block">
+            <h6 class="text-uppercase fw-bold mb-4"><i class="fas fa-gem me-3"></i>Changar in</h6>
             <p>Todo esto para responder a tus consultas, acercate a nuestras oficinas o escribinos. Nuestros consultores se pondrán en contacto con vos.</p>
           </div>
-          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+          <div class="col-6 col-md-6 col-lg-3 justify-content-center">
             <h6 class="text-uppercase fw-bold mb-4">Nosotros</h6>
-            <p><a href="#!" class="text-reset">¿Quiénes somos?</a></p>
-          </div>
-          
-          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <p><a href="/informacion" class="text-reset">Acerca de nosotros</a></p>
+            <p><a href="/informacion#como-funciona" class="text-reset">¿Como funciona?</a></p>
             <h6 class="text-uppercase fw-bold mb-4">Links útiles</h6>
             <p><a href="#!" class="text-reset">Empleado</a></p>
             <p><a href="#!" class="text-reset">Empleador</a></p>
             <p><a href="#!" class="text-reset">Ayuda</a></p>
           </div>
           
-          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <div class="col-6 col-md-6 col-lg-4">
             <h6 class="text-uppercase fw-bold mb-4">Contacto</h6>
-            <p><i class="fas fa-home me-3"></i> Rosario, Santa Fe, Argentina</p>
-            <p><i class="fas fa-envelope me-3"></i>info@ayuda.com</p>
-            <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-            <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+            <p class="d-none d-lg-block"><i class="fas fa-home me-3 "></i> Rosario, Santa Fe, Argentina</p>
+            <p class="d-none d-lg-block"><i class="fas fa-envelope me-3 "></i>info@ayuda.com</p>
+            <p class="d-lg-none d-xl-none">Rosario, Santa Fe, Argentina</p>
+            <p class="d-lg-none d-xl-none">info@ayuda.com</p>
           </div>
         </div>
       </div>
     </section>
 
-    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+    <div class="text-center p-4 color-5" >
       © 2021 Copyright:
-      <a class="text-reset fw-bold" href="">Equipo</a>
+      <a class="text-reset fw-bold" href="#">Equipo</a>
     </div>
   </footer>
 </body>

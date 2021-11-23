@@ -8,12 +8,12 @@
 
 <body>
     <!-- Navbar -->
-    <div th:include="/fragments/componentes.html :: navbar"></div>
+    <div th:replace="/fragments/componentes.html :: navbar"></div>
 
-    <div class="bg-image" style="background-image: url('../img/empleador.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover; height: 100vh">
+    <div class="bg-image-emp">
         <!-- Formulario -->
-        <div class="container mb-5">
-            <div class="row justify-content-center">
+        <div class="container">
+            <div class="row justify-content-center pb-5">
                 <div class="col-lg-4 d-flex  align-items-center  flex-column py-5" style="border: 2px solid black; background: rgba(0, 0, 0, .4); color: #FFF; margin-top: 2rem; border-radius: 15px;">
                     <h1 class="display-4">Registrate</h1>
                     <p class="lead mt-5">
@@ -35,35 +35,38 @@
                                 <input type="email" id="email" name="email" th:value="${email}" class="form-control" required autofocus>
                             </div>
                             <!-- Contraseña -->
-                            <div class="col-6">
+                            <div class="col-12 col-lg-6">
                                 <label class="form-label fw-bolder" for="contrasena">Contraseña</label>
                                 <input type="password" id="contrasena" name="contrasena" class="form-control" required>
                             </div>
                             <!-- Repetir contraseña -->
-                            <div class="col-6">
-                                <label class="form-label fw-bolder" for="contrasena2">Repetir Contraseña</label>
-                                <input type="password" id="contrasena2" name="contrasena2" class="form-control" required>
+                            <div class="col-12 col-lg-6">
+                                <div class="form-outline">
+                                    <label class="form-label fw-bolder d-none d-sm-block" for="contrasena2">Repetir Contraseña</label>
+                                    <label class="form-label fw-bolder d-block d-sm-none" for="contrasena2">Repite Contraseña</label>
+                                    <input type="password" id="contrasena2" name="contrasena2" class="form-control" required>
+                                </div>
                             </div>
                             <!-- Nombre -->
-                            <div class="col-sm-6 col-md-6">
+                            <div class="col-6 col-sm-6 col-md-6">
                                 <label class="form-label fw-bolder" for="name">Nombre</label>
                                 <input type="text" id="nombre" name="nombre" th:value="${nombre}" class="form-control" required>
                             </div>
                             <!-- Apellido -->
-                            <div class="col-sm-6 col-md-6">
+                            <div class="col-6 col-sm-6 col-md-6">
                                 <label class="form-label fw-bolder" for="apellido">Apellido</label>
                                 <input type="text" id="apellido" name="apellido" th:value="${apellido}" class="form-control" required
                                 >
                             </div>
                             <!-- Fecha de nacimiento -->
-                            <div class="col-4 col-lg-6">
+                            <div class="col-12 col-md-6 col-lg-6">
                                 <label class="my-3 form-label fw-bolder" for="fechaNacimiento">Fecha de nacimiento</label>
                                 <div class="form-group">
-                                    <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento" th:value="${#temporals.format(localDate, 'yyyy-MM-dd')}" required>
+                                    <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento" th:value="${fechaNacimiento}" required>
                                 </div>
                             </div>
                             <!-- Teléfono -->
-                            <div class="col-4 col-lg-6">
+                            <div class="col-12 col-md-6 col-lg-6">
                                 <div class="form-group">
                                     <label class="my-3 form-label fw-bolder" id="telefono">Teléfono</label>
                                     <input type="text" class="form-control" name="telefono" id="telefono" th:value="${telefono}" required>
@@ -84,7 +87,7 @@
                                 </div>
                             </div>
                             <!-- Género -->
-                            <div class="col-sm-6 col-lg-4">
+                            <div class="col-4 col-lg-4">
                                 <label class="my-3 form-label fw-bolder" id="tipo">Género</label>
                                 <div class="col-md-6">
                                     <select name="genero" id="genero" required>
@@ -96,7 +99,7 @@
                                 </div>
                             </div>
                             <!-- Zona -->
-                            <div class="col-sm-6 col-lg-4">
+                            <div class="col-4 col-lg-4">
                                 <label class="my-3 form-label fw-bolder" id="tipo">Zona</label>
                                 <div class="col-md-6">
                                     <select name="zona" id="zona" required>

@@ -1,7 +1,133 @@
-#presentacion {
+#exp {
     text-align: justify;
 }
 
 #tarjeta {
     box-shadow: 10px 5px 25px black;
+    border-radius: 24px !important;
+}
+
+#img-perfil {
+    object-fit: cover; 
+    max-width: 150px;
+    max-height: 150px;
+    
+}
+
+#caja-comentar {
+    border-radius: 24px !important;
+}
+.comment-box {
+    padding: 5px
+}
+
+#img-comentarios {
+    object-fit: cover;
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.comment-area textarea {
+    resize: none;
+    border: 1px solid #ad9f9f
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #ffffff;
+    outline: 0;
+    box-shadow: 0 0 0 1px rgb(0, 0, 0) !important
+}
+
+.rating {
+    margin-top: -10px;
+    margin-left: -4px;
+}
+
+.rating>input {
+    display: none
+}
+
+.rating>label {
+    position: relative;
+    width: 19px;
+    font-size: 25px;
+    color: rgb(7, 199, 196);
+    cursor: pointer
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important
+}
+
+.rating>input:checked~label:before {
+    opacity: 1
+}
+
+.rating:hover>input:checked~label:before {
+    opacity: 0.4
+}
+
+
+.review-list{
+    border: black;
+    border-radius: 24px !important;
+} 
+.review-list ul li .izq span {
+     width: 50px;
+     height: 50px;
+     display: inline-block;
+}
+ .review-list ul li .izq {
+     flex: none;
+     max-width: none;
+     margin: 0 10px 0 0;
+}
+ .review-list ul li .izq span img {
+    object-fit: cover; 
+    max-width: 50px;
+    max-height: 50px;
+}
+ .review-list ul li .der h4 {
+     font-size: 16px;
+     margin: 0;
+     display: flex;
+}
+ .review-list ul li .der h4 .estrella {
+     display: flex;
+     align-items: center;
+     margin-left: 10px;
+     color: #ffbf00;
+}
+ .review-list ul li .der h4 .estrella svg {
+     margin: 0 4px 0 0px;
+}
+
+ /* .review-list ul li {
+     border-bottom: 1px solid #dadbdd;
+     padding: 0 0 30px;
+} */
+ .review-list ul li .der {
+     flex: auto;
+}
+ .review-list ul li .comment {
+     margin: 10px 0 0;
+}
+ .review-list ul li .comment p {
+     font-size: 16px;
+     margin: 0;
+     text-align: justify;
+}
+
+ul, ul li {
+    list-style: none;
+    margin-left: -15px;
 }

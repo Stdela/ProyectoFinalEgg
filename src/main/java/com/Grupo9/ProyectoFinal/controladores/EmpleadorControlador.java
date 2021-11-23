@@ -1,42 +1,38 @@
 package com.Grupo9.ProyectoFinal.controladores;
 
 
-import java.time.LocalDate;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.Grupo9.ProyectoFinal.Entidad.Comentario;
 import com.Grupo9.ProyectoFinal.Entidad.Empleador;
 import com.Grupo9.ProyectoFinal.Entidad.Trabajador;
 import com.Grupo9.ProyectoFinal.Enum.Genero;
 import com.Grupo9.ProyectoFinal.Enum.Oficio;
 import com.Grupo9.ProyectoFinal.Enum.Tipo;
 import com.Grupo9.ProyectoFinal.Enum.Zona;
-import com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException;
-import com.Grupo9.ProyectoFinal.Excepciones.WebException;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleadorServicio;
 import com.Grupo9.ProyectoFinal.Servicios.EmpleoServicio;
 import com.Grupo9.ProyectoFinal.Servicios.SendEmail;
 import com.Grupo9.ProyectoFinal.Servicios.TrabajadorServicio;
-import java.io.IOException;
-import java.sql.Date;
-
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller
@@ -56,8 +52,9 @@ public class EmpleadorControlador {
 	SendEmail mailSender;
 	
 	@GetMapping()
-	public String index(ModelMap model) {
-        List<Trabajador> listaTrabajadores = trabajadorServicio.listarTrabajador();
+	public String index(ModelMap model, @RequestParam(required = false) int page) {
+		
+        Page<Trabajador> listaTrabajadores = trabajadorServicio.listarTrabajador(page);
 		
 		model.addAttribute("listaTrabajadores", listaTrabajadores);
 		
@@ -108,7 +105,6 @@ public class EmpleadorControlador {
 	
 	}
 	
-	//Aca se necesitarian tambien los datos del que lo crea
 	@PreAuthorize("hasAnyRole('ROLE_EMPLEADOR')")
 	// SOLO PUEDEN ACCEDER EMPLEADORES
 	@GetMapping("/crear-empleo")
@@ -139,13 +135,14 @@ public class EmpleadorControlador {
 	
 	
 	
-	@GetMapping("/perfil/{id}")
-	public String perfilEmpleador(ModelMap model, @PathVariable("id") Long id) throws NoSuchElementException  {
+	@GetMapping(path = "/perfil/{id}",  produces = "image/png")
+	public String perfilEmpleador(ModelMap model, @PathVariable("id") Long id, @RequestParam(defaultValue = "0") Integer page) throws NoSuchElementException, com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException  {
 		try {
 			Empleador empleador = empleadorServicio.encontrarPorId(id);
 			Integer edad = empleadorServicio.edad(empleador.getFechaNacimiento());
 			model.addAttribute("empleador", empleador);
 			model.addAttribute("edad", edad);
+			model.addAttribute("empleos", empleoServicio.listarEmpleos(page));
 			return "perfil_empleador";
 
 		} catch(NoSuchElementException ex) {
@@ -161,14 +158,16 @@ public class EmpleadorControlador {
 		
 		
 	}
-	@GetMapping("/perfil-empleador")
-	public String perfilPropio (HttpSession httpSession, ModelMap model) throws NoSuchElementException {
+	@GetMapping(path = "/perfil-empleador", produces = "image/png")
+	public String perfilPropio (HttpSession httpSession, ModelMap model, @RequestParam(defaultValue = "0") Integer page) throws NoSuchElementException, com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException {
 		Empleador empleador = (Empleador) httpSession.getAttribute("usuariosession");
 		Empleador e = empleadorServicio.encontrarPorId(empleador.getId());
 		Integer edad = empleadorServicio.edad(empleador.getFechaNacimiento());
-		httpSession.setAttribute("usuariosession", empleador)	;
+		///httpSession.setAttribute("usuariosession", e);
 		model.addAttribute("empleador", e);
 		model.addAttribute("edad", edad);
+		model.addAttribute("empleos", empleoServicio.listarEmpleos(page));
+		
 		return "perfil_empleador";
 	}
 	
@@ -182,11 +181,12 @@ public class EmpleadorControlador {
 	
 	@PostMapping("/perfil-modificar")
 	public String modificar(HttpSession httpSession, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
-    		@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") Tipo tipo) {
+    		@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") Tipo tipo, MultipartFile imagen) {
 		try {
 			Empleador emp = (Empleador) httpSession.getAttribute("usuariosession");
-			empleadorServicio.modificarEmpleador(emp.getId(), nombre, apellido, genero, fechaNacimiento, zona, telefono, tipo);
-			httpSession.setAttribute("usuariosession", emp)	;		
+			Empleador e = empleadorServicio.encontrarPorId(emp.getId());
+			empleadorServicio.modificarEmpleador(e.getId(), nombre, apellido, genero, fechaNacimiento, zona, telefono, tipo, imagen);
+			httpSession.setAttribute("usuariosession", e)	;		
 			return "redirect:/empleador/perfil-empleador";
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -196,16 +196,16 @@ public class EmpleadorControlador {
         
         
         @GetMapping("/perfil/modificar/{id}")
-        public String modificarEmpleador(ModelMap model, @PathVariable("id") Long id) throws NoSuchElementException {
+        public String modificarEmpleador(ModelMap model, @PathVariable("id") Long id) throws NoSuchElementException, com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException {
         	model.addAttribute(empleadorServicio.encontrarPorId(id));
         	return "formularioEmpleador";
         }
         
         @PutMapping("/perfil/modificar/{id}")
         public String modificar(ModelMap model,@PathVariable("id") Long id, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido,
-    		@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") Tipo tipo, @RequestParam("foto") MultipartFile foto ) throws IOException, NoSuchElementException{
+    		@RequestParam("genero") Genero genero, @RequestParam("fechaNacimiento") Date fechaNacimiento, @RequestParam("zona") Zona zona, @RequestParam("telefono") String telefono,@RequestParam("tipo") Tipo tipo, MultipartFile imagen ) throws IOException, NoSuchElementException, com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException{
             try {
-        	empleadorServicio.modificarEmpleador(id, nombre, apellido, genero, fechaNacimiento, zona, telefono, tipo); 
+        	empleadorServicio.modificarEmpleador(id, nombre, apellido, genero, fechaNacimiento, zona, telefono, tipo, imagen); 
         	   return "perfil_empleador";
         } catch(NoSuchElementException ex) {
 			model.put("error", ex);
@@ -220,7 +220,7 @@ public class EmpleadorControlador {
         }
         
         @PutMapping("/modificarEmpleo/{id}")
-        public String modificarEmpleo(ModelMap model, @PathVariable("id") Long id, @RequestParam("nombre") String nombre, @RequestParam("descripcion") String descripcion, @RequestParam("oficio") Oficio oficio) throws NoSuchElementException {
+        public String modificarEmpleo(ModelMap model, @PathVariable("id") Long id, @RequestParam("nombre") String nombre, @RequestParam("descripcion") String descripcion, @RequestParam("oficio") Oficio oficio) throws NoSuchElementException, com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException {
         	try {
         	empleoServicio.modificarEmpleo(id, nombre, descripcion, oficio);
         	
@@ -231,8 +231,17 @@ public class EmpleadorControlador {
               }
         }
 	
-        
-	
+       /* @GetMapping("/eliminar")
+    	public String borrarCuenta(HttpSession httpSession) {
+    	try { 		
+    		Empleador emp = (Empleador) httpSession.getAttribute("usuariosession");
+    		empleadorServicio.eliminarEmpleadorBD(emp.getId());
+    		return "/logout";
+    	} catch (Exception e) {
+    			return "redirect:/";		
+    	}	
+    	}
+	*/
 	
 
 }

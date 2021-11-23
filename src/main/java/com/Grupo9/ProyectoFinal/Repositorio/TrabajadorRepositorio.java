@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.Grupo9.ProyectoFinal.Entidad.Empleador;
 import com.Grupo9.ProyectoFinal.Entidad.Trabajador;
+import com.Grupo9.ProyectoFinal.Enum.Genero;
 import com.Grupo9.ProyectoFinal.Enum.Oficio;
 import com.Grupo9.ProyectoFinal.Enum.Tipo;
 import com.Grupo9.ProyectoFinal.Enum.Zona;
@@ -18,7 +19,7 @@ public interface TrabajadorRepositorio extends JpaRepository<Trabajador, Long>{
 
     public Trabajador findByEmail(String email);
     
-    @Query("SELECT t FROM Trabajador t WHERE t.oficio=:oficio")
+    @Query("SELECT t FROM Trabajador t WHERE t.oficio=:oficio AND t.disponible=TRUE")
 	public ArrayList<Trabajador> buscarPorOficio(@Param("oficio") Oficio oficio);
     
     @Query("SELECT t FROM Trabajador t WHERE t.email=:email")
@@ -32,6 +33,14 @@ public interface TrabajadorRepositorio extends JpaRepository<Trabajador, Long>{
 	
 	@Query("SELECT t FROM Trabajador t WHERE t.nombre=:nombre")
 	public Trabajador buscarPorNombre(@Param("nombre") String nombre);
+	
+	@Query("SELECT t FROM Trabajador t WHERE t.genero=:genero AND t.disponible=TRUE")
+	public ArrayList<Trabajador> buscarPorGenero(@Param("genero") Genero genero);
+	
+	@Query("SELECT t FROM Trabajador t WHERE t.genero=:genero AND t.oficio=:oficio AND t.disponible=TRUE")
+	public ArrayList<Trabajador> buscarPorOficioYGenero(@Param("oficio") Oficio oficio, @Param("genero") Genero genero);
+	
+	
 
 
 }

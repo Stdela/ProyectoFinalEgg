@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments/componentes.html :: head"></th:block>
+    <link rel="stylesheet" th:href="@{/css/perfstyle.css}" href="/css/perfstyle.css" type="text/css">
+    <title>Perfil</title>
+</head>
+
+<body class="bg-light">
+    <!-- NAV -->
+    <div th:replace="/fragments/componentes.html :: navbar"></div>
+
+    <div class="index color-4">
+        <div class="container pb-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-11 pt-5">
+                    <div id="tarjeta" class="row">
+                        <div class="col-sm-4 bg-info rounded-start">
+                            <div class="card-block text-center">
+                                <i class="fas fa-user-tie fa-7x mt-5"></i> 
+                                <div>
+                                    <a class="btn btn-outline-dark m-2" href="/" role="button">Volver</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-8 bg-white rounded-end">
+                            <h4 class="mt-3">¿CÓMO FUNCIONA (NOMBRE)?</h4>
+                            <div class="col-sm-8 bg-white rounded-end">
+                                <!-- <h3 class="mt-3 text-center">Presentacion</h3>
+                                <hr class="badge-primary mt-0">
+                                <p id="presentacion" class="justi" th:text="${empleador.nombre}"></p> -->
+                                <h4 class="mt-3">En el caso que seas empleador</h4>
+                                <hr class="bg-black">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">A la hora de registrarte elegí el apartado "Empleador", completá tus datos, apretá ""registrarse" y ya sos parte de (NOMBRE)</li>
+                                    <li class="list-group-item">Creá empleos desde tu perfil con el boton "crear empleo", ahí podes especificar lo que estas buscando, el tipo de trabajador, la zona y cualquier cosa que quieras aclarar.</li>
+                                    <li class="list-group-item">Buscá trabajadores segun tus necesidades, podes filtrar por oficio, genero,etc. Contactate con ellxs y pediles el presupuesto.</li>
+                                </ol>
+                                <hr class="bg-black">
+                            </div>
+                            <div class="col-sm-8 bg-white rounded-end">
+                                <!-- <h3 class="mt-3 text-center">Presentacion</h3>
+                                <hr class="badge-primary mt-0">
+                                <p id="presentacion" class="justi" th:text="${empleador.nombre}"></p> -->
+                                <h4 class="mt-3">En el caso que seas trabajador</h4>
+                                <hr class="bg-black">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">A la hora de registrarte elegí el apartado "Trabajador", completá tus datos, apretá ""registrarse" y ya sos parte de (NOMBRE)</li>
+                                    <li class="list-group-item">Recordá completar con tu experiencia, es muy importante que los empleadores sepan que sabes hacer</li>
+                                    <li class="list-group-item">Buscá una oferta de trabajo en "Empleos", vas a ver tarjetas con los empleos activos, ahí podés ver que tipo de trabajo es, en que zona y quien lo solicita. Contactate para postularte.</li>
+                                </ol>
+                                <hr class="bg-black">                      
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="/fragments/componentes.html :: footer"></div>
+</body>
+</html>

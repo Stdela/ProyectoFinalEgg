@@ -35,16 +35,20 @@
                 <!-- 1.1 -->
                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                   <form th:action="@{/login}" method="post">
+                    <div th:if="${error != null}"
+                            class="alert alert-danger alert-dismissible text-center align-items-center" th:text="${error}">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
                     <!-- Email input -->
                     <div class="form-outline mb-4">
-                      <input type="email" id="emailLog" class="form-control" name="username" />
-                      <label class="form-label" for="emailLog">Email</label>
+                      <input type="email" id="emailLog" class="form-control letra-2" name="username" required/>
+                      <label class="form-label letra-1" for="emailLog">Email</label>
                     </div>
                   
                     <!-- Password input -->
                     <div class="form-outline mb-4">
-                      <input type="password" id="contrasenaLog" class="form-control" name="password" />
-                      <label class="form-label" for="contrasenaLog">Contraseña</label>  
+                      <input type="password" id="contrasenaLog" class="form-control" name="password" required/>
+                      <label class="form-label letra-1" for="contrasenaLog">Contraseña</label>  
                     </div>
                   
                     <!-- 2 column grid layout for inline styling -->

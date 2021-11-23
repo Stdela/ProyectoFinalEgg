@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
@@ -54,7 +55,7 @@ public class Usuario {
 	@NotBlank(message = "debe proporcionar un email")
 	protected String email;
 	@NotBlank(message = "debe proporcionar una contraseña")
-	@Size(min = 6, max = 16, message = "Contrasena debe tener entre 6 y 16 caracteres.")
+	///@Size(min = 6, max = 16, message = "Contrasena debe tener entre 6 y 16 caracteres.")
 	protected String contrasena;
 
 	protected ArrayList<String> rol;
@@ -71,13 +72,13 @@ public class Usuario {
 	protected String telefono;
 	protected String presentacion;
 
-	@Lob
-	@Basic
-	protected byte[] imagen;
+	@OneToOne
+	protected Foto imagen;
+	
 	protected boolean borrado = false;
 
 	public Usuario(@Email @NotNull String email, @NotNull String contrasena, String nombre, String apellido,
-			Genero genero, Date fechaNacimiento, Zona zona, String telefono) {
+			Genero genero, Date fechaNacimiento, Zona zona, String telefono, Foto imagen) {
 		super();
 		this.email = email;
 		this.contrasena = contrasena;
@@ -87,6 +88,7 @@ public class Usuario {
 		this.fechaNacimiento = fechaNacimiento;
 		this.zona = zona;
 		this.telefono = telefono;
+		this.imagen = imagen;
 	}
 
 }

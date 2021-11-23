@@ -2,6 +2,7 @@ package com.Grupo9.ProyectoFinal.Servicios;
 
 import com.Grupo9.ProyectoFinal.Entidad.Comentario;
 import com.Grupo9.ProyectoFinal.Entidad.Empleo;
+import com.Grupo9.ProyectoFinal.Entidad.Foto;
 import com.Grupo9.ProyectoFinal.Entidad.Trabajador;
 import com.Grupo9.ProyectoFinal.Entidad.Usuario;
 import com.Grupo9.ProyectoFinal.Enum.Genero;
@@ -11,9 +12,14 @@ import com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException;
 import com.Grupo9.ProyectoFinal.Excepciones.WebException;
 import com.Grupo9.ProyectoFinal.Repositorio.ComentarioRepositorio;
 import com.Grupo9.ProyectoFinal.Repositorio.EmpleoRepositorio;
+//import com.Grupo9.ProyectoFinal.Servicios.FotoServicio;
 
 import org.hibernate.loader.plan.exec.process.internal.AbstractRowReader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.Grupo9.ProyectoFinal.Repositorio.TrabajadorRepositorio;
@@ -23,6 +29,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,10 +43,15 @@ public class TrabajadorServicio {
 	EmpleoRepositorio empleoRepositorio;
 	@Autowired
 	ComentarioRepositorio cr;
+	
+	@Autowired
+	FotoServicio fotoServicio;
+	
 	@Autowired
 	CustomUserDetailsService detailsService;
 	@Autowired
 	EmpleoServicio empleoServicio;
+	
 
 	public Trabajador crearTrabajador(String email, String contrasena, String contrasena2, String nombre,
 			String apellido, String genero, Date fechaNacimiento, String zona, String telefono, String oficio,
@@ -121,7 +133,7 @@ public class TrabajadorServicio {
 
 		Trabajador trabajador = new Trabajador(email, contrasena, nombre, apellido, Genero.valueOf(genero),
 				fechaNacimiento, Zona.valueOf(zona), telefono, Oficio.valueOf(oficio), experiencia,
-				Boolean.valueOf(disponible), Boolean.valueOf(licencia), skills);
+				Boolean.valueOf(disponible), Boolean.valueOf(licencia), skills, null);
 
 		trabajadorRepositorio.save(trabajador);
 		detailsService.crearTrabajador(trabajador);
@@ -137,30 +149,50 @@ public class TrabajadorServicio {
 		trabajadorRepositorio.deleteById(id);
 
 	}
+	
+	public void eliminarTrabajadorBD(Long id) throws NoSuchElementException {
+		if(cr.getById(id)==null) {
+			throw new NoSuchElementException("El usuario no fue encontrado");
+		}
+		cr.deleteById(id);
+	}
+	
 
-	public Trabajador modificarTrabajador(Long id, String nombre, String apellido, Genero genero, Date fechaNacimiento,
+	public void modificarTrabajador(Long id, String nombre, String apellido, Genero genero, Date fechaNacimiento,
 			Zona zona, String telefono, Oficio oficio, String experiencia, Boolean disponible, Boolean licencia,
-			String skills, MultipartFile imagen, String presentacion) throws IOException {
+			String skills, MultipartFile imagen /*, String presentacion*/) throws IOException {
 		Trabajador trabajador = trabajadorRepositorio.findById(id).get();
+		
 		trabajador.setApellido(apellido);
 		trabajador.setNombre(nombre);
 		trabajador.setDisponible(disponible);
 		trabajador.setGenero(genero);
 		trabajador.setFechaNacimiento(fechaNacimiento);
-		trabajador.setImagen(imagen.getBytes());
-		trabajador.setPresentacion(presentacion);
+//		trabajador.setImagen(imagen.getBytes());
+//		trabajador.setPresentacion(presentacion);
 		trabajador.setSkills(skills);
 		trabajador.setOficio(oficio);
 		trabajador.setLicencia(licencia);
 		trabajador.setZona(zona);
 		trabajador.setTelefono(telefono);
 		trabajador.setExperiencia(experiencia);
-		return trabajador;
+		
+		if (!imagen.isEmpty()) {
+			String idFoto = null;
+			if (trabajador.getImagen() != null) {
+				idFoto = trabajador.getImagen().getId();
+			}
+			Foto foto = fotoServicio.modificar(idFoto, imagen);
+			trabajador.setImagen(foto);
+		} 
+		
+		trabajadorRepositorio.save(trabajador);
 
 	}
 
-	public List<Trabajador> listarTrabajador() {
-		return trabajadorRepositorio.findAll();
+	public Page<Trabajador> listarTrabajador(int page) {
+		Pageable pageable = PageRequest.of(page, 10);
+		return trabajadorRepositorio.findAll(pageable);
 	}
 
 	public Trabajador encontrarPorId(Long id) throws NoSuchElementException {
@@ -229,6 +261,19 @@ public class TrabajadorServicio {
 		return trabajadorRepositorio.buscarPorOficio(oficio);
 	}
 	
+	public Double valoracion(List<Comentario> comentario) {
+		Double acum = 0.0;
+		Double cont = 0.0;
+		for (Comentario c : comentario) {
+			acum += c.getPuntaje();
+			cont++;
+		}
+		Double res = acum/cont;
+		res = Math.floor(res*10);
+		res /= 10;
+		return res;
+	}
+	
 	public Integer edad(Date fechaNacimiento) {
 		Date hoy = new Date();
 		
@@ -250,6 +295,22 @@ public class TrabajadorServicio {
 		}
 		
 		return diferencia;
+	}
+
+	
+	public Genero asignarGenero(String genero) {
+		switch (genero) {
+		case "hombres":
+			return Genero.MASCULINO;		
+		case "mujeres":
+			return Genero.FEMENINO;
+	}
+		return null;
+	}
+
+	
+	public ArrayList<Trabajador> buscarPorGenero(Genero genero){
+		return trabajadorRepositorio.buscarPorGenero(genero);
 	}
 
 }

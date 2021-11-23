@@ -4,6 +4,35 @@ html {
     /* background-color: #363538; */
 }
 
+#logo {
+    max-width: 200px;
+    height: auto;
+}
+.color-1 {
+    color: #5232ED;
+}
+.color-2 {
+    color: #2CD5D9;
+}
+.color-3 {
+    color: #6E7076;
+}
+.color-4 {
+    background-color: #E1EAF8;
+}
+.color-5 {
+    background-color: #150773;
+}
+.color-6 {
+    background-color: #E1EAF8;
+}
+.letra-1 {
+    color: white;
+}
+.letra-2 {
+    color: #111111;
+}
+
 
 /* NAVBAR */
 .hidden {
@@ -11,7 +40,8 @@ html {
 }
 
 .menu-bar {
-    background-image: linear-gradient(-90deg, #5D6D7E, #34495E);
+    background-image: linear-gradient(-90deg, #407FE4, #20148E);
+    /* background-image: linear-gradient(-90deg, #5D6D7E, #34495E); */
 }
 
 .nav-link {
@@ -42,6 +72,30 @@ td, th {
     min-height: 70px;
 }
 
+/* BG_IMAGE TRABAJADOR*/
+.bg-image-tbj {
+    background-image: url('../img/trabajador.jpg');background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* height: 80vh; */
+}
+
+.div_box {
+    border: 2px solid black;
+    background: rgba(0, 0, 0, .4);
+    color: #FFF;
+    margin-top: 2rem;
+    border-radius: 15px;
+}
+
+/* BG_IMAGE EMPLEADOR*/
+.bg-image-emp {
+    background-image: url('../img/empleador.jpg'); background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* height: 100vh; */
+}
+
 
 /* FOOTER */
 footer {
@@ -53,30 +107,39 @@ footer {
     color: white;
 }
 
-.social {
+/* .social {
     background-color: #D5D8DC;
-}
-
+} */
 .fondo {
     border: 2px solid #5D6D7E;
     max-height: 80vh;
     width: 100% ;
-    text-align: center;    
+    text-align: center;
     border-radius: 5px;
     padding: 1.5rem;
     color: black;
 }
 
-.caco {
-    opacity: .85;
-    /* background: url(../img/registro.jpg) center no-repeat;
-     */
-     background-color: #1ABC9C;
-    -webkit-background-size: cover;
-   -moz-background-size: cover;
-   -o-background-size: cover;
-   background-size: cover;
-   height: 100%;
-   width: 100% ;
-   text-align: center;
+.conectar {
+    display: flex;
+    align-items: center;
 }
+
+.redes>a {
+    /* color: #566573; */
+    color: white;
+}
+
+/* .caco {
+    opacity: .85;
+    background-color: #1ABC9C;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+    width: 100% ;
+    text-align: center;
+} */
+/* background: url(../img/registro.jpg) center no-repeat;
+ */

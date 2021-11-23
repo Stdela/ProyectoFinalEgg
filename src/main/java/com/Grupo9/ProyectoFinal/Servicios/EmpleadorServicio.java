@@ -12,10 +12,14 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.Grupo9.ProyectoFinal.Entidad.Empleador;
+import com.Grupo9.ProyectoFinal.Entidad.Foto;
 import com.Grupo9.ProyectoFinal.Entidad.Comentario;
 
 import com.Grupo9.ProyectoFinal.Enum.Genero;
@@ -39,6 +43,9 @@ public class EmpleadorServicio {
 
 	@Autowired
 	CustomUserDetailsService detailsService;
+	
+	@Autowired
+	FotoServicio fotoServicio;
 
 	public Empleador crearEmpleador(String email, String contrasena, String contrasena2, String nombre, String apellido,
 			String genero, Date fechaNacimiento, String zona, String telefono, String tipo) throws WebException {
@@ -104,7 +111,7 @@ public class EmpleadorServicio {
 		}
 
 		Empleador empleador = new Empleador(email, contrasena, nombre, apellido, Genero.valueOf(genero), fechaNacimiento, Zona.valueOf(zona),
-				telefono, Tipo.valueOf(tipo));
+				telefono, Tipo.valueOf(tipo), null);
 
 		ArrayList<String> rol = new ArrayList<>();
 		rol.add("ROLE_EMPLEADOR");
@@ -143,15 +150,16 @@ public class EmpleadorServicio {
 		return e;
 	}
 
-	public List<Empleador> listarEmpleadores() {
-		List<Empleador> listaEmpleadores = er.findAll();
+	public Page<Empleador> listarEmpleadores(Integer page) {
+		Pageable pageable = PageRequest.of(page, 10);
+		Page<Empleador> listaEmpleadores = er.findAll(pageable);
 		return listaEmpleadores;
 	}
 
 	public void modificarEmpleador(Long id, String nombre, String apellido, Genero genero, Date fechaNacimiento,
 
 		
-			Zona zona, String telefono, Tipo tipo /*MultipartFile foto*/) throws IOException, NoSuchElementException {
+			Zona zona, String telefono, Tipo tipo, MultipartFile imagen) throws IOException, NoSuchElementException {
 		if(er.getById(id)==null) {
 			throw new NoSuchElementException("El usuario no fue encontrado");
 		}
@@ -165,8 +173,16 @@ public class EmpleadorServicio {
 		e.setTelefono(telefono);
 		e.setTipo(tipo);
 //		e.setImagen(foto.getBytes());
-
-		er.save(e);
+		
+		if (!imagen.isEmpty()) {
+			String idFoto = null;
+			if (e.getImagen() != null) {
+				idFoto = e.getImagen().getId();
+			}
+			Foto foto = fotoServicio.modificar(idFoto, imagen);
+			e.setImagen(foto);
+			er.save(e);
+		}
 	}
 
 	public String puntosEmpleador(Long id) throws NoSuchElementException {

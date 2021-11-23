@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <th:block th:include="fragments/componentes.html :: head"></th:block>
+    <link rel="stylesheet" th:href="@{/css/informacion.css}" href="/css/informacion.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Antique&family=Vollkorn:wght@500&display=swap"
+        rel="stylesheet">
+    <title>Información &#65381; ChangarIn</title>
+</head>
+
+<body>
+    <div th:replace="/fragments/componentes.html :: navbar"></div>
+
+    <div class="info">
+        <div class="text-body">
+            <h1>¿Que es <i>ChangarIn</i>?</h1>
+            <p>Es una plataforma especializada para el mercado laboral de <i>oficios</i> y trabajos <i>freelance</i>,
+                diseñada con el objetivo de lograr una comunicación más transparente y rápida entre las <b>personas</b>
+                que necesitan soluciones, y los <b>profesionales</b> que desempeñen dicha labor, brindando una
+                herramienta útil y ágil que conecta de manera eficiente a las personas.</p>
+            <p>En un mundo que está en constante <i>cambio</i>, con nuevas tecnologías y herramientas a nuestro
+                alrededor, el equipo de desarrollo y diseño de <b>ChangarIn</b> ideó una respuesta a este amplio
+                mercado, abriendo una nueva oportunidad para para todo aquel que necesite <i>trabajo rápido</i>, o
+                <i>soluciones rápidas</i>.
+            </p>
+        </div>
+        <div class="image-col">
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="container explain" id="como-funciona">
+        <div class="text-body">
+            <h1>¿Como funciona?</h1>
+            <p>ChangarIn permite que cualquiera que esté interesado pueda crearse un perfil y publicar ofertas o encontrar trabajo de la manera más sencilla y práctica <br>¿Qué estás esperando para unirte?</p>
+        </div>
+        <div class="item">
+            <div class="icon text-center">
+                <i class="fas fa-user-check"></i>
+            </div>
+            <h2 class="text-center">Registrate en la plataforma</h2>
+            <p>Así podrás ingresar a las funcionalidades como empleador o trabajador y conectarte con todo el mundo.</p>
+        </div>
+        <div class="item">
+            <div class="icon">
+                <i class="fab fa-wpforms"></i>
+            </div>
+            <h2 class="text-center">Publica un empleo</h2>
+            <p>Si necesitas solucionar un problema podés crear una solicitud, o buscar a un trabajador disponible.</p>
+        </div>
+        <div class="item">
+            <div class="icon">
+                <i class="fas fa-briefcase"></i>
+            </div>
+            <h2 class="text-center">Conéctate con personas</h2>
+            <p>Contáctate con un empleador y soluciona problemas o con un trabajador y obten el servicio que necesitas.
+            </p>
+        </div>
+        <div class="last">
+            <h3 class="text-center">¡Y así de fácil ya estás formando parte de la comunidad, ya sea contratando o solucionando problemas!<br></h3>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="h2">
+        <h2>Ahora solo te queda unirte a esta comunidad:</h2>
+    </div>
+    <div class="register">
+        <div class="col1">
+            <div class="text h-100 w-75">
+                <h1>¿Necesitas solucionar un problema hogareño?</h1>
+                <p>Ingresa ahora mismo a la red de oficios en donde encontrarás a los profesionales que necesitas, más
+                    cercanos
+                    a tí, dispuestos a ayudarte</p>
+                <a href="/empleador/registro-empleador" class="btn btn-dark d-grid">Registrarse como empleador</a>
+            </div>
+        </div>
+        <div class="col2">
+            <div class="text h-100 w-75">
+                <h1>¿Estás en busqueda de un trabajo de oficio?</h1>
+                <p>Registrate como trabajador y forma parte de la comunidad para empezar a conseguir changas ya mismo,
+                    en tu ciudad, zona y barrio</p>
+                <a href="/trabajador/registro-trabajador" class="btn btn-dark d-grid">Registrarse como trabajador</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="utilidades">
+        <div class="text2 text-center">
+            <h1>¿Tenés dudas o consultas?</h1>
+            <p>Echale un vistazo a las dudas frecuentes, o contactarte con nosotros</p>
+        </div>
+        <div class="preguntas">
+            <a href="/dudas-frecuentes" class="btn btn-outline-dark">Dudas frecuentes</a>
+        </div>
+        <div class="contacto">
+            <a href="/contacto" class="btn btn-outline-dark">Contacto</a>
+        </div>
+    </div>
+
+    <div th:replace="/fragments/componentes.html :: footer"></div>
+</body>
+
+</html>

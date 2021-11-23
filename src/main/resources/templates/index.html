@@ -1,48 +1,108 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
-    <!--/*/ <th:block th:include="fragments/componentes.html :: head">
-    </th:block> /*/-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/index_style.css}" href="/css/index_style.css" type="text/css">
+    <th:block th:include="fragments/componentes.html :: head"></th:block>
+
     <title>Proyecto Egg</title>
 </head>
 
 <body>
-    <!-- NAV -->
-    <div th:replace="/fragments/componentes.html :: navbar"></div>
+  <!-- NAV -->
+  <div th:replace="/fragments/componentes.html :: navbar"></div>
 
-    <div class="index">
-
-        <h1 class="text-center py-2">Proyecto</h1>
-
-        <div class="container text-center content">
-
-            <h2 class="text-center py-3">La solución más rápida a tu problema... <br> ¡la encontras acá!</h2>
-            <h1>categorias:
-                <div class="trabajos-todos">
-                    <a class="btn btn-warning h-100" href="/busquedaTrabajadores/todos">MOSTRAR TODOS</a>
-                </div>
-            </h1>
-            <!-- categorias de trabajos disponibles (Solo te envía a la lista de trabajadores, la búsqueda por categoria está WIP)-->
-            <div class="wrap">
-                <section class="categorias">
-                    <div class="trabajos d-grid" th:each="oficio : ${T(com.Grupo9.ProyectoFinal.Enum.Oficio).values()}">
-                        <a class="btn btn-lg btn-warning h-100" th:href="${'/busquedaTrabajadores/'+oficio}"><input
-                                type="image" id="image" th:alt="${'botón de '+oficio}" th:src="${'/img/'+oficio+'.png'}" th:text="${oficio}"></a>
-                    </div>
-                </section>
-            </div>
+  <div class="index color-4">
+    <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="10000">
+          <a href="http://">
+            <img src="/img/rsz_work.jpg" class="d-block w-100" alt="...">
+          </a>
+          <div class="carousel-caption d-none d-md-block">
+            <!-- <h3 class="txt-uppercase">Sigamos trabajando juntos</h3> -->
+            <!-- <p class="txt-uppercase">Tanto si buscás trabajo o alguien que lo haga, estás en el lugar correcto.</p> -->
+          </div>
         </div>
+        <div class="carousel-item" data-bs-interval="2000">
+          <a href="http://">
+            <img src="/img/rsz_ros.jpg" class="d-block w-100" alt="...">
+          </a>
+          <div class="carousel-caption d-none d-md-block">
+            <!-- <h3 class="txt-uppercase">Rosario la cuidad</h3> -->
+            <!-- <p class="txt-uppercase">Realiza tus búsquedas según la necesidad de tu zona.</p> -->
+          </div>
+        </div>
+        <div class="carousel-item">
+          <a href="http://">
+            <img src="/img/rsz_registro.jpg" class="d-block w-100" alt="...">
+          </a>
+          <div class="carousel-caption d-none d-md-block">
+            <!-- <h3 class="txt-uppercase">Registros</h3> -->
+            <!-- <p class="txt-uppercase">Llena el formulario y da solución a tus problemas.</p> -->
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-    <div th:replace="/fragments/componentes.html :: footer"></div>
+
+    <div sec:authorize="hasRole('ROLE_EMPLEADOR')">
+      <div class="text-center mb-5" sec:authorize="isAuthenticated()" >
+        <h1 class="text-center py-2">Changar IN</h1>
+        <h2 class="text-center py-3">La solución más rápida a tu problema... <br> ¡la encontras acá!</h2>
+        <!-- categorias de trabajos disponibles (Solo te envía a la lista de trabajadores, la búsqueda por categoria está WIP)-->
+        <div class="wrap">
+          <section class="categorias">
+            <div class="trabajos-todos">
+              <a class="btn btn-warning h-100" href="/busquedaTrabajadores/todos">MOSTRAR TODOS</a>
+            </div>
+            <div class="trabajos d-grid gap-2" th:each="oficio : ${T(com.Grupo9.ProyectoFinal.Enum.Oficio).values()}">
+              <a class="btn btn-lg btn-warning h-100" th:href="${'/busquedaTrabajadores/'+oficio}"><input
+                type="image" id="image" th:alt="${'botón de '+oficio}" th:src="${'/img/'+oficio+'.png'}" th:text="${oficio}"></a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <section class="text-center bg-light">
+      <div class="container">
+        <h2> <span class="badge bg-dark  "> Changar in</span> te acerca a tu changa diaria</h2>
+        <br>
+        <div class="row">
+          <div class="col-sm-4 mb3">
+            <img width="60" class="mb1" src="https://d2dgum4gsvdsrq.cloudfront.net/assets/icons/certificate-9494107b6e3a358d12f7f7da27d5dfcc3c8c989b3a55195a4bae715ee82b5e6e.svg">
+            <h4 class="bold mb-3">Filtros para tus búsquedas</h4>
+            <p>Utiliza los filtros para búsquedas concretas.</p>
+          </div>
+          <div class="col-sm-4 mb3">
+            <img width="60" class="mb1" src="https://d2dgum4gsvdsrq.cloudfront.net/assets/icons/extra-visibility-11bfec03a3cf638d0ac23f46765ad2f4e9c2cb7a3d2d732aeea7766448e5b42f.svg">
+            <h4 class="bold mb-3">Visibilidad sobre tus empleos</h4>
+            <p>En tu perfil puedes visualizar todos tus empleos publicados.</p>
+          </div>
+          <div class="col-sm-4 mb3">
+            <img width="60" class="mb1" src="https://d2dgum4gsvdsrq.cloudfront.net/assets/icons/paper-plane-1e59db1f9803279d54737b4b4b8ce99547b451981112aa0c3f828591f9bd00cc.svg">
+            <h4 class="bold mb-3">Contacta ya</h4>
+            <p>Una vez encontrada tu CHANGA tienes la posibilidad de contactarte directamente con el empleador.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div> <!--index fin-->
+
+  <div th:replace="/fragments/componentes.html :: footer"></div>
 </body>
 
 </html>

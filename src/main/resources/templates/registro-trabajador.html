@@ -7,19 +7,19 @@
 </head>
 
 <body>
-    <div th:include="/fragments/componentes.html :: navbar"></div>
+    <div th:replace="/fragments/componentes.html :: navbar"></div>
 
-    <div class="bg-image" style="background-image: url('../img/trabajador.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover; height: 100vh">
+    <div class="bg-image-tbj">
         <!-- Formulario -->
-        <div class="container mb-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-4 d-flex  align-items-center  flex-column" style="border: 2px solid black; background: rgba(0, 0, 0, .4); color: #FFF; margin-top: 2rem; border-radius: 15px;">
+        <div class="container mb-0">
+            <div class="row justify-content-center pb-5">
+                <div class="col-lg-4 d-flex  align-items-center  flex-column div_box">
                     <h1 class="display-4">Registrate</h1>
                     <p class="lead">Haz contacto y da una solución efectiva con quién lo necesite.</p>
                 </div>
                 <div class="col-lg-1"></div>
                 <div class="col-lg-7" style="border: 2px solid black; background: rgba(0, 0, 0, .4); color: #FFF; margin-top: 2rem; border-radius: 15px;">
-                    <form th:action="@{/trabajador/registro-trabajador}" class="col my-3 mx-3" method="POST" style="height: 80vh;">
+                    <form th:action="@{/trabajador/registro-trabajador}" class="col my-3 mx-3" method="POST" style="min-height: 80vh;">
                         <div th:if="${errorTrabajador != null}"
                             class="alert alert-danger alert-dismissible text-center align-items-center">
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -57,7 +57,8 @@
                             <!-- Repetir contraseña -->
                             <div class="col-6 col-lg-4">
                                 <div class="form-outline">
-                                    <label class="form-label fw-bolder" for="contrasena2">Repetir Contraseña</label>
+                                    <label class="form-label fw-bolder d-none d-sm-block" for="contrasena2">Repetir Contraseña</label>
+                                    <label class="form-label fw-bolder d-block d-sm-none" for="contrasena2">Repite Contraseña</label>
                                     <input type="password" id="contrasena2" name="contrasena2" class="form-control" required>
                                 </div>
                             </div>
@@ -65,48 +66,50 @@
                             <div class="col-12 col-lg-4">
                                 <div class="form-outline">
                                     <label class="form-label fw-bolder" for="fechaNacimiento">Fecha de nacimiento</label>
-                                    <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento"  th:value="${#temporals.format(localDate, 'yyyy-MM-dd')}" required>
+                                    <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento"  th:value="${fechaNacimiento}" required>
                                 </div>
                             </div>
                             <hr>
-                            <!-- Zona -->
-                            <div class="col-4 col-lg-4">
-                                <label class="form-label fw-bolder" for="zona">Zona</label>
-                                <select name="zona" id="zona" required>
-                                    <option selected>selecionar</option>
-                                    <option 
-                                      th:each="zonaOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Zona).values()}" 
-                                      th:values="${zonaOpt}"
-                                      th:text="${zonaOpt}"
-                                      th:selected="${zonaOpt==zona}">
-                                    </option>
-                                </select>
-                            </div>
-                            <!-- Género -->
-                            <div class="col-4 col-lg-4">
-                                <label class="form-label fw-bolder" for="genero">Género</label>
-                                <select name="genero" id="genero" required>
-                                    <option selected>selecionar</option>
-                                    <option 
-                                      th:each="generoOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Genero).values()}"
-                                      th:values="${generoOpt}"
-                                      th:text="${generoOpt}"
-                                      th:selected="${generoOpt==genero}">
-                                    </option>
-                                </select>
-                            </div>
-                            <!-- Oficio -->
-                            <div class="col-4 col-lg-4">
-                                <label class="form-label fw-bolder" for="oficio">Oficio</label>
-                                <select name="oficio" id="oficio" required>
-                                    <option selected>selecionar</option>
-                                    <option 
-                                      th:each="oficioOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Oficio).values()}"
-                                      th:values="${oficioOpt}"
-                                      th:text="${oficioOpt}"
-                                      th:selected="${oficioOpt==oficio}">
-                                    </option>
-                                </select>
+                            <div class="row">                                
+                                <!-- Zona -->
+                                <div class="col-4 col-lg-4">
+                                    <label class="form-label fw-bolder" for="zona">Zona</label>
+                                    <select name="zona" id="zona" required>
+                                        <option selected>selecionar</option>
+                                        <option 
+                                          th:each="zonaOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Zona).values()}" 
+                                          th:values="${zonaOpt}"
+                                          th:text="${zonaOpt}"
+                                          th:selected="${zonaOpt==zona}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <!-- Género -->
+                                <div class="col-4 col-lg-4">
+                                    <label class="form-label fw-bolder" for="genero">Género</label>
+                                    <select name="genero" id="genero" required>
+                                        <option selected>selecionar</option>
+                                        <option 
+                                          th:each="generoOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Genero).values()}"
+                                          th:values="${generoOpt}"
+                                          th:text="${generoOpt}"
+                                          th:selected="${generoOpt==genero}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <!-- Oficio -->
+                                <div class="col-4 col-lg-4">
+                                    <label class="form-label fw-bolder" for="oficio">Oficio</label>
+                                    <select name="oficio" id="oficio" required>
+                                        <option selected>selecionar</option>
+                                        <option 
+                                          th:each="oficioOpt : ${T(com.Grupo9.ProyectoFinal.Enum.Oficio).values()}"
+                                          th:values="${oficioOpt}"
+                                          th:text="${oficioOpt}"
+                                          th:selected="${oficioOpt==oficio}">
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="col-12 col-lg-4">
                                 <!-- Teléfono -->
@@ -115,44 +118,44 @@
                                 <input type="pass" id="telefono" name="telefono" th:value="${telefono}" class="form-control" required>
                             </div>
                             <!-- Skills -->
-                            <div class="col col-lg-4">
+                            <div class="col-4 col-md-4 col-lg-4">
                                 <label for="skills" class="form-label fw-bolder">Skills</label>
                                 <input class="form-control" type="text" name="skills" th:value="${skills}" id="skills">
                             </div>
                             <!-- Licencia -->      
-                            <div class="col col-lg-2">
+                            <div class="col-4 col-md-4 col-lg-2">
                                 <label class="form-label fw-bolder" for="licencia">Licencia</label>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="licencia" id="si-lic" value="true">
+                                    <input class="form-check-input" type="radio" name="licencia" id="si-lic" value="true" th:checked="${licencia}? licencia : false">
                                     <label class="form-check-label" for="si-lic">
                                       Si
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="licencia" id="no-lic" value="no">
+                                    <input class="form-check-input" type="radio" name="licencia" id="no-lic" value="no" th:checked="${licencia}? false : true">
                                     <label class="form-check-label" for="no-lic">
                                       No
                                     </label>
                                 </div>
                             </div>
                             <!-- Disponibilidad -->
-                            <div class="col col-lg-2">
-                              <label class="form-label fw-bolder" for="disponible">Disponibilidad</label>
+                            <div class="col-4 col-md-4 col-lg-2">
+                              <label class="form-label fw-bolder" for="disponible" aria-required="true">Disponibilidad</label>
                               <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="disponible" id="si-disp" value="true">
+                                  <input class="form-check-input" type="radio" name="disponible" id="si-disp" value="true" th:checked="${disponible}? disponible : false">
                                   <label class="form-check-label" for="si-disp">
                                     Si
                                   </label>
                               </div>
                               <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="disponible" id="no-disp" value="no">
+                                  <input class="form-check-input" type="radio" name="disponible" id="no-disp" value="no" th:checked="${disponible}? false : true">
                                   <label class="form-check-label" for="no-disp">
                                     No
                                   </label>
                               </div>
                             </div>
                             <!-- Experiencia -->
-                            <div class="col col-lg-12">
+                            <div class="col-12 col-md-6 col-lg-12">
                                 <label for="experiencia" class="form-label fw-bolder">Cuéntanos sobre tu experiencia.</label>
                                 <textarea class="form-control" name="experiencia" th:text="${experiencia}" id="experiencia" rows="5"></textarea>
                             </div>
