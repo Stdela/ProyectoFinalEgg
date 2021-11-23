@@ -136,12 +136,13 @@ public class EmpleadorControlador {
 	
 	
 	@GetMapping(path = "/perfil/{id}",  produces = "image/png")
-	public String perfilEmpleador(ModelMap model, @PathVariable("id") Long id) throws NoSuchElementException, com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException  {
+	public String perfilEmpleador(ModelMap model, @PathVariable("id") Long id, @RequestParam(defaultValue = "0") Integer page) throws NoSuchElementException, com.Grupo9.ProyectoFinal.Excepciones.NoSuchElementException  {
 		try {
 			Empleador empleador = empleadorServicio.encontrarPorId(id);
 			Integer edad = empleadorServicio.edad(empleador.getFechaNacimiento());
 			model.addAttribute("empleador", empleador);
 			model.addAttribute("edad", edad);
+			model.addAttribute("empleos", empleoServicio.listarEmpleos(page));
 			return "perfil_empleador";
 
 		} catch(NoSuchElementException ex) {
