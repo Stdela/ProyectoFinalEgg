@@ -14,7 +14,6 @@
 <body>
     <div th:replace="/fragments/componentes.html :: navbar"></div>
 
-
     <div class="info">
         <div class="text-body">
             <h1>¿Que es <i>ChangarIn</i>?</h1>
@@ -43,48 +42,26 @@
             <div class="icon text-center">
                 <i class="fas fa-user-check"></i>
             </div>
-            <div class="image-col">
-            </div>
+            <h2 class="text-center">Registrate en la plataforma</h2>
+            <p>Así podrás ingresar a las funcionalidades como empleador o trabajador y conectarte con todo el mundo.</p>
         </div>
-    
-        <hr>
-    
-        <div class="container explain" id="como-funciona">
-            <div class="text-body">
-                <h1>¿Como funciona?</h1>
-                <p>Changas Go! permite que cualquiera que esté interesado pueda crearse un perfil y publicar ofertas o encontrar trabajo de la manera más sencilla y práctica <br>¿Qué estás esperando para unirte?</p>
+        <div class="item">
+            <div class="icon">
+                <i class="fab fa-wpforms"></i>
             </div>
-            <div class="item">
-                <div class="icon text-center">
-                    <i class="fas fa-user-check"></i>
-                </div>
-                <h2 class="text-center">Registrate en la plataforma</h2>
-                <p>Así podrás ingresar a las funcionalidades como empleador o trabajador y conectarte con todo el mundo.</p>
-            </div>
-            <div class="item">
-                <div class="icon">
-                    <i class="fab fa-wpforms"></i>
-                </div>
-                <h2 class="text-center">Publica un empleo</h2>
-                <p>Si necesitas solucionar un problema podés crear una solicitud, o buscar a un trabajador disponible.</p>
-            </div>
-            <div class="item">
-                <div class="icon">
-                    <i class="fas fa-briefcase"></i>
-                </div>
-                <h2 class="text-center">Conéctate con personas</h2>
-                <p>Contáctate con un empleador y soluciona problemas o con un trabajador y obten el servicio que necesitas.
-                </p>
-            </div>
-            <div class="last">
-                <h3 class="text-center">¡Y así de fácil ya estás formando parte de la comunidad, ya sea contratando o solucionando problemas!<br></h3>
-            </div>
+            <h2 class="text-center">Publica un empleo</h2>
+            <p>Si necesitas solucionar un problema podés crear una solicitud, o buscar a un trabajador disponible.</p>
         </div>
-    
-        <hr>
-    
-        <div class="h2">
-            <h2>Ahora solo te queda unirte a esta comunidad:</h2>
+        <div class="item">
+            <div class="icon">
+                <i class="fas fa-briefcase"></i>
+            </div>
+            <h2 class="text-center">Conéctate con personas</h2>
+            <p>Contáctate con un empleador y soluciona problemas o con un trabajador y obten el servicio que necesitas.
+            </p>
+        </div>
+        <div class="last">
+            <h3 class="text-center">¡Y así de fácil ya estás formando parte de la comunidad, ya sea contratando o solucionando problemas!<br></h3>
         </div>
     </div>
 
@@ -113,6 +90,18 @@
         </div>
     </div>
 
+    <div class="utilidades">
+        <div class="text2 text-center">
+            <h1>¿Tenés dudas o consultas?</h1>
+            <p>Echale un vistazo a las dudas frecuentes, o contactarte con nosotros</p>
+        </div>
+        <div class="preguntas">
+            <a href="/dudas-frecuentes" class="btn btn-outline-dark">Dudas frecuentes</a>
+        </div>
+        <div class="contacto">
+            <a href="/contacto" class="btn btn-outline-dark">Contacto</a>
+        </div>
+    </div>
 
     <div th:replace="/fragments/componentes.html :: footer"></div>
 </body>
