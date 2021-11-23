@@ -15,24 +15,6 @@
       <!-- NAV -->
     <div th:replace="/fragments/componentes.html :: navbar"></div>
 
-<<<<<<< Updated upstream
-    <div class="color-4">
-        <div class="container pb-5">
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-11 mt-5 mb-5 pt-5">
-                    <div id="tarjeta" class="row">
-                        <div class="col-sm-4 bg-info rounded-start">
-                            <div class="card-block text-center">
-                                <img id="img-perfil" th:if="${empleador.imagen != null}" th:src="${'/foto/empleador?id='+empleador.id}" class="img-thumbnail mt-5 rounded-circle w-100" alt="">
-                                <h2 class="fw-bold mt-4" th:text="${empleador.nombre + ' ' + empleador.apellido}"></h2>
-                                <p th:text="${empleador.tipo}"></p>
-                                <div class="row mt-3 mb-1 d-flex justify-content-center" sec:authorize="hasRole('ROLE_EMPLEADOR')">
-                                    <div class="d-grid gap-2 d-md-block">
-                                        <button class="btn btn-outline-secondary" type="button"><a class="text-decoration-none text-dark" href="/empleador/perfil-modificar">Editar Perfil</a></button>
-                                        <button class="btn btn-outline-secondary" type="button"><a class="text-decoration-none text-dark" href="/empleador/crear-empleo" role="button">Crear empleo</a></button>
-                                      </div>
-                                </div>
-=======
     <div class="container mb-5">
         <div class="row d-flex justify-content-center">
             <div class="col-md-11 mt-5 mb-5 pt-5">
@@ -63,7 +45,6 @@
                             <div class="col-sm-6">
                                 <p class="fw-bold">Zona</p>
                                 <h6 class="text-muted" th:text="${empleador.zona}"></h6>
->>>>>>> Stashed changes
                             </div>
                         </div>
                         <div class="col-sm-8 bg-white rounded-end">
